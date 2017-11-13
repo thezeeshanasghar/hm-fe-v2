@@ -1,3 +1,4 @@
+import { GeneralHttpService } from './services/general-http.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -18,7 +19,7 @@ import { ExpenseTransectionComponent } from './pages/expense-transection/expense
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [GeneralHttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
