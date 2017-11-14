@@ -1,3 +1,4 @@
+import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
 import { AddUserComponent } from './pages/add-user/add-user.component';
 import { ExpenseTransectionComponent } from './pages/expense-transection/expense-transection.component';
 import { IncomeTransectionComponent } from './pages/income-transection/income-transection.component';
@@ -15,6 +16,7 @@ export const appRoutes:Routes=[
     {path:"income",component:IncomeTransectionComponent}
     ,{ path:"expense",component:ExpenseTransectionComponent},
     {path:"addUser",component:AddUserComponent},
+    {path:"roznamcha",component:RoznamchaComponent},
 
  {path:"**",component:AllUsersComponent}   
 ]

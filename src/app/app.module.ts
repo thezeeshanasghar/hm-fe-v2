@@ -1,3 +1,4 @@
+import { Http, HttpModule } from '@angular/http';
 import { Routers } from './app.routes';
 import { GeneralHttpService } from './services/general-http.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,6 +10,7 @@ import { IncomeTransectionComponent } from './pages/income-transection/income-tr
 import { AllUsersComponent } from './pages/all-users/all-users.component';
 import { ExpenseTransectionComponent } from './pages/expense-transection/expense-transection.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     AddUserComponent,
     IncomeTransectionComponent,
     AllUsersComponent,
-    ExpenseTransectionComponent
+    ExpenseTransectionComponent,
+    RoznamchaComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule ,
-    Routers
+    Routers,
+    HttpModule
   ],
   providers: [GeneralHttpService],
   bootstrap: [AppComponent]

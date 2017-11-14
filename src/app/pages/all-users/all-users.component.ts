@@ -1,3 +1,4 @@
+import { GeneralHttpService } from './../../services/general-http.service';
 import { TransectionModel } from './../../Models/Transection.model';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 export class AllUsersComponent implements OnInit {
   date: Date;
   transection:TransectionModel[];
+  allUsers:any;
 
-  constructor() {
+  constructor(private gu:GeneralHttpService) {
     this.date=new Date();
+    this.getUsers();
+   }
+   getUsers()
+   {
+     this.gu.getAllUsers().subscribe(data=>{
+       console.log(data.ResponseData)
+       this.allUsers=data.ResponseData;
+
+     },error=>{});
    }
 
   ngOnInit() {

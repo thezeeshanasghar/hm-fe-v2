@@ -7,43 +7,35 @@
       <th>Date</th>
       <th>Account #</th>
       <th>Account Holder</th>
+      <th>Email</th>
       <th>Cnic</th>
       <th>Contact</th>
       <th>Address</th>
-      <!-- <th>Amount-Dr</th>
-       <th>Amount-Cr</th>
+      <th>Balance</th>
+      
       <th>Actions</th> -->
     </tr>
   </thead>
   <!-- <div *ngIf="userData.length>0" > -->
  
   <tbody>
-    <tr>
-        <td>1</td>
-        <td>{{date |date:'shortDate'}}</td>
-        <td>007</td>
-        <td>Zeeshan Ashgar</td> 
-        <td>03465430413</td>
-        <td>6110115935691</td>
-        <td>local</td>
-        <!-- <td>400000</td>
-        <td>{{100000-400000}}</td> -->
-        <!-- <td><a style="font-size:15px"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>     -->
-    </tr>
+    
 
 
-        <!-- <tr *ngFor="let u of userData; let i=index">
+        <tr *ngFor="let u of allUsers; let i=index">
         <td>{{i+1}}</td>
-        <td>{{u.AccountCreationDate | date:'medium'}}</td>
-        <td>{{u.AccountNumber}}</td>
-        <td>{{u.FirstName}} {{u.LastName}}</td> 
-      <td>{{u.Cnic}}</td>
-        <td>{{u.Contact}}</td>
+        <td>{{u.Created | date:'shortDate'}}</td>
+        <td>{{u.Number}}</td>
+        <td>{{u.Name}}</td> 
         <td>{{u.Email}}</td>
-        <td>{{u.AmountDR |number}}</td>
-        <td >{{u.AmountCR |number}}</td>
-        <td><a style="font-size:15px"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
-      </tr> -->
+     
+      <td>{{u.CNIC}}</td>
+        <td>{{u.MobileNumber}}</td>
+        <td>{{u.Address}}</td>
+        <td>{{u.Balance |number}}</td>
+       
+        <!-- <td><a style="font-size:15px"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td> -->
+      </tr>
 
   </tbody>
 <!-- </div> -->
