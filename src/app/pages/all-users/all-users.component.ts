@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./all-users.component.css']
 })
 export class AllUsersComponent implements OnInit {
+  date: Date;
 
-  constructor() { }
+  constructor() {
+    this.date=new Date();
+   }
 
   ngOnInit() {
   }

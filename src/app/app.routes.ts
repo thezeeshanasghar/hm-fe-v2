@@ -19,4 +19,4 @@ export const appRoutes:Routes=[
  {path:"**",component:AllUsersComponent}   
 ]
 
-export const Router:ModuleWithProviders=RouterModule.forRoot(appRoutes);
+export const Routers:ModuleWithProviders=RouterModule.forRoot(appRoutes);
