@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class AddUserComponent implements OnInit {
 
   public form:FormGroup;
-  public firstName:AbstractControl;
+  public name:AbstractControl;
  
   public email:AbstractControl;
   public cnic:AbstractControl;
@@ -20,16 +20,16 @@ export class AddUserComponent implements OnInit {
   public contact:AbstractControl;
   constructor( public fb:FormBuilder,public router:Router) {
     this.form=fb.group({
-      'firstName': ['', Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(35)])],
+      'name': ['', Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(35)])],
       'cnic': ['', Validators.compose([Validators.required,AmountValidator.validate, Validators.minLength(3),Validators.maxLength(13)])],
       'address': ['', Validators.compose([Validators.required, Validators.minLength(7)])],
-      'amount': ['', Validators.compose([Validators.required, AmountValidator.validate,  Validators.minLength(3)])],
+      'amount': ['0', Validators.compose([Validators.required, AmountValidator.validate,  Validators.minLength(1)])],
       'contact': ['', Validators.compose([Validators.required,AmountValidator.validate, Validators.minLength(3),Validators.maxLength(11)])],
 
 
     });
 
-    this.firstName = this.form.controls['firstName'];
+    this.name = this.form.controls['name'];
     this.cnic = this.form.controls['cnic'];
     this.address = this.form.controls['address'];
     this.email = this.form.controls['email'];
@@ -40,7 +40,7 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit() {
   }
-  onsubmit(m)
+  onSubmit(m)
   {
     console.log(m);
 

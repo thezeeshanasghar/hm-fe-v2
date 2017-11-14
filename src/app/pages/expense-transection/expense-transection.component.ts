@@ -40,18 +40,18 @@ export class ExpenseTransectionComponent implements OnInit {
   }
 
   onSubmit(m){
-    console.log(m);
+    console.log(JSON.stringify(m));
     
-    let em:any;
-    em={
-      AccountID:m.userAccount,
-      TransectionDate:this.date,
-      ExpenseDR:m.loanAmount,
-      Description:m.description,
-      PreviousExpenseDR:40000
+    // let em:any;
+    // em={
+    //   AccountID:m.userAccount,
+    //   TransectionDate:this.date,
+    //   ExpenseDR:m.loanAmount,
+    //   Description:m.description,
+    //   PreviousExpenseDR:40000
       
-    }
-    console.log(em);
+    // }
+    // console.log(em);
 
     // this.rs.PostExpenseTransection(em).subscribe(data=>{
     //   console.log(data);

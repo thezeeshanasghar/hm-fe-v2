@@ -34,18 +34,18 @@ export class IncomeTransectionComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit(m){
-    console.log(m);
+    console.log(JSON.stringify(m));
     
-    let em:any;
-    em={
-      AccountID:m.userAccount,
-      TransectionDate:this.date,
-      IncomeCR:m.incomeAmount,
-      Description:m.description,
+    // let em:any;
+    // em={
+    //   AccountID:m.userAccount,
+    //   TransectionDate:this.date,
+    //   IncomeCR:m.incomeAmount,
+    //   Description:m.description,
       
       
-    }
-    console.log(em);
+    // }
+    // console.log(em);
 
     // this.rs.PostIncomeTransection(em).subscribe(data=>{
     //   console.log(data);

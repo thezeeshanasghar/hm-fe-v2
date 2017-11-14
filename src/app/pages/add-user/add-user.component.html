@@ -44,16 +44,16 @@
 
                   <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
                       <!--first name-->
-                      <div class="form-group row" [ngClass]="{'has-error': (!firstName.valid && firstName.touched), 'has-success': (firstName.valid && firstName.touched)}">
+                      <div class="form-group row" [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
 
                           <div class="col-sm-12">
                               <div class="input-group">
                                   <span class="input-group-addon">
                                       <i class="glyphicon glyphicon-user"></i>
                                   </span>
-                                  <input [formControl]="firstName" type="text" class="form-control" id="inputPassword3" placeholder=" Enter First Name">
+                                  <input [formControl]="name" type="text" class="form-control" id="inputPassword3" placeholder=" Enter First Name">
                               </div>
-                              <span *ngIf="!firstName.valid && firstName.touched && firstName.value.length < 4 " class="help-block sub-little-text">Minimum 4 characters required</span>
+                              <span *ngIf="!name.valid && name.touched && name.value.length < 4 " class="help-block sub-little-text">Minimum 4 characters required</span>
                           </div>
                       </div>
                

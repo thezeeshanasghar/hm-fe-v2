@@ -1,3 +1,4 @@
+import { TransectionModel } from './../../Models/Transection.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllUsersComponent implements OnInit {
   date: Date;
+  transection:TransectionModel[];
 
   constructor() {
     this.date=new Date();
