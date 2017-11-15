@@ -1,9 +1,9 @@
 import { AccountModel } from './account.model';
-export class TransectionModel{
+export class TransactionModel{
    
     constructor(
         public Id:number,
-        public Number:string,
+        public AccountNumber:string,
         public Amount:number,
         public AccountID:number,
         public Account:AccountModel

@@ -2,7 +2,7 @@ export class AccountModel{
     constructor(
         public Id:number,
         public Name:string,
-        public Number:String,
+        public AccountNumber:String,
         public MobileNumber:string,
         public Email:string,
         public CNIC:string,
