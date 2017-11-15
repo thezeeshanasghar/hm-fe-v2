@@ -9,14 +9,22 @@ export class GeneralHttpService {
   public getTransections()
   {
     //let headers = new Headers({ 'Content-Type': 'application/json' });
-    let str="http://localhost:16443/api/transection";
+    let str="http://hm-api.afz-sol.com/api/transaction";
      return this.http.get(str).map((response: Response) => response.json());
   }
 
   public getAllUsers()
   {
     //let headers = new Headers({ 'Content-Type': 'application/json' });
-    let str="http://localhost:16443/api/account";
+    let str="http://hm-api.afz-sol.com/api/account";
+     return this.http.get(str).map((response: Response) => response.json());
+  }
+
+  public getAllUsersById(id)
+  {
+    //let headers = new Headers({ 'Content-Type': 'application/json' });
+    let str="http://hm-api.afz-sol.com/api/account/"+id;
+    console.log(str);
      return this.http.get(str).map((response: Response) => response.json());
   }
 
