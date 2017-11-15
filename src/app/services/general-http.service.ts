@@ -23,7 +23,7 @@ export class GeneralHttpService {
   public getAllUsersById(id)
   {
     //let headers = new Headers({ 'Content-Type': 'application/json' });
-    let str="http://hm-api.afz-sol.com/api/account/"+id+"/transactions";
+    let str="http://hm-api.afz-sol.com/api/account/"+id;
     console.log(str);
      return this.http.get(str).map((response: Response) => response.json());
   }

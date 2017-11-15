@@ -31,14 +31,14 @@ export class RoznamchaComponent implements OnInit {
     this.gu.getTransections().subscribe(data => {
       // console.log(data.ResponseData)
        this.transaction = data.ResponseData; // transctionDTO -> Accont {}
-      console.log(this.transaction);
+      //console.log(this.transaction);
 
        this.transaction.forEach(element => {
          this.gu.getAllUsersById(element.AccountID).subscribe(data => {
         
         console.log(data);
-         element.Account=data.ResponseData;
-       // console.log(element.Account);
+       //  element.Account=data.ResponseData;
+       console.log(element.Account);
       
       }, error => { });
      
@@ -48,7 +48,7 @@ export class RoznamchaComponent implements OnInit {
     }, error => { });
    
 
-   // console.log(this.transaction);
+  //  console.log(this.transaction);
 
   }
 
