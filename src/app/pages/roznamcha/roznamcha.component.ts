@@ -17,42 +17,22 @@ export class RoznamchaComponent implements OnInit {
   userData: any;
   singleUser: any;
   constructor(private gu: GeneralHttpService) {
-    
-   this.getTransactions();
-   //this.getUsers();
+    this.getTransactions();
   }
 
   ngOnInit() {
-
   }
 
-  
   getTransactions() {
-    this.gu.getTransections().subscribe(data => {
-      // console.log(data.ResponseData)
-       this.transaction = data.ResponseData; // transctionDTO -> Accont {}
-      //console.log(this.transaction);
+    this.gu.getTransactions().subscribe(data => {
+      this.transaction = data.ResponseData; // transctionDTO -> Accont {}
 
-       this.transaction.forEach(element => {
-         this.gu.getAllUsersById(element.AccountID).subscribe(data => {
-        
-        console.log(data);
-       //  element.Account=data.ResponseData;
-       console.log(element.Account);
-      
-      }, error => { });
-     
-        
+      this.transaction.forEach(element => {
+        this.gu.getAccountById(element.AccountID).subscribe(data => {
+          element.Account = data.ResponseData;
+        }, error => { });
       });
 
     }, error => { });
-   
-
-  //  console.log(this.transaction);
-
   }
-
-
-
-
 }

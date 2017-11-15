@@ -1,31 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map'
+import { AccountModel } from '../Models/account.model';
+
 @Injectable()
 export class GeneralHttpService {
 
-  constructor(private http:Http) { }
+  private ip: string;
+  private port: number;
+  constructor(private http: Http) {
+    // this.ip='hm-api.afz-sol.com';
+    // this.port = 80;
 
-  public getTransections()
-  {
-    //let headers = new Headers({ 'Content-Type': 'application/json' });
-    let str="http://hm-api.afz-sol.com/api/transaction";
-     return this.http.get(str).map((response: Response) => response.json());
+    this.ip = 'localhost';
+    this.port = 16443;
   }
 
-  public getAllUsers()
-  {
+  public getTransactions() {
     //let headers = new Headers({ 'Content-Type': 'application/json' });
-    let str="http://hm-api.afz-sol.com/api/account";
-     return this.http.get(str).map((response: Response) => response.json());
+    let str = "http://" + this.ip + ":" + this.port + "/api/transaction";
+    return this.http.get(str).map((response: Response) => response.json());
   }
 
-  public getAllUsersById(id)
-  {
+  public getAllAccounts() {
     //let headers = new Headers({ 'Content-Type': 'application/json' });
-    let str="http://hm-api.afz-sol.com/api/account/"+id;
-    console.log(str);
-     return this.http.get(str).map((response: Response) => response.json());
+    let str = "http://" + this.ip + ":" + this.port + "/api/account";
+    return this.http.get(str).map((response: Response) => response.json());
+  }
+
+  public getAccountById(id) {
+    //let headers = new Headers({ 'Content-Type': 'application/json' });
+    let str = "http://" + this.ip + ":" + this.port + "/api/account/" + id;
+    return this.http.get(str).map((response: Response) => response.json());
+  }
+
+  public postAccount(obj:AccountModel) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let url = "http://" + this.ip + ":" + this.port + "/api/account/";
+    return this.http.post(url,JSON.stringify(obj),{ headers: headers}).map((response: Response) => response.json());
   }
 
 }

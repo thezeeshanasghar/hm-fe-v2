@@ -9,21 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllUsersComponent implements OnInit {
   date: Date;
-  transection:TransactionModel[];
-  allUsers:any;
+  transaction: TransactionModel[];
 
-  constructor(private gu:GeneralHttpService) {
-    this.date=new Date();
-    // this.getUsers();
-   }
-   getUsers()
-   {
-     this.gu.getAllUsers().subscribe(data=>{
-       console.log(data.ResponseData)
-       this.allUsers=data.ResponseData;
 
-     },error=>{});
-   }
+  constructor(private gu: GeneralHttpService) {
+    this.date = new Date();
+  }
 
   ngOnInit() {
   }
