@@ -1,24 +1,23 @@
 import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
-import { AddUserComponent } from './pages/add-user/add-user.component';
 import { ExpenseTransectionComponent } from './pages/expense-transection/expense-transection.component';
 import { IncomeTransectionComponent } from './pages/income-transection/income-transection.component';
 import { AllUsersComponent } from './pages/all-users/all-users.component';
 import { ModuleWithProviders, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddAccountComponent } from './pages/add-account/add-account.component';
 
-export const appRoutes:Routes=[
+export const appRoutes: Routes = [
     {
         path: '',
         redirectTo: 'allUsers',
         pathMatch: 'full'
     },
 
-    {path:"income",component:IncomeTransectionComponent}
-    ,{ path:"expense",component:ExpenseTransectionComponent},
-    {path:"addUser",component:AddUserComponent},
-    {path:"roznamcha",component:RoznamchaComponent},
-
- {path:"**",component:AllUsersComponent}   
+    { path: "income", component: IncomeTransectionComponent },
+    { path: "expense", component: ExpenseTransectionComponent },
+    { path: "addAccount", component: AddAccountComponent },
+    { path: "roznamcha", component: RoznamchaComponent },
+    { path: "**", component: AllUsersComponent }
 ]
 
-export const Routers:ModuleWithProviders=RouterModule.forRoot(appRoutes);
+export const Routers: ModuleWithProviders = RouterModule.forRoot(appRoutes);
