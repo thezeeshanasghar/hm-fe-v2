@@ -1,10 +1,9 @@
 import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
-import { ExpenseTransectionComponent } from './pages/expense-transection/expense-transection.component';
-import { IncomeTransectionComponent } from './pages/income-transection/income-transection.component';
 import { AllUsersComponent } from './pages/all-users/all-users.component';
 import { ModuleWithProviders, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddAccountComponent } from './pages/add-account/add-account.component';
+import { ExpenseComponent } from './pages/expense/expense.component';
 
 export const appRoutes: Routes = [
     {
@@ -12,9 +11,7 @@ export const appRoutes: Routes = [
         redirectTo: 'allUsers',
         pathMatch: 'full'
     },
-
-    { path: "income", component: IncomeTransectionComponent },
-    { path: "expense", component: ExpenseTransectionComponent },
+    { path: "expense", component: ExpenseComponent },
     { path: "addAccount", component: AddAccountComponent },
     { path: "roznamcha", component: RoznamchaComponent },
     { path: "**", component: AllUsersComponent }

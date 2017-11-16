@@ -6,21 +6,22 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { IncomeTransectionComponent } from './pages/income-transection/income-transection.component';
 import { AllUsersComponent } from './pages/all-users/all-users.component';
-import { ExpenseTransectionComponent } from './pages/expense-transection/expense-transection.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
 import { AddAccountComponent } from './pages/add-account/add-account.component';
+import { ExpenseComponent } from './pages/expense/expense.component';
+import { IncomeComponent } from './pages/income/income.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IncomeTransectionComponent,
     AllUsersComponent,
-    ExpenseTransectionComponent,
+    ExpenseComponent,
     RoznamchaComponent,
-    AddAccountComponent
+    AddAccountComponent,
+    ExpenseComponent,
+    IncomeComponent
   ],
   imports: [
     BrowserModule,
