@@ -11,16 +11,16 @@ import { AccountModel } from '../../Models/account.model';
 })
 export class AddAccountComponent implements OnInit {
 
-  public form:FormGroup;
+  public form: FormGroup;
 
-  public number:AbstractControl;
-  public name:AbstractControl;
-  public mobileNumber:AbstractControl;
-  public cnic:AbstractControl;
-  public address:AbstractControl;
-  public amount:AbstractControl;
+  public number: AbstractControl;
+  public name: AbstractControl;
+  public mobileNumber: AbstractControl;
+  public cnic: AbstractControl;
+  public address: AbstractControl;
+  public amount: AbstractControl;
 
-  constructor(public fb: FormBuilder, public router: Router,private gu: GeneralHttpService) {
+  constructor(public fb: FormBuilder, public router: Router, private gu: GeneralHttpService) {
     this.form = fb.group({
       'number': ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(10)])],
       'name': ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(35)])],
@@ -28,7 +28,7 @@ export class AddAccountComponent implements OnInit {
       'cnic': ['', Validators.compose([Validators.required, AmountValidator.validate, Validators.minLength(1), Validators.maxLength(13)])],
       'address': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       'amount': ['0', Validators.compose([Validators.required, AmountValidator.validate, Validators.minLength(1)])],
-      
+
     });
 
     this.number = this.form.controls['number'];
@@ -44,25 +44,36 @@ export class AddAccountComponent implements OnInit {
   }
 
   onSubmit(m) {
-    
+
     let model = new AccountModel();
     model.Id = 0;
     model.Number = this.form.value.number;
     model.Name = this.form.value.name;
     model.MobileNumber = this.form.value.mobileNumber;
     model.CNIC = this.form.value.cnic;
+    model.Created = this.getCurrentDate();
     model.Address = this.form.value.address;
     model.Balance = this.form.value.amount;
 
-    this.gu.postAccount(model).subscribe(data=> {}, error=> {});
-    // model
+    this.gu.postAccount(model).subscribe(data => { console.log(data) }, error => { console.log(error) });
 
-    // this.rs.PostExpenseTransection(em).subscribe(data=>{
-    //   console.log(data);
+    this.router.navigate(["roznamcha"]);
 
-    // },error=>{});
+  }
 
-   this.router.navigate(["roznamcha"]);
+  getCurrentDate() {
+    var today = new Date();
+    let dd:any = today.getDate();
+    let mm:any = today.getMonth()+1; //January is 0!
+    
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd;
 
+    } 
+    if(mm<10){
+        mm='0'+mm;
+    } 
+    return dd+'-'+mm+'-'+yyyy;
   }
 }
