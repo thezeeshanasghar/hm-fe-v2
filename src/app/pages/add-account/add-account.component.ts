@@ -76,4 +76,15 @@ export class AddAccountComponent implements OnInit {
     } 
     return dd+'-'+mm+'-'+yyyy;
   }
+
+obSubmit(m){
+  console.log(m);
+}
+
+
+
+
+
+
+
 }

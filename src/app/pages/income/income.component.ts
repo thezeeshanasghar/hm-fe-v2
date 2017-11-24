@@ -4,6 +4,7 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/fo
 import { Component, OnInit } from '@angular/core';
 import { UUID } from 'angular2-uuid';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class IncomeComponent implements OnInit {
   public description:AbstractControl;
   
 
-  constructor(public fb:FormBuilder,public gu:GeneralHttpService) {
+  constructor(public fb:FormBuilder,public gu:GeneralHttpService,private router:Router) {
     this.form=fb.group({
       'userAccount':['',Validators.compose([Validators.required])],
       'incomeAmount':['',Validators.compose([Validators.required,AmountValidator.validate,Validators.minLength(3)])],
@@ -44,7 +45,7 @@ this.getAllAccount();
     }, error=> {});
   }
 
-  onSubmit(m)
+  onSubmitIncome(m)
   {
     //console.log(m);
     var uid=UUID.UUID();
@@ -55,13 +56,15 @@ this.getAllAccount();
       AccountID:m.userAccount,
       Number:uid,
       Amount:m.incomeAmount,
-      Date:dateTime
+      Date:dateTime,
+      Description:m.description
 
     }
     //console.log(transaction);
 
     this.gu.PostTransaction(transaction).subscribe(data=>{
       console.log(data)
+      this.router.navigate(["allUsers"]);
     },
     error=>{});
   }
