@@ -15,6 +15,7 @@ import * as moment from 'moment';
 })
 export class ExpenseComponent {
   allAccounts:any[]=[];
+  
   public form: FormGroup;
   public userAccount: AbstractControl;
   public loanAmount: AbstractControl;
@@ -51,7 +52,7 @@ export class ExpenseComponent {
     //console.log(m);
     var uid=UUID.UUID();
     var date=new Date();
-    var dateTime = moment.utc(date).format("YYYY-MM-DD HH:mm:ss");
+    var dateTime = moment.utc(date).format("YYYY-MM-DD");
       var transaction={
       
       AccountID:m.userAccount,
@@ -68,4 +69,8 @@ export class ExpenseComponent {
     error=>{});
   }
 
+  
+    
+
+  
 }
