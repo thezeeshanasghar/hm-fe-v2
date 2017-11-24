@@ -52,14 +52,14 @@ export class ExpenseComponent {
     //console.log(m);
     var uid=UUID.UUID();
     var date=new Date();
-    var dateTime = moment.utc(date).format("YYYY-MM-DD");
+    var dateTime = moment.utc(date).format("DD-MM-YYYY");
       var transaction={
       
       AccountID:m.userAccount,
       Number:uid,
       Amount:"-"+m.loanAmount,
+      Description: m.description,
       Date:dateTime
-
     }
     //console.log(transaction);
 

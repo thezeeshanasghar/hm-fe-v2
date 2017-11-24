@@ -7,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-roznamcha',
-  templateUrl: './roznamcha.component.html',
-  styleUrls: ['./roznamcha.component.css']
+  templateUrl: './roznamcha.component.html'
 })
 export class RoznamchaComponent implements OnInit {
   singelUser: any;
@@ -35,11 +34,12 @@ export class RoznamchaComponent implements OnInit {
       });
 
     }, error => { });
+    
   }
 
-  getUserById(id){
-    this.gu.getAccountById(id).subscribe(data=>{
-      this.singelUser=data.ResponseData;
+  getUserById(id) {
+    this.gu.getAccountById(id).subscribe(data => {
+      this.singelUser = data.ResponseData;
     });
   }
 }

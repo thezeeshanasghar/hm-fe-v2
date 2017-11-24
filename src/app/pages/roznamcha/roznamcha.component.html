@@ -39,15 +39,11 @@
                          </tr>
                        </thead>
                        <tbody>
-                           <tr *ngFor="let u of income;let i=index"  >
+                           <tr *ngFor="let u of transaction;let i=index"  >
 
                                <td >{{i+1}}</td>
-                               <td>{{u.Date |date :'short'}}</td>
-                               <!-- <td>{{singleUser.Name}}</td> -->
-                               <!-- <td>{{u.User.AccountNumber}}</td>
-                               <td>{{u.User.FirstName}}  {{u.User.LastName}}</td>
-                               <td>{{u.Description}}</td> -->
-                             
+                                <td>{{u.Account.Name}}</td>
+                                <td>{{u.Account.MobileNumber}}</td>
                                <td >{{u.Amount |number}}</td>
                               
                                <td>
