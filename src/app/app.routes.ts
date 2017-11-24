@@ -1,3 +1,4 @@
+import { IncomeComponent } from './pages/income/income.component';
 import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
 import { AllUsersComponent } from './pages/all-users/all-users.component';
 import { ModuleWithProviders, Component } from '@angular/core';
@@ -12,7 +13,9 @@ export const appRoutes: Routes = [
         pathMatch: 'full'
     },
     { path: "expense", component: ExpenseComponent },
+    { path: "income", component: IncomeComponent },
     { path: "addAccount", component: AddAccountComponent },
+
     { path: "roznamcha", component: RoznamchaComponent },
     { path: "**", component: AllUsersComponent }
 ]

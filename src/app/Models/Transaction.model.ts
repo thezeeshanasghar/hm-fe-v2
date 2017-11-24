@@ -3,7 +3,7 @@ export class TransactionModel{
    
     constructor(
         public Id:number,
-        public AccountNumber:string,
+        public Number:string,
         public Amount:number,
         public AccountID:number,
         public Account:AccountModel

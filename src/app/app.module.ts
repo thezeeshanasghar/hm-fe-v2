@@ -13,6 +13,7 @@ import { AddAccountComponent } from './pages/add-account/add-account.component';
 import { ExpenseComponent } from './pages/expense/expense.component';
 import { IncomeComponent } from './pages/income/income.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { IncomeComponent } from './pages/income/income.component';
     BrowserModule,
     ReactiveFormsModule ,
     Routers,
-    HttpModule
+    HttpModule,
+    
   ],
   providers: [GeneralHttpService],
   bootstrap: [AppComponent]
