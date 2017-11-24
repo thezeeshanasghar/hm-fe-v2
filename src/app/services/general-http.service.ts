@@ -21,6 +21,15 @@ export class GeneralHttpService {
     let str = "http://" + this.ip + ":" + this.port + "/api/transaction";
     return this.http.get(str).map((response: Response) => response.json());
   }
+  public PostTransaction(m){
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let body=JSON.stringify(m);
+    console.log(body);
+    let url = "http://" + this.ip + ":" + this.port + "/api/transaction";
+    console.log(url);
+    return this.http.post(url,body,{ headers: headers}).map((response: Response) => response.json());
+
+  }
 
   public getAllAccounts() {
     //let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -36,7 +45,7 @@ export class GeneralHttpService {
 
   public postAccount(obj:AccountModel) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    let url = "http://" + this.ip + ":" + this.port + "/api/account/";
+    let url = "http://" + this.ip + ":" + this.port + "/api/account";
     return this.http.post(url,JSON.stringify(obj),{ headers: headers}).map((response: Response) => response.json());
   }
 

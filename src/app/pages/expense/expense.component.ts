@@ -1,3 +1,5 @@
+import { TransactionModel } from './../../Models/Transaction.model';
+import { Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -5,13 +7,14 @@ import { Router } from '@angular/router';
 
 import { AmountValidator } from '../../../assets/validators/index';
 import { GeneralHttpService } from '../../services/general-http.service';
-
+import { UUID } from 'angular2-uuid';
+import * as moment from 'moment';
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html'
 })
 export class ExpenseComponent {
-
+  allAccounts:any[]=[];
   public form: FormGroup;
   public userAccount: AbstractControl;
   public loanAmount: AbstractControl;
@@ -26,13 +29,43 @@ export class ExpenseComponent {
     this.userAccount = this.form.controls["userAccount"];
     this.loanAmount = this.form.controls["loanAmount"];
     this.description = this.form.controls["description"];
+    // var date=new Date();
+    // var dateTime = moment.utc(date).format("YYYY-MM-DD HH:mm:ss");
+    //  console.log(dateTime);
+
+   
 
     this.getAllAccount();
   }
 
   getAllAccount() {
-    this.gu.getAllAccounts().subscribe(data=> {console.log(data.ResponseData)}, error=> {})
+    this.gu.getAllAccounts().subscribe(data=> {
+      
+      this.allAccounts=data.ResponseData;
+    //  console.log(data.ResponseData)
+    }, error=> {})
   }
 
+  onSubmit(m)
+  {
+    //console.log(m);
+    var uid=UUID.UUID();
+    var date=new Date();
+    var dateTime = moment.utc(date).format("YYYY-MM-DD HH:mm:ss");
+      var transaction={
+      
+      AccountID:m.userAccount,
+      Number:uid,
+      Amount:"-"+m.loanAmount,
+      Date:dateTime
+
+    }
+    //console.log(transaction);
+
+    this.gu.PostTransaction(transaction).subscribe(data=>{
+      console.log(data)
+    },
+    error=>{});
+  }
 
 }
