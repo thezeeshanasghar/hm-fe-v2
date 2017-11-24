@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./roznamcha.component.css']
 })
 export class RoznamchaComponent implements OnInit {
+  singelUser: any;
 
   public transaction: TransactionModel[];
   transactionData: any
@@ -34,5 +35,11 @@ export class RoznamchaComponent implements OnInit {
       });
 
     }, error => { });
+  }
+
+  getUserById(id){
+    this.gu.getAccountById(id).subscribe(data=>{
+      this.singelUser=data.ResponseData;
+    });
   }
 }
