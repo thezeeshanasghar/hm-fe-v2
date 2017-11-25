@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class IncomeComponent implements OnInit {
 
+  changeClass=false;
   allAccounts:any[]=[];
   public form:FormGroup;
   public userAccount:AbstractControl;

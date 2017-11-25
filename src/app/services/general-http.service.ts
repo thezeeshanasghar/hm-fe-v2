@@ -9,11 +9,11 @@ export class GeneralHttpService {
   private ip: string;
   private port: number;
   constructor(private http: Http) {
-    // this.ip='hm-api.afz-sol.com';
-    // this.port = 80;
+     this.ip='hm-api.afz-sol.com';
+     this.port = 80;
 
-    this.ip = 'localhost';
-    this.port = 16443;
+   // this.ip = 'localhost';
+    //this.port = 16443;
   }
 
   public getTransactions() {
@@ -24,7 +24,7 @@ export class GeneralHttpService {
 
   public getTransactionsIdBy(id)
   {
-    let str = "http://" + this.ip + ":" + this.port + "/api/account/"+id+"transactions";
+    let str = "http://" + this.ip + ":" + this.port + "/api/account/"+id+"/transactions";
     return this.http.get(str).map((response: Response) => response.json());
 
   }

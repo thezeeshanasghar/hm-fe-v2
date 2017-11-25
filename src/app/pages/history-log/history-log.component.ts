@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./history-log.component.css']
 })
 export class HistoryLogComponent implements OnInit {
-  allAccounts: any[]=[];
+  allAccounts;
   public transaction: TransactionModel[];
   modal;
   date;
@@ -24,7 +24,7 @@ export class HistoryLogComponent implements OnInit {
   }
   getAllUsers(){
     this.gu.getAllAccounts().subscribe(data=>{
-      this.allAccounts=data;
+      this.allAccounts=data.ResponseData;
       console.log(data);
 
     },
@@ -39,15 +39,7 @@ export class HistoryLogComponent implements OnInit {
       this.transaction = data.ResponseData; // transctionDTO -> Accont {}
 
       this.transaction.forEach(element => {
-        // if(element.Amount>0)
-        // {
-        //   this.totalIncome+=element.Amount;
-        // }
-        // else{
-        //   this.totalExpense+=element.Amount;
-        // }
-
-        // this.grandTotal= this.totalIncome+this.totalExpense;
+   
         this.gu.getAccountById(element.AccountID).subscribe(data => {
           element.Account = data.ResponseData;
 
@@ -60,20 +52,14 @@ export class HistoryLogComponent implements OnInit {
 
   getLogById(id)
   {
+    console.log(id)
     this.gu.getTransactionsIdBy(id).subscribe(data=>{
-      this.transaction=data.ResposeData;
+      this.transaction=data.ResponseData;
+      console.log(this.transaction);
 
       this.transaction.forEach(element => {
-        // if(element.Amount>0)
-        // {
-        //   this.totalIncome+=element.Amount;
-        // }
-        // else{
-        //   this.totalExpense+=element.Amount;
-        // }
-
-        // this.grandTotal= this.totalIncome+this.totalExpense;
-        this.gu.getAccountById(element.AccountID).subscribe(data => {
+      
+        this.gu.getAccountById(id).subscribe(data => {
           element.Account = data.ResponseData;
 
         }, error => { });
