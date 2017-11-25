@@ -9,11 +9,11 @@ export class GeneralHttpService {
   private ip: string;
   private port: number;
   constructor(private http: Http) {
-     this.ip='hm-api.afz-sol.com';
-     this.port = 80;
+    //this.ip='hm-api.afz-sol.com';
+    //this.port = 80;
 
-   // this.ip = 'localhost';
-    //this.port = 16443;
+    this.ip = 'localhost';
+    this.port = 16443;
   }
 
   public getTransactions() {
@@ -22,19 +22,18 @@ export class GeneralHttpService {
     return this.http.get(str).map((response: Response) => response.json());
   }
 
-  public getTransactionsIdBy(id)
-  {
-    let str = "http://" + this.ip + ":" + this.port + "/api/account/"+id+"/transactions";
+  public getTransactionsIdBy(id) {
+    let str = "http://" + this.ip + ":" + this.port + "/api/account/" + id + "/transactions";
     return this.http.get(str).map((response: Response) => response.json());
 
   }
-  public PostTransaction(m){
+  public PostTransaction(m) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    let body=JSON.stringify(m);
+    let body = JSON.stringify(m);
     console.log(body);
     let url = "http://" + this.ip + ":" + this.port + "/api/transaction";
     console.log(url);
-    return this.http.post(url,body,{ headers: headers}).map((response: Response) => response.json());
+    return this.http.post(url, body, { headers: headers }).map((response: Response) => response.json());
 
   }
 
@@ -50,10 +49,10 @@ export class GeneralHttpService {
     return this.http.get(str).map((response: Response) => response.json());
   }
 
-  public postAccount(obj:AccountModel) {
+  public postAccount(obj: AccountModel) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let url = "http://" + this.ip + ":" + this.port + "/api/account";
-    return this.http.post(url,JSON.stringify(obj),{ headers: headers}).map((response: Response) => response.json());
+    return this.http.post(url, JSON.stringify(obj), { headers: headers }).map((response: Response) => response.json());
   }
 
 }

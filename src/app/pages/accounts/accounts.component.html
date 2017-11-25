@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addAccountModal">Add Account</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Sr #</th>
+          <th>Account #</th>
+          <th>Name</th>
+          <th>Contact</th>
+          <th>CNIC</th>
+          <th>Balance</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of allAccounts; let i=index">
+          <td>{{i+1}}</td>
+          <td>{{u.Number}}</td>
+          <td>{{u.Name}}</td>
+          <td>{{u.MobileNumber}}</td>
+          <td>{{u.CNIC}}</td>
+          <td>{{u.Balance |number}}</td>
+          <td>{{u.Address}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addAccountModal" #addAccountModal role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Account</h4>
+      </div>
+      <div class="modal-body">
+
+        <app-add-account></app-add-account>
+
+      </div>
+      
+    </div>
+
+  </div>
+</div>

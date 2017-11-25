@@ -1,72 +1,41 @@
 import { TransactionModel } from './../../Models/Transaction.model';
 import { GeneralHttpService } from './../../services/general-http.service';
 import { Component, OnInit } from '@angular/core';
+import { AccountModel } from '../../Models/account.model';
 
 
 @Component({
   selector: 'app-history-log',
-  templateUrl: './history-log.component.html',
-  styleUrls: ['./history-log.component.css']
+  templateUrl: './history-log.component.html'
 })
 export class HistoryLogComponent implements OnInit {
-  allAccounts;
-  public transaction: TransactionModel[];
-  modal;
-  date;
+  allAccounts: AccountModel[] = [];
+  transaction: TransactionModel[] = [];
 
-  constructor(private gu:GeneralHttpService) {
-    this.date=new Date();
-    this.getTransactions();
-    this.getAllUsers();
-   }
+  constructor(private gu: GeneralHttpService) { }
 
   ngOnInit() {
+    this.getAllUsers();
   }
-  getAllUsers(){
-    this.gu.getAllAccounts().subscribe(data=>{
-      this.allAccounts=data.ResponseData;
-      console.log(data);
 
+  getAllUsers() {
+    this.gu.getAllAccounts().subscribe(data => {
+      this.allAccounts = data.ResponseData;
     },
-    error=>{
-
-    });
-
-  }
-
-  getTransactions() {
-    this.gu.getTransactions().subscribe(data => {
-      this.transaction = data.ResponseData; // transctionDTO -> Accont {}
-
-      this.transaction.forEach(element => {
-   
-        this.gu.getAccountById(element.AccountID).subscribe(data => {
-          element.Account = data.ResponseData;
-
-        }, error => { });
+      error => {
+        console.log(error);
       });
-
-    }, error => { });
-    
   }
 
-  getLogById(id)
-  {
-    console.log(id)
-    this.gu.getTransactionsIdBy(id).subscribe(data=>{
-      this.transaction=data.ResponseData;
-      console.log(this.transaction);
+  getLogById(id) {
+    this.gu.getTransactionsIdBy(id).subscribe(data => {
+      this.transaction = data.ResponseData;
 
       this.transaction.forEach(element => {
-      
         this.gu.getAccountById(id).subscribe(data => {
           element.Account = data.ResponseData;
-
-        }, error => { });
+        }, error => { console.log(error); });
       });
-    },error=>{});
-    
-  
+    }, error => { console.log(error); });
   }
-
 }

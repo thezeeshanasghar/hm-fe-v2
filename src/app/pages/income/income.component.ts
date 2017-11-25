@@ -13,61 +13,59 @@ import { Router } from '@angular/router';
 })
 export class IncomeComponent implements OnInit {
 
-  changeClass=false;
-  allAccounts:any[]=[];
-  public form:FormGroup;
-  public userAccount:AbstractControl;
-  public incomeAmount:AbstractControl;
-  public description:AbstractControl;
-  
+  changeClass = false;
+  allAccounts: any[] = [];
+  public form: FormGroup;
+  public userAccount: AbstractControl;
+  public incomeAmount: AbstractControl;
+  public description: AbstractControl;
 
-  constructor(public fb:FormBuilder,public gu:GeneralHttpService,private router:Router) {
-    this.form=fb.group({
-      'userAccount':['',Validators.compose([Validators.required])],
-      'incomeAmount':['',Validators.compose([Validators.required,AmountValidator.validate,Validators.minLength(3)])],
-      'description':['',Validators.compose([Validators.required, Validators.minLength(10)])]
+
+  constructor(public fb: FormBuilder, public gu: GeneralHttpService, private router: Router) {
+    this.form = fb.group({
+      'userAccount': ['', Validators.compose([Validators.required])],
+      'incomeAmount': ['', Validators.compose([Validators.required, AmountValidator.validate, Validators.minLength(3)])],
+      'description': ['', Validators.compose([Validators.required, Validators.minLength(10)])]
 
     });
 
     this.userAccount = this.form.controls["userAccount"];
     this.incomeAmount = this.form.controls["incomeAmount"];
     this.description = this.form.controls["description"];
-this.getAllAccount();
-   }
+    this.getAllAccount();
+  }
 
   ngOnInit() {
   }
 
   getAllAccount() {
-    this.gu.getAllAccounts().subscribe(data=> {
-      
-      this.allAccounts=data.ResponseData;
-    //  console.log(data.ResponseData)
-    }, error=> {});
+    this.gu.getAllAccounts().subscribe(data => {
+
+      this.allAccounts = data.ResponseData;
+      //  console.log(data.ResponseData)
+    }, error => { });
   }
 
-  onSubmitIncome(m)
-  {
+  onSubmitIncome(m) {
     //console.log(m);
-    var uid=UUID.UUID();
-    var date=new Date();
-    var dateTime = moment.utc(date).format("YYYY-MM-DD HH:mm:ss");
-      var transaction={
-      
-      AccountID:m.userAccount,
-      Number:uid,
-      Amount:m.incomeAmount,
-      Date:dateTime,
-      Description:m.description
+    var uid = UUID.UUID();
+    var date = new Date();
+    var dateTime = moment.utc(date).format("DD-MM-YYYY");
+    var transaction = {
+      AccountID: m.userAccount,
+      Number: uid,
+      Amount: m.incomeAmount,
+      Date: dateTime,
+      Description: m.description
 
     }
     //console.log(transaction);
 
-    this.gu.PostTransaction(transaction).subscribe(data=>{
+    this.gu.PostTransaction(transaction).subscribe(data => {
       console.log(data)
       this.router.navigate(["allUsers"]);
     },
-    error=>{});
+      error => { });
   }
 
 

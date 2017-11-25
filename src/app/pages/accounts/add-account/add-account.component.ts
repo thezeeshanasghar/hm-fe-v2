@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AmountValidator } from './../../../assets/validators/amount.valdator';
-import { GeneralHttpService } from '../../services/general-http.service';
-import { AccountModel } from '../../Models/account.model';
+import { AmountValidator } from './../../../../assets/validators/amount.valdator';
+import { GeneralHttpService } from '../../../services/general-http.service';
+import { AccountModel } from '../../../Models/account.model';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-add-account',
   templateUrl: './add-account.component.html'
 })
 export class AddAccountComponent implements OnInit {
-
-  changeClass=false;
+  
+  changeClass = false;
   public form: FormGroup;
 
   public number: AbstractControl;
@@ -52,40 +54,21 @@ export class AddAccountComponent implements OnInit {
     model.Name = this.form.value.name;
     model.MobileNumber = this.form.value.mobileNumber;
     model.CNIC = this.form.value.cnic;
-    model.Created = this.getCurrentDate();
+    model.Created = moment.utc(new Date()).format("DD-MM-YYYY");
     model.Address = this.form.value.address;
     model.Balance = this.form.value.amount;
 
-    this.gu.postAccount(model).subscribe(data => { console.log(data) }, error => { console.log(error) });
+    this.gu.postAccount(model).subscribe(data => {
+      if(data.IsSuccess==true){
+        
+      } else {
+        console.log('Error in postAccount: ' + data.Message);
+      }
+
+    }, error => { console.log(error) });
 
     this.router.navigate(["roznamcha"]);
 
   }
-
-  getCurrentDate() {
-    var today = new Date();
-    let dd:any = today.getDate();
-    let mm:any = today.getMonth()+1; //January is 0!
-    
-    var yyyy = today.getFullYear();
-    if(dd<10){
-        dd='0'+dd;
-
-    } 
-    if(mm<10){
-        mm='0'+mm;
-    } 
-    return dd+'-'+mm+'-'+yyyy;
-  }
-
-obSubmit(m){
-  console.log(m);
-}
-
-
-
-
-
-
 
 }
