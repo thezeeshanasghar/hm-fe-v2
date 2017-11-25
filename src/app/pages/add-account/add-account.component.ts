@@ -11,6 +11,7 @@ import { AccountModel } from '../../Models/account.model';
 })
 export class AddAccountComponent implements OnInit {
 
+  changeClass=false;
   public form: FormGroup;
 
   public number: AbstractControl;
