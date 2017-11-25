@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Sr#</th>
+      <th>Account #</th>
+      <th>Name</th>
+      <th>Contact #</th>
+      <th>CNIC</th>
+      <th>Balance</th>
+      <th>Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let account of allAccounts; let i=index">
+      <td>{{i+1}}</td>
+      <td>{{account.Number}}</td>
+      <td>{{account.Name}}</td>
+      <td>{{account.MobileNumber}}</td>
+      <td>{{account.CNIC}}</td>
+      <td>{{account.Balance |number}}</td>
+      <td>{{account.Address}}</td>
+    </tr>
+  </tbody>
+</table>
