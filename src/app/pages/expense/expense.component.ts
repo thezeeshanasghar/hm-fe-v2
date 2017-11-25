@@ -47,13 +47,13 @@ export class ExpenseComponent {
     }, error=> {})
   }
 
-  onSubmit(m)
+  onSubmitExpense(m)
   {
     //console.log(m);
     var uid=UUID.UUID();
     var date=new Date();
     var dateTime = moment.utc(date).format("DD-MM-YYYY");
-      var transaction={
+      var trans={
       
       AccountID:m.userAccount,
       Number:uid,
@@ -63,8 +63,9 @@ export class ExpenseComponent {
     }
     //console.log(transaction);
 
-    this.gu.PostTransaction(transaction).subscribe(data=>{
-      console.log(data)
+    this.gu.PostTransaction(trans).subscribe(data=>{
+      console.log(data);
+      this.router.navigate(["allUsers"]);
     },
     error=>{});
   }

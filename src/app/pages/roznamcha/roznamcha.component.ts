@@ -10,13 +10,19 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './roznamcha.component.html'
 })
 export class RoznamchaComponent implements OnInit {
-  singelUser: any;
+  grandTotal: any=0.0;
+  totalExpense: any=0.0;
+  totalIncome: any=0.0;
+  singelUser: any=0;
 
   public transaction: TransactionModel[];
   transactionData: any
   userData: any;
   singleUser: any;
-  constructor(private gu: GeneralHttpService) {
+  date; 
+   constructor(private gu: GeneralHttpService) {
+
+  this.date=new Date();
     this.getTransactions();
   }
 
@@ -28,8 +34,18 @@ export class RoznamchaComponent implements OnInit {
       this.transaction = data.ResponseData; // transctionDTO -> Accont {}
 
       this.transaction.forEach(element => {
+        if(element.Amount>0)
+        {
+          this.totalIncome+=element.Amount;
+        }
+        else{
+          this.totalExpense+=element.Amount;
+        }
+
+        this.grandTotal= this.totalIncome+this.totalExpense;
         this.gu.getAccountById(element.AccountID).subscribe(data => {
           element.Account = data.ResponseData;
+
         }, error => { });
       });
 

@@ -21,6 +21,13 @@ export class GeneralHttpService {
     let str = "http://" + this.ip + ":" + this.port + "/api/transaction";
     return this.http.get(str).map((response: Response) => response.json());
   }
+
+  public getTransactionsIdBy(id)
+  {
+    let str = "http://" + this.ip + ":" + this.port + "/api/account/"+id+"transactions";
+    return this.http.get(str).map((response: Response) => response.json());
+
+  }
   public PostTransaction(m){
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let body=JSON.stringify(m);

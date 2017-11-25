@@ -7,11 +7,12 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { AllUsersComponent } from './pages/all-users/all-users.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
 import { AddAccountComponent } from './pages/add-account/add-account.component';
 import { ExpenseComponent } from './pages/expense/expense.component';
 import { IncomeComponent } from './pages/income/income.component';
+import { HistoryLogComponent } from './pages/history-log/history-log.component';
 
 
 @NgModule({
@@ -22,10 +23,12 @@ import { IncomeComponent } from './pages/income/income.component';
     RoznamchaComponent,
     AddAccountComponent,
     ExpenseComponent,
-    IncomeComponent
+    IncomeComponent,
+    HistoryLogComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule ,
     Routers,
     HttpModule,

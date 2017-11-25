@@ -7,13 +7,13 @@
       <th>Date</th>
       <th>Account #</th>
       <th>Account Holder</th>
-      <th>Email</th>
+      <!-- <th>Email</th> -->
       <th>Cnic</th>
       <th>Contact</th>
       <th>Address</th>
       <th>Balance</th>
       
-      <th>Actions</th> -->
+      <!-- <th>Actions</th> -->
     </tr>
   </thead>
   <!-- <div *ngIf="userData.length>0" > -->
@@ -22,12 +22,12 @@
     
 
 
-        <tr *ngFor="let u of allUsers; let i=index">
+        <tr *ngFor="let u of allAccounts; let i=index">
         <td>{{i+1}}</td>
-        <td>{{u.Created | date:'shortDate'}}</td>
+        <td>{{date | date:'shortDate'}}</td>
         <td>{{u.Number}}</td>
         <td>{{u.Name}}</td> 
-        <td>{{u.Email}}</td>
+        <!-- <td>{{u.Email}}</td> -->
      
       <td>{{u.CNIC}}</td>
         <td>{{u.MobileNumber}}</td>

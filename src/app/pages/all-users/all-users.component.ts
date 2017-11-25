@@ -1,3 +1,4 @@
+
 import { GeneralHttpService } from './../../services/general-http.service';
 import { TransactionModel } from './../../Models/Transaction.model';
 import { Component, OnInit } from '@angular/core';
@@ -8,12 +9,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./all-users.component.css']
 })
 export class AllUsersComponent implements OnInit {
-  date: Date;
-  transaction: TransactionModel[];
+  allAccounts: any[]=[];
+  date1: Date;
+  
 
 
   constructor(private gu: GeneralHttpService) {
-    this.date = new Date();
+    this.date1 = new Date();
+    this.getAllAccounts();
+  }
+
+  getAllAccounts()
+  {
+    this.gu.getAllAccounts().subscribe(data=>{
+      this.allAccounts=data.ResponseData;
+      console.log(this.allAccounts);
+    },error=>{});
   }
 
   ngOnInit() {
