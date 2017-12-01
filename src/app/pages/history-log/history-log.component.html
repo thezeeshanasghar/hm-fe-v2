@@ -6,11 +6,23 @@
             <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Number}}--{{u.Name}}</option>
           </select>
     </div>
+    <div class="col-md-12">
+      <div  *ngIf="singleUser!=null">
+        <h2>Account Details</h2>
+        Name:{{singleUser.Name}}<br>
+        CNIC:{{singleUser.CNIC}} <br>
+        Contact:{{singleUser.MobileNumber}} <br>
+        Address:{{singleUser.Address}} <br>
+        <button class="btn btn-success"> Balance : {{singleUser.Balance}}</button> <br>
+        <button class="btn btn-primary" (click)="print()">print</button>
+        
+      </div>
+    </div>
 
-    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top:10px;">
+    <div id="print-section" class="col-lg-12 col-md-12 col-sm-12" style="padding-top:10px;">
         <div class="panel panel-default">
           <div class="panel-heading">History Log
-            <!-- <span class="pull-right"><b>Total Income:</b> {{totalIncome | number}}</span> -->
+            <!-- <span class="pull-right"> Balance : {{singleUser.Balance |number}}</span> -->
           </div>
           <div class="panel-body">
             <table class="table table-striped">
@@ -18,32 +30,36 @@
                 <tr>
                   <th>Sr#</th>
                   <th>Date</th>
-                  <!-- <th>Ac#</th> -->
-    
-                  <th>Name</th>
+                 
+                  <th>Amount</th>
+                  <!-- <th>Income</th> -->
                   <th>Description</th>
                   
-                  <th>Amount</th>
-                  
-                  <!-- <th>Actions</th> -->
+               
                 </tr>
               </thead>
               <tbody>
                   <tr *ngFor="let u of transaction;let i=index"  >
     
                      <td *ngIf="u.Account!=null ">{{i+1}}</td>
-                     <td *ngIf="u.Account!=null ">{{date | date:'shortDate'}}</td>
-                     <!-- <td *ngIf="u.Account!=null && u.Amount<0">{{u.Account.Id}}</td> -->
-    
-                     <td *ngIf="u.Account!=null ">{{u.Account.Name}}</td>
+                     <td *ngIf="u.Account!=null ">{{u.Date}}</td>
+                     <td *ngIf="u.Account!=null && u.Amount<0" style="color:red;font-style:bold">{{u.Amount}}</td>
+                      <td *ngIf="u.Account!=null  && u.Amount>0">{{u.Amount |number}}</td>
                      <td *ngIf="u.Account!=null ">{{u.Description}}</td>
-                    <td *ngIf="u.Account!=null  " >{{u.Amount |number}}</td>
+                     
+                    <!-- <td *ngIf="u.Account!=null  " >{{u.Amount |number}}</td> -->
                    
                     <!-- <td *ngIf="u.Account!=null && u.Amount<0">
                         <a style="font-size:15px" data-toggle="modal" data-target="#IncomeModal"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                       <a style="font-size:15px" (click)="deleteIncome(u.id)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                     </td> -->
                       
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>Balance : {{singleUser.Balance |number}}</td>
+                      <td></td>
                     </tr>
              
               </tbody>
