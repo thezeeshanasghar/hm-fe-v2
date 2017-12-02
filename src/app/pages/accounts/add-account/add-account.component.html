@@ -3,6 +3,11 @@
 
         <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
 
+                <div class="form-group">
+                        <label for="avatar">Avatar</label>
+                        <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
+                        <!-- <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button> -->
+                      </div>
             <!--number-->
             <div class="form-group row" [ngClass]="{'has-error': (!name.valid && number.touched), 'has-success': (number.valid && number.touched)}">
                 <div class="input-group">
