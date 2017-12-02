@@ -15,6 +15,7 @@ export class HistoryLogComponent implements OnInit {
   totalIncome: number=0.0;
   allAccounts: AccountModel[] = [];
   transaction: TransactionModel[] = [];
+  modal;
 
   constructor(private gu: GeneralHttpService) { }
 
