@@ -5,6 +5,7 @@ import { ModuleWithProviders, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ExpenseComponent } from './pages/expense/expense.component';
 import { AccountsComponent } from './pages/accounts/accounts.component';
+import { AddAccountComponent } from './pages/accounts/add-account/add-account.component';
 
 export const appRoutes: Routes = [
     {
@@ -13,6 +14,7 @@ export const appRoutes: Routes = [
         pathMatch: 'full'
     },
     { path: "accounts", component: AccountsComponent },
+    { path: "addAccount", component: AddAccountComponent },
     { path: "expense", component: ExpenseComponent },
     { path: "income", component: IncomeComponent },
     { path: "log", component: HistoryLogComponent },
