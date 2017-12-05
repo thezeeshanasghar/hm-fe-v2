@@ -13,6 +13,7 @@ import { ExpenseComponent } from './pages/expense/expense.component';
 import { IncomeComponent } from './pages/income/income.component';
 import { HistoryLogComponent } from './pages/history-log/history-log.component';
 import { AccountsComponent } from './pages/accounts/accounts.component';
+import { ModalModule } from 'ngx-bootstrap'
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import { AccountsComponent } from './pages/accounts/accounts.component';
     ReactiveFormsModule ,
     Routers,
     HttpModule,
-    
+    ModalModule.forRoot()
     
   ],
   providers: [GeneralHttpService],
