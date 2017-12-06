@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-12">
-    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#ExpenseModal"><b>اندراج خرچ</b></button>
+    <button type="button" class="btn btn-primary pull-right" (click)="openModal(template)" style="font-size:15px">Expense&nbsp;/&nbsp;<b>اندراج خرچ</b></button>
     &nbsp;&nbsp;
-    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#IncomeModal"><b>اندراج آمدن</b></button>
+    <button class="btn btn-primary pull-right" (click)="openModalIncome(templateIncome)" style="font-size:15px">Income&nbsp;/&nbsp;<b>اندراج آمدن</b></button>
     &nbsp;&nbsp;
     <!-- <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addAccountModal"><b>کھاتہ اندراج</b></button> -->
  
@@ -31,9 +31,12 @@
           <td>{{u.Name}}</td>
           <td>{{u.MobileNumber}}</td>
           <td>{{u.CNIC}}</td>
-          <td>{{u.Balance |number}}</td>
+          <td *ngIf="u.Balance>=0"  style="color:rgb(100, 231, 100)"  >{{u.Balance |number}}</td>
+          <td *ngIf="u.Balance<0"  style="color:red"  >{{u.Balance |number}}</td>
+          
+          
           <td>{{u.Address}}</td>
-    <button class="btn btn-primary pull-right" data-toggle="modal" (click)="getLogById(u.Id)" data-target="#HistoryModal"><b>تفصیل کھاتہ</b></button>
+    <button class="btn btn-primary pull-right" data-toggle="modal" (click)="getLogById(u.Id)" data-target="#HistoryModal" style="font-size:15px">History Log&nbsp;/&nbsp;<b>تفصیل کھاتہ</b></button>
     <td></td>
         </tr>
       </tbody>
@@ -41,34 +44,36 @@
   </div>
 </div>
 
+<ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left"><b>اندراج خرچ</b></h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-expense></app-expense>
+    </div>
+  </ng-template>
 
-
-<!-- Add Account Modal -->
-<div class="modal fade" id="addAccountModal" #addAccountModal role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
+  <ng-template #templateIncome>
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><b>کھاتہ اندراج</b></h4>
+        <h4 class="modal-title pull-left" style="font-size:25px"><b>اندراج آمدن</b></h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefIncome.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
-
-        <app-add-account></app-add-account>
-
+        <app-income></app-income>
       </div>
-      
-    </div>
+    </ng-template>
 
-  </div>
-</div>
+
 <!-- add account Modal end -->
 <!-- expnese Modal -->
-<div class="modal fade" id="ExpenseModal"  role="dialog">
+<!-- <div class="modal fade" id="ExpenseModal"  role="dialog">
   <div class="modal-dialog">
 
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -83,13 +88,12 @@
     </div>
 
   </div>
-</div>
+</div> -->
 <!-- expense Modal end -->
 <!--income Modal -->
-<div class="modal fade" id="IncomeModal"  role="dialog">
+<!-- <div class="modal fade" id="IncomeModal"  role="dialog">
   <div class="modal-dialog">
 
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -104,7 +108,7 @@
     </div>
 
   </div>
-</div>
+</div> -->
 <!-- income Modal end -->
 <!--history Modal -->
 <div class="modal fade" id="HistoryModal"  role="dialog">
@@ -132,7 +136,9 @@
 
           </div>
           <div class="col-md-6">
-              <button class="btn btn-success"> Balance : {{singleUser.Balance}}</button>
+              <button *ngIf="singleUser.Balance>0" class="btn btn-success"> Balance : {{singleUser.Balance}}</button>
+              <button *ngIf="singleUser.Balance<0" class="btn btn-danger"> Balance : {{singleUser.Balance}}</button>
+              
               <button class="btn btn-primary" (click)="print()">print</button>
           </div>
           
@@ -148,10 +154,11 @@
                   <tr>
                     <th>Sr#</th>
                     <th>Date</th>
-                   
-                    <th>Amount</th>
-                    <!-- <th>Income</th> -->
                     <th>Description</th>
+                    <th>Income</th>
+                    <th>Expense</th>
+                    <th>Balance</th>
+                    7
                     
                  
                   </tr>
@@ -161,10 +168,15 @@
       
                        <td *ngIf="u.Account!=null ">{{i+1}}</td>
                        <td *ngIf="u.Account!=null ">{{u.Date}}</td>
-                       <td *ngIf="u.Account!=null && u.Amount<0" style="color:red;font-style:bold">{{u.Amount}}</td>
-                        <td *ngIf="u.Account!=null  && u.Amount>0">{{u.Amount |number}}</td>
                        <td *ngIf="u.Account!=null ">{{u.Description}}</td>
                        
+                        <td  style="color:rgb(100, 231, 100)"  *ngIf="u.Account!=null  && u.Amount>0">{{u.Amount |number}}</td>
+                        <td  style="color:red"  *ngIf="u.Account!=null && u.Amount<0" style="color:red;font-style:bold"></td>
+                        <td  style="color:rgb(100, 231, 100)"  *ngIf="u.Account!=null  && u.Amount>0"></td>
+                        
+                        <td  style="color:red"  *ngIf="u.Account!=null && u.Amount<0" style="color:red;font-style:bold">{{u.Amount}}</td>
+                        
+                       <td></td>
                       <!-- <td *ngIf="u.Account!=null  " >{{u.Amount |number}}</td> -->
                      
                       <!-- <td *ngIf="u.Account!=null && u.Amount<0">
@@ -173,12 +185,16 @@
                       </td> -->
                         
                       </tr>
-                      <tr>
+                      <!-- <tr>
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td *ngIf="singleUser!=null ">Total</td>
-                        <td *ngIf="singleUser!=null ">{{singleUser.Balance |number}}</td>
+                        <td style="color:rgb(100, 231, 100)" *ngIf="singleUser!=null && singleUser.Balance>0">{{singleUser.Balance |number}}</td>
+                        <td  style="color:red " *ngIf="singleUser!=null && singleUser.Balance<0">{{singleUser.Balance |number}}</td>
+                        
                         <td></td>
-                      </tr>
+                      </tr> -->
                
                 </tbody>
               </table>

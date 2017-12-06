@@ -63,7 +63,7 @@ export class IncomeComponent implements OnInit {
 
     this.gu.PostTransaction(transaction).subscribe(data => {
       console.log(data)
-      this.router.navigate(["allUsers"]);
+      this.router.navigate(["roznamcha"]);
     },
       error => { });
   }

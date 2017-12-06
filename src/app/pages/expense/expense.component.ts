@@ -1,8 +1,11 @@
+import { AccountsComponent } from './../accounts/accounts.component';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TransactionModel } from './../../Models/Transaction.model';
 import { Response } from '@angular/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap';
 
 
 import { AmountValidator } from '../../../assets/validators/index';
@@ -22,7 +25,7 @@ export class ExpenseComponent {
   public loanAmount: AbstractControl;
   public description: AbstractControl;
 
-  constructor(public fb: FormBuilder, public router: Router,private gu: GeneralHttpService) {
+  constructor(public fb: FormBuilder, public router: Router,private gu: GeneralHttpService,private modalService: BsModalService) {
     this.form = fb.group({
       'userAccount': ['', Validators.compose([Validators.required])],
       'loanAmount': ['', Validators.compose([Validators.required, AmountValidator.validate, Validators.minLength(3)])],
@@ -47,6 +50,10 @@ export class ExpenseComponent {
     //  console.log(data.ResponseData)
     }, error=> {})
   }
+  modalRef: BsModalRef;
+  closeModal(template:AccountsComponent) {
+    this.modalRef = this.modalService.show(template);
+  }
 
   onSubmitExpense(m)
   {
@@ -66,7 +73,8 @@ export class ExpenseComponent {
 
     this.gu.PostTransaction(trans).subscribe(data=>{
       console.log(data);
-      this.router.navigate(["allUsers"]);
+      //this.closeModal();
+      this.router.navigate(["roznamcha"]);
     },
     error=>{});
   }

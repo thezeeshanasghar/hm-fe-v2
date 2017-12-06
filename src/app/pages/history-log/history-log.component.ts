@@ -10,9 +10,9 @@ import { AccountModel } from '../../Models/account.model';
 })
 export class HistoryLogComponent implements OnInit {
   singleUser: AccountModel;
-  grandTotal: number=0.0;
-  totalExpense: number=0.0;
-  totalIncome: number=0.0;
+  grandTotal: number = 0.0;
+  totalExpense: number = 0.0;
+  totalIncome: number = 0.0;
   allAccounts: AccountModel[] = [];
   transaction: TransactionModel[] = [];
   modal;
@@ -37,55 +37,22 @@ export class HistoryLogComponent implements OnInit {
       this.transaction = data.ResponseData;
 
       this.transaction.forEach(element => {
-        if(element.Amount>0)
-        {
-          this.totalIncome+=element.Amount;
+        if (element.Amount > 0) {
+          this.totalIncome += element.Amount;
         }
-        else{
-          this.totalExpense+=element.Amount;
+        else {
+          this.totalExpense += element.Amount;
         }
 
-        this.grandTotal= this.totalIncome+this.totalExpense;
+        this.grandTotal = this.totalIncome + this.totalExpense;
         this.gu.getAccountById(id).subscribe(data => {
           element.Account = data.ResponseData;
-          this.singleUser=element.Account
+          this.singleUser = element.Account
         }, error => { console.log(error); });
       });
     }, error => { console.log(error); });
   }
 
 
-  print(): void {
-    let printContents, popupWin;
-    printContents = document.getElementById('print-section').innerHTML;
-    console.log(printContents);
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
-    popupWin.document.open();
-    popupWin.document.write(`
-      <html>
-        <head>
-          <title>Hussain Motors</title>
-          <style>
-         
-          th{
-            width:150px;
-            background-color:Blue;
-          }
-          td{
-            width:300px;
-            text-align:center;
-            background-color:skyBlue;
-          }
-          </style>
-        </head>
-    <body onload="window.print();window.close()">
-    <table>
-
-    </table>
-    ${printContents}
-    </body>
-      </html>`
-    );
-    popupWin.document.close();
-}
+ 
 }
