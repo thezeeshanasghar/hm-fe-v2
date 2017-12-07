@@ -1,8 +1,7 @@
-import { IncomeComponent } from './pages/income/income.component';
 import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
 import { ModuleWithProviders, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ExpenseComponent } from './pages/expense/expense.component';
+
 import { AccountsComponent } from './pages/accounts/accounts.component';
 import { AddAccountComponent } from './pages/accounts/add-account/add-account.component';
 

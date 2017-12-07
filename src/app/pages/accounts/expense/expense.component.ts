@@ -1,6 +1,6 @@
-import { AccountsComponent } from './../accounts/accounts.component';
+import { AccountsComponent } from './../accounts.component';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { TransactionModel } from './../../Models/Transaction.model';
+import { TransactionModel } from './../../../Models/Transaction.model';
 import { Response } from '@angular/http';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap';
 
 
-import { AmountValidator } from '../../../assets/validators/index';
-import { GeneralHttpService } from '../../services/general-http.service';
+import { AmountValidator } from '../../../../assets/validators/index';
+import { GeneralHttpService } from '../../../services/general-http.service';
 import { UUID } from 'angular2-uuid';
 import * as moment from 'moment';
 @Component({
