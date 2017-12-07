@@ -1,10 +1,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      
-       
-      
-       
+     
           <form [formGroup]="form" (ngSubmit)="onSubmitIncome(form.value)" class="form-horizontal">
 
             <!--userAccount -->
@@ -16,7 +13,7 @@
 
                   <select [formControl]="userAccount" class="form-control" id="sel1">
                     <option value="">--Select User Account--</option>
-                    <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Number}}--{{u.Name}}</option>
+                    <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Number}}&nbsp;--&nbsp;{{u.Name}}</option>
                   </select>
                 </div>
                 <span *ngIf="!userAccount.valid && userAccount.touched && userAccount.value.length < 4 " class="help-block sub-little-text">userAccount is required"></span>
@@ -47,11 +44,7 @@
             <!-- description -->
 
             <div class=" row">
-              <button  (click)="form.reset" [disabled]="!form.valid" class="btn btn-primary pull-right"  type="submit" >
-                <i class="fa fa-user-plus" aria-hidden="true"></i>
-                <i [ngClass]="{'fa fa-spinner fa-spin': changeClass}"></i>
-                
-                Add</button>
+              <button  (click)="form.reset" [disabled]="!form.valid" class="btn btn-primary pull-right"  type="submit" > Add</button>
             </div>
 
           </form>

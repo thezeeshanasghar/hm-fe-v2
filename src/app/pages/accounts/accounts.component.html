@@ -55,7 +55,7 @@
           <td>{{account.Address}}</td>
           <td [ngClass]="account.Balance>=0 ? 'text-green': 'text-red'">{{account.Balance |number}}</td>
           <td>
-            <a href="#" class="pull-right" data-toggle="modal" (click)="getTransactionsByAccountId(account.Id)" data-target="#HistoryModal"
+            <a href="#" class="pull-right" data-toggle="modal" (click)="getTransactionsByAccountId(account.Id)" data-target="#TransactionModal"
               style="font-size:15px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
               History Log &nbsp;/&nbsp;
               <b>تفصیل کھاتہ</b>
@@ -73,7 +73,7 @@
       Expense&nbsp;/&nbsp;
       <b>اندراج خرچ</b>
     </h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefExpense.hide()">
       <span aria-hidden="true" style="display: inline-block; padding: 0 5px">&times;</span>
     </button>
   </div>
@@ -100,7 +100,7 @@
 
 
 <!--history Modal -->
-<div class="modal fade" id="HistoryModal" role="dialog">
+<div class="modal fade" id="TransactionModal" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -133,10 +133,14 @@
               <td>{{i+1}}</td>
               <td>{{u.Date}}</td>
               <td>{{u.Description}}</td>
-              <td style="color:green" *ngIf="u.Amount>0">{{u.Amount |number}}</td>
-              <td style="color:red" *ngIf="u.Amount<0" style="color:red;font-style:bold"></td>
-              <td style="color:green" *ngIf="u.Amount>0"></td>
-              <td style="color:red" *ngIf="u.Amount<0" style="color:red;font-style:bold">{{u.Amount}}</td>
+              <td *ngIf="u.Amount>0;else income" style="color:green">{{u.Amount |number}}</td>
+              <ng-template #income>
+                <td style="color:red;font-style:bold"></td>
+              </ng-template>
+              <td *ngIf="u.Amount<0;else expense" style="color:red">{{u.Amount |number}}</td>
+              <ng-template #expense>
+                <td style="color:green;font-style:bold"></td>
+              </ng-template>
               <td [ngClass]="last ? 'text-bold': 'text-normal'">{{ getRowTotalUsingIndex(i) }}</td>
             </tr>
 

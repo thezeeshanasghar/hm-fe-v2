@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 })
 export class IncomeComponent implements OnInit {
 
-  changeClass = false;
   allAccounts: any[] = [];
   public form: FormGroup;
   public userAccount: AbstractControl;
@@ -32,10 +31,11 @@ export class IncomeComponent implements OnInit {
     this.userAccount = this.form.controls["userAccount"];
     this.incomeAmount = this.form.controls["incomeAmount"];
     this.description = this.form.controls["description"];
-    this.getAllAccount();
   }
 
   ngOnInit() {
+    this.getAllAccount();
+    
   }
 
   getAllAccount() {
@@ -62,7 +62,7 @@ export class IncomeComponent implements OnInit {
     //console.log(transaction);
 
     this.gu.PostTransaction(transaction).subscribe(data => {
-      console.log(data)
+      //console.log(data)
       this.router.navigate(["roznamcha"]);
     },
       error => { });
