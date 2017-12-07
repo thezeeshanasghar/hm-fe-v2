@@ -11,7 +11,6 @@ import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
 import { AddAccountComponent } from './pages/accounts/add-account/add-account.component';
 import { ExpenseComponent } from './pages/expense/expense.component';
 import { IncomeComponent } from './pages/income/income.component';
-import { HistoryLogComponent } from './pages/history-log/history-log.component';
 import { AccountsComponent } from './pages/accounts/accounts.component';
 import { ModalModule } from 'ngx-bootstrap'
 
@@ -24,7 +23,6 @@ import { ModalModule } from 'ngx-bootstrap'
     AddAccountComponent,
     ExpenseComponent,
     IncomeComponent,
-    HistoryLogComponent,
     AccountsComponent
   ],
   imports: [

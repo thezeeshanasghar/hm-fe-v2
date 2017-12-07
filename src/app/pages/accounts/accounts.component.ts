@@ -1,6 +1,6 @@
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TransactionModel } from './../../Models/Transaction.model';
-import { Component, OnInit, TemplateRef} from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { GeneralHttpService } from '../../services/general-http.service';
 import { AccountModel } from '../../Models/account.model';
 import { BsModalService } from 'ngx-bootstrap';
@@ -11,28 +11,21 @@ import { BsModalService } from 'ngx-bootstrap';
   templateUrl: './accounts.component.html'
 })
 export class AccountsComponent implements OnInit {
-  allAccounts: AccountModel[]=[];
-  singleUser: AccountModel;
-  grandTotal: number=0.0;
-  totalExpense: number=0.0;
-  totalIncome: number=0.0;
-  
-  transaction: TransactionModel[] = [];
+  allAccounts: AccountModel[] = [];
+  selectedAccountTransactions: TransactionModel[] = [];
 
-  constructor(private gu: GeneralHttpService,private modalService: BsModalService) { }
-  modalRef: BsModalRef;
-  modalRefIncome:BsModalRef;
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+  constructor(private gu: GeneralHttpService, private modalService: BsModalService) { }
+  modalRefExpense: BsModalRef;
+  modalRefIncome: BsModalRef;
+
+  openModalExpense(template: TemplateRef<any>) {
+    this.modalRefExpense = this.modalService.show(template);
   }
   openModalIncome(templateIncome: TemplateRef<any>) {
     this.modalRefIncome = this.modalService.show(templateIncome);
   }
   ngOnInit() {
-    console.log(this.allAccounts);
-   
- this.getAllAccounts();
-    
+    this.getAllAccounts();
   }
 
   getAllAccounts() {
@@ -41,60 +34,21 @@ export class AccountsComponent implements OnInit {
     }, error => { });
   }
 
-  getLogById(id) {
+  getTransactionsByAccountId(id) {
     this.gu.getTransactionsIdBy(id).subscribe(data => {
-      this.transaction = data.ResponseData;
-
-      this.transaction.forEach(element => {
-        if(element.Amount>0)
-        {
-          this.totalIncome+=element.Amount;
-        }
-        else{
-          this.totalExpense+=element.Amount;
-        }
-
-        this.grandTotal= this.totalIncome+this.totalExpense;
-        this.gu.getAccountById(id).subscribe(data => {
-          element.Account = data.ResponseData;
-          this.singleUser=element.Account
-        }, error => { console.log(error); });
-      });
+      this.selectedAccountTransactions = data.ResponseData;
     }, error => { console.log(error); });
   }
-  print(): void
-  {
-   let printContents, popupWin;
-   printContents = document.getElementById('print-section').innerHTML;
-   console.log(printContents);
-   popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
-   popupWin.document.open();
-   popupWin.document.write(`
-     <html>
-       <head>
-         <title>Hussain Motors</title>
-         <style>
-        
-         th{
-           width:150px;
-           background-color:Blue;
-         }
-         td{
-           width:300px;
-           text-align:center;
-           background-color:skyBlue;
-         }
-         </style>
-       </head>
-   <body onload="window.print();window.close()">
-   <table>
 
-   </table>
-   ${printContents}
-   </body>
-     </html>`
-   );
-   popupWin.document.close();
- }
-
+  print() {
+    // TODO: need to call the backend 
+  }
+  
+  getRowTotalUsingIndex(index :number):number {
+    let sum = 0;
+    for(var i = 0; i <= index; i++) {
+      sum += this.selectedAccountTransactions[i].Amount;
+    }
+    return sum;
+  }
 }

@@ -1,4 +1,3 @@
-import { HistoryLogComponent } from './pages/history-log/history-log.component';
 import { IncomeComponent } from './pages/income/income.component';
 import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
 import { ModuleWithProviders, Component } from '@angular/core';
@@ -17,7 +16,6 @@ export const appRoutes: Routes = [
     { path: "addAccount", component: AddAccountComponent },
     { path: "expense", component: ExpenseComponent },
     { path: "income", component: IncomeComponent },
-    { path: "log", component: HistoryLogComponent },
 
 
     { path: "roznamcha", component: RoznamchaComponent },
