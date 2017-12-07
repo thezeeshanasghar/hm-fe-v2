@@ -1,5 +1,5 @@
-import { AmountValidator } from './../../../assets/validators/amount.valdator';
-import { GeneralHttpService } from './../../services/general-http.service';
+import { AmountValidator } from './../../../../assets/validators/amount.valdator';
+import { GeneralHttpService } from './../../../services/general-http.service';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { UUID } from 'angular2-uuid';

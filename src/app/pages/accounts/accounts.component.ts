@@ -1,3 +1,4 @@
+import { Http } from '@angular/http';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TransactionModel } from './../../Models/Transaction.model';
 import { Component, OnInit, TemplateRef } from '@angular/core';
@@ -13,10 +14,16 @@ import { BsModalService } from 'ngx-bootstrap';
 export class AccountsComponent implements OnInit {
   allAccounts: AccountModel[] = [];
   selectedAccountTransactions: TransactionModel[] = [];
+  ip;
+  port;
 
-  constructor(private gu: GeneralHttpService, private modalService: BsModalService) { }
+  constructor(private gu: GeneralHttpService, private modalService: BsModalService,private http:Http) { 
+    this.ip=this.gu.ip;
+    this.port=this.gu.port;
+  }
   modalRefExpense: BsModalRef;
   modalRefIncome: BsModalRef;
+ 
 
   openModalExpense(template: TemplateRef<any>) {
     this.modalRefExpense = this.modalService.show(template);
@@ -40,9 +47,7 @@ export class AccountsComponent implements OnInit {
     }, error => { console.log(error); });
   }
 
-  print() {
-    // TODO: need to call the backend 
-  }
+  
   
   getRowTotalUsingIndex(index :number):number {
     let sum = 0;

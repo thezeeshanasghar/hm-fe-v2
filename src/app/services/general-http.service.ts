@@ -6,15 +6,17 @@ import { AccountModel } from '../Models/account.model';
 @Injectable()
 export class GeneralHttpService {
 
-  private ip: string;
-  private port: number;
+  public ip: string;
+  public port: number;
   constructor(private http: Http) {
-    this.ip='hm-api.afz-sol.com';
+   this.ip='hm-api.afz-sol.com';
     this.port = 80;
 
-    //this.ip = 'localhost';
-    //this.port = 16443;
+    // this.ip = 'localhost';
+    // this.port = 16443;
   }
+
+ 
 
   public getTransactions() {
     //let headers = new Headers({ 'Content-Type': 'application/json' });

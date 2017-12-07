@@ -9,8 +9,8 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
 import { AddAccountComponent } from './pages/accounts/add-account/add-account.component';
-import { ExpenseComponent } from './pages/expense/expense.component';
-import { IncomeComponent } from './pages/income/income.component';
+import { ExpenseComponent } from './pages/accounts/expense/expense.component';
+import { IncomeComponent } from './pages/accounts/income/income.component';
 import { AccountsComponent } from './pages/accounts/accounts.component';
 import { ModalModule } from 'ngx-bootstrap'
 
