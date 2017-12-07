@@ -14,10 +14,16 @@ import { BsModalService } from 'ngx-bootstrap';
 export class AccountsComponent implements OnInit {
   allAccounts: AccountModel[] = [];
   selectedAccountTransactions: TransactionModel[] = [];
+  ip;
+  port;
 
-  constructor(private gu: GeneralHttpService, private modalService: BsModalService,private http:Http) { }
+  constructor(private gu: GeneralHttpService, private modalService: BsModalService,private http:Http) { 
+    this.ip=this.gu.ip;
+    this.port=this.gu.port;
+  }
   modalRefExpense: BsModalRef;
   modalRefIncome: BsModalRef;
+ 
 
   openModalExpense(template: TemplateRef<any>) {
     this.modalRefExpense = this.modalService.show(template);
