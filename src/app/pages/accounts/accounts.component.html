@@ -1,15 +1,37 @@
+<style>
+  .text-green {
+    color: green
+  }
+
+  .text-red {
+    color: red;
+  }
+
+  .text-bold {
+    font-size: 15px;
+    font-weight: bolder
+  }
+
+  .text-normal {
+    font-size: 14px;
+    font-weight: normal
+  }
+</style>
 <div class="row">
   <div class="col-md-12">
-    <button type="button" class="btn btn-primary pull-right" (click)="openModal(template)" style="font-size:15px">Expense&nbsp;/&nbsp;<b>اندراج خرچ</b></button>
-    &nbsp;&nbsp;
-    <button class="btn btn-primary pull-right" (click)="openModalIncome(templateIncome)" style="font-size:15px">Income&nbsp;/&nbsp;<b>اندراج آمدن</b></button>
-    &nbsp;&nbsp;
-    <!-- <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addAccountModal"><b>کھاتہ اندراج</b></button> -->
- 
-    &nbsp;&nbsp;
-   </div>
+    <div class="pull-right">
+      <button type="button" class="btn btn-primary" (click)="openModalExpense(templateExpense)" style="font-size:15px">
+        Expense &nbsp;/&nbsp;
+        <b>اندراج خرچ</b>
+      </button>
+      <button class="btn btn-primary" (click)="openModalIncome(templateIncome)" style="font-size:15px">
+        Income &nbsp;/&nbsp;
+        <b>اندراج آمدن</b>
+      </button>
+    </div>
+  </div>
 </div>
-<div class="row">
+<div class="row" style="margin-top:15px">
   <div class="col-md-12 col-sm-12">
     <table class="table table-striped">
       <thead>
@@ -19,191 +41,110 @@
           <th>Name</th>
           <th>Contact</th>
           <th>CNIC</th>
-          <th>Balance</th>
           <th>Address</th>
-          <th></th>
+          <th>Balance</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let u of allAccounts; let i=index">
+        <tr *ngFor="let account of allAccounts; let i=index">
           <td>{{i+1}}</td>
-          <td>{{u.Number}}</td>
-          <td>{{u.Name}}</td>
-          <td>{{u.MobileNumber}}</td>
-          <td>{{u.CNIC}}</td>
-          <td *ngIf="u.Balance>=0"  style="color:rgb(100, 231, 100)"  >{{u.Balance |number}}</td>
-          <td *ngIf="u.Balance<0"  style="color:red"  >{{u.Balance |number}}</td>
-          
-          
-          <td>{{u.Address}}</td>
-    <button class="btn btn-primary pull-right" data-toggle="modal" (click)="getLogById(u.Id)" data-target="#HistoryModal" style="font-size:15px">History Log&nbsp;/&nbsp;<b>تفصیل کھاتہ</b></button>
-    <td></td>
+          <td>{{account.Number}}</td>
+          <td>{{account.Name}}</td>
+          <td>{{account.MobileNumber}}</td>
+          <td>{{account.CNIC}}</td>
+          <td>{{account.Address}}</td>
+          <td [ngClass]="account.Balance>=0 ? 'text-green': 'text-red'">{{account.Balance |number}}</td>
+          <td>
+            <a href="#" class="pull-right" data-toggle="modal" (click)="getTransactionsByAccountId(account.Id)" data-target="#HistoryModal"
+              style="font-size:15px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+              History Log &nbsp;/&nbsp;
+              <b>تفصیل کھاتہ</b>
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
 
-<ng-template #template>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left"><b>اندراج خرچ</b></h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <app-expense></app-expense>
-    </div>
-  </ng-template>
-
-  <ng-template #templateIncome>
-      <div class="modal-header">
-        <h4 class="modal-title pull-left" style="font-size:25px"><b>اندراج آمدن</b></h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefIncome.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <app-income></app-income>
-      </div>
-    </ng-template>
-
-
-<!-- add account Modal end -->
-<!-- expnese Modal -->
-<!-- <div class="modal fade" id="ExpenseModal"  role="dialog">
-  <div class="modal-dialog">
-
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><b>اندراج خرچ</b></h4>
-      </div>
-      <div class="modal-body">
-
-        <app-expense></app-expense>
-
-      </div>
-      
-    </div>
-
+<ng-template #templateExpense>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">
+      Expense&nbsp;/&nbsp;
+      <b>اندراج خرچ</b>
+    </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true" style="display: inline-block; padding: 0 5px">&times;</span>
+    </button>
   </div>
-</div> -->
-<!-- expense Modal end -->
-<!--income Modal -->
-<!-- <div class="modal fade" id="IncomeModal"  role="dialog">
-  <div class="modal-dialog">
-
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><b>اندراج آمدن</b></h4>
-      </div>
-      <div class="modal-body">
-
-        <app-income></app-income>
-
-      </div>
-      
-    </div>
-
+  <div class="modal-body">
+    <app-expense></app-expense>
   </div>
-</div> -->
-<!-- income Modal end -->
+</ng-template>
+
+<ng-template #templateIncome>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left" style="font-size:25px">
+      Income&nbsp;/&nbsp;
+      <b>اندراج آمدن</b>
+    </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefIncome.hide()">
+      <span aria-hidden="true" style="display: inline-block; padding: 0 5px">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-income></app-income>
+  </div>
+</ng-template>
+
+
+
 <!--history Modal -->
-<div class="modal fade" id="HistoryModal"  role="dialog">
+<div class="modal fade" id="HistoryModal" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><b>تفصیل کھاتہ</b></h4>
+        <button type="button" class="close" data-dismiss="modal" style="display: inline-block; padding: 0 5px">&times;</button>
+        <h4 class="modal-title">
+          History Log&nbsp;/&nbsp;
+          <b>تفصیل کھاتہ</b>
+        </h4>
       </div>
       <div class="modal-body">
+        <ng-template #no_data_templ>
+          No data found...
+        </ng-template>
+        <table class="table table-striped" *ngIf="selectedAccountTransactions?.length;else no_data_templ">
+          <thead>
+            <tr>
+              <th>Sr#</th>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Income</th>
+              <th>Expense</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody>
 
-      <!-- history log -->
-      
-        <div  *ngIf="singleUser!=null">
-            <h2>Account Details</h2>
-          <div class="col-md-6">
-              
-              Name:&nbsp;&nbsp; <b>{{singleUser.Name}}</b> <br>
-              Account Number:&nbsp;&nbsp; <b>{{singleUser.Number}}</b>  <br>
-              CNIC:&nbsp;&nbsp; <b>{{singleUser.CNIC}}</b>  <br>
-              Contact:&nbsp;&nbsp; <b>{{singleUser.MobileNumber}}</b>  <br>
-              Address:&nbsp;&nbsp; <b>{{singleUser.Address}}</b>  <br>
+            <tr *ngFor="let u of selectedAccountTransactions;let i=index; let last=last">
+              <td>{{i+1}}</td>
+              <td>{{u.Date}}</td>
+              <td>{{u.Description}}</td>
+              <td style="color:green" *ngIf="u.Amount>0">{{u.Amount |number}}</td>
+              <td style="color:red" *ngIf="u.Amount<0" style="color:red;font-style:bold"></td>
+              <td style="color:green" *ngIf="u.Amount>0"></td>
+              <td style="color:red" *ngIf="u.Amount<0" style="color:red;font-style:bold">{{u.Amount}}</td>
+              <td [ngClass]="last ? 'text-bold': 'text-normal'">{{ getRowTotalUsingIndex(i) }}</td>
+            </tr>
 
-          </div>
-          <div class="col-md-6">
-              <button *ngIf="singleUser.Balance>0" class="btn btn-success"> Balance : {{singleUser.Balance}}</button>
-              <button *ngIf="singleUser.Balance<0" class="btn btn-danger"> Balance : {{singleUser.Balance}}</button>
-              
-              <button class="btn btn-primary" (click)="print()">print</button>
-          </div>
-          
-          
-          
-        </div>
-    
-  
-      <div id="print-section">
-         
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Sr#</th>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Income</th>
-                    <th>Expense</th>
-                    <th>Balance</th>
-                    7
-                    
-                 
-                  </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let u of transaction;let i=index"  >
-      
-                       <td *ngIf="u.Account!=null ">{{i+1}}</td>
-                       <td *ngIf="u.Account!=null ">{{u.Date}}</td>
-                       <td *ngIf="u.Account!=null ">{{u.Description}}</td>
-                       
-                        <td  style="color:rgb(100, 231, 100)"  *ngIf="u.Account!=null  && u.Amount>0">{{u.Amount |number}}</td>
-                        <td  style="color:red"  *ngIf="u.Account!=null && u.Amount<0" style="color:red;font-style:bold"></td>
-                        <td  style="color:rgb(100, 231, 100)"  *ngIf="u.Account!=null  && u.Amount>0"></td>
-                        
-                        <td  style="color:red"  *ngIf="u.Account!=null && u.Amount<0" style="color:red;font-style:bold">{{u.Amount}}</td>
-                        
-                       <td></td>
-                      <!-- <td *ngIf="u.Account!=null  " >{{u.Amount |number}}</td> -->
-                     
-                      <!-- <td *ngIf="u.Account!=null && u.Amount<0">
-                          <a style="font-size:15px" data-toggle="modal" data-target="#IncomeModal"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                        <a style="font-size:15px" (click)="deleteIncome(u.id)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                      </td> -->
-                        
-                      </tr>
-                      <!-- <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td *ngIf="singleUser!=null ">Total</td>
-                        <td style="color:rgb(100, 231, 100)" *ngIf="singleUser!=null && singleUser.Balance>0">{{singleUser.Balance |number}}</td>
-                        <td  style="color:red " *ngIf="singleUser!=null && singleUser.Balance<0">{{singleUser.Balance |number}}</td>
-                        
-                        <td></td>
-                      </tr> -->
-               
-                </tbody>
-              </table>
-            
-          
-        </div>
-      <!-- history log -->
+          </tbody>
+        </table>
+
       </div>
-      
+
     </div>
 
   </div>
