@@ -13,7 +13,7 @@ import * as moment from 'moment';
   selector: 'app-add-account',
   templateUrl: './add-account.component.html'
 })
-export class AddAccountComponent implements OnInit {
+export class AddAccountComponent {
   
   
   changeClass = false;
@@ -49,14 +49,8 @@ export class AddAccountComponent implements OnInit {
     this.cnic = this.form.controls['cnic'];
     this.address = this.form.controls['address'];
     this.amount = this.form.controls['amount'];
-   
-    
-
-
   }
 
-  ngOnInit() {
-  }
 
   onSubmit(m) {
    console.log(m)

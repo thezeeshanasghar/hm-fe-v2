@@ -14,10 +14,6 @@ export const appRoutes: Routes = [
     },
     { path: "accounts", component: AccountsComponent },
     { path: "addAccount", component: AddAccountComponent },
-    { path: "expense", component: ExpenseComponent },
-    { path: "income", component: IncomeComponent },
-
-
     { path: "roznamcha", component: RoznamchaComponent },
     { path: "**", component: AccountsComponent }
 ]
