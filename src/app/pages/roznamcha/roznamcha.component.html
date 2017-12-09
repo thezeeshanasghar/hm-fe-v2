@@ -10,7 +10,9 @@
     </div>
     <div class="col-md-3"></div>
     <div class="col-md-6 col-lg-6" style="    padding-right: 30px;">
-      <span class="btn btn-success pull-right">Remaining Balance: &nbsp;<b>{{grandTotal |number}}</b></span>
+      <span class="btn btn-success pull-right">Remaining Balance: &nbsp;
+        <b>{{grandTotal |number}}</b>
+      </span>
 
     </div>
   </div>
@@ -21,7 +23,8 @@
         <div class="panel panel-default">
           <div class="panel-heading">Income
             <span class="pull-right">
-              Total Income: &nbsp;<b>{{totalIncome | number}}</b>
+              Total Income: &nbsp;
+              <b>{{totalIncome | number}}</b>
             </span>
           </div>
           <div class="panel-body">
@@ -37,7 +40,7 @@
 
                   <th>Amount</th>
 
-                  <!-- <th>Actions</th> -->
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -51,10 +54,14 @@
                   <td *ngIf="u.Account!=null && u.Amount>0">{{u.Description}}</td>
                   <td *ngIf="u.Account!=null  && u.Amount>0">{{u.Amount |number}}</td>
 
-                  <!-- <td *ngIf="u.Account!=null && u.Amount<0">
-                                 <a style="font-size:15px" data-toggle="modal" data-target="#IncomeModal"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                               <a style="font-size:15px" (click)="deleteIncome(u.id)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                             </td> -->
+                  <td *ngIf="u.Amount>0">
+                    <a style="font-size:15px" class="btn btn-sm">
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true" (click)="openModalEdit(templateEdit,u.Id,u.Account.Id)"></span>
+                    </a>
+                    <a style="font-size:15px" class="btn btn-sm" (click)="openModalDelete(templateDelete,u.Id)">
+                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </a>
+                  </td>
 
                 </tr>
 
@@ -67,7 +74,8 @@
         <div class="panel panel-default">
           <div class="panel-heading">Expense
             <span class="pull-right">
-              Total Expense:&nbsp;<b>{{totalExpense | number}}</b>
+              Total Expense:&nbsp;
+              <b>{{totalExpense | number}}</b>
             </span>
           </div>
           <div class="panel-body">
@@ -94,13 +102,16 @@
 
                   <td *ngIf="u.Account!=null && u.Amount<0">{{u.Account.Name}}</td>
                   <td *ngIf="u.Account!=null && u.Amount<0">{{u.Description}}</td>
-                  <td *ngIf="u.Account!=null  && u.Amount<0">{{u.Amount |number}}</td>
-                  <!--                             
-                             <td *ngIf="u.Account!=null && u.Amount<0">
-                                 <a style="font-size:15px" data-toggle="modal" data-target="#IncomeModal"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                               <a style="font-size:15px" (click)="deleteIncome(u.id)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                             </td>
-                                -->
+                  <td *ngIf="u.Account!=null && u.Amount<0">{{u.Amount |number}}</td>
+                  <td *ngIf="u.Account!=null && u.Amount<0">
+                    <a style="font-size:15px" class="btn btn-sm" (click)="openModalEdit(templateEdit,u.Id,u.Account.Id)">
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </a>
+                    <a style="font-size:15px" class="btn btn-sm" (click)="openModalDelete(templateDelete,u.Id)">
+                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </a>
+                  </td>
+
                 </tr>
 
               </tbody>
@@ -110,3 +121,101 @@
       </div>
     </div>
   </div>
+
+
+
+  <ng-template #templateDelete>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">
+        Delete Transaction
+      </h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefDelete.hide()">
+        <span aria-hidden="true" style="display: inline-block; padding: 0 5px">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>are you sure to delete this recred??</p>
+
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-success btn-sm" (click)="modalRefDelete.hide()">No</a>
+      <a class="btn btn-danger btn-sm" (click)="modalRefDelete.hide();deleteTransaction()">Yes</a>
+
+    </div>
+  </ng-template>
+
+  <ng-template #templateEdit>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Edit Transaction
+        </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefEdit.hide()">
+          <span aria-hidden="true" style="display: inline-block; padding: 0 5px">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+  <div class="row">
+      <div class="col-md-12">
+       
+            <form [formGroup]="form" (ngSubmit)="editTransaction(form.value)" class="form-horizontal">
+  
+              <!--userAccount -->
+              <!-- <div class="form-group row" [ngClass]="{'has-error': (!userAccount.valid && userAccount.touched), 'has-success': (userAccount.valid && userAccount.touched)}">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="glyphicon glyphicon-map-marker"></i>
+                    </span>
+  
+                    <select [formControl]="userAccount" class="form-control" id="sel1">
+                      <option value="">--Select User Account--</option>
+                      <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Number}}&nbsp;--&nbsp;{{u.Name}}</option>
+                    </select>
+                  </div>
+                  <span *ngIf="!userAccount.valid && userAccount.touched && userAccount.value.length < 4 " class="help-block sub-little-text">userAccount is required"></span>
+              </div> -->
+              <!--userAccount -->
+  
+              <!--amount-->
+              <div class="form-group row" [ngClass]="{'has-error': (!incomeAmount.valid && incomeAmount.touched), 'has-success': (incomeAmount.valid && incomeAmount.touched)}">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="glyphicon glyphicon-usd"></i>
+                    </span>
+                    <input required [formControl]="incomeAmount" type="text" class="form-control" id="inputPassword3" placeholder=" Enter Amount">
+                  </div>
+                  <span *ngIf="!incomeAmount.valid && incomeAmount.touched " class="help-block sub-little-text">Enter a valid Amount</span>
+              </div>
+              <!-- Amount -->
+              <!--description-->
+              <div class="form-group row" [ngClass]="{'has-error': (!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="glyphicon glyphicon-pencil"></i>
+                    </span>
+                    <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
+                  </div>
+                  <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must be at least 10 characters</span>
+              </div>
+              <!-- description -->
+  
+              <!-- <div class=" row">
+                <button  (click)="form.reset" [disabled]="!form.valid" class="btn btn-primary pull-right"  type="submit" > Add</button>
+              </div> -->
+              
+                  <a class="btn btn-default btn-sm pull-right" (click)="modalRefEdit.hide()">Cancle</a>
+                  <a class="btn btn-success btn-sm pull-right"  (click)="modalRefEdit.hide();editTransaction(form.value)">Update</a>
+            
+               
+  
+            </form>
+  
+         
+        
+      </div>
+    </div>
+  
+  
+      </div>
+      
+    </ng-template>

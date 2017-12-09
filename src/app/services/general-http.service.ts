@@ -9,11 +9,11 @@ export class GeneralHttpService {
   public ip: string;
   public port: number;
   constructor(private http: Http) {
-   this.ip='hm-api.afz-sol.com';
-    this.port = 80;
+  //  this.ip='hm-api.afz-sol.com';
+  //   this.port = 80;
 
-    // this.ip = 'localhost';
-    // this.port = 16443;
+    this.ip = 'localhost';
+    this.port = 16443;
   }
 
  
@@ -24,9 +24,25 @@ export class GeneralHttpService {
     return this.http.get(str).map((response: Response) => response.json());
   }
 
+
+  public deleteTransaction(id){
+    let str = "http://" + this.ip + ":" + this.port + "/api/transaction/" + id;
+    return this.http.delete(str).map((response: Response) => response.json());
+
+  }
+
   public getTransactionsIdBy(id) {
     let str = "http://" + this.ip + ":" + this.port + "/api/account/" + id + "/transactions";
     return this.http.get(str).map((response: Response) => response.json());
+
+  }
+  public EditTransaction(id,m) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let body = JSON.stringify(m);
+    console.log(body);
+    let url = "http://" + this.ip + ":" + this.port + "/api/transaction/"+id;
+    console.log(url);
+    return this.http.post(url, body, { headers: headers }).map((response: Response) => response.json());
 
   }
   public PostTransaction(m) {

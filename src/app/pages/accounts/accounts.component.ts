@@ -1,3 +1,5 @@
+import { AmountValidator } from './../../../assets/validators/amount.valdator';
+import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Http } from '@angular/http';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TransactionModel } from './../../Models/Transaction.model';
@@ -14,12 +16,28 @@ import { BsModalService } from 'ngx-bootstrap';
 export class AccountsComponent implements OnInit {
   allAccounts: AccountModel[] = [];
   selectedAccountTransactions: TransactionModel[] = [];
-  ip;
-  port;
+ public ip;
+  public port;
 
-  constructor(private gu: GeneralHttpService, private modalService: BsModalService,private http:Http) { 
+  public form: FormGroup;
+  public userAccount: AbstractControl;
+  public incomeAmount: AbstractControl;
+  public description: AbstractControl;
+
+  constructor(public fb: FormBuilder,private gu: GeneralHttpService, private modalService: BsModalService,private http:Http) { 
     this.ip=this.gu.ip;
     this.port=this.gu.port;
+
+    this.form = fb.group({
+      'userAccount': ['', Validators.compose([Validators.required])],
+      'incomeAmount': ['', Validators.compose([Validators.required, AmountValidator.validate, Validators.minLength(3)])],
+      'description': ['', Validators.compose([Validators.required, Validators.minLength(10)])]
+
+    });
+
+    this.userAccount = this.form.controls["userAccount"];
+    this.incomeAmount = this.form.controls["incomeAmount"];
+    this.description = this.form.controls["description"];
   }
   modalRefExpense: BsModalRef;
   modalRefIncome: BsModalRef;
