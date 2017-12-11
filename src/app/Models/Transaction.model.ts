@@ -6,7 +6,8 @@ export class TransactionModel{
         public Number:string,
         public Amount:number,
         public AccountID:number,
-        public Account:AccountModel
+        public Account:AccountModel,
+        public Date:Date
 
     ) {
         

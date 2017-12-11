@@ -1,3 +1,4 @@
+import { RequestOptions, Http,Headers } from '@angular/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -5,6 +6,7 @@ import { AmountValidator } from './../../../../assets/validators/amount.valdator
 import { GeneralHttpService } from '../../../services/general-http.service';
 import { AccountModel } from '../../../Models/account.model';
 import * as moment from 'moment';
+import { Observable } from 'rxjs/Rx';
 
 
 
@@ -14,7 +16,7 @@ import * as moment from 'moment';
   templateUrl: './add-account.component.html'
 })
 export class AddAccountComponent {
-  
+  private isUploadBtn: boolean = true;
   
   changeClass = false;
   public form: FormGroup;
@@ -30,7 +32,7 @@ export class AddAccountComponent {
  // @ViewChild('ImageName') Image_Name;
 
 
-  constructor(public fb: FormBuilder, public router: Router, private gu: GeneralHttpService) {
+  constructor(public fb: FormBuilder, public router: Router, private gu: GeneralHttpService,private http:Http) {
     this.form = fb.group({
       'number': ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(10)])],
       'name': ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(35)])],
@@ -82,39 +84,29 @@ export class AddAccountComponent {
 
   }
 
-
-  onFileChange(event) {
-    console.log("image Function")
-
-     let reader = new FileReader();
-    // console.log(event);
-    // this.ImageName=event.target.files;
-    // console.log(event.target.files)
-    // console.log(event.target.files.mozFullPath);
-
-    // let fileList: FileList = event.target.files;  
-    // if (fileList.length > 0) {  
-    // let file: File = fileList[0];  
-    // let formData: FormData = new FormData();  
-    // formData.append('uploadFile', file, file.name);  
-    // this.ImageName=formData;
-    // console.log(formData);
-    //  }
-
-
-    if(event.target.files && event.target.files.length > 0) {
-      let file = event.target.files[0];
-      this.ImageName=file.name;
-      console.log(this.ImageName)
-     // reader.readAsDataURL(file);
-      // reader.onload = () => {
-      //   this.form.get('avatar').setValue({
-      //     filename: file.name,
-      //     filetype: file.type,
-      //     value: reader.result.split(',')[1]
-      //   })
-      // };
-    }
-  }
+//file upload event  
+fileChange(event) {  
+  debugger;  
+  let fileList: FileList = event.target.files;  
+  if (fileList.length > 0) {  
+  let file: File = fileList[0];  
+  let formData: FormData = new FormData();  
+  formData.append('uploadFile', file, file.name);  
+  let headers = new Headers()  
+headers.append('Content-Type', 'multipart/form-data');  
+  headers.append('Accept', 'application/json');  
+  let options = new RequestOptions({headers:headers});  
+  let apiUrl1 = "http://"+this.gu.ip+":"+this.gu.port+"/api/UploadFileApi";  
+  console.log(apiUrl1);
+  this.http.post(apiUrl1, formData, options)  
+  .map(res => res.json())  
+  .catch(error => Observable.throw(error))  
+  .subscribe(  
+  data => {console.log('success')},  
+  error =>{console.log(error)}  
+  )  
+  }  
+  //window.location.reload();  
+  } 
 
 }
