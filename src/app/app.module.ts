@@ -12,7 +12,8 @@ import { AddAccountComponent } from './pages/accounts/add-account/add-account.co
 import { ExpenseComponent } from './pages/accounts/expense/expense.component';
 import { IncomeComponent } from './pages/accounts/income/income.component';
 import { AccountsComponent } from './pages/accounts/accounts.component';
-import { ModalModule } from 'ngx-bootstrap'
+import { ModalModule } from 'ngx-bootstrap';
+import { MyDatePickerModule } from 'mydatepicker';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ModalModule } from 'ngx-bootstrap'
     AddAccountComponent,
     ExpenseComponent,
     IncomeComponent,
-    AccountsComponent
+    AccountsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import { ModalModule } from 'ngx-bootstrap'
     ReactiveFormsModule ,
     Routers,
     HttpModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    MyDatePickerModule
     
   ],
   providers: [GeneralHttpService],

@@ -1,14 +1,19 @@
 <div class="row">
   <div class="row" style="padding-bottom:5px">
     <div class="col-md-3 col-lg-3">
-      <!-- <span class="pull-left" style="    padding-left: 15px;">
+      <span class="pull-left" style="    padding-left: 15px;">
           <form #myForm="ngForm" novalidate>
-              <my-date-picker name="mydate" [options]="myDatePickerOptions"
+              <my-date-picker 
+              (ngModelChange)="getTransactionbyDate($event)"
+              
+                name="mydate" [options]="myDatePickerOptions" #mydate="ngModel"
                               [(ngModel)]="model" required></my-date-picker>
           </form>
-      </span> -->
+      </span>
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-md-3">  <span class="btn btn-info pull-right">Previous Balance: &nbsp;
+      <b >{{previousGrandTotal |number}}</b>
+    </span></div>
     <div class="col-md-6 col-lg-6" style="    padding-right: 30px;">
       <span class="btn btn-success pull-right">Remaining Balance: &nbsp;
         <b>{{grandTotal |number}}</b>
@@ -46,8 +51,8 @@
               <tbody>
                 <tr *ngFor="let u of transaction;let i=index">
 
-                  <td *ngIf="u.Account!=null && u.Amount>0">{{i+1}}</td>
-                  <td *ngIf="u.Account!=null && u.Amount>0">{{u.Date}}</td>
+                  <td *ngIf="u.Amount>0">{{i+1}}</td>
+                  <td *ngIf="u.Amount>0">{{u.Date}}</td>
                   <!-- <td *ngIf="u.Account!=null && u.Amount<0">{{u.Account.Id}}</td> -->
 
                   <td *ngIf="u.Account!=null && u.Amount>0">{{u.Account.Name}}</td>

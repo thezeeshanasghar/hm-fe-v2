@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { UUID } from 'angular2-uuid';
 import * as moment from 'moment';
 import { Console } from '@angular/core/src/console';
+import { IMyDpOptions } from 'mydatepicker';
 
 @Component({
   selector: 'app-roznamcha',
@@ -24,8 +25,10 @@ export class RoznamchaComponent implements OnInit {
   grandTotal: any=0.0;
   totalExpense: any=0.0;
   totalIncome: any=0.0;
+  previousGrandTotal: Number;
+
   public transaction: TransactionModel[];
-  date; 
+  date=new Date();
 
   
   public form: FormGroup;
@@ -65,7 +68,21 @@ export class RoznamchaComponent implements OnInit {
 
   }
 
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'dd.mm.yyyy',
+    showClearDateBtn:false,
+    editableDateField:false,
+    disableSince: {year: this.date.getFullYear(), month: this.date.getMonth()+1, day: this.date.getDate()+1}
+    
+};
+todaydate=new Date()
+// Initialized to specific date (09.10.2018).
+public model = { date: { year: this.todaydate.getFullYear(), month: this.todaydate.getMonth()+1, day: this.todaydate.getDate() } , filter: "all"};
+
   ngOnInit() {
+   // var date = new Date();
+    //var dateTime = moment.utc(date).format("DD-MM-YYYY");
     this.getTransactions(); 
   }
 
@@ -83,6 +100,38 @@ export class RoznamchaComponent implements OnInit {
     },error=>{
 
     });
+  }
+
+  getTransactionbyDate(d){
+    console.log(d);
+
+    let dateTime=d.date.month+"-"+d.date.day+"-"+d.date.year;
+   this.getTransactions(dateTime);
+    this.totalExpense=0.0;
+    this.totalExpense=0.0;
+    this.grandTotal=0.0;
+
+  // transctionDTO -> Accont {}
+      console.log(this.transaction);
+
+      this.transaction.forEach(element => {        
+        if(element.Amount>0 && element.Date.toString()==dateTime)
+        {
+          this.totalIncome+=element.Amount;         
+        }
+        else if(element.Amount<0 && element.Date.toString()==dateTime){
+                 this.totalExpense+=element.Amount;
+        }
+
+        this.grandTotal= this.totalIncome+this.totalExpense;
+        //this.previousGrandTotal=this.previousTotalIncome+this.previousTotalExpense;
+        // this.gu.getAccountById(element.AccountID).subscribe(data => {
+        //   element.Account = data.ResponseData;
+
+        // }, error => { });
+      });
+
+    
   }
 
   editTransaction(m){
@@ -111,25 +160,33 @@ export class RoznamchaComponent implements OnInit {
       },
         error => { });
     }
-  getTransactions() {
-    this.gu.getTransactions().subscribe(data => {
-      this.transaction = data.ResponseData; // transctionDTO -> Accont {}
+  getTransactions(date='') {
+    
+    
+    this.gu.getTransactions(date).subscribe(data => {
+    console.log(Number(data.ResponseData.PreviousBalance));
+      this.transaction = data.ResponseData.Transactions; 
+     this.previousGrandTotal=Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
+      //console.log(this.transaction);
 
       this.transaction.forEach(element => {
-        if(element.Amount>0)
-        {
-          this.totalIncome+=element.Amount;
-        }
-        else{
-          this.totalExpense+=element.Amount;
-        }
+          
+                if(element.Amount>0 )
+                {
+                  this.totalIncome+=element.Amount;         
+                }
+                else if(element.Amount<0){
+                         this.totalExpense+=element.Amount;
+                }
 
+              
         this.grandTotal= this.totalIncome+this.totalExpense;
+        //this.previousGrandTotal=this.previousTotalIncome+this.previousTotalExpense;
         this.gu.getAccountById(element.AccountID).subscribe(data => {
           element.Account = data.ResponseData;
 
         }, error => { });
-      });
+     });
 
     }, error => { });
     
