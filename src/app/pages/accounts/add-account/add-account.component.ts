@@ -16,7 +16,7 @@ import { Observable } from 'rxjs/Rx';
   templateUrl: './add-account.component.html'
 })
 export class AddAccountComponent {
-  private isUploadBtn: boolean = true;
+  public isUploadBtn: boolean = true;
   
   changeClass = false;
   public form: FormGroup;

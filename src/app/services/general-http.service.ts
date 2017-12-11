@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map'
 import { AccountModel } from '../Models/account.model';
+import { SIGABRT } from 'constants';
 
 @Injectable()
 export class GeneralHttpService {
@@ -18,9 +19,10 @@ export class GeneralHttpService {
 
  
 
-  public getTransactions() {
+  public getTransactions(date='') {
     //let headers = new Headers({ 'Content-Type': 'application/json' });
     let str = "http://" + this.ip + ":" + this.port + "/api/transaction";
+    str+="?date="+date;
     return this.http.get(str).map((response: Response) => response.json());
   }
 
