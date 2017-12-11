@@ -25,7 +25,7 @@ export class RoznamchaComponent implements OnInit {
   grandTotal: any=0.0;
   totalExpense: any=0.0;
   totalIncome: any=0.0;
-  previousGrandTotal: Number;
+  previousGrandTotal: Number=0.0;
 
   public transaction: TransactionModel[];
   date=new Date();
@@ -81,9 +81,9 @@ todaydate=new Date()
 public model = { date: { year: this.todaydate.getFullYear(), month: this.todaydate.getMonth()+1, day: this.todaydate.getDate() } , filter: "all"};
 
   ngOnInit() {
-   // var date = new Date();
-    //var dateTime = moment.utc(date).format("DD-MM-YYYY");
-    this.getTransactions(); 
+   var date = new Date();
+    var dateTime = moment.utc(date).format("DD-MM-YYYY");
+    this.getTransactions(dateTime); 
   }
 
   deleteTransaction(){
@@ -160,7 +160,7 @@ public model = { date: { year: this.todaydate.getFullYear(), month: this.todayda
       },
         error => { });
     }
-  getTransactions(date='') {
+  getTransactions(date:any) {
     
     
     this.gu.getTransactions(date).subscribe(data => {
