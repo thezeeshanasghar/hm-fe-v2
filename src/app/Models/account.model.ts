@@ -8,6 +8,6 @@ export class AccountModel {
     public Address: string;
     public Created: string;
     public Balance: number;
-    public Image:File;
+    public Image:string;
     public constructor() {}
 }
