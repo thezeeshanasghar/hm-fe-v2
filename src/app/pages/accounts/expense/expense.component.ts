@@ -28,7 +28,7 @@ export class ExpenseComponent {
   constructor(public fb: FormBuilder, public router: Router,private gu: GeneralHttpService,private modalService: BsModalService) {
     this.form = fb.group({
       'userAccount': ['', Validators.compose([Validators.required])],
-      'loanAmount': ['', Validators.compose([Validators.required, AmountValidator.validate, Validators.minLength(3)])],
+      'loanAmount': ['', Validators.compose([Validators.required, AmountValidator.validate, Validators.minLength(2)])],
       'description': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
     });
     this.userAccount = this.form.controls["userAccount"];
