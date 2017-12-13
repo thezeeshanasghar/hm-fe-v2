@@ -23,7 +23,7 @@ export class IncomeComponent implements OnInit {
   constructor(public fb: FormBuilder, public gu: GeneralHttpService, private router: Router) {
     this.form = fb.group({
       'userAccount': ['', Validators.compose([Validators.required])],
-      'incomeAmount': ['', Validators.compose([Validators.required, AmountValidator.validate, Validators.minLength(3)])],
+      'incomeAmount': ['', Validators.compose([Validators.required, AmountValidator.validate, Validators.minLength(2)])],
       'description': ['', Validators.compose([Validators.required, Validators.minLength(10)])]
 
     });
