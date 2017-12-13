@@ -28,7 +28,7 @@ export class AddAccountComponent {
   public address: AbstractControl;
   public amount: AbstractControl;
   public UserImageName:File;
-  public ImageName:File
+  public ImageName:string
  // @ViewChild('ImageName') Image_Name;
 
 
@@ -66,7 +66,7 @@ export class AddAccountComponent {
     model.Created = moment.utc(new Date()).format("DD-MM-YYYY");
     model.Address = this.form.value.address;
     model.Balance = this.form.value.amount;
-    model.Image=this.ImageName;
+    model.Image="UploadFile/"+this.ImageName;
     
     console.log(model)
 
@@ -87,7 +87,9 @@ export class AddAccountComponent {
 //file upload event  
 fileChange(event) {  
   debugger;  
-  let fileList: FileList = event.target.files;  
+  let fileList: FileList = event.target.files; 
+  console.log(fileList) 
+  this.ImageName=fileList[0].name;
   if (fileList.length > 0) {  
   let file: File = fileList[0];  
   let formData: FormData = new FormData();  
