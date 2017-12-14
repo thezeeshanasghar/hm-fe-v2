@@ -69,10 +69,10 @@ export class GeneralHttpService {
     return this.http.get(str).map((response: Response) => response.json());
   }
 
-  public postAccount(obj: AccountModel) {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
+  public postAccount(obj: FormData) {
+    //let headers = new Headers({ 'Content-Type': 'application/json' });
     let url = "http://" + this.ip + ":" + this.port + "/api/account";
-    return this.http.post(url, JSON.stringify(obj), { headers: headers }).map((response: Response) => response.json());
+    return this.http.post(url, obj).map((response: Response) => response.json());
   }
 
 }
