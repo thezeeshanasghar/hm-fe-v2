@@ -1,6 +1,6 @@
-import { RequestOptions, Http,Headers } from '@angular/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { RequestOptions, Http, Headers } from '@angular/http';
+import { Component, TemplateRef, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AmountValidator } from './../../../../assets/validators/amount.valdator';
 import { GeneralHttpService } from '../../../services/general-http.service';
@@ -8,7 +8,8 @@ import { AccountModel } from '../../../Models/account.model';
 import * as moment from 'moment';
 import { Observable } from 'rxjs/Rx';
 
-
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 
 @Component({
@@ -16,99 +17,74 @@ import { Observable } from 'rxjs/Rx';
   templateUrl: './add-account.component.html'
 })
 export class AddAccountComponent {
-  public isUploadBtn: boolean = true;
-  
-  changeClass = false;
-  public form: FormGroup;
+  form: FormGroup;
 
-  public number: AbstractControl;
-  public name: AbstractControl;
-  public mobileNumber: AbstractControl;
-  public cnic: AbstractControl;
-  public address: AbstractControl;
-  public amount: AbstractControl;
-  public UserImageName:File;
-  public ImageName:string
- // @ViewChild('ImageName') Image_Name;
+  number = new FormControl('', [Validators.required]);
+  name = new FormControl('', [Validators.required]);
+  mobileNumber = new FormControl('', [Validators.required]);
+  cnic = new FormControl('', [Validators.required]);
+  address = new FormControl('', [Validators.required]);
+    
+
+  modalRef: BsModalRef;
+  message: string = '';
+  @ViewChild('alertModel')
+  private alertModal: TemplateRef<any>;
+
+  @ViewChild('fileInput') fileInput: ElementRef;
 
 
-  constructor(public fb: FormBuilder, public router: Router, private gu: GeneralHttpService,private http:Http) {
+
+  constructor(public fb: FormBuilder, public router: Router, private gu: GeneralHttpService, private http: Http, private modalService: BsModalService) {
     this.form = fb.group({
-      'number': ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(10)])],
-      'name': ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(35)])],
-      'mobileNumber': ['', Validators.compose([Validators.required, AmountValidator.validate, Validators.minLength(3), Validators.maxLength(11)])],
-      'cnic': ['', Validators.compose([Validators.required, AmountValidator.validate, Validators.minLength(1), Validators.maxLength(13)])],
-      'address': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      'amount': ['0', Validators.compose([Validators.required, AmountValidator.validate, Validators.minLength(1)])],
-      
-     
-      
+      number: this.number,
+      name: this.name,
+      mobileNumber: this.mobileNumber,
+      cnic: this.cnic,
+      address: this.address,
+      avatar:null
     });
-
-    this.number = this.form.controls['number'];
-    this.name = this.form.controls['name'];
-    this.mobileNumber = this.form.controls['mobileNumber'];
-    this.cnic = this.form.controls['cnic'];
-    this.address = this.form.controls['address'];
-    this.amount = this.form.controls['amount'];
   }
 
 
-  onSubmit(m) {
-   console.log(m)
+  onSubmit(post) {
+    let fromData = new FormData();
 
     let model = new AccountModel();
-    model.Id = 0;
-    model.Number = this.form.value.number;
-    model.Name = this.form.value.name;
-    model.MobileNumber = this.form.value.mobileNumber;
-    model.CNIC = this.form.value.cnic;
-    model.Created = moment.utc(new Date()).format("DD-MM-YYYY");
-    model.Address = this.form.value.address;
-    model.Balance = this.form.value.amount;
-    model.Image="UploadFile/"+this.ImageName;
+    model.Number = post.number;
+    model.Name = post.name;
+    model.MobileNumber = post.mobileNumber;
+    model.CNIC = post.cnic;
+    model.Address = post.address;
+
     
-    console.log(model)
+    fromData.append('model',JSON.stringify(model)  );
+    fromData.append('avatar', this.form.get('avatar').value);
 
-    this.gu.postAccount(model).subscribe(data => {
-      if(data.IsSuccess==true){
-        this.router.navigate(["accounts"]);
-        
-      } else {
-        console.log('Error in postAccount: ' + data.Message);
-      }
-
-    }, error => { console.log(error) });
-
-   //this.router.navigate(["roznamcha"]);
-
+    this.gu.postAccount(fromData).subscribe(
+      data => {
+        if (data.IsSuccess == true) {
+          this.router.navigate(["accounts"]);
+        } else {
+          this.message = data.Message;
+          this.openModal(this.alertModal);
+        }
+      },
+      error => {
+        this.message = error;
+        this.openModal(this.alertModal);
+      });
   }
 
-//file upload event  
-fileChange(event) {  
-  debugger;  
-  let fileList: FileList = event.target.files; 
-  console.log(fileList) 
-  this.ImageName=fileList[0].name;
-  if (fileList.length > 0) {  
-  let file: File = fileList[0];  
-  let formData: FormData = new FormData();  
-  formData.append('uploadFile', file, file.name);  
-  let headers = new Headers()  
-headers.append('Content-Type', 'multipart/form-data');  
-  headers.append('Accept', 'application/json');  
-  let options = new RequestOptions({headers:headers});  
-  let apiUrl1 = "http://"+this.gu.ip+":"+this.gu.port+"/api/UploadFileApi";  
-  console.log(apiUrl1);
-  this.http.post(apiUrl1, formData, options)  
-  .map(res => res.json())  
-  .catch(error => Observable.throw(error))  
-  .subscribe(  
-  data => {console.log('success')},  
-  error =>{console.log(error)}  
-  )  
-  }  
-  //window.location.reload();  
-  } 
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  onFileChange(event) {
+    if(event.target.files.length > 0) {
+      let file = event.target.files[0];
+      this.form.get('avatar').setValue(file);
+    }
+  }
 
 }

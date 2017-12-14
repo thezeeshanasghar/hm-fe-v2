@@ -1,76 +1,49 @@
-<style>  
-        #pgnumber {  
-        display: none !important;  
-        }  
-        .fileUpload {  
-        position: relative;  
-        overflow: hidden;  
-        margin: 10px;  
-        }  
-        .fileUpload input.upload {  
-        position: absolute;  
-        top: 0;  
-        right: 0;  
-        margin: 0;  
-        padding: 0;  
-        font-size: 20px;  
-        cursor: pointer;  
-        opacity: 0;  
-        filter: alpha(opacity=0);  
-        }  
-        </style> 
-
-        <!-- <h2>Upload Files Sample</h2>   -->
-        <div class="fileUpload btn btn-primary" *ngIf="isUploadBtn">  
-                <span>Upload Image</span>  
-                <input type="file" id="btnUpload" value="Upload" (change)="fileChange($event)" class="upload" />  
-                </div> 
 <div class="row">
-        
-
-    
     <div class="col-md-6 col-md-offset-3">
-        <h2>Add Account &nbsp;/&nbsp;<b>کھاتہ اندراج</b></h2>
+        <h2>Add Account &nbsp;/&nbsp;
+            <b>کھاتہ اندراج</b>
+        </h2>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit(form)" class="form-horizontal">
-<!-- 
-            <div class="form-group">
-                <label for="avatar">Avatar</label>
-                <input name="file" type="file" id="avatar" (change)="onFileChange($event)" #ImageFile>
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
 
-            </div> -->
-            <!--number-->
-            <div class="form-group row" [ngClass]="{'has-error': (!name.valid && number.touched), 'has-success': (number.valid && number.touched)}">
+            <!-- number -->
+            <div class="form-group row" [ngClass]="{'has-error': (!number.valid && number.touched), 'has-success': (number.valid && number.touched)}">
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-user"></i>
                     </span>
-                    <input [formControl]="number" type="text" class="form-control" placeholder="Enter Account No.">
+                    <input [formControl]="number" type="text" class="form-control" placeholder="Enter account number">
                 </div>
-                <span *ngIf="!number.valid && number.touched && number.value.length < 2" class="help-block sub-little-text">Minimum 2 characters required</span>
+                <div *ngIf="number.touched && number.hasError('required')" class="help-block sub-little-text">
+                    account number is required.
+                </div>
             </div>
 
-            <!--name-->
+            <!-- name -->
             <div class="form-group row" [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-user"></i>
                     </span>
-                    <input [formControl]="name" type="text" class="form-control" id="inputPassword3" placeholder=" Enter First Name">
+                    <input [formControl]="name" type="text" class="form-control" placeholder="Enter account holder name">
                 </div>
-                <span *ngIf="!name.valid && name.touched && name.value.length < 4 " class="help-block sub-little-text">Minimum 4 characters required</span>
+                <div *ngIf="name.touched && name.hasError('required')" class="help-block sub-little-text">
+                    account holder name is required.
+                </div>
             </div>
 
 
-            <!--mobileNumber-->
+            <!-- mobileNumber -->
             <div class="form-group row" [ngClass]="{'has-error': (!mobileNumber.valid && mobileNumber.touched), 'has-success': (mobileNumber.valid && mobileNumber.touched)}">
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-phone"></i>
                     </span>
-                    <input required [formControl]="mobileNumber" type="text" class="form-control" placeholder=" Enter Mobile Number">
+                    <input [formControl]="mobileNumber" type="text" class="form-control" placeholder="Enter mobile number">
                 </div>
-                <span *ngIf="!mobileNumber.valid && mobileNumber.touched " class="help-block sub-little-text">Enter a valid Mobile Number</span>
+                <div *ngIf="mobileNumber.touched && mobileNumber.hasError('required')" class="help-block sub-little-text">
+                    mobile number is required.
+                </div>
             </div>
 
             <!--cnic-->
@@ -79,11 +52,13 @@
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-credit-card"></i>
                     </span>
-                    <input required [formControl]="cnic" type="text" class="form-control" placeholder=" Enter CNIC">
+                    <input [formControl]="cnic" type="text" class="form-control" placeholder="Enter CNIC">
                 </div>
-                <span *ngIf="!cnic.valid && cnic.touched " class="help-block sub-little-text">Enter a valid CNIC</span>
+                <div *ngIf="cnic.touched && cnic.hasError('required')" class="help-block sub-little-text">
+                    CNIC is required.
+                </div>
             </div>
-            <!-- cnic -->
+
 
             <!--address-->
             <div class="form-group row" [ngClass]="{'has-error': (!address.valid && address.touched), 'has-success': (address.valid && address.touched)}">
@@ -91,30 +66,37 @@
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-home"></i>
                     </span>
-                    <textarea rows="5" cols="40" [formControl]="address" class="form-control" placeholder="Address gose here....."></textarea>
+                    <textarea rows="5" cols="40" [formControl]="address" class="form-control" placeholder="Enter address....."></textarea>
                 </div>
-                <span *ngIf="!address.valid && address.touched " class="help-block sub-little-text">Enter a valid Address</span>
+                <div *ngIf="address.touched && address.hasError('required')" class="help-block sub-little-text">
+                    address is required.
+                </div>
             </div>
             <!-- address -->
+            <div class="form-group">
+                <label for="avatar">Image</label>
+                <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
+            </div>
 
-            <!--amount-->
-            <!-- <div class="form-group row" [ngClass]="{'has-error': (!amount.valid && amount.touched), 'has-success': (amount.valid && amount.touched)}">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-usd"></i>
-                                </span>
-                                <input required [formControl]="amount" type="text" class="form-control" id="inputPassword3" placeholder=" Enter Amount">
-                            </div>
-                            <span *ngIf="!amount.valid && amount.touched " class="help-block sub-little-text">Enter a valid Amount</span>
-                        </div> -->
-            <!-- Amount -->
-
-
-
-            <div class=" row">
-                <button type="submit" class="btn btn-primary pull-right" (click)="form.reset" [disabled]="!form.valid">Add</button>
-                <!-- <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button> -->
+            <div class="row">
+                <button type="submit" class="btn btn-primary pull-right" (click)="form.reset" [disabled]="!form.valid">&nbsp;Add&nbsp;</button>
             </div>
         </form>
     </div>
 </div>
+
+
+<ng-template #alertModel>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Message</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <span class="text-danger">{{message}}</span>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
+    </div>
+</ng-template>

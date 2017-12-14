@@ -18,12 +18,11 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
-      "styles": ["assets/css/bootstrap-luman.css",
-
-        "styles.css"
+      "styles": [
+        "styles.css",
+        "assets/css/bootstrap-luman.css"
       ],
       "scripts": [
-
         "assets/jquery/jquery.min.js",
         "assets/js/bootstrap.min.js"
       ],

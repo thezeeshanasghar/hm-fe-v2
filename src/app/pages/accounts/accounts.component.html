@@ -52,7 +52,7 @@
           <td>{{account.Number}}</td>
           <td>{{account.Name}}</td>
           <td>{{account.MobileNumber}}</td>
-          <td><img src="http://{{ip}}:{{port}}/{{account.image}} " width="50" height="50" alt=""> </td>
+          <td><img src="http://{{ip}}:{{port}}/{{account.image}} " width="40" height="40" alt="" style="border-radius: 50%;"> </td>
           <td>{{account.CNIC}}</td>
           <td>{{account.Address}}</td>
           <td [ngClass]="account.Balance>=0 ? 'text-green': 'text-red'">{{account.Balance |number}}</td>
