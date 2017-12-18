@@ -16,6 +16,13 @@
     font-size: 14px;
     font-weight: normal
   }
+
+  h5{
+    color:rgb(40, 116, 216);
+    /* font-family:fantasy; */
+    font-size: 15px
+
+  }
 </style>
 <div class="row">
   <div class="col-md-12">
@@ -52,7 +59,8 @@
           <td>{{account.Number}}</td>
           <td>{{account.Name}}</td>
           <td>{{account.MobileNumber}}</td>
-          <td><img src="http://{{ip}}:{{port}}/{{account.image}} " width="40" height="40" alt="" style="border-radius: 50%;"> </td>
+          <td>
+            <img src="http://{{ip}}:{{port}}/{{account.image}} " width="40" height="40" alt="" style="border-radius: 50%;"> </td>
           <td>{{account.CNIC}}</td>
           <td>{{account.Address}}</td>
           <td [ngClass]="account.Balance>=0 ? 'text-green': 'text-red'">{{account.Balance |number}}</td>
@@ -63,15 +71,13 @@
               <b>تفصیل کھاتہ</b>
             </a>
 
-           
+
           </td>
-          <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}"
-          class="pull-right btn btn-info btn-sm" 
-                     style="font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
-         Print</a>
-          
-              
-        
+          <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm" style="font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+            Print</a>
+
+
+
         </tr>
       </tbody>
     </table>
@@ -127,7 +133,26 @@
         <ng-template #no_data_templ>
           No data found...
         </ng-template>
+        <div *ngIf="singleUser" class="row">
+         
+          <div class="col-md-8">
+              <h5>Account number:&nbsp;&nbsp; {{singleUser.Number}}</h5>
+              <h5>Name:&nbsp;&nbsp; {{singleUser.Name}}</h5>
+              <h5>Contact:&nbsp;&nbsp; {{singleUser.MobileNumber}}</h5>
+              <h5>Address:&nbsp;&nbsp; {{singleUser.Address}}</h5>
+              <h5>Balance:&nbsp;&nbsp; {{singleUser.Balance |number}}</h5>
+              
+              
+          </div>
+          <div class="col-md-4" >
+              <img src="http://{{ip}}:{{port}}/{{singleUser.image}} " width="150" height="150" alt="" >    
+          </div>
+       
+        </div>
+
         <table class="table table-striped" *ngIf="selectedAccountTransactions?.length;else no_data_templ">
+
+
           <thead>
             <tr>
               <th>Sr#</th>
@@ -156,9 +181,9 @@
             </tr>
 
           </tbody>
-        
+
         </table>
-      
+
 
       </div>
 

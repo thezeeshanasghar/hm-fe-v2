@@ -163,7 +163,7 @@ export class RoznamchaComponent implements OnInit {
     this.gu.getTransactions(date).subscribe(data => {
       console.log(Number(data.ResponseData.PreviousBalance));
       this.transaction = data.ResponseData.Transactions;
-      // this.previousGrandTotal=Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
+       this.previousGrandTotal=Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
       //console.log(this.transaction);
 
       this.transaction.forEach(element => {
