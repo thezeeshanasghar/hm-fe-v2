@@ -74,6 +74,8 @@ export class ExpenseComponent {
     this.gu.PostTransaction(trans).subscribe(data=>{
       console.log(data);
       //this.closeModal();
+      this.form.reset();
+      //this.form.controls["loanAmount"].reset();;
       this.router.navigate(["roznamcha"]);
     },
     error=>{});
