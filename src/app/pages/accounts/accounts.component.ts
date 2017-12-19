@@ -16,6 +16,7 @@ import { BsModalService } from 'ngx-bootstrap';
 export class AccountsComponent implements OnInit {
   allAccounts: AccountModel[] = [];
   selectedAccountTransactions: TransactionModel[] = [];
+  singleUser:any;
  public ip;
   public port;
 
@@ -62,6 +63,12 @@ export class AccountsComponent implements OnInit {
   getTransactionsByAccountId(id) {
     this.gu.getTransactionsIdBy(id).subscribe(data => {
       this.selectedAccountTransactions = data.ResponseData;
+      console.log(this.selectedAccountTransactions);
+      this.gu.getAccountById(id).subscribe(data=>{
+        console.log(data);
+        this.singleUser=data.ResponseData;
+      },error=>{});
+
     }, error => { console.log(error); });
   }
 
