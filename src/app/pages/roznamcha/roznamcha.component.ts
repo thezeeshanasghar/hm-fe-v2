@@ -87,7 +87,7 @@ export class RoznamchaComponent implements OnInit {
 
   deleteTransaction() {
     console.log(this.DeleteItemId);
-    this.modalRefEdit = this.modalService.show(TemplateRef);
+    //this.modalRefEdit = this.modalService.show(TemplateRef);
     this.gu.deleteTransaction(this.DeleteItemId).subscribe(data => {
 
       // this.modalRefMessage.content();
