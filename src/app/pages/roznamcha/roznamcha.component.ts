@@ -131,7 +131,7 @@ export class RoznamchaComponent implements OnInit {
 
   }
 
-  editTransaction(m) {
+  editTransactionIncome(m) {
     console.log(this.EditItemId);
     console.log(m)
 
@@ -157,13 +157,42 @@ export class RoznamchaComponent implements OnInit {
     },
       error => { });
   }
+  
+  editTransactionExpense(m) {
+    console.log(this.EditItemId);
+    console.log(m)
+
+
+    console.log(m);
+    var uid = UUID.UUID();
+    var date = new Date();
+    var dateTime = moment.utc(date).format("DD-MM-YYYY");
+    var transaction = {
+      Id: this.EditItemId,
+      AccountID: this.accountId,
+      Number: uid,
+      Amount:"-"+m.incomeAmount,
+      Date: dateTime,
+      Description: m.description
+
+    }
+    console.log(transaction);
+
+    this.gu.EditTransaction(this.EditItemId, transaction).subscribe(data => {
+      //console.log(data)
+      this.form.reset();
+      this.router.navigate(['accounts']);
+    },
+      error => { });
+  }
+  
   getTransactions(date: any) {
 
 
     this.gu.getTransactions(date).subscribe(data => {
       console.log(Number(data.ResponseData.PreviousBalance));
       this.transaction = data.ResponseData.Transactions;
-       this.previousGrandTotal=Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
+      this.previousGrandTotal=Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
       //console.log(this.transaction);
 
       this.transaction.forEach(element => {
