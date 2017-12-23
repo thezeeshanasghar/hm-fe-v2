@@ -44,7 +44,7 @@ export class GeneralHttpService {
     console.log(body);
     let url = "http://" + this.ip + ":" + this.port + "/api/transaction/"+id;
     console.log(url);
-    return this.http.post(url, body, { headers: headers }).map((response: Response) => response.json());
+    return this.http.put(url, body, { headers: headers }).map((response: Response) => response.json());
 
   }
   public PostTransaction(m) {

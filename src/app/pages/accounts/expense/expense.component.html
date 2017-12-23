@@ -13,7 +13,7 @@
 
                   <select [formControl]="userAccount" class="form-control" id="sel1">
                     <option value="">--Select User Account--</option>
-                    <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Number}}--{{u.Name}}</option>
+                    <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}-{{u.Number}}</option>
                   </select>
                 </div>
                 <span *ngIf="!userAccount.valid && userAccount.touched && userAccount.value.length < 4 " class="help-block sub-little-text">userAccount is required"></span>
