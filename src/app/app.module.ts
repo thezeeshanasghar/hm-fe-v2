@@ -14,6 +14,7 @@ import { IncomeComponent } from './pages/accounts/income/income.component';
 import { AccountsComponent } from './pages/accounts/accounts.component';
 import { ModalModule, AlertModule } from 'ngx-bootstrap';
 import { MyDatePickerModule } from 'mydatepicker';
+import { StockCarComponent } from './pages/stock-car/stock-car.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { MyDatePickerModule } from 'mydatepicker';
     ExpenseComponent,
     IncomeComponent,
     AccountsComponent,
+    StockCarComponent,
 
   ],
   imports: [

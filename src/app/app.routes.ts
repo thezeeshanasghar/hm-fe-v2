@@ -1,3 +1,4 @@
+import { StockCarComponent } from './pages/stock-car/stock-car.component';
 import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
 import { ModuleWithProviders, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,6 +12,7 @@ export const appRoutes: Routes = [
         redirectTo: 'accounts',
         pathMatch: 'full'
     },
+    { path: "carStock", component: StockCarComponent },
     { path: "accounts", component: AccountsComponent },
     { path: "addAccount", component: AddAccountComponent },
     { path: "roznamcha", component: RoznamchaComponent },
