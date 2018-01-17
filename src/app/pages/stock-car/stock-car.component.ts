@@ -17,7 +17,8 @@ public maker:AbstractControl;
 public registrationNumber:AbstractControl;
 public engineNumber:AbstractControl;
 public chassisNumber:AbstractControl;
-public owner:AbstractControl;
+public owner1:AbstractControl;
+public owner2:AbstractControl;
 public purchasePrice:AbstractControl;
 public salePrice:AbstractControl;
 public purchaseDate:AbstractControl;
@@ -37,7 +38,10 @@ makerList =['Toyota','Honda','Hundai','Suzuki','Faw'];
       'registrationNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'engineNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'chassisNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'owner': ['', Validators.compose([Validators.required])],
+      'owner1': ['', Validators.compose([Validators.required])],
+      'owner2': [''],
+      'purchaseDate': [''],
+      'saleDate': [''],
       'purchasePrice': ['', Validators.compose([AmountValidator.validate])],
       'salePrice': ['', Validators.compose([AmountValidator.validate])],
       
@@ -50,10 +54,14 @@ makerList =['Toyota','Honda','Hundai','Suzuki','Faw'];
     this.registrationNumber=this.form.controls['registrationNumber'];
     this.engineNumber=this.form.controls['engineNumber'];
     this.chassisNumber=this.form.controls['chassisNumber'];
-    this.owner=this.form.controls['owner'];
+    this.owner1=this.form.controls['owner1'];
+    this.owner2=this.form.controls['owner2'];
     this.purchasePrice=this.form.controls['purchasePrice'];
     this.salePrice=this.form.controls['salePrice'];
     this.color=this.form.controls['color'];
+    this.purchaseDate=this.form.controls['purchaseDate'];
+    this.saleDate=this.form.controls['saleDate'];
+
 
   }
 

@@ -1,25 +1,45 @@
 <div class="container-fluid">
 
+  <div class="row">
+    <h3>Car Inventry &nbsp; /&nbsp;  کار اندراج</h3>
+  </div>
+  <hr>
     <div class="row">     
           <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
           
         
           <div class="col-md-6" style="padding-right:30px">
                 <!--userAccount -->
-                <div class="form-group row" [ngClass]="{'has-error': (!owner.valid && owner.touched), 'has-success': (owner.valid && owner.touched)}">
+                <div class="form-group row" [ngClass]="{'has-error': (!owner1.valid && owner1.touched), 'has-success': (owner1.valid && owner1.touched)}">
                   <div class="input-group">
                     <span class="input-group-addon">
                       <i class="glyphicon glyphicon-map-marker"></i>
                     </span>
           
-                    <select [formControl]="owner" class="form-control" id="sel1">
-                      <option value="">--Select Owner Account--</option>
+                    <select [formControl]="owner1" class="form-control" id="sel1">
+                      <option value="">--Select owner 1 Account--</option>
                       <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
                     </select>
                   </div>
-                  <span *ngIf="!owner.valid && owner.touched && owner.value.length < 4 " class="help-block sub-little-text">User Account is required</span>
+                  <span *ngIf="!owner1.valid && owner1.touched && owner1.value.length < 4 " class="help-block sub-little-text">User Account is required</span>
                 </div>
                 <!--userAccount -->
+
+                <!--userAccount2 -->
+                <div class="form-group row">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-map-marker"></i>
+                      </span>
+            
+                      <select [formControl]="owner2" class="form-control" id="sel1">
+                        <option value="">--Select Owner 2 Account--</option>
+                        <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
+                      </select>
+                    </div>
+                    <!-- <span *ngIf="!owner2.valid && owner2.touched && owner2.value.length < 4 " class="help-block sub-little-text">User Account is required</span> -->
+                  </div>
+                  <!--userAccount2 -->
                   <!--Name-->
                   <div class="form-group row" [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
                     <div class="input-group">
@@ -124,7 +144,7 @@
                       <span class="input-group-addon">
                         <i class="fa fa-clock-o"></i>
                       </span>
-                      <input required name="purshaceDate" type="date" class="form-control">
+                      <input [formControl]="purchaseDate" type="date" class="form-control">
                     </div>
                   </div>
                   <!-- purchaseDate -->
@@ -148,7 +168,7 @@
                       <span class="input-group-addon">
                         <i class="fa fa-clock-o"></i>
                       </span>
-                      <input required name="saleDate" type="date" class="form-control">
+                      <input required [formControl]="saleDate" name="saleDate" type="date" class="form-control">
                     </div>
                   </div>
                   <!-- SaleDate -->
