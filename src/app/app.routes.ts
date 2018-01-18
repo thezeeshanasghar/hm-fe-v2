@@ -1,3 +1,4 @@
+import { SaleComponent } from './pages/sale/sale.component';
 import { StockCarComponent } from './pages/stock-car/stock-car.component';
 import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
 import { ModuleWithProviders, Component } from '@angular/core';
@@ -13,6 +14,7 @@ export const appRoutes: Routes = [
         pathMatch: 'full'
     },
     { path: "carStock", component: StockCarComponent },
+    { path: "carSale", component: SaleComponent},
     { path: "accounts", component: AccountsComponent },
     { path: "addAccount", component: AddAccountComponent },
     { path: "roznamcha", component: RoznamchaComponent },
