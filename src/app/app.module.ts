@@ -16,6 +16,7 @@ import { ModalModule, AlertModule } from 'ngx-bootstrap';
 import { MyDatePickerModule } from 'mydatepicker';
 import { StockCarComponent } from './pages/stock-car/stock-car.component';
 import { SaleComponent } from './pages/sale/sale.component';
+import { SaleToUnregisterUserComponent } from './pages/sale-to-unregister-user/sale-to-unregister-user.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { SaleComponent } from './pages/sale/sale.component';
     AccountsComponent,
     StockCarComponent,
     SaleComponent,
+    SaleToUnregisterUserComponent,
 
   ],
   imports: [
