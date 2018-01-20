@@ -7,8 +7,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './sale-to-unregister-user.component.html'
 })
 export class SaleToUnregisterUserComponent implements OnInit {
+  allAccounts: any[] = [];
+  showBuyer = false;
+  showSeller = false;
+  vehicalList = ['LHR 1234', 'LHQ 3456', 'LHE 5463', 'LHR 4567', 'LHE 6789', 'LHQ 2345']
 
   public form: FormGroup;
+  public buyer1: AbstractControl;
+  public seller1: AbstractControl;
+  public buyer2: AbstractControl;
+  public seller2: AbstractControl;
   public buyerName: AbstractControl;
   public buyerContact: AbstractControl;
   public buyerCNIC: AbstractControl;
@@ -18,7 +26,7 @@ export class SaleToUnregisterUserComponent implements OnInit {
   public sellerContact: AbstractControl;
   public sellerCNIC: AbstractControl;
   public sellerAddress: AbstractControl;
-
+  public vehical: AbstractControl;
   public vehicalName: AbstractControl;
   public modelNumber: AbstractControl;
   public maker: AbstractControl;
@@ -27,8 +35,8 @@ export class SaleToUnregisterUserComponent implements OnInit {
   public chassisNumber: AbstractControl;
   public color: AbstractControl;
 
-  public date: AbstractControl;
-  public commissionFromOwner: AbstractControl;
+  public dueDate: AbstractControl;
+  public commissionFromSeller: AbstractControl;
   public commissionFromBuyer: AbstractControl;
 
   public vehicalPrice: AbstractControl;
@@ -43,13 +51,16 @@ export class SaleToUnregisterUserComponent implements OnInit {
   public witnessCnic2: AbstractControl;
 
 
-  makerList =['Toyota','Honda','Hundai','Suzuki','Faw'];
+  makerList = ['Toyota', 'Honda', 'Hundai', 'Suzuki', 'Faw'];
 
 
   constructor(private fb: FormBuilder, private gu: GeneralHttpService) {
 
     this.form = fb.group({
-
+      'buyer1': ['', Validators.compose([Validators.required])],
+      'buyer2': ['', Validators.compose([Validators.required])],
+      'seller1': ['', Validators.compose([Validators.required])],
+      'seller2': ['', Validators.compose([Validators.required])],
       'buyerName': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'buyerContact': ['', Validators.compose([Validators.required, Validators.maxLength(11)])],
       'buyerCNIC': ['', Validators.compose([Validators.required, Validators.maxLength(13)])],
@@ -59,6 +70,7 @@ export class SaleToUnregisterUserComponent implements OnInit {
       'sellerContact': ['', Validators.compose([Validators.required, Validators.maxLength(11)])],
       'sellerCNIC': ['', Validators.compose([Validators.required, Validators.maxLength(13)])],
       'sellerAddress': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'vehical': ['', Validators.compose([Validators.required])],
 
       'vehicalName': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'modelNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
@@ -69,9 +81,9 @@ export class SaleToUnregisterUserComponent implements OnInit {
       'chassisNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
 
 
-      //'date': [''],
-     // 'commissionFromOwner': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      //'commissionFromBuyer': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'dueDate': [''],
+      'commissionFromSeller': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'commissionFromBuyer': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'vehicalPrice': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'buyerPaidAmount': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
 
@@ -83,6 +95,10 @@ export class SaleToUnregisterUserComponent implements OnInit {
       'witnessCnic2': ['', Validators.compose([Validators.required, Validators.maxLength(13)])],
     });
 
+    this.buyer1 = this.form.controls['buyer1'];
+    this.buyer2 = this.form.controls['buyer2'];
+    this.seller1 = this.form.controls['seller1'];
+    this.seller2 = this.form.controls['seller2'];
     this.buyerName = this.form.controls['buyerName'];
     this.buyerContact = this.form.controls['buyerContact'];
     this.buyerCNIC = this.form.controls['buyerCNIC'];
@@ -94,19 +110,20 @@ export class SaleToUnregisterUserComponent implements OnInit {
     this.sellerAddress = this.form.controls['sellerAddress'];
 
 
-  //  this.date = this.form.controls['date'];
+    this.dueDate = this.form.controls['dueDate'];
+    this.vehical = this.form.controls['vehical'];
     this.vehicalName = this.form.controls['vehicalName'];
     this.modelNumber = this.form.controls['modelNumber'];
     this.maker = this.form.controls['maker'];
     this.registrationNumber = this.form.controls['registrationNumber'];
     this.engineNumber = this.form.controls['engineNumber'];
     this.chassisNumber = this.form.controls['chassisNumber'];
-    this.color=this.form.controls['color'];
+    this.color = this.form.controls['color'];
 
     this.vehicalPrice = this.form.controls['vehicalPrice'];
     this.buyerPaidAmount = this.form.controls['buyerPaidAmount'];
-   // this.commissionFromOwner = this.form.controls['commissionFromOwner'];
-    //this.commissionFromBuyer = this.form.controls['commissionFromBuyer'];
+    this.commissionFromSeller = this.form.controls['commissionFromSeller'];
+    this.commissionFromBuyer = this.form.controls['commissionFromBuyer'];
 
     this.witnessName1 = this.form.controls['witnessName1'];
     this.witnessContact1 = this.form.controls['witnessContact1'];
@@ -119,9 +136,28 @@ export class SaleToUnregisterUserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllAccount();
   }
 
-  onSubmit(m){
+  getAllAccount() {
+    this.gu.getAllAccounts().subscribe(data => {
+      this.allAccounts = data.ResponseData;
+      console.log(this.allAccounts)
+    }, error => { });
+  }
+
+  changeCheckboxBuyer(c) {
+    // console.log("checkbox ");
+    this.showBuyer = !this.showBuyer;
+    console.log(this.showBuyer)
+  }
+  changeCheckboxSeller(c) {
+
+    this.showSeller = !this.showSeller;
+
+  }
+
+  onSubmit(m) {
     console.log(m);
 
   }
