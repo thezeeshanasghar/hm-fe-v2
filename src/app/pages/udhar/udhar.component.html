@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  
+
+ 
+<div class="row">
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+
+ 
+        <div class="col-md-12">         
+
+              <!--vehical -->
+              <div class="form-group row" [ngClass]="{'has-error': (!vehical.valid && vehical.touched), 'has-success': (vehical.valid && vehical.touched)}">
+                  <label for="vehical">Vehical:</label>
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="fa fa-car"></i>
+                      </span>
+
+                      <select [formControl]="vehical" class="form-control" id="sel1">
+                          <option value="">--Select vehical--</option>
+                          <option value="{{u}}" *ngFor="let u of vehicalList">{{u}}</option>
+                      </select>
+                  </div>
+                  <span *ngIf="!vehical.valid && vehical.touched && vehical.value.length < 4 " class="help-block sub-little-text">Vehical vehical is required</span>
+              </div> 
+              <!--vehical-->
+                <!--amountPaid-->
+                <div class="form-group row" [ngClass]="{'has-error': (!amountPaid.valid && amountPaid.touched), 'has-success': (amountPaid.valid && amountPaid.touched)}">
+                  <label for="buyerPaidAmoount">Amount Paid:</label>
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="fa fa-money"></i>
+                      </span>
+                      <input required [formControl]="amountPaid" type="text" class="form-control" placeholder=" Enter Vehical buyer Paid Amount">
+                  </div>
+                  <span *ngIf="!amountPaid.valid && amountPaid.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
+              </div>
+              <!-- amountPaid -->
+
+                <!-- nextDueDate -->
+
+        <div class="form-group row">
+          <label for="nextDueDate">Due Date For Remaing Payment</label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-clock-o"></i>
+            </span>
+            <input required [formControl]="nextDueDate" name="nextDueDate" type="date" class="form-control">
+          </div>
+        </div>
+        <!-- nextDueDate -->
+          
+        
+       
+
+              <button [disabled]="!form.valid" type="submit" class="btn btn-primary pull-right">
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                <i [ngClass]="{'fa fa-spinner fa-spin': changeClass}"></i>
+                Add</button>
+
+    
+
+        </div>
+        
+  </form>
+</div>
+</div>

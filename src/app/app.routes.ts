@@ -1,3 +1,4 @@
+import { UdharComponent } from './pages/udhar/udhar.component';
 import { SaleToUnregisterUserComponent } from './pages/sale-to-unregister-user/sale-to-unregister-user.component';
 import { SaleComponent } from './pages/sale/sale.component';
 import { StockCarComponent } from './pages/stock-car/stock-car.component';
@@ -17,6 +18,7 @@ export const appRoutes: Routes = [
     { path: "carStock", component: StockCarComponent },
     { path: "carSale", component: SaleComponent},
     { path: "carSaleUnregisterUser", component: SaleToUnregisterUserComponent},
+    { path: "udhar", component: UdharComponent},
 
     { path: "accounts", component: AccountsComponent },
     { path: "addAccount", component: AddAccountComponent },
