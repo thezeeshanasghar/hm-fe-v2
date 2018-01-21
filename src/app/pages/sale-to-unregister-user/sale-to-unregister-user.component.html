@@ -375,13 +375,7 @@
 
 
         </div>
-        <div id="Buyer" class="tab-pane fade">
-
-
-
-
-
-        </div>
+        
         <div id="Vehical" class="tab-pane fade" *ngIf="!showSeller">
           <div class="col-md-6" style="padding-right:30px">
 
@@ -570,14 +564,32 @@
               <span *ngIf="!witnessCnic2.valid && witnessCnic2.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
             </div>
             <!-- witnessCnic2 -->
+         
 
+
+           
+
+          </div>
+          
+            <div class="col-md-12">
+                <!--description-->
+          <div class="form-group row" [ngClass]="{'has-error': (!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </span>
+              <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
+            </div>
+            <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must be at least 10 characters</span>
+        </div>
+        <!-- description -->
+            </div>
 
             <button [disabled]="!form.valid" type="submit" class="btn btn-primary pull-right">
               <i class="fa fa-user-plus" aria-hidden="true"></i>
               <i [ngClass]="{'fa fa-spinner fa-spin': changeClass}"></i>
               Add</button>
-
-          </div>
+          
 
         </div>
       </div>
