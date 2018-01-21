@@ -1,13 +1,42 @@
 <div class="container-fluid">
-  
-    <div class="row">
-        <!-- <h3>Car Sale Case 1 & 2 &nbsp; /&nbsp; کار فروخت</h3> -->
-        <label for="isActive">I'm Register Seller &nbsp;&nbsp;</label>
-        <input type="checkbox" name="isActive" (change)="changeCheckboxSeller($event)"><br>
-        <label for="isActive">I'm Register Buyer &nbsp;&nbsp;</label>
-            <input type="checkbox" name="isActiveNot" (change)="changeCheckboxBuyer($event)">
-    </div>
-    <hr>
+
+  <div class="row">
+    <!-- <h3>Car Sale Case 1 & 2 &nbsp; /&nbsp; کار فروخت</h3> -->
+    <label for="isActive">I'm Register Seller &nbsp;&nbsp;</label>
+    <input type="checkbox" name="isActive" (change)="changeCheckboxSeller($event)">
+    <br>
+    <label for="isActive">I'm Register Buyer &nbsp;&nbsp;</label>
+    <input type="checkbox" name="isActiveNot" (change)="changeCheckboxBuyer($event)">
+  </div>
+  <hr>
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Sr#</th>
+          <th>Date</th>
+          <th>Seller Name</th>
+          <th>Seller Contact</th>
+          <th>Buyer Name</th>
+          <th>Buyer Contact</th>
+          <th>Toatal Commission</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          
+          <td>12/01/2018</td>
+          <td>ejaz sidhu</td>
+          <td>09876554</td>
+          <td>ASIM</td>
+          <td>68767899</td>
+          <td>50000</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <div class="row">
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
 
@@ -30,10 +59,10 @@
         <div id="Parties" class="tab-pane fade in active">
 
           <div class="col-md-6" style="padding-right:30px" *ngIf="!showSeller">
-              <!-- <label for="isActive">I'm Register User &nbsp;&nbsp;</label>
+            <!-- <label for="isActive">I'm Register User &nbsp;&nbsp;</label>
               <input type="checkbox" name="isActive" (change)="changeCheckboxSeller($event)"> -->
-           
-           
+
+
             <!--sellerName-->
             <div class="form-group row" [ngClass]="{'has-error': (!sellerName.valid && sellerName.touched), 'has-success': (sellerName.valid && sellerName.touched)}">
 
@@ -101,18 +130,18 @@
               <span *ngIf="!vehicalPrice.valid && vehicalPrice.touched " class="help-block sub-little-text">Enter a valid Vehical vehicalPrice</span>
             </div>
             <!-- vehicalPrice -->
-              <!--commissionFromSeller-->
-              <div class="form-group row" [ngClass]="{'has-error': (!commissionFromSeller.valid && commissionFromSeller.touched), 'has-success': (commissionFromSeller.valid && commissionFromSeller.touched)}">
-                  <label for="commissionFromSeller">Commission:</label>
-                  <div class="input-group">
-                      <span class="input-group-addon">
-                          <i class="fa fa-paint-brush"></i>
-                      </span>
-                      <input required [formControl]="commissionFromSeller" type="text" class="form-control" placeholder=" Enter commission">
-                  </div>
-                  <span *ngIf="!commissionFromSeller.valid && commissionFromSeller.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
+            <!--commissionFromSeller-->
+            <div class="form-group row" [ngClass]="{'has-error': (!commissionFromSeller.valid && commissionFromSeller.touched), 'has-success': (commissionFromSeller.valid && commissionFromSeller.touched)}">
+              <label for="commissionFromSeller">Commission:</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-paint-brush"></i>
+                </span>
+                <input required [formControl]="commissionFromSeller" type="text" class="form-control" placeholder=" Enter commission">
               </div>
-              <!-- commissionFromSeller -->
+              <span *ngIf="!commissionFromSeller.valid && commissionFromSeller.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
+            </div>
+            <!-- commissionFromSeller -->
 
 
 
@@ -120,83 +149,83 @@
 
           </div>
           <div class="col-md-6" *ngIf="showSeller" style="padding-right:30px">
-              <!-- <label for="isActive">I'm Not Register User &nbsp;&nbsp;</label>
+            <!-- <label for="isActive">I'm Not Register User &nbsp;&nbsp;</label>
               <input type="checkbox" name="isActive" (change)="changeCheckboxSeller($event)"> -->
 
-              <!--userAccount -->
+            <!--userAccount -->
             <div class="form-group row" [ngClass]="{'has-error': (!seller1.valid && seller1.touched), 'has-success': (seller1.valid && seller1.touched)}">
-                <label for="seller1">seller1 1:</label>
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-user"></i>
-                  </span>
-  
-                  <select [formControl]="seller1" class="form-control" id="sel1">
-                    <option value="">--Select Seller 1 Account--</option>
-                    <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
-                  </select>
-                </div>
-                <span *ngIf="!seller1.valid && seller1.touched && seller1.value.length < 4 " class="help-block sub-little-text">User Account is required</span>
+              <label for="seller1">seller1 1:</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-user"></i>
+                </span>
+
+                <select [formControl]="seller1" class="form-control" id="sel1">
+                  <option value="">--Select Seller 1 Account--</option>
+                  <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
+                </select>
               </div>
-              <!--userAccount -->
-              <!--userAccount -->
-              <div class="form-group row">
-                  <label for="seller2">Seller 2:</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="fa fa-user"></i>
-                    </span>
-    
-                    <select [formControl]="seller2" class="form-control" id="sel1">
-                      <option value="">--Select Seller 2 Account--</option>
-                      <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
-                    </select>
-                  </div>
-                  
-                </div>
-                <!--userAccount -->
-                <!--vehical -->
-                <div class="form-group row" [ngClass]="{'has-error': (!vehical.valid && vehical.touched), 'has-success': (vehical.valid && vehical.touched)}">
-                    <label for="vehical">Vehical:</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="fa fa-car"></i>
-                        </span>
+              <span *ngIf="!seller1.valid && seller1.touched && seller1.value.length < 4 " class="help-block sub-little-text">User Account is required</span>
+            </div>
+            <!--userAccount -->
+            <!--userAccount -->
+            <div class="form-group row">
+              <label for="seller2">Seller 2:</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-user"></i>
+                </span>
 
-                        <select [formControl]="vehical" class="form-control" id="sel1">
-                            <option value="">--Select vehical--</option>
-                            <option value="{{u}}" *ngFor="let u of vehicalList">{{u}}</option>
-                        </select>
-                    </div>
-                    <span *ngIf="!vehical.valid && vehical.touched && vehical.value.length < 4 " class="help-block sub-little-text">Vehical vehical is required</span>
-                </div>
-                <!--vehical -->
+                <select [formControl]="seller2" class="form-control" id="sel1">
+                  <option value="">--Select Seller 2 Account--</option>
+                  <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
+                </select>
+              </div>
 
-                 <!--vehicalPrice-->
+            </div>
+            <!--userAccount -->
+            <!--vehical -->
+            <div class="form-group row" [ngClass]="{'has-error': (!vehical.valid && vehical.touched), 'has-success': (vehical.valid && vehical.touched)}">
+              <label for="vehical">Vehical:</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-car"></i>
+                </span>
+
+                <select [formControl]="vehical" class="form-control" id="sel1">
+                  <option value="">--Select vehical--</option>
+                  <option value="{{u}}" *ngFor="let u of vehicalList">{{u}}</option>
+                </select>
+              </div>
+              <span *ngIf="!vehical.valid && vehical.touched && vehical.value.length < 4 " class="help-block sub-little-text">Vehical vehical is required</span>
+            </div>
+            <!--vehical -->
+
+            <!--vehicalPrice-->
             <div class="form-group row" [ngClass]="{'has-error': (!vehicalPrice.valid && vehicalPrice.touched), 'has-success': (vehicalPrice.valid && vehicalPrice.touched)}">
 
-                <label for="vehicalPrice">Car Price:</label>
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-car"></i>
-                  </span>
-                  <input required [formControl]="vehicalPrice" type="text" class="form-control" placeholder=" Enter Vehical vehicalPrice">
-                </div>
-                <span *ngIf="!vehicalPrice.valid && vehicalPrice.touched " class="help-block sub-little-text">Enter a valid Vehical vehicalPrice</span>
+              <label for="vehicalPrice">Car Price:</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-car"></i>
+                </span>
+                <input required [formControl]="vehicalPrice" type="text" class="form-control" placeholder=" Enter Vehical vehicalPrice">
               </div>
-              <!-- vehicalPrice -->
-              <!--commissionFromSeller-->
-              <div class="form-group row" [ngClass]="{'has-error': (!commissionFromSeller.valid && commissionFromSeller.touched), 'has-success': (commissionFromSeller.valid && commissionFromSeller.touched)}">
-                  <label for="commissionFromSeller">Commission:</label>
-                  <div class="input-group">
-                      <span class="input-group-addon">
-                          <i class="fa fa-paint-brush"></i>
-                      </span>
-                      <input required [formControl]="commissionFromSeller" type="text" class="form-control" placeholder=" Enter commission">
-                  </div>
-                  <span *ngIf="!commissionFromSeller.valid && commissionFromSeller.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
+              <span *ngIf="!vehicalPrice.valid && vehicalPrice.touched " class="help-block sub-little-text">Enter a valid Vehical vehicalPrice</span>
+            </div>
+            <!-- vehicalPrice -->
+            <!--commissionFromSeller-->
+            <div class="form-group row" [ngClass]="{'has-error': (!commissionFromSeller.valid && commissionFromSeller.touched), 'has-success': (commissionFromSeller.valid && commissionFromSeller.touched)}">
+              <label for="commissionFromSeller">Commission:</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-paint-brush"></i>
+                </span>
+                <input required [formControl]="commissionFromSeller" type="text" class="form-control" placeholder=" Enter commission">
               </div>
-              <!-- commissionFromSeller -->
+              <span *ngIf="!commissionFromSeller.valid && commissionFromSeller.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
+            </div>
+            <!-- commissionFromSeller -->
 
           </div>
 
@@ -221,56 +250,56 @@
             <!--userAccount -->
             <!--userAccount -->
             <div class="form-group row">
-                <label for="buyer2">buyer 2:</label>
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-user"></i>
-                  </span>
-  
-                  <select [formControl]="buyer2" class="form-control" id="sel1">
-                    <option value="">--Select Buyer 2 Account--</option>
-                    <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
-                  </select>
-                </div>
-                
-              </div>
-              <!--userAccount -->
-               <!--buyerPaidAmount-->
-               <div class="form-group row" [ngClass]="{'has-error': (!buyerPaidAmount.valid && buyerPaidAmount.touched), 'has-success': (buyerPaidAmount.valid && buyerPaidAmount.touched)}">
-                  <label for="buyerPaidAmoount">Advance:</label>
-                  <div class="input-group">
-                      <span class="input-group-addon">
-                          <i class="fa fa-paint-brush"></i>
-                      </span>
-                      <input required [formControl]="buyerPaidAmount" type="text" class="form-control" placeholder=" Enter Vehical buyer Paid Amount">
-                  </div>
-                  <span *ngIf="!buyerPaidAmount.valid && buyerPaidAmount.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
-              </div>
-              <!-- buyerPaidAmount -->
-              <!--commissionFromBuyer-->
-              <div class="form-group row" [ngClass]="{'has-error': (!commissionFromBuyer.valid && commissionFromBuyer.touched), 'has-success': (commissionFromBuyer.valid && commissionFromBuyer.touched)}">
-                  <label for="commissionFromBuyer">Commission:</label>
-                  <div class="input-group">
-                      <span class="input-group-addon">
-                          <i class="fa fa-paint-brush"></i>
-                      </span>
-                      <input required [formControl]="commissionFromBuyer" type="text" class="form-control" placeholder=" Enter commission">
-                  </div>
-                  <span *ngIf="!commissionFromBuyer.valid && commissionFromBuyer.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
-              </div>
-              <!-- commissionFromBuyer -->
-               <!-- dueDate -->
+              <label for="buyer2">buyer 2:</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-user"></i>
+                </span>
 
-        <div class="form-group row">
-          <label for="dueDate">Due Date For Remaing Payment</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              <input required [formControl]="dueDate" name="dueDate" type="date" class="form-control">
+                <select [formControl]="buyer2" class="form-control" id="sel1">
+                  <option value="">--Select Buyer 2 Account--</option>
+                  <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
+                </select>
+              </div>
+
             </div>
-          </div>
-          <!-- dueDate -->
+            <!--userAccount -->
+            <!--buyerPaidAmount-->
+            <div class="form-group row" [ngClass]="{'has-error': (!buyerPaidAmount.valid && buyerPaidAmount.touched), 'has-success': (buyerPaidAmount.valid && buyerPaidAmount.touched)}">
+              <label for="buyerPaidAmoount">Advance:</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-paint-brush"></i>
+                </span>
+                <input required [formControl]="buyerPaidAmount" type="text" class="form-control" placeholder=" Enter Vehical buyer Paid Amount">
+              </div>
+              <span *ngIf="!buyerPaidAmount.valid && buyerPaidAmount.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
+            </div>
+            <!-- buyerPaidAmount -->
+            <!--commissionFromBuyer-->
+            <div class="form-group row" [ngClass]="{'has-error': (!commissionFromBuyer.valid && commissionFromBuyer.touched), 'has-success': (commissionFromBuyer.valid && commissionFromBuyer.touched)}">
+              <label for="commissionFromBuyer">Commission:</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-paint-brush"></i>
+                </span>
+                <input required [formControl]="commissionFromBuyer" type="text" class="form-control" placeholder=" Enter commission">
+              </div>
+              <span *ngIf="!commissionFromBuyer.valid && commissionFromBuyer.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
+            </div>
+            <!-- commissionFromBuyer -->
+            <!-- dueDate -->
+
+            <div class="form-group row">
+              <label for="dueDate">Due Date For Remaing Payment</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                <input required [formControl]="dueDate" name="dueDate" type="date" class="form-control">
+              </div>
+            </div>
+            <!-- dueDate -->
 
           </div>
           <div class="col-md-6" *ngIf="!showBuyer">
@@ -345,31 +374,31 @@
               <span *ngIf="!buyerPaidAmount.valid && buyerPaidAmount.touched " class="help-block sub-little-text">Enter a valid Vehical buyerPaidAmount</span>
             </div>
             <!-- buyerPaidAmount -->
-             <!--commissionFromBuyer-->
-             <div class="form-group row" [ngClass]="{'has-error': (!commissionFromBuyer.valid && commissionFromBuyer.touched), 'has-success': (commissionFromBuyer.valid && commissionFromBuyer.touched)}">
-                <label for="commissionFromBuyer">Commission:</label>
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="fa fa-paint-brush"></i>
-                    </span>
-                    <input required [formControl]="commissionFromBuyer" type="text" class="form-control" placeholder=" Enter commission">
-                </div>
-                <span *ngIf="!commissionFromBuyer.valid && commissionFromBuyer.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
+            <!--commissionFromBuyer-->
+            <div class="form-group row" [ngClass]="{'has-error': (!commissionFromBuyer.valid && commissionFromBuyer.touched), 'has-success': (commissionFromBuyer.valid && commissionFromBuyer.touched)}">
+              <label for="commissionFromBuyer">Commission:</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-paint-brush"></i>
+                </span>
+                <input required [formControl]="commissionFromBuyer" type="text" class="form-control" placeholder=" Enter commission">
+              </div>
+              <span *ngIf="!commissionFromBuyer.valid && commissionFromBuyer.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
             </div>
             <!-- commissionFromBuyer -->
-            
-        <!-- dueDate -->
 
-        <div class="form-group row">
-            <label for="dueDate">Due Date For Remaing Payment</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              <input required [formControl]="dueDate" name="dueDate" type="date" class="form-control">
+            <!-- dueDate -->
+
+            <div class="form-group row">
+              <label for="dueDate">Due Date For Remaing Payment</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                <input required [formControl]="dueDate" name="dueDate" type="date" class="form-control">
+              </div>
             </div>
-          </div>
-          <!-- dueDate -->
+            <!-- dueDate -->
 
           </div>
 
@@ -572,7 +601,7 @@
             <!-- witnessCnic2 -->
 
 
-            <button [disabled]="!form.valid" type="submit" class="btn btn-primary pull-right">
+            <button type="submit" class="btn btn-primary pull-right">
               <i class="fa fa-user-plus" aria-hidden="true"></i>
               <i [ngClass]="{'fa fa-spinner fa-spin': changeClass}"></i>
               Add</button>
