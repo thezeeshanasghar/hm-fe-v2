@@ -17,6 +17,7 @@ import { MyDatePickerModule } from 'mydatepicker';
 import { StockCarComponent } from './pages/stock-car/stock-car.component';
 import { SaleComponent } from './pages/sale/sale.component';
 import { SaleToUnregisterUserComponent } from './pages/sale-to-unregister-user/sale-to-unregister-user.component';
+import { UdharComponent } from './pages/udhar/udhar.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { SaleToUnregisterUserComponent } from './pages/sale-to-unregister-user/s
     StockCarComponent,
     SaleComponent,
     SaleToUnregisterUserComponent,
+    UdharComponent,
 
   ],
   imports: [
