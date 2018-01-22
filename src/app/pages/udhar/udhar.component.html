@@ -10,14 +10,14 @@
 
               <!--vehical -->
               <div class="form-group row" [ngClass]="{'has-error': (!vehical.valid && vehical.touched), 'has-success': (vehical.valid && vehical.touched)}">
-                  <label for="vehical">Vehical:</label>
+                  <label for="vehical">Recipt:</label>
                   <div class="input-group">
                       <span class="input-group-addon">
                           <i class="fa fa-car"></i>
                       </span>
 
                       <select [formControl]="vehical" class="form-control" id="sel1">
-                          <option value="">--Select vehical--</option>
+                          <option value="">--Select recipt--</option>
                           <option value="{{u}}" *ngFor="let u of vehicalList">{{u}}</option>
                       </select>
                   </div>
@@ -49,6 +49,22 @@
           </div>
         </div>
         <!-- nextDueDate -->
+
+        <div class="row">
+          <div class="col-md-12">
+              <!--description-->
+        <div class="form-group row" [ngClass]="{'has-error': (!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </span>
+            <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
+          </div>
+          <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must be at least 10 characters</span>
+      </div>
+      <!-- description -->
+          </div>
+        </div>
           
         
        

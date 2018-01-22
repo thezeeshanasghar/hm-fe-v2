@@ -21,6 +21,7 @@ export class SaleToUnregisterUserComponent implements OnInit {
   public buyerContact: AbstractControl;
   public buyerCNIC: AbstractControl;
   public buyerAddress: AbstractControl;
+  public description: AbstractControl;
 
   public sellerName: AbstractControl;
   public sellerContact: AbstractControl;
@@ -79,6 +80,7 @@ export class SaleToUnregisterUserComponent implements OnInit {
       'registrationNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'engineNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'chassisNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'description': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
 
 
       'dueDate': [''],
@@ -108,6 +110,7 @@ export class SaleToUnregisterUserComponent implements OnInit {
     this.sellerContact = this.form.controls['sellerContact'];
     this.sellerCNIC = this.form.controls['sellerCNIC'];
     this.sellerAddress = this.form.controls['sellerAddress'];
+    this.description = this.form.controls["description"];
 
 
     this.dueDate = this.form.controls['dueDate'];

@@ -14,6 +14,7 @@ export class UdharComponent implements OnInit {
   public vehical: AbstractControl;
   public amountPaid:AbstractControl;
   public nextDueDate:AbstractControl;
+  public description: AbstractControl;
 
 
   constructor(public fb:FormBuilder,public gu:GeneralHttpService) {
@@ -22,7 +23,8 @@ export class UdharComponent implements OnInit {
 
       'vehical': ['', Validators.compose([Validators.required])],
       'amountPaid': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'nextDueDate':['']
+      'nextDueDate':[''],
+      'description': ['', Validators.compose([Validators.required, Validators.minLength(10)])]
 
 
     });
@@ -30,6 +32,7 @@ export class UdharComponent implements OnInit {
     this.vehical = this.form.controls['vehical'];
     this.amountPaid = this.form.controls['amountPaid'];
     this.nextDueDate=this.form.controls['nextDueDate'];
+    this.description = this.form.controls["description"];
    }
    ngOnInit() {
   }
