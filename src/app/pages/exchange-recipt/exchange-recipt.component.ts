@@ -7,6 +7,8 @@ import { GeneralHttpService } from '../../services/general-http.service';
   templateUrl: './exchange-recipt.component.html'
 })
 export class ExchangeReciptComponent implements OnInit {
+  showSeller: boolean=false;
+  showBuyer: boolean=false;
   allAccounts: any[] = [];
   public form: FormGroup;
   public buyer1: AbstractControl;
@@ -88,14 +90,13 @@ export class ExchangeReciptComponent implements OnInit {
       'sellerCNIC': ['', Validators.compose([Validators.required, Validators.maxLength(13)])],
       'sellerAddress': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'sellerVehicalvehical': ['', Validators.compose([Validators.required])],
-
       'sellerVehicalvehicalName': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'sellerVehicalmodelNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'sellerVehicalcolor': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'sellerVehicalmaker': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'sellerVehicalregistrationNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'sellerVehicalengineNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'sellerVehicalchassisNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'sellerVehicalColor': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'sellerVehicalMaker': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'sellerVehicalRegistrationNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'sellerVehicalEngineNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'sellerVehicalChassisNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
 
       'description': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
 
@@ -123,14 +124,6 @@ export class ExchangeReciptComponent implements OnInit {
     this.buyerCNIC = this.form.controls['buyerCNIC'];
     this.buyerAddress = this.form.controls['buyerAddress'];
 
-    this.sellerName = this.form.controls['sellerName'];
-    this.sellerContact = this.form.controls['sellerContact'];
-    this.sellerCNIC = this.form.controls['sellerCNIC'];
-    this.sellerAddress = this.form.controls['sellerAddress'];
-    this.description = this.form.controls["description"];
-
-
-    this.dueDate = this.form.controls['dueDate'];
     this.buyersVehical= this.form.controls['buyersVehical'];
     this.buyersVehicalName = this.form.controls['buyersVehicalName'];
     this.buyersVehicalModelNumber = this.form.controls['buyersVehicalModelNumber'];
@@ -140,6 +133,23 @@ export class ExchangeReciptComponent implements OnInit {
     this.buyersVehicalChassisNumber = this.form.controls['buyersVehicalChassisNumber'];
     this.buyersVehicalColor = this.form.controls['buyersVehicalColor'];
 
+    this.sellerName = this.form.controls['sellerName'];
+    this.sellerContact = this.form.controls['sellerContact'];
+    this.sellerCNIC = this.form.controls['sellerCNIC'];
+    this.sellerAddress = this.form.controls['sellerAddress'];
+
+    this.sellerVehical= this.form.controls['sellerVehical'];
+    this.sellerVehicalName = this.form.controls['sellerVehicalName'];
+    this.sellerVehicalModelNumber = this.form.controls['sellerVehicalModelNumber'];
+    this.sellerVehicalMaker = this.form.controls['sellerVehicalMaker'];
+    this.sellerVehicalRegistrationNumber = this.form.controls['sellerVehicalRegistrationNumber'];
+    this.sellerVehicalEngineNumber = this.form.controls['sellerVehicalEngineNumber'];
+    this.sellerVehicalChassisNumber = this.form.controls['sellerVehicalChassisNumber'];
+    this.sellerVehicalColor = this.form.controls['sellerVehicalColor'];
+
+     
+    this.description = this.form.controls["description"];
+    this.dueDate = this.form.controls['dueDate'];
     this.vehicalPrice = this.form.controls['vehicalPrice'];
     this.buyerPaidAmount = this.form.controls['buyerPaidAmount'];
     this.commissionFromSeller = this.form.controls['commissionFromSeller'];
@@ -155,7 +165,32 @@ export class ExchangeReciptComponent implements OnInit {
 
   }
 
+
   ngOnInit() {
+    this.getAllAccount();
+  }
+
+  getAllAccount() {
+    this.gu.getAllAccounts().subscribe(data => {
+      this.allAccounts = data.ResponseData;
+      console.log(this.allAccounts)
+    }, error => { });
+  }
+
+  changeCheckboxBuyer(c) {
+    // console.log("checkbox ");
+    this.showBuyer = !this.showBuyer;
+    console.log(this.showBuyer)
+  }
+  changeCheckboxSeller(c) {
+
+    this.showSeller = !this.showSeller;
+
+  }
+
+  onSubmit(m) {
+    console.log(m);
+
   }
 
 }
