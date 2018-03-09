@@ -1,3 +1,4 @@
+import { ExchangeReciptComponent } from './pages/exchange-recipt/exchange-recipt.component';
 import { UdharComponent } from './pages/udhar/udhar.component';
 import { SaleToUnregisterUserComponent } from './pages/sale-to-unregister-user/sale-to-unregister-user.component';
 import { SaleComponent } from './pages/sale/sale.component';
@@ -15,6 +16,7 @@ export const appRoutes: Routes = [
         redirectTo: 'accounts',
         pathMatch: 'full'
     },
+    { path: "exchangeRecipt", component: ExchangeReciptComponent },
     { path: "carStock", component: StockCarComponent },
     { path: "carSale", component: SaleComponent},
     { path: "carSaleUnregisterUser", component: SaleToUnregisterUserComponent},

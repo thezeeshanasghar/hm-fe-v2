@@ -18,6 +18,7 @@ import { StockCarComponent } from './pages/stock-car/stock-car.component';
 import { SaleComponent } from './pages/sale/sale.component';
 import { SaleToUnregisterUserComponent } from './pages/sale-to-unregister-user/sale-to-unregister-user.component';
 import { UdharComponent } from './pages/udhar/udhar.component';
+import { ExchangeReciptComponent } from './pages/exchange-recipt/exchange-recipt.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { UdharComponent } from './pages/udhar/udhar.component';
     SaleComponent,
     SaleToUnregisterUserComponent,
     UdharComponent,
+    ExchangeReciptComponent,
 
   ],
   imports: [
