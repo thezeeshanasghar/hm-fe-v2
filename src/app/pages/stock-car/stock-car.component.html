@@ -1,185 +1,40 @@
 <div class="container-fluid">
 
   <div class="row">
-    <h3>Car Inventry &nbsp; /&nbsp; کار اندراج</h3>
+    <h3>Car Inventory &nbsp; /&nbsp; کار اندراج</h3>
   </div>
   <hr>
   <div class="row">
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+    <form [formGroup]="carStockForm" (ngSubmit)="onSubmit(carStockForm.value)" class="form-horizontal">
 
 
       <div class="col-md-6" style="padding-right:30px">
-        <!--userAccount -->
-        <div class="form-group row" [ngClass]="{'has-error': (!owner1.valid && owner1.touched), 'has-success': (owner1.valid && owner1.touched)}">
+        <!-- owner1 -->
+        <div class="form-group" 
+        [ngClass]="{'has-error': !carStockForm.controls['owner1'].valid &&  carStockForm.controls['owner1'].touched, 'has-success': carStockForm.controls['owner1'].valid}">
           <div class="input-group">
             <span class="input-group-addon">
               <i class="glyphicon glyphicon-map-marker"></i>
             </span>
 
-            <select [formControl]="owner1" class="form-control" id="sel1">
-              <option value="">--Select owner 1 Account--</option>
-              <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
+            <select formControlName="owner1" class="form-control">
+              <option value="">-- Select first owner account --</option>
+              <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Number}} -- {{u.Name}}</option>
             </select>
           </div>
-          <span *ngIf="!owner1.valid && owner1.touched && owner1.value.length < 4 " class="help-block sub-little-text">User Account is required</span>
+          <span *ngIf="!carStockForm.controls['owner1'].valid && carStockForm.controls['owner1'].touched"
+            class="help-block sub-little-text">Owner1 is required</span>
         </div>
-        <!--userAccount -->
+        <!-- owner1 -->
 
-        <!--userAccount2 -->
-        <div class="form-group row">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="glyphicon glyphicon-map-marker"></i>
-            </span>
 
-            <select [formControl]="owner2" class="form-control" id="sel1">
-              <option value="">--Select Owner 2 Account--</option>
-              <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
-            </select>
-          </div>
-          <!-- <span *ngIf="!owner2.valid && owner2.touched && owner2.value.length < 4 " class="help-block sub-little-text">User Account is required</span> -->
-        </div>
-        <!--userAccount2 -->
-        <!--Name-->
-        <div class="form-group row" [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="fa fa-car"></i>
-            </span>
-            <input required [formControl]="name" type="text" class="form-control" placeholder=" Enter Vehical Name">
-          </div>
-          <span *ngIf="!name.valid && name.touched " class="help-block sub-little-text">Enter a valid Vehical Name</span>
-        </div>
-        <!-- Name -->
-        <!--modelNumber-->
-        <div class="form-group row" [ngClass]="{'has-error': (!modelNumber.valid && modelNumber.touched), 'has-success': (modelNumber.valid && modelNumber.touched)}">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="fa fa-car"></i>
-            </span>
-            <input required [formControl]="modelNumber" type="text" class="form-control" placeholder=" Enter Vehical model Number">
-          </div>
-          <span *ngIf="!modelNumber.valid && modelNumber.touched " class="help-block sub-little-text">Enter a valid Vehical Model Number</span>
-        </div>
-        <!-- modelNumber -->
 
-        <!--registrationNumber-->
-        <div class="form-group row" [ngClass]="{'has-error': (!registrationNumber.valid && registrationNumber.touched), 'has-success': (registrationNumber.valid && registrationNumber.touched)}">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="fa fa-book"></i>
-            </span>
-            <input required [formControl]="registrationNumber" type="text" class="form-control" placeholder=" Enter Vehical registration Number">
-          </div>
-          <span *ngIf="!registrationNumber.valid && registrationNumber.touched " class="help-block sub-little-text">Enter a valid Vehical Registration Number</span>
-        </div>
-        <!-- registrationNumber -->
-        <!--chassisNumber-->
-        <div class="form-group row" [ngClass]="{'has-error': (!chassisNumber.valid && chassisNumber.touched), 'has-success': (chassisNumber.valid && chassisNumber.touched)}">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="fa fa-cogs"></i>
-            </span>
-            <input required [formControl]="chassisNumber" type="text" class="form-control" placeholder=" Enter Vehical Chassis Number">
-          </div>
-          <span *ngIf="!chassisNumber.valid && chassisNumber.touched " class="help-block sub-little-text">Enter a valid Vehical Number</span>
-        </div>
-        <!-- chassisNumber -->
-        <!--engineNumber-->
-        <div class="form-group row" [ngClass]="{'has-error': (!engineNumber.valid && engineNumber.touched), 'has-success': (engineNumber.valid && engineNumber.touched)}">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="fa fa-cogs"></i>
-            </span>
-            <input required [formControl]="engineNumber" type="text" class="form-control" placeholder=" Enter Vehical Engine Number">
-          </div>
-          <span *ngIf="!engineNumber.valid && engineNumber.touched " class="help-block sub-little-text">Enter a valid Vehical Engine Number</span>
-        </div>
-        <!-- engineNumber -->
-      </div>
-      <div class="col-md-6">
-
-        <!--color-->
-        <div class="form-group row" [ngClass]="{'has-error': (!color.valid && color.touched), 'has-success': (color.valid && color.touched)}">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="fa fa-paint-brush"></i>
-            </span>
-            <input required [formControl]="color" type="text" class="form-control" placeholder=" Enter Vehical Color">
-          </div>
-          <span *ngIf="!color.valid && color.touched " class="help-block sub-little-text">Enter a valid Vehical Color</span>
-        </div>
-        <!-- color -->
-
-        <!--maker -->
-        <div class="form-group row" [ngClass]="{'has-error': (!maker.valid && maker.touched), 'has-success': (maker.valid && maker.touched)}">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="fa fa-car"></i>
-            </span>
-
-            <select [formControl]="maker" class="form-control" id="sel1">
-              <option value="">--Select Maker--</option>
-              <option value="{{u}}" *ngFor="let u of makerList">{{u}}</option>
-            </select>
-          </div>
-          <span *ngIf="!maker.valid && maker.touched && maker.value.length < 4 " class="help-block sub-little-text">Vehical maker is required</span>
-        </div>
-        <!--maker -->
-
-        <!--purchasePrice-->
-        <div class="form-group row" [ngClass]="{'has-error': (!purchasePrice.valid && purchasePrice.touched), 'has-success': (purchasePrice.valid && purchasePrice.touched)}">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="glyphicon glyphicon-usd"></i>
-            </span>
-            <input required [formControl]="purchasePrice" type="text" class="form-control" placeholder=" Enter Vehical Prchase Price">
-          </div>
-          <span *ngIf="!purchasePrice.valid && purchasePrice.touched " class="help-block sub-little-text">Enter a valid Vehical Purchase Price</span>
-        </div>
-        <!-- purchaseDate -->
-
-        <div class="form-group row">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="fa fa-clock-o"></i>
-            </span>
-            <input [formControl]="purchaseDate" type="date" class="form-control">
-          </div>
-        </div>
-        <!-- purchaseDate -->
-
-        <!--salePrice-->
-        <div class="form-group row" [ngClass]="{'has-error': (!salePrice.valid && salePrice.touched), 'has-success': (salePrice.valid && salePrice.touched)}">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="glyphicon glyphicon-usd"></i>
-            </span>
-            <input required [formControl]="salePrice" type="text" class="form-control" placeholder=" Enter Vehical Sale Price">
-          </div>
-          <span *ngIf="!salePrice.valid && salePrice.touched " class="help-block sub-little-text">Enter a valid Vehical Sale Price</span>
-        </div>
-        <!-- salePrice -->
-
-        <!-- SaleDate -->
-
-        <div class="form-group row">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="fa fa-clock-o"></i>
-            </span>
-            <input required [formControl]="saleDate" name="saleDate" type="date" class="form-control">
-          </div>
-        </div>
-        <!-- SaleDate -->
-
-        <button [disabled]="!form.valid" type="submit" class="btn btn-primary pull-right">
+        <button type="submit" class="btn btn-primary pull-right">
           <i class="fa fa-user-plus" aria-hidden="true"></i>
           <i [ngClass]="{'fa fa-spinner fa-spin': changeClass}"></i>
           Add</button>
 
       </div>
-
     </form>
   </div>
 </div>
