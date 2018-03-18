@@ -31,10 +31,8 @@ export class StockCarComponent implements OnInit {
       chassisNumber: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       owner1: ['', Validators.required],
       owner2: [''],
-      purchaseDate: [''],
-      saleDate: [''],
-      purchasePrice: ['', Validators.compose([AmountValidator.validate])],
-      salePrice: ['', Validators.compose([AmountValidator.validate])],
+      purchaseDate: ['', Validators.required],
+      purchasePrice: ['', Validators.compose([Validators.required, AmountValidator.validate])]
     });
   }
 

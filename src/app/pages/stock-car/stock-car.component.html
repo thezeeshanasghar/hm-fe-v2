@@ -10,7 +10,9 @@
 
       <div class="col-md-6" style="padding-right:30px">
         <!-- owner1 -->
-        <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['owner1'].valid &&          carStockForm.controls['owner1'].touched, 'has-success': carStockForm.controls['owner1'].valid}">
+        <div class="form-group" 
+          [ngClass]="{'has-error': !carStockForm.controls['owner1'].valid && carStockForm.controls['owner1'].touched,
+                      'has-success': carStockForm.controls['owner1'].valid}">
           <div class="input-group">
             <span class="input-group-addon">
               <i class="glyphicon glyphicon-user"></i>
@@ -21,12 +23,12 @@
               <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Number}} -- {{u.Name}}</option>
             </select>
           </div>
-          <span *ngIf="!carStockForm.controls['owner1'].valid && carStockForm.controls['owner1'].touched" class="help-block sub-little-text">Owner1 is required</span>
+          <span *ngIf="!carStockForm.controls['owner1'].valid && carStockForm.controls['owner1'].touched" 
+                class="help-block sub-little-text">Owner1 is required</span>
         </div>
         <!-- owner1 -->
         <!-- owner2 -->
-        <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['owner2'].valid && 
-          carStockForm.controls['owner2'].touched, 'has-success': carStockForm.controls['owner2'].valid}">
+        <div class="form-group">
           <div class="input-group">
             <span class="input-group-addon">
               <i class="glyphicon glyphicon-user"></i>
@@ -37,8 +39,7 @@
               <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Number}} -- {{u.Name}}</option>
             </select>
           </div>
-          <span *ngIf="!carStockForm.controls['owner2'].valid && 
-           carStockForm.controls['owner2'].touched" class="help-block sub-little-text">Owner 2 is required</span>
+          
         </div>
         <!-- owner2 -->
 
@@ -189,34 +190,7 @@
         <!--vehical  purchasePrice -->
 
 
-        <!-- vehical saleDate -->
-        <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['saleDate'].valid && 
-          carStockForm.controls['saleDate'].touched, 'has-success': carStockForm.controls['saleDate'].valid}">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="fa fa-car"></i>
-            </span>
-
-            <input type="date" formControlName="saleDate" class="form-control" placeholder=" Enter vehical sale date number">
-          </div>
-          <span *ngIf="!carStockForm.controls['saleDate'].valid && 
-           carStockForm.controls['saleDate'].touched" class="help-block sub-little-text">Vehical sale date is required</span>
-        </div>
-        <!--vehical  saleDate -->
-        <!-- vehical salePrice -->
-        <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['salePrice'].valid && 
-        carStockForm.controls['salePrice'].touched, 'has-success': carStockForm.controls['salePrice'].valid}">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="fa fa-car"></i>
-            </span>
-
-            <input type="text" formControlName="salePrice" class="form-control" placeholder=" Enter vehical chasis number">
-          </div>
-          <span *ngIf="!carStockForm.controls['salePrice'].valid && 
-         carStockForm.controls['salePrice'].touched" class="help-block sub-little-text">Vehical purchase price is required</span>
-        </div>
-        <!--vehical  salePrice -->
+        
 
 
 
