@@ -8,6 +8,7 @@ import { GeneralHttpService } from '../../services/general-http.service';
 })
 export class ExchangeReciptComponent implements OnInit {
   showSeller: boolean=false;
+  changeClass=false;
   showBuyer: boolean=false;
   allAccounts: any[] = [];
   public form: FormGroup;

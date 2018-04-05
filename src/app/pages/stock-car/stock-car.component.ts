@@ -1,3 +1,4 @@
+import { Car } from './../../Models/car.model';
 import { GeneralHttpService } from './../../services/general-http.service';
 import { AmountValidator } from './../../../assets/validators/amount.valdator';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -10,6 +11,7 @@ import { AccountModel } from '../../Models/account.model';
 
 })
 export class StockCarComponent implements OnInit {
+  changeClass=false;
 
   public carStockForm: FormGroup;
 
@@ -33,7 +35,9 @@ export class StockCarComponent implements OnInit {
       owner2: [''],
       purchaseDate: [''],
       saleDate: [''],
+      computerizedNoPlate:[false],
       purchasePrice: ['', Validators.compose([AmountValidator.validate])],
+      noOfPapers: ['', Validators.compose([AmountValidator.validate])],
       salePrice: ['', Validators.compose([AmountValidator.validate])],
     });
   }
@@ -48,8 +52,28 @@ export class StockCarComponent implements OnInit {
     }, error => { console.log(error) });
   }
 
-  onSubmit(m) {
-    console.log(m);
+  onSubmit(post) {
+    console.log(post);
+    let formDate=new FormData();
+
+
+    let modal=new Car();
+    modal.carOwner[0]=post.owner1;
+    if(post.owner2){
+      modal.carOwner[1]=post.owner2
+    }
+    modal.Name=post.name;
+    modal.EngineNumber=post.engineNumber;
+    modal.ChasisNumber=post.cheasisNumber;
+    modal.RegistrationNumber=post.registrationNumber;
+    modal.ModelNumber=post.modalNumber;
+    modal.Maker=post.maker;
+    
+
+
+     console.log(JSON.stringify(modal));
+
+    
   }
 
   sortAllAccounts(accouts) {
