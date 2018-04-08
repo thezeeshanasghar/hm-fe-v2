@@ -5,7 +5,7 @@
   </div>
   <hr>
   <div class="row">
-    <form [formGroup]="carStockForm" (ngSubmit)="onSubmit(carStockForm.value)" class="form-horizontal">
+    <form [formGroup]="carStockForm" (ngSubmit)="onSubmit(carStockForm.value)" class="form-horizontal" enctype="multipart/form-data">
 
 
       <div class="col-md-6" style="padding-right:30px">
@@ -157,16 +157,25 @@
           carStockForm.controls['engineNumber'].touched" class="help-block sub-little-text">Vehical engine number is required</span>
         </div>
         <!--vehical  engineNumber -->
-
-        <!-- vehical computerizedNoPlate -->
-        <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['computerizedNoPlate'].valid && 
-         carStockForm.controls['computerizedNoPlate'].touched, 'has-success': carStockForm.controls['computerizedNoPlate'].valid}">
-          <!-- <div class="input-group">
+         <!-- vehical token -->
+         <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['token'].valid && 
+         carStockForm.controls['token'].touched, 'has-success': carStockForm.controls['token'].valid}">
+          <div class="input-group">
             <span class="input-group-addon">
               <i class="fa fa-car"></i>
             </span>
 
-          </div> -->
+            <input type="text" formControlName="token" class="form-control" placeholder=" Enter vehical token status">
+          </div>
+          <span *ngIf="!carStockForm.controls['token'].valid && 
+          carStockForm.controls['token'].touched" class="help-block sub-little-text">Vehical token status is required</span>
+        </div>
+        <!--vehical  token -->
+
+        <!-- vehical computerizedNoPlate -->
+        <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['computerizedNoPlate'].valid && 
+         carStockForm.controls['computerizedNoPlate'].touched, 'has-success': carStockForm.controls['computerizedNoPlate'].valid}">
+        
           <label for="computerizedNoPlate">Computerized No Plate</label>
           <input type="checkbox" formControlName="computerizedNoPlate">
 
@@ -239,7 +248,7 @@
         </div> -->
         <!--vehical  saleDate -->
         <!-- vehical salePrice -->
-        <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['salePrice'].valid && 
+        <!-- <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['salePrice'].valid && 
         carStockForm.controls['salePrice'].touched, 'has-success': carStockForm.controls['salePrice'].valid}">
           <div class="input-group">
             <span class="input-group-addon">
@@ -250,8 +259,13 @@
           </div>
           <span *ngIf="!carStockForm.controls['salePrice'].valid && 
          carStockForm.controls['salePrice'].touched" class="help-block sub-little-text">Vehical purchase price is required</span>
-        </div>
+        </div> -->
         <!--vehical  salePrice -->
+
+        <div class="form-group">
+                <label for="avatar">Car Image</label>
+                <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
+            </div>
 
 
 

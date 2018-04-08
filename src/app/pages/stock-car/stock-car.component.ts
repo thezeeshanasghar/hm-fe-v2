@@ -11,7 +11,7 @@ import { AccountModel } from '../../Models/account.model';
 
 })
 export class StockCarComponent implements OnInit {
-  changeClass=false;
+  changeClass = false;
 
   public carStockForm: FormGroup;
 
@@ -34,11 +34,13 @@ export class StockCarComponent implements OnInit {
       owner1: ['', Validators.required],
       owner2: [''],
       purchaseDate: [''],
-      saleDate: [''],
-      computerizedNoPlate:[false],
+   
+      computerizedNoPlate: [false],
       purchasePrice: ['', Validators.compose([AmountValidator.validate])],
       noOfPapers: ['', Validators.compose([AmountValidator.validate])],
-      salePrice: ['', Validators.compose([AmountValidator.validate])],
+    
+      token: ['', Validators.required],
+      avatar:null
     });
   }
 
@@ -54,26 +56,35 @@ export class StockCarComponent implements OnInit {
 
   onSubmit(post) {
     console.log(post);
-    let formDate=new FormData();
+    let formData = new FormData();
 
-
-    let modal=new Car();
-    modal.carOwner[0]=post.owner1;
-    if(post.owner2){
-      modal.carOwner[1]=post.owner2
+debugger;
+    let model = new Car();
+    model.carOwner[0] = post.owner1;
+    if (post.owner2) {
+      model.carOwner[1] = post.owner2
     }
-    modal.Name=post.name;
-    modal.EngineNumber=post.engineNumber;
-    modal.ChasisNumber=post.cheasisNumber;
-    modal.RegistrationNumber=post.registrationNumber;
-    modal.ModelNumber=post.modalNumber;
-    modal.Maker=post.maker;
-    
+    model.Name = post.name;
+    model.EngineNumber = post.engineNumber;
+    model.ChasisNumber = post.cheasisNumber;
+    model.RegistrationNumber = post.registrationNumber;
+    model.ModelNumber = post.modelNumber;
+    model.Maker = post.maker;
+    model.Color = post.color;
+    model.ComputerizedNoPlate = post.computerizedNoPlate;
+    model.NoOfPapers = post.numberOfPapers;
+    model.Token = post.token;
+    model.PurchaseDate = post.purchaseDate;
+    model.PurchasePrice = post.purchasePrice;
 
 
-     console.log(JSON.stringify(modal));
+    formData.append('model',JSON.stringify(model) );
+    formData.append('avatar', this.carStockForm.get('avatar').value);
 
-    
+
+    console.log(formData);
+
+
   }
 
   sortAllAccounts(accouts) {
@@ -81,5 +92,12 @@ export class StockCarComponent implements OnInit {
       if (obj1.Number == obj2.Number) return 0;
       return (obj1.Number > obj2.Number) ? 1 : -1;
     });
+  }
+
+  onFileChange(event) {
+    if(event.target.files.length > 0) {
+      let file = event.target.files[0];
+      this.carStockForm.get('avatar').setValue(file);
+    }
   }
 }
