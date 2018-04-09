@@ -1,3 +1,3 @@
 export class CarOwner{
-    AccountId:number
+    AccountId:number[]
 }
