@@ -4,6 +4,7 @@ import { AmountValidator } from './../../../assets/validators/amount.valdator';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AccountModel } from '../../Models/account.model';
+import { CarOwner } from '../../Models/carOwner.model';
 
 @Component({
   selector: 'app-stock-car',
@@ -30,17 +31,17 @@ export class StockCarComponent implements OnInit {
       maker: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       registrationNumber: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       engineNumber: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      chassisNumber: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      chasisNumber: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       owner1: ['', Validators.required],
       owner2: [''],
       purchaseDate: [''],
-   
+
       computerizedNoPlate: [false],
       purchasePrice: ['', Validators.compose([AmountValidator.validate])],
       noOfPapers: ['', Validators.compose([AmountValidator.validate])],
-    
+
       token: ['', Validators.required],
-      avatar:null
+      avatar: null
     });
   }
 
@@ -58,31 +59,62 @@ export class StockCarComponent implements OnInit {
     console.log(post);
     let formData = new FormData();
 
-debugger;
-    let model = new Car();
-    model.carOwner[0] = post.owner1;
-    if (post.owner2) {
-      model.carOwner[1] = post.owner2
+    debugger;
+    
+
+
+    let carmodel = new Car();
+    // carmodel.carOwner[0].AccountId = post.owner1;
+    // carmodel.carOwner[1].AccountId = post.owner2;
+    carmodel.Name = post.name;
+    carmodel.EngineNumber = post.engineNumber;
+    carmodel.ChasisNumber = post.cheasisNumber;
+    carmodel.RegistrationNumber = post.registrationNumber;
+    carmodel.ModelNumber = post.modelNumber;
+    carmodel.Maker = post.maker;
+    carmodel.Color = post.color;
+    carmodel.ComputerizedNoPlate = post.computerizedNoPlate;
+    carmodel.NoOfPapers = post.numberOfPapers;
+    carmodel.Token = post.token;
+    carmodel.PurchaseDate = post.purchaseDate;
+    carmodel.PurchasePrice = post.purchasePrice;
+
+    let model = {
+      carOwnerDTO: [
+        {
+          AccountId: post.owner1
+        },
+        {
+          AccountId: post.owner2
+        }
+      ]
+      ,
+      carDTO: {
+        Id: 0,
+        Name: carmodel.Name,
+        EngineNumber: carmodel.EngineNumber,
+        ModelNumber: carmodel.ModelNumber,
+        ChasisNumber: carmodel.ChasisNumber,
+        RegistrationNumber: carmodel.RegistrationNumber,
+
+        Color: carmodel.Color,
+        Maker: carmodel.Maker,
+        Token: carmodel.Token,
+        ComputerizedNoPlate: carmodel.ComputerizedNoPlate,
+        NoOfPapers: carmodel.NoOfPapers,
+        PurchasePrice:carmodel.PurchasePrice,
+        PurchaseDate: carmodel.PurchaseDate
+
+      }
+
     }
-    model.Name = post.name;
-    model.EngineNumber = post.engineNumber;
-    model.ChasisNumber = post.cheasisNumber;
-    model.RegistrationNumber = post.registrationNumber;
-    model.ModelNumber = post.modelNumber;
-    model.Maker = post.maker;
-    model.Color = post.color;
-    model.ComputerizedNoPlate = post.computerizedNoPlate;
-    model.NoOfPapers = post.numberOfPapers;
-    model.Token = post.token;
-    model.PurchaseDate = post.purchaseDate;
-    model.PurchasePrice = post.purchasePrice;
 
 
-    formData.append('model',JSON.stringify(model) );
+    formData.append('model', JSON.stringify(model));
     formData.append('avatar', this.carStockForm.get('avatar').value);
 
 
-    console.log(formData);
+    console.log(formData.get('model'));
 
 
   }
@@ -95,7 +127,7 @@ debugger;
   }
 
   onFileChange(event) {
-    if(event.target.files.length > 0) {
+    if (event.target.files.length > 0) {
       let file = event.target.files[0];
       this.carStockForm.get('avatar').setValue(file);
     }
