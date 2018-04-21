@@ -94,19 +94,22 @@
 
 
 
-        <!-- vehical color -->
-        <!-- <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['color'].valid && 
-         carStockForm.controls['color'].touched, 'has-success': carStockForm.controls['color'].valid}">
+        <!-- vehical maker -->
+        <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['maker'].valid && 
+         carStockForm.controls['maker'].touched, 'has-success': carStockForm.controls['maker'].valid}">
+         <label for="color">Maker</label> 
           <div class="input-group">
             <span class="input-group-addon">
               <i class="fa fa-car"></i>
             </span>
-
-            <input type="text" formControlName="color" class="form-control" placeholder=" Enter vehical color">
+            <select formControlName="maker" class="form-control">
+              <option value="">-- Select Maker --</option>
+              <option value="{{u}}" *ngFor="let u of makerList">{{u}}</option>
+            </select>
           </div>
-          <span *ngIf="!carStockForm.controls['color'].valid && 
-          carStockForm.controls['color'].touched" class="help-block sub-little-text">Vehical color is required</span>
-        </div> -->
+          <span *ngIf="!carStockForm.controls['maker'].valid && 
+          carStockForm.controls['maker'].touched" class="help-block sub-little-text">Vehical color is required</span>
+        </div>
         <!--vehical  color -->
 
         <!-- No of Papers -->
