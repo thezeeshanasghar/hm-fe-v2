@@ -2,10 +2,12 @@
 
   <div class="row">
     <h3>Car Inventory &nbsp; /&nbsp; کار اندراج</h3>
-    <button class="btn btn-primary pull-right" (click)="showAddCarFormToggle()")>Add Car</button>
+    <button *ngIf="!showAddCarForm"  class="btn btn-primary pull-right" (click)="showAddCarFormToggle()" style="font-size:15px">Add Car</button>
+    <button *ngIf="showAddCarForm" class="btn btn-primary pull-right" (click)="showAddCarFormToggle()" style="font-size:15px">Show All Cars</button>
+    
   </div>
   <hr>
-  <div class="row">
+  <div class="row" *ngIf="!showAddCarForm">
       <table class="table table-striped">
         <thead style="background: lightblue">
           <tr>
@@ -17,20 +19,26 @@
             <th>Purcasing Date</th>
             <th>Number of Papers</th>
             <th>Token Status</th>
+            <th></th>
           </tr>
         </thead>
-      </table>
+      
       <tbody>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>Corola</td>
+          <td>Ejaz</td>
+          <td>Toyota</td>
+          <td>LHG 4567</td>
+          <td>14-4-2017</td>
+          <td>all</td>
+          <td>2017 done</td> 
+          <td>
+            <button class="btn btn-warning" data-target="editCarStock" data-toggle="modal">Edit</button>
+            <button class="btn btn-danger">Delete</button>
+          </td>
         </tr>
       </tbody>
+    </table>
     </div>
   <hr>
   <div class="row" *ngIf="showAddCarForm" >
@@ -324,5 +332,30 @@
     </form>
   </div>
 
+
+  <!--edit carstock -->
+<div class="modal fade" id="editCarStock" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" style="display: inline-block; padding: 0 5px">&times;</button>
+          <h4 class="modal-title">
+            Edit Car Stock&nbsp;/&nbsp;
+            <!-- <b>تفصیل کھاتہ</b> -->
+          </h4>
+        </div>
+        <div class="modal-body">
+         
+        
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  </div>
+  <!-- edit carstock end -->
   
 </div>
