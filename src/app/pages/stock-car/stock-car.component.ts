@@ -1,3 +1,4 @@
+import { CarService } from './../../services/car/car.service';
 import { Car } from './../../Models/car.model';
 import { GeneralHttpService } from './../../services/general-http.service';
 import { AmountValidator } from './../../../assets/validators/amount.valdator';
@@ -19,7 +20,7 @@ export class StockCarComponent implements OnInit {
   allAccounts: AccountModel[] = [];
   makerList = ['Toyota', 'Honda', 'Hundai', 'Suzuki', 'Faw'];
 
-  constructor(private fb: FormBuilder, private gu: GeneralHttpService) {
+  constructor(private cs:CarService,private fb: FormBuilder, private gu: GeneralHttpService) {
     this.createForm();
   }
 
@@ -114,7 +115,11 @@ export class StockCarComponent implements OnInit {
     formData.append('avatar', this.carStockForm.get('avatar').value);
 
 
-    console.log(formData.get('model'));
+    console.log(formData);
+
+    this.cs.addCar(formData).subscribe(data=>{
+      console.log(data);
+    },error=>{});
 
 
   }
