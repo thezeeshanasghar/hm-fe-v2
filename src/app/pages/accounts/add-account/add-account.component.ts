@@ -30,11 +30,7 @@ export class AddAccountComponent {
   message: string = '';
   @ViewChild('alertModel')
   private alertModal: TemplateRef<any>;
-
   @ViewChild('fileInput') fileInput: ElementRef;
-
-
-
   constructor(public fb: FormBuilder, public router: Router, private gu: GeneralHttpService, private http: Http, private modalService: BsModalService) {
     this.form = fb.group({
       number: this.number,

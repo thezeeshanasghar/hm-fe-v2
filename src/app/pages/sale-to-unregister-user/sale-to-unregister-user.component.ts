@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SaleToUnregisterUserComponent implements OnInit {
   allAccounts: any[] = [];
+  changeClass=false;
+
   showBuyer = false;
   showSeller = false;
   vehicalList = ['LHR 1234', 'LHQ 3456', 'LHE 5463', 'LHR 4567', 'LHE 6789', 'LHQ 2345']

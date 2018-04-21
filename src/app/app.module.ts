@@ -19,6 +19,7 @@ import { SaleComponent } from './pages/sale/sale.component';
 import { SaleToUnregisterUserComponent } from './pages/sale-to-unregister-user/sale-to-unregister-user.component';
 import { UdharComponent } from './pages/udhar/udhar.component';
 import { ExchangeReciptComponent } from './pages/exchange-recipt/exchange-recipt.component';
+import { CarService } from './services/car/car.service';
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import { ExchangeReciptComponent } from './pages/exchange-recipt/exchange-recipt
     MyDatePickerModule
     
   ],
-  providers: [GeneralHttpService],
+  providers: [GeneralHttpService,CarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

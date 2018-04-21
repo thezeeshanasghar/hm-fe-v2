@@ -9,6 +9,7 @@ import { GeneralHttpService } from '../../services/general-http.service';
 })
 export class SaleComponent implements OnInit {
 
+  changeClass=false;
   allAccounts:any[]=[];
   vehicalList=['LHR 1234','LHQ 3456','LHE 5463','LHR 4567','LHE 6789','LHQ 2345']
   public form:FormGroup;
