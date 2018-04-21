@@ -17,16 +17,16 @@
     font-weight: normal
   }
 
-  h5{
-    color:rgb(40, 116, 216);
+  h5 {
+    color: rgb(40, 116, 216);
     /* font-family:fantasy; */
     font-size: 15px
-
   }
 </style>
 <div class="row">
   <div class="col-md-12">
     <div class="pull-right">
+      <button *ngIf="allAccounts.length>0" class="btn btn-success">Total Account Holders&nbsp; :&nbsp; {{allAccounts.length}}</button>
       <button type="button" class="btn btn-primary" (click)="openModalExpense(templateExpense)" style="font-size:15px">
         Expense &nbsp;/&nbsp;
         <b>اندراج خرچ</b>
@@ -41,16 +41,18 @@
 <div class="row" style="margin-top:15px">
   <div class="col-md-12 col-sm-12">
     <table class="table table-striped">
-      <thead>
+      <thead style="background: lightblue">
         <tr>
-          <th>Sr #</th>
-          <th>Account #</th>
+          <th>Sr.</th>
+          <th>Acc. #</th>
           <th>Name</th>
           <th>Contact</th>
           <th>Image</th>
           <th>CNIC</th>
           <th>Address</th>
           <th>Balance</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -73,8 +75,12 @@
 
 
           </td>
-          <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm" style="font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
-            Print</a>
+          <td>
+            <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm" style="font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+              Print</a>
+
+          </td>
+
 
 
 
@@ -134,20 +140,20 @@
           No data found...
         </ng-template>
         <div *ngIf="singleUser" class="row">
-         
+
           <div class="col-md-8">
-              <h5>Account number:&nbsp;&nbsp; {{singleUser.Number}}</h5>
-              <h5>Name:&nbsp;&nbsp; {{singleUser.Name}}</h5>
-              <h5>Contact:&nbsp;&nbsp; {{singleUser.MobileNumber}}</h5>
-              <h5>Address:&nbsp;&nbsp; {{singleUser.Address}}</h5>
-              <h5>Balance:&nbsp;&nbsp; {{singleUser.Balance |number}}</h5>
-              
-              
+            <h5>Account number:&nbsp;&nbsp; {{singleUser.Number}}</h5>
+            <h5>Name:&nbsp;&nbsp; {{singleUser.Name}}</h5>
+            <h5>Contact:&nbsp;&nbsp; {{singleUser.MobileNumber}}</h5>
+            <h5>Address:&nbsp;&nbsp; {{singleUser.Address}}</h5>
+            <h5>Balance:&nbsp;&nbsp; {{singleUser.Balance |number}}</h5>
+
+
           </div>
-          <div class="col-md-4" >
-              <img src="http://{{ip}}:{{port}}/{{singleUser.image}} " width="150" height="150" alt="" >    
+          <div class="col-md-4">
+            <img src="http://{{ip}}:{{port}}/{{singleUser.image}} " width="150" height="150" alt="">
           </div>
-       
+
         </div>
 
         <table class="table table-striped" *ngIf="selectedAccountTransactions?.length;else no_data_templ">

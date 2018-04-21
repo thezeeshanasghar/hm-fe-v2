@@ -14,7 +14,7 @@ import { CarOwner } from '../../Models/carOwner.model';
 })
 export class StockCarComponent implements OnInit {
   changeClass = false;
-
+showAddCarForm=false;
   public carStockForm: FormGroup;
 
   allAccounts: AccountModel[] = [];
@@ -136,5 +136,9 @@ export class StockCarComponent implements OnInit {
       let file = event.target.files[0];
       this.carStockForm.get('avatar').setValue(file);
     }
+  }
+
+  showAddCarFormToggle(){
+    this.showAddCarForm=!this.showAddCarForm;
   }
 }

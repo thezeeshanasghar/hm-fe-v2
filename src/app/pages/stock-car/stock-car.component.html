@@ -2,9 +2,38 @@
 
   <div class="row">
     <h3>Car Inventory &nbsp; /&nbsp; کار اندراج</h3>
+    <button class="btn btn-primary pull-right" (click)="showAddCarFormToggle()")>Add Car</button>
   </div>
   <hr>
   <div class="row">
+      <table class="table table-striped">
+        <thead style="background: lightblue">
+          <tr>
+            <th>Car Name</th>
+            <th>Car Owner</th>
+            <th>Maker</th>
+            <th>Rigistration
+              Number</th>
+            <th>Purcasing Date</th>
+            <th>Number of Papers</th>
+            <th>Token Status</th>
+          </tr>
+        </thead>
+      </table>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </div>
+  <hr>
+  <div class="row" *ngIf="showAddCarForm" >
     <form [formGroup]="carStockForm" (ngSubmit)="onSubmit(carStockForm.value)" class="form-horizontal" enctype="multipart/form-data">
 
 
@@ -294,4 +323,6 @@
 
     </form>
   </div>
+
+  
 </div>
