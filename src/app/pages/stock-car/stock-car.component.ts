@@ -14,32 +14,33 @@ import { CarOwner } from '../../Models/carOwner.model';
 })
 export class StockCarComponent implements OnInit {
   changeClass = false;
-showAddCarForm=false;
+  showAddCarForm = false;
   public carStockForm: FormGroup;
 
   allAccounts: AccountModel[] = [];
   makerList = ['Toyota', 'Honda', 'Hundai', 'Suzuki', 'Faw'];
 
-  constructor(private cs:CarService,private fb: FormBuilder, private gu: GeneralHttpService) {
+  constructor(private cs: CarService, private fb: FormBuilder, private gu: GeneralHttpService) {
     this.createForm();
   }
 
   createForm() {
+    let date = new Date();
     this.carStockForm = this.fb.group({
-      name: ['', Validators.required],
-      modelNumber: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      color: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      maker: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      registrationNumber: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      engineNumber: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      chasisNumber: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      name: ['Toyata GLI', Validators.required],
+      modelNumber: ['M321', Validators.compose([Validators.required, Validators.minLength(2)])],
+      color: ['Black', Validators.compose([Validators.required, Validators.minLength(2)])],
+      maker: ['Honda', Validators.compose([Validators.required, Validators.minLength(2)])],
+      registrationNumber: ['R321', Validators.compose([Validators.required, Validators.minLength(2)])],
+      engineNumber: ['E321', Validators.compose([Validators.required, Validators.minLength(2)])],
+      chasisNumber: ['C321', Validators.compose([Validators.required, Validators.minLength(2)])],
       owner1: ['', Validators.required],
       owner2: [''],
-      purchaseDate: ['', Validators.required],
-      purchasePrice: ['', Validators.compose([Validators.required, AmountValidator.validate])],
+      purchaseDate: [date, Validators.required],
+      purchasePrice: ['200', Validators.compose([Validators.required, AmountValidator.validate])],
       computerizedNoPlate: [false],
-      noOfPapers: ['', Validators.compose([AmountValidator.validate])],
-      token: ['', Validators.required],
+      noOfPapers: ['3', Validators.compose([AmountValidator.validate])],
+      token: ['Lifetime', Validators.required],
       avatar: null
     });
   }
@@ -58,28 +59,22 @@ showAddCarForm=false;
     console.log(post);
     let formData = new FormData();
 
-    debugger;
-    
-
-
     let carmodel = new Car();
-    // carmodel.carOwner[0].AccountId = post.owner1;
-    // carmodel.carOwner[1].AccountId = post.owner2;
     carmodel.Name = post.name;
     carmodel.EngineNumber = post.engineNumber;
-    carmodel.ChasisNumber = post.cheasisNumber;
+    carmodel.ChasisNumber = post.chasisNumber;
     carmodel.RegistrationNumber = post.registrationNumber;
     carmodel.ModelNumber = post.modelNumber;
     carmodel.Maker = post.maker;
     carmodel.Color = post.color;
     carmodel.ComputerizedNoPlate = post.computerizedNoPlate;
-    carmodel.NoOfPapers = post.numberOfPapers;
+    carmodel.NoOfPapers = post.noOfPapers;
     carmodel.Token = post.token;
     carmodel.PurchaseDate = post.purchaseDate;
     carmodel.PurchasePrice = post.purchasePrice;
 
     let model = {
-      carOwnerDTO: [
+      carOwnerDTOs: [
         {
           AccountId: post.owner1
         },
@@ -89,37 +84,27 @@ showAddCarForm=false;
       ]
       ,
       carDTO: {
-        Id: 0,
         Name: carmodel.Name,
         EngineNumber: carmodel.EngineNumber,
         ModelNumber: carmodel.ModelNumber,
         ChasisNumber: carmodel.ChasisNumber,
         RegistrationNumber: carmodel.RegistrationNumber,
-
         Color: carmodel.Color,
         Maker: carmodel.Maker,
         Token: carmodel.Token,
         ComputerizedNoPlate: carmodel.ComputerizedNoPlate,
         NoOfPapers: carmodel.NoOfPapers,
-        PurchasePrice:carmodel.PurchasePrice,
+        PurchasePrice: carmodel.PurchasePrice,
         PurchaseDate: carmodel.PurchaseDate
-
       }
-
     }
-
 
     formData.append('model', JSON.stringify(model));
     formData.append('avatar', this.carStockForm.get('avatar').value);
 
-
-    console.log(formData);
-
-    this.cs.addCar(formData).subscribe(data=>{
+    this.cs.addCar(formData).subscribe(data => {
       console.log(data);
-    },error=>{});
-
-
+    }, error => { });
   }
 
   sortAllAccounts(accouts) {
@@ -136,7 +121,7 @@ showAddCarForm=false;
     }
   }
 
-  showAddCarFormToggle(){
-    this.showAddCarForm=!this.showAddCarForm;
+  showAddCarFormToggle() {
+    this.showAddCarForm = !this.showAddCarForm;
   }
 }
