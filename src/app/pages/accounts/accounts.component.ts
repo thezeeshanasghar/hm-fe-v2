@@ -1,5 +1,5 @@
 import { AmountValidator } from './../../../assets/validators/amount.valdator';
-import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Http } from '@angular/http';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TransactionModel } from './../../Models/Transaction.model';
@@ -20,6 +20,15 @@ export class AccountsComponent implements OnInit {
  public ip;
   public port;
 
+  editUserForm: FormGroup;
+
+  number = new FormControl('', [Validators.required]);
+  name = new FormControl('', [Validators.required]);
+  mobileNumber = new FormControl('', [Validators.required]);
+  cnic = new FormControl('', [Validators.required]);
+  address = new FormControl('', [Validators.required]);
+    
+
   public form: FormGroup;
   public userAccount: AbstractControl;
   public incomeAmount: AbstractControl;
@@ -39,6 +48,15 @@ export class AccountsComponent implements OnInit {
     this.userAccount = this.form.controls["userAccount"];
     this.incomeAmount = this.form.controls["incomeAmount"];
     this.description = this.form.controls["description"];
+
+    this.editUserForm = fb.group({
+      number: this.number,
+      name: this.name,
+      mobileNumber: this.mobileNumber,
+      cnic: this.cnic,
+      address: this.address,
+      avatar:null
+    });
   }
   modalRefExpense: BsModalRef;
   modalRefIncome: BsModalRef;

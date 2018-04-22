@@ -1,25 +1,33 @@
 <div class="container-fluid">
-
   <div class="row">
-    <!-- <h3>Car Sale Case 1 & 2 &nbsp; /&nbsp; کار فروخت</h3> -->
-    <label for="isActive">I'm Register Seller &nbsp;&nbsp;</label>
-    <input type="checkbox" name="isActive" (change)="changeCheckboxSeller($event)">
-    <br>
-    <label for="isActive">I'm Register Buyer &nbsp;&nbsp;</label>
-    <input type="checkbox" name="isActiveNot" (change)="changeCheckboxBuyer($event)">
+    <h3>Car Sale &nbsp; /&nbsp; کار فروخت</h3>
+    <button *ngIf="!showSales" class="btn btn-primary pull-right" (click)="showSalesFormToggle()" style="font-size:15px">
+      <i class="fa fa-car"></i> Add new sale</button>
+    <button *ngIf="showSales" class="btn btn-primary pull-right" (click)="showSalesFormToggle()" style="font-size:15px">
+      <i class="fa fa-car"></i>Show All sales</button>
+    <p *ngIf="showSales">
+      <label for="isActive">I'm Register Seller &nbsp;&nbsp;</label>
+      <input type="checkbox" name="isActive" (change)="changeCheckboxSeller($event)"> &nbsp; &nbsp;
+      <label for="isActive">I'm Register Buyer &nbsp;&nbsp;</label>
+      <input type="checkbox" name="isActiveNot" (change)="changeCheckboxBuyer($event)">
+    </p>
+
+
   </div>
   <hr>
-  <div class="row">
-    <table class="table table-striped">
-      <thead>
+
+  <div class="row" *ngIf="!showSales">
+    <table class="table table-striped table-sm">
+      <thead style="background:lightblue">
         <tr>
           <th>Sr#</th>
           <th>Date</th>
-          <th>Seller Name</th>
-          <th>Seller Contact</th>
-          <th>Buyer Name</th>
-          <th>Buyer Contact</th>
-          <th>Toatal Commission</th>
+          <th>Seller name</th>
+          <th>Seller contact</th>
+          <th>Buyer name</th>
+          <th>Buyer contact</th>
+          <th>Toatal commission</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -32,12 +40,19 @@
           <td>ASIM</td>
           <td>68767899</td>
           <td>50000</td>
+          <td>
+            <button class="btn btn-warning" data-target="#editCarStock" data-toggle="modal">
+              <i class="fa fa-pencil"></i>Edit</button>
+            <button class="btn btn-danger">
+              <i class="fa fa-trash"></i>Delete</button>
+          </td>
 
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="showSales">
+
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
 
       <ul class="nav nav-tabs">
@@ -628,4 +643,5 @@
 
     </form>
   </div>
+
 </div>
