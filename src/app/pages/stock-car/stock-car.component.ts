@@ -13,6 +13,8 @@ import { CarOwner } from '../../Models/carOwner.model';
 
 })
 export class StockCarComponent implements OnInit {
+  carOwnerList=[];
+  carsList=[];
   changeClass = false;
   showAddCarForm = false;
   public carStockForm: FormGroup;
@@ -21,7 +23,15 @@ export class StockCarComponent implements OnInit {
   makerList = ['Toyota', 'Honda', 'Hundai', 'Suzuki', 'Faw'];
 
   constructor(private cs: CarService, private fb: FormBuilder, private gu: GeneralHttpService) {
+    
+  }
+
+ 
+
+  ngOnInit() {
+    this.getAllAccount();
     this.createForm();
+     this.getCars();
   }
 
   createForm() {
@@ -43,10 +53,6 @@ export class StockCarComponent implements OnInit {
       token: ['Lifetime', Validators.required],
       avatar: null
     });
-  }
-
-  ngOnInit() {
-    this.getAllAccount();
   }
 
   getAllAccount() {
@@ -105,6 +111,16 @@ export class StockCarComponent implements OnInit {
     this.cs.addCar(formData).subscribe(data => {
       console.log(data);
     }, error => { });
+  }
+
+  getCars(){
+
+    this.cs.getCars().subscribe(data=>{
+      console.log(data.ResponseData);
+      this.carsList=data.ResponseData
+      // this.carOwnerList=data.carOwnerDTOs
+    },
+    error=>{});
   }
 
   sortAllAccounts(accouts) {
