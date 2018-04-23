@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class SaleToUnregisterUserComponent implements OnInit {
   allAccounts: any[] = [];
   changeClass=false;
+  showSales=false;
 
   showBuyer = false;
   showSeller = false;
@@ -142,6 +143,10 @@ export class SaleToUnregisterUserComponent implements OnInit {
 
   ngOnInit() {
     this.getAllAccount();
+  }
+
+  showSalesFormToggle(){
+    this.showSales=!this.showSales;
   }
 
   getAllAccount() {
