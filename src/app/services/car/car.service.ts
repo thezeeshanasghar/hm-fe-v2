@@ -11,10 +11,17 @@ export class CarService {
 
   addCar(obj:FormData){
    
-      let headers = new Headers({ 'Content-Type': 'application/json' });
+      // let headers = new Headers({ 'Content-Type': 'application/json' });
       let url = "http://" + this.gs.ip + ":" + this.gs.port + "/api/car";
       return this.http.post(url, obj).map((response: Response) => response.json());
     
+  }
+
+  getCars(){
+    // let headers = new Headers({ 'Content-Type': 'application/json' });
+    let url = "http://" + this.gs.ip + ":" + this.gs.port + "/api/car";
+    return this.http.get(url).map((response: Response) => response.json());
+
   }
 
 }

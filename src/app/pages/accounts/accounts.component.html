@@ -224,7 +224,7 @@
         </h4>
       </div>
       <div class="modal-body">
-        <form [formGroup]="editUserForm" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+        <form [formGroup]="editUserForm" class="form-horizontal">
 
           <!-- number -->
           <div class="form-group row" [ngClass]="{'has-error': (!number.valid && number.touched), 'has-success': (number.valid && number.touched)}">
@@ -293,10 +293,10 @@
             </div>
           </div>
           <!-- address -->
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="avatar">Image</label>
             <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
-          </div>
+          </div> -->
           <div class="row">
             <button type="submit" class="btn btn-primary pull-right btn-sm" (click)="form.reset" [disabled]="!editUserForm.valid">&nbsp;Update&nbsp;</button>
           </div>
