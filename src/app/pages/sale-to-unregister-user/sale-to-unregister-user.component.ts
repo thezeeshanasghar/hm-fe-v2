@@ -1,6 +1,7 @@
 import { GeneralHttpService } from './../../services/general-http.service';
 import { FormControl, FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { AmountValidator } from '../../../assets/validators';
 
 @Component({
   selector: 'app-sale-to-unregister-user',
@@ -8,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SaleToUnregisterUserComponent implements OnInit {
   allAccounts: any[] = [];
-  changeClass=false;
-  showSales=false;
+  changeClass = false;
+  showSales = false;
 
   showBuyer = false;
   showSeller = false;
@@ -85,12 +86,11 @@ export class SaleToUnregisterUserComponent implements OnInit {
       'chassisNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'description': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
 
-
       'dueDate': [''],
-      'commissionFromSeller': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'commissionFromBuyer': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'vehicalPrice': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'buyerPaidAmount': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'commissionFromSeller': ['', Validators.compose([Validators.required, Validators.minLength(2),AmountValidator.validate])],
+      'commissionFromBuyer': ['', Validators.compose([Validators.required, Validators.minLength(2),AmountValidator.validate])],
+      'vehicalPrice': ['', Validators.compose([Validators.required, Validators.minLength(2),AmountValidator.validate])],
+      'buyerPaidAmount': ['', Validators.compose([Validators.required, Validators.minLength(2),AmountValidator.validate])],
 
       'witnessName1': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'witnessContact1': ['', Validators.compose([Validators.required, Validators.maxLength(11)])],
@@ -98,6 +98,10 @@ export class SaleToUnregisterUserComponent implements OnInit {
       'witnessName2': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'witnessContact2': ['', Validators.compose([Validators.required, Validators.maxLength(11)])],
       'witnessCnic2': ['', Validators.compose([Validators.required, Validators.maxLength(13)])],
+
+      'computerizedNoPlate': [false],
+      'noOfPapers': ['3', Validators.compose([AmountValidator.validate])],
+      'token': ['Lifetime', Validators.required],
     });
 
     this.buyer1 = this.form.controls['buyer1'];
@@ -145,8 +149,8 @@ export class SaleToUnregisterUserComponent implements OnInit {
     this.getAllAccount();
   }
 
-  showSalesFormToggle(){
-    this.showSales=!this.showSales;
+  showSalesFormToggle() {
+    this.showSales = !this.showSales;
   }
 
   getAllAccount() {
@@ -167,9 +171,82 @@ export class SaleToUnregisterUserComponent implements OnInit {
 
   }
 
-  onSubmit(m) {
-    console.log(m);
+  onSubmit(m:any) {
+    // console.log(m);
 
+    let model={
+      buyerDTOs 
+      :[
+        {
+          Id:0,
+          AccountId: m.buyer1,
+          Address: m.buyerAddress,
+          CNIC: m.buyerCNIC,
+          Contact: m.buyerContact,
+          Name: m.buyerName,
+          PaidAmount: m.buyerPaidAmount,
+          commission: m.commissionFromBuyer
+        },
+        {
+          Id: 0,
+          AccountId: m.buyer2,
+      
+        }
+
+      ],
+      sellerDTOs: [
+        {
+          Id: 0,
+          AccountId: m.seller1,
+          Address: m.sellerAddress,
+          CNIC: m.sellerCNIC,
+          Contact: m.sellerContact,
+          Name: m.sellerName,
+          VehicalPrice: m.vehicalPrice,
+          commission: m.commissionFromSeller
+        },
+        {
+          Id: 0,
+          AccountId: m.seller2,
+         
+        }
+      ],
+
+      witnessDTOs: [
+        {
+          Id: 0,
+          Name: m.witnessName1,
+          CNIC: m.witnessCnic1,
+          Contact: m.witnessContact1
+        },
+        {
+          Id: 0,
+          Name: m.witnessName2,
+          CNIC: m.witnessCnic2,
+          Contact: m.witnessContact2
+        }
+      ],
+
+      carDTO :{
+        
+        Name: m.vehicalName,
+        EngineNumber: m.engineNumber,
+        ModelNumber: m.modelNumber,
+        ChasisNumber: m.chassisNumber,
+        RegistrationNumber: m.registrationNumber,
+        Color: m.color,
+        Maker: m.maker,
+        Token: m.token,
+        ComputerizedNoPlate: m.computerizedNoPlate,
+        NoOfPapers: m.noOfPApsers,
+        
+      }
+
+  
+    }
+
+
+console.log(JSON.stringify(model));
   }
 
 }
