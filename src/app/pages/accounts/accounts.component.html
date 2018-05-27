@@ -25,8 +25,54 @@
 </style>
 <div class="row">
   <div class="col-md-12">
+     <!-- warning message -->
+     <div *ngIf="warningTrigger" class="alert alert-warning alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" >&times;</a>
+        <i class="fa fa-comment fa-fw"></i>
+          <strong>Please select any one of given filters below</strong>
+          <span class="pull-right"><strong>
+            برائے مہربانی سرچ کے لیا کوئی ایک  فلٹر کا انتخاب کریں       </strong>    </span>
+    </div>
+  </div>
+</div>
+<div class="row">
+
+     
+  <form #searchForm="ngForm" (ngSubmit)="onSubmit(search)">
+
+
+    <div class="col-md-2">
+      <label for="cnic">Serach by Cnic</label>
+      <select name="cnic" id="cnic" class="form-control" [(ngModel)]="search.cnic">
+        <!-- <option value="">--Search by CNIC--</option> -->
+        <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.CNIC}}</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label for="mobile">Serach by mobile</label>
+      <select name="mobile" id="mobile" class="form-control" [(ngModel)]="search.mobile">
+        <!-- <option value="">--Search by Phone #--</option> -->
+        <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.MobileNumber}}</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label for="name">Serach by Name</label>
+      <select name="name" id="name" class="form-control" [(ngModel)]="search.name">
+        <!-- <option value="">--Search by Name--</option> -->
+        <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-2" style="margin-top: 27px">
+      <button class="btn btn-sm" type="submit">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+
+  </form>
+  <div class="col-md-4">
     <div class="pull-right">
-      <button *ngIf="allAccounts.length>0" class="btn btn-success" style="font-size:15px">Total Account Holders&nbsp; :&nbsp; {{allAccounts.length}}</button>
+      <!-- <button *ngIf="allAccounts.length>0" class="btn btn-success" style="font-size:15px">Total Account Holders&nbsp; :&nbsp; {{allAccounts.length}}</button> -->
       <button type="button" class="btn btn-primary" (click)="openModalExpense(templateExpense)" style="font-size:15px">
         Expense &nbsp;/&nbsp;
         <b>اندراج خرچ</b>
@@ -58,8 +104,46 @@
           <th></th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let account of allAccounts; let i=index">
+      <tbody *ngIf="showSearch">
+        <tr *ngFor="let account of allAccounts ; let i=index">
+          <td>{{i+1}}</td>
+          <td>{{account.Number}}</td>
+          <td>{{account.Name}}</td>
+          <td>{{account.MobileNumber}}</td>
+          <td>
+            <img src="http://{{ip}}:{{port}}/{{account.image}} " width="40" height="40" alt="" style="border-radius: 50%;"> </td>
+          <!-- <td>{{account.CNIC}}</td> -->
+          <!-- <td>{{account.Address}}</td> -->
+          <td [ngClass]="account.Balance>=0 ? 'text-green': 'text-red'">{{account.Balance |number}}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" data-target="#editAccount" data-toggle="modal">
+              <i class="fa fa-pencil"></i>
+            </button>
+            <button class="btn btn-danger btn-sm">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+          <td>
+            <a href="#" class="pull-right" data-toggle="modal" (click)="getTransactionsByAccountId(account.Id)" data-target="#TransactionModal"
+              style="font-size:15px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+              History/
+              <b>تفصیل</b>
+            </a>
+
+          </td>
+          <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm" style="margin-top:7px;font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+            Print</a>
+
+
+
+
+
+
+        </tr>
+      </tbody>
+
+      <tbody *ngIf="!showSearch">
+        <tr *ngFor="let account of allAccounts ; let i=index">
           <td>{{i+1}}</td>
           <td>{{account.Number}}</td>
           <td>{{account.Name}}</td>
@@ -128,8 +212,6 @@
     <app-income></app-income>
   </div>
 </ng-template>
-
-
 
 <!--history Modal -->
 <div class="modal fade" id="TransactionModal" role="dialog">
@@ -207,9 +289,6 @@
   </div>
 </div>
 <!-- history Modal end -->
-
-
-
 <!--edit Account -->
 <div class="modal fade" id="editAccount" role="dialog">
   <div class="modal-dialog modal-lg">

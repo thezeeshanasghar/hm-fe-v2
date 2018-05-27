@@ -7,9 +7,10 @@ import { GeneralHttpService } from '../../services/general-http.service';
   templateUrl: './exchange-recipt.component.html'
 })
 export class ExchangeReciptComponent implements OnInit {
-  showSeller: boolean=false;
-  changeClass=false;
-  showBuyer: boolean=false;
+  showExchange = false;
+  showSeller: boolean = false;
+  changeClass = false;
+  showBuyer: boolean = false;
   allAccounts: any[] = [];
   public form: FormGroup;
   public buyer1: AbstractControl;
@@ -43,8 +44,8 @@ export class ExchangeReciptComponent implements OnInit {
   public sellerVehicalEngineNumber: AbstractControl;
   public sellerVehicalChassisNumber: AbstractControl;
   public sellerVehicalColor: AbstractControl;
- 
- 
+
+
 
   public dueDate: AbstractControl;
   public commissionFromSeller: AbstractControl;
@@ -66,7 +67,7 @@ export class ExchangeReciptComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private gu: GeneralHttpService) { 
+  constructor(private fb: FormBuilder, private gu: GeneralHttpService) {
 
     this.form = fb.group({
       'buyer1': ['', Validators.compose([Validators.required])],
@@ -125,7 +126,7 @@ export class ExchangeReciptComponent implements OnInit {
     this.buyerCNIC = this.form.controls['buyerCNIC'];
     this.buyerAddress = this.form.controls['buyerAddress'];
 
-    this.buyersVehical= this.form.controls['buyersVehical'];
+    this.buyersVehical = this.form.controls['buyersVehical'];
     this.buyersVehicalName = this.form.controls['buyersVehicalName'];
     this.buyersVehicalModelNumber = this.form.controls['buyersVehicalModelNumber'];
     this.buyersVehicalMaker = this.form.controls['buyersVehicalMaker'];
@@ -139,7 +140,7 @@ export class ExchangeReciptComponent implements OnInit {
     this.sellerCNIC = this.form.controls['sellerCNIC'];
     this.sellerAddress = this.form.controls['sellerAddress'];
 
-    this.sellerVehical= this.form.controls['sellerVehical'];
+    this.sellerVehical = this.form.controls['sellerVehical'];
     this.sellerVehicalName = this.form.controls['sellerVehicalName'];
     this.sellerVehicalModelNumber = this.form.controls['sellerVehicalModelNumber'];
     this.sellerVehicalMaker = this.form.controls['sellerVehicalMaker'];
@@ -148,7 +149,7 @@ export class ExchangeReciptComponent implements OnInit {
     this.sellerVehicalChassisNumber = this.form.controls['sellerVehicalChassisNumber'];
     this.sellerVehicalColor = this.form.controls['sellerVehicalColor'];
 
-     
+
     this.description = this.form.controls["description"];
     this.dueDate = this.form.controls['dueDate'];
     this.vehicalPrice = this.form.controls['vehicalPrice'];
@@ -192,6 +193,10 @@ export class ExchangeReciptComponent implements OnInit {
   onSubmit(m) {
     console.log(m);
 
+  }
+
+  showExchnageFormToggle() {
+    this.showExchange = !this.showExchange;
   }
 
 }

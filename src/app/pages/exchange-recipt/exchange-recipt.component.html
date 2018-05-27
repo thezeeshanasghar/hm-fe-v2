@@ -1,17 +1,25 @@
 <div class="container-fluid">
 
+
   <div class="row">
-    <!-- <h3>Car Sale Case 1 & 2 &nbsp; /&nbsp; کار فروخت</h3> -->
-    <label for="isActive">I'm Register Seller &nbsp;&nbsp;</label>
-    <input type="checkbox" name="isActive" (change)="changeCheckboxSeller($event)">
-    <br>
-    <label for="isActive">I'm Register Buyer &nbsp;&nbsp;</label>
-    <input type="checkbox" name="isActiveNot" (change)="changeCheckboxBuyer($event)">
+    <h3>Car Sale Case 1 & 2 &nbsp; /&nbsp; کار فروخت</h3>
+    <button *ngIf="!showExchange" class="btn btn-primary pull-right" (click)="showExchnageFormToggle()" style="font-size:15px">
+      <i class="fa fa-car"></i> Add new exchange deal</button>
+    <button *ngIf="showExchange" class="btn btn-primary pull-right" (click)="showExchnageFormToggle()" style="font-size:15px">
+      <i class="fa fa-car"></i>Show All exchange deals</button>
+
+    <p *ngIf=showExchange>
+      <label for="isActive">I'm Register Seller &nbsp;&nbsp;</label>
+      <input type="checkbox" name="isActive" (change)="changeCheckboxSeller($event)">
+      <br>
+      <label for="isActive">I'm Register Buyer &nbsp;&nbsp;</label>
+      <input type="checkbox" name="isActiveNot" (change)="changeCheckboxBuyer($event)">
+    </p>
   </div>
   <hr>
-  <div class="row">
+  <div class="row" *ngIf=!showExchange>
     <table class="table table-striped">
-      <thead>
+      <thead style="background-color: lightblue">
         <tr>
           <th>Sr#</th>
           <th>Date</th>
@@ -20,24 +28,32 @@
           <th>Buyer Name</th>
           <th>Buyer Contact</th>
           <th>Toatal Commission</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>1</td>
-          
+
           <td>12/01/2018</td>
           <td>ejaz sidhu</td>
           <td>09876554</td>
           <td>ASIM</td>
           <td>68767899</td>
           <td>50000</td>
+          <td>
+              <button class="btn btn-warning" data-target="#editCarStock" data-toggle="modal">
+                <i class="fa fa-pencil"></i>Edit</button>
+              <button class="btn btn-danger">
+                <i class="fa fa-trash"></i>Delete</button>
+            </td>
+  
 
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="row">
+  <div class="row" *ngIf=showExchange>
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
 
       <ul class="nav nav-tabs">
@@ -404,7 +420,7 @@
 
 
         </div>
-        
+
         <div id="Vehical" class="tab-pane fade" *ngIf="!showSeller">
           <div class="col-md-6" style="padding-right:30px">
 
@@ -590,32 +606,32 @@
               <span *ngIf="!witnessCnic2.valid && witnessCnic2.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
             </div>
             <!-- witnessCnic2 -->
-         
 
 
-           
+
+
 
           </div>
-          
-            <div class="col-md-12">
-                <!--description-->
-          <div class="form-group row" [ngClass]="{'has-error': (!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="glyphicon glyphicon-pencil"></i>
-              </span>
-              <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
-            </div>
-            <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must be at least 10 characters</span>
-        </div>
-        <!-- description -->
-            </div>
 
-            <button type="submit" class="btn btn-primary pull-right">
-              <i class="fa fa-user-plus" aria-hidden="true"></i>
-              <i [ngClass]="{'fa fa-spinner fa-spin': changeClass}"></i>
-              Add</button>
-          
+          <div class="col-md-12">
+            <!--description-->
+            <div class="form-group row" [ngClass]="{'has-error': (!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="glyphicon glyphicon-pencil"></i>
+                </span>
+                <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
+              </div>
+              <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must be at least 10 characters</span>
+            </div>
+            <!-- description -->
+          </div>
+
+          <button type="submit" class="btn btn-primary pull-right">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            <i [ngClass]="{'fa fa-spinner fa-spin': changeClass}"></i>
+            Add</button>
+
 
         </div>
       </div>
@@ -626,3 +642,27 @@
     </form>
   </div>
 </div>
+
+ <!--edit carstock -->
+ <div class="modal fade" id="editCarStock" role="dialog">
+
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" style="display: inline-block; padding: 0 5px">&times;</button>
+          <h4 class="modal-title">
+             editCar Exchange&nbsp;/&nbsp;
+            <!-- <b>تفصیل کھاتہ</b> -->
+          </h4>
+        </div>
+        <div class="modal-body">
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <!-- edit carstock end -->

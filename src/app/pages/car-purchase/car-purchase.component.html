@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="row">
-    <h3>Car Sale &nbsp; /&nbsp; کار فروخت</h3>
+    <h3>Car Purchase &nbsp; /&nbsp; کار خرید</h3>
     <button *ngIf="!showSales" class="btn btn-primary pull-right" (click)="showSalesFormToggle()" style="font-size:15px">
-      <i class="fa fa-car"></i> Add new sale</button>
+      <i class="fa fa-car"></i> Add new purchase</button>
     <button *ngIf="showSales" class="btn btn-primary pull-right" (click)="showSalesFormToggle()" style="font-size:15px">
-      <i class="fa fa-car"></i>Show All sales</button>
+      <i class="fa fa-car"></i>Show All purchase</button>
     <p *ngIf="showSales">
       <label for="isActive">I'm Register Seller &nbsp;&nbsp;</label>
       <input type="checkbox" name="isActive" (change)="changeCheckboxSeller($event)"> &nbsp; &nbsp;
@@ -72,6 +72,19 @@
 
       <div class="tab-content">
         <div id="Parties" class="tab-pane fade in active">
+
+           <!-- dealDate -->
+
+           <div class="form-group row">
+              <label for="dealDate">Due Date For Remaing Payment</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                <input required formControlName="dealDate" name="dealDate" type="date" class="form-control">
+              </div>
+            </div>
+            <!-- dealDate -->
 
           <div class="col-md-6" style="padding-right:30px" *ngIf="!showSeller">
             <!-- <label for="isActive">I'm Register User &nbsp;&nbsp;</label>

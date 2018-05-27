@@ -1,13 +1,14 @@
-import { GeneralHttpService } from './../../services/general-http.service';
-import { FormControl, FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { GeneralHttpService } from '../../services/general-http.service';
 import { AmountValidator } from '../../../assets/validators';
 
 @Component({
-  selector: 'app-sale-to-unregister-user',
-  templateUrl: './sale-to-unregister-user.component.html'
+  selector: 'app-car-purchase',
+  templateUrl: './car-purchase.component.html',
+  styleUrls: ['./car-purchase.component.css']
 })
-export class SaleToUnregisterUserComponent implements OnInit {
+export class CarPurchaseComponent implements OnInit {
   allAccounts: any[] = [];
   changeClass = false;
   showSales = false;
@@ -26,6 +27,7 @@ export class SaleToUnregisterUserComponent implements OnInit {
   public buyerCNIC: AbstractControl;
   public buyerAddress: AbstractControl;
   public description: AbstractControl;
+  public dealDate: AbstractControl;
 
   public sellerName: AbstractControl;
   public sellerContact: AbstractControl;
@@ -87,10 +89,11 @@ export class SaleToUnregisterUserComponent implements OnInit {
       'description': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
 
       'dueDate': [''],
-      'commissionFromSeller': ['', Validators.compose([Validators.required, Validators.minLength(2),AmountValidator.validate])],
-      'commissionFromBuyer': ['', Validators.compose([Validators.required, Validators.minLength(2),AmountValidator.validate])],
-      'vehicalPrice': ['', Validators.compose([Validators.required, Validators.minLength(2),AmountValidator.validate])],
-      'buyerPaidAmount': ['', Validators.compose([Validators.required, Validators.minLength(2),AmountValidator.validate])],
+      'dealDate':[''],
+      'commissionFromSeller': ['', Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
+      'commissionFromBuyer': ['', Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
+      'vehicalPrice': ['', Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
+      'buyerPaidAmount': ['', Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
 
       'witnessName1': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'witnessContact1': ['', Validators.compose([Validators.required, Validators.maxLength(11)])],
@@ -171,29 +174,29 @@ export class SaleToUnregisterUserComponent implements OnInit {
 
   }
 
-  onSubmit(m:any) {
+  onSubmit(m: any) {
     // console.log(m);
 
-    let model={
-      buyerDTOs 
-      :[
-        {
-          Id:0,
-          AccountId: m.buyer1,
-          Address: m.buyerAddress,
-          CNIC: m.buyerCNIC,
-          Contact: m.buyerContact,
-          Name: m.buyerName,
-          PaidAmount: m.buyerPaidAmount,
-          commission: m.commissionFromBuyer
-        },
-        {
-          Id: 0,
-          AccountId: m.buyer2,
-      
-        }
+    let model = {
+      buyerDTOs
+        : [
+          {
+            Id: 0,
+            AccountId: m.buyer1,
+            Address: m.buyerAddress,
+            CNIC: m.buyerCNIC,
+            Contact: m.buyerContact,
+            Name: m.buyerName,
+            PaidAmount: m.buyerPaidAmount,
+            commission: m.commissionFromBuyer
+          },
+          {
+            Id: 0,
+            AccountId: m.buyer2,
 
-      ],
+          }
+
+        ],
       sellerDTOs: [
         {
           Id: 0,
@@ -208,7 +211,7 @@ export class SaleToUnregisterUserComponent implements OnInit {
         {
           Id: 0,
           AccountId: m.seller2,
-         
+
         }
       ],
 
@@ -227,8 +230,8 @@ export class SaleToUnregisterUserComponent implements OnInit {
         }
       ],
 
-      carDTO :{
-        
+      carDTO: {
+
         Name: m.vehicalName,
         EngineNumber: m.engineNumber,
         ModelNumber: m.modelNumber,
@@ -239,14 +242,15 @@ export class SaleToUnregisterUserComponent implements OnInit {
         Token: m.token,
         ComputerizedNoPlate: m.computerizedNoPlate,
         NoOfPapers: m.noOfPApsers,
-        
+
       }
 
-  
+
     }
 
 
-console.log(JSON.stringify(model));
+    console.log(JSON.stringify(model));
   }
 
 }
+

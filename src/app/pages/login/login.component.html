@@ -1,0 +1,88 @@
+<div >
+
+  <div class="row" >
+    <div class="col-md-6 col-md-offset-3">
+
+      <div class="login-panel panel panel-default">
+
+
+        <h1 style=" padding-top:10px;text-align:center;color:cadetblue;font-weight:bold">
+
+          <!-- <i class="fa fa-car"></i> -->
+          <img src="favicon.ico" alt="">
+          <br>
+          <strong>Hussain Motors</strong>
+        </h1>
+
+
+
+        <!-- <div class="panel-heading">
+            <div class="panel-title"><strong>Login</strong></div>
+          </div> -->
+        <div class="panel-body" id="bodylogin">
+          <div style="padding:15px"></div>
+
+          <!-- success message -->
+      <div *ngIf="successTrigger" class="alert alert-success alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <i class="fa fa-comment fa-fw"></i>
+        <strong>{{myMessage}}</strong>
+      </div>
+      <!-- error message -->
+      <div *ngIf="errorTrigger" class="alert alert-danger alert-dismissable">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+        <i class="fa fa-warning fa-fw"></i>
+        <strong>{{myMessage}}</strong>
+      </div>
+
+          <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+            <!--email-->
+            <div class="form-group row" [ngClass]="{'has-error': (!email.valid && email.touched), 'has-success': (email.valid && email.touched)}">
+
+              <div class="col-sm-12">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-envelope"></i>
+                  </span>
+                  <input required [formControl]="email" type="email" class="form-control" placeholder=" Enter Email">
+                </div>
+                <span *ngIf="!email.valid && email.touched " class="help-block sub-little-text">Enter a valid Address</span>
+
+              </div>
+            </div>
+            <!--password-->
+            <div class="form-group row" [ngClass]="{'has-error': (!password.valid && password.touched), 'has-success': (password.valid && password.touched)}">
+              <div class="col-sm-12">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-lock"></i>
+                  </span>
+                  <input [formControl]="password" type="password" class="form-control" placeholder="Enter Password">
+                </div>
+                <span *ngIf="!password.valid && password.touched " class="help-block sub-little-text">Password field can't empty.</span>
+
+              </div>
+            </div>
+
+            <!--submit button-->
+
+            <div style="text-align:center" class="form-group row" style="padding-top:15px;padding-right:15px">
+              <button [disabled]="!form.valid" type="submit" class="btn btn-primary pull-right ">
+                <i class="fa fa-sign-in" aria-hidden="true"></i>
+                &nbsp; Login &nbsp;
+                <i [ngClass]="{'fa fa-spinner fa-spin': changeClass}"></i>
+              </button>
+
+
+            </div>
+            <!-- <hr style="height:2px;border:none;background-color:orange;" /> -->
+
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

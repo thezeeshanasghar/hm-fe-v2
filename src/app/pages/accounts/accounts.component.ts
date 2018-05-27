@@ -1,5 +1,5 @@
 import { AmountValidator } from './../../../assets/validators/amount.valdator';
-import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl, FormsModule } from '@angular/forms';
 import { Http } from '@angular/http';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TransactionModel } from './../../Models/Transaction.model';
@@ -7,6 +7,13 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { GeneralHttpService } from '../../services/general-http.service';
 import { AccountModel } from '../../Models/account.model';
 import { BsModalService } from 'ngx-bootstrap';
+import { Router } from '@angular/router';
+
+export class searchModel {
+  name: string;
+  cnic: number;
+  mobile: number;
+}
 
 
 @Component({
@@ -14,10 +21,21 @@ import { BsModalService } from 'ngx-bootstrap';
   templateUrl: './accounts.component.html'
 })
 export class AccountsComponent implements OnInit {
+
+
+  public search: searchModel = {
+    name: '',
+    cnic: 0,
+    mobile: 0
+  }
+
+
+  showSearch = false;
+  warningTrigger = false;
   allAccounts: AccountModel[] = [];
   selectedAccountTransactions: TransactionModel[] = [];
-  singleUser:any;
- public ip;
+  singleUser: any;
+  public ip;
   public port;
 
   editUserForm: FormGroup;
@@ -27,16 +45,24 @@ export class AccountsComponent implements OnInit {
   mobileNumber = new FormControl('', [Validators.required]);
   cnic = new FormControl('', [Validators.required]);
   address = new FormControl('', [Validators.required]);
-    
+
 
   public form: FormGroup;
   public userAccount: AbstractControl;
   public incomeAmount: AbstractControl;
   public description: AbstractControl;
 
-  constructor(public fb: FormBuilder,private gu: GeneralHttpService, private modalService: BsModalService,private http:Http) { 
-    this.ip=this.gu.ip;
-    this.port=this.gu.port;
+  constructor(private router: Router, public fb: FormBuilder, private gu: GeneralHttpService, private modalService: BsModalService, private http: Http) {
+    // let obj = JSON.parse(localStorage.getItem("Authorized"));
+    // console.log(obj.Authorized);
+
+    // if(obj==null || obj.Authorized ==false){
+    //   router.navigate(['login']);    
+
+    // }
+
+    this.ip = this.gu.ip;
+    this.port = this.gu.port;
 
     this.form = fb.group({
       'userAccount': ['', Validators.compose([Validators.required])],
@@ -55,13 +81,29 @@ export class AccountsComponent implements OnInit {
       mobileNumber: this.mobileNumber,
       cnic: this.cnic,
       address: this.address,
-      avatar:null
+      avatar: null
     });
   }
   modalRefExpense: BsModalRef;
   modalRefIncome: BsModalRef;
- 
 
+
+  searchUser(word) {
+    console.log(word);
+    let user: any[] = [];
+
+    // this.allAccounts.forEach(element => {
+    //   element
+
+    //   if(element.Name==word){
+    //     console.log("this is searched");
+    //   }
+
+    // });
+
+
+
+  }
   openModalExpense(template: TemplateRef<any>) {
     this.modalRefExpense = this.modalService.show(template);
   }
@@ -82,21 +124,36 @@ export class AccountsComponent implements OnInit {
     this.gu.getTransactionsIdBy(id).subscribe(data => {
       this.selectedAccountTransactions = data.ResponseData;
       console.log(this.selectedAccountTransactions);
-      this.gu.getAccountById(id).subscribe(data=>{
+      this.gu.getAccountById(id).subscribe(data => {
         console.log(data);
-        this.singleUser=data.ResponseData;
-      },error=>{});
+        this.singleUser = data.ResponseData;
+      }, error => { });
 
     }, error => { console.log(error); });
   }
 
-  
-  
-  getRowTotalUsingIndex(index :number):number {
+
+
+  getRowTotalUsingIndex(index: number): number {
     let sum = 0;
-    for(var i = 0; i <= index; i++) {
+    for (var i = 0; i <= index; i++) {
       sum += this.selectedAccountTransactions[i].Amount;
     }
     return sum;
+  }
+
+
+  onSubmit(form: searchModel) {
+    console.log(form);
+
+    if (form.name == '' && form.cnic == 0 && form.mobile == 0) {
+      this.warningTrigger = true;
+      console.log("empty form")
+
+      setTimeout(()=>{
+        this.warningTrigger=false;
+      },5000)
+
+    }
   }
 }
