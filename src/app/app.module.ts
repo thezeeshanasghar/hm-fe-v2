@@ -21,8 +21,10 @@ import { UdharComponent } from './pages/udhar/udhar.component';
 import { ExchangeReciptComponent } from './pages/exchange-recipt/exchange-recipt.component';
 import { CarService } from './services/car/car.service';
 import { LoginComponent } from './pages/login/login.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { CarPurchaseComponent } from './pages/car-purchase/car-purchase.component';
 
 
 @NgModule({
@@ -40,8 +42,10 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     UdharComponent,
     ExchangeReciptComponent,
     LoginComponent,
-    PageNotFoundComponent,
+
     DashboardComponent,
+    SearchFilterPipe,
+    CarPurchaseComponent,
 
   ],
   imports: [

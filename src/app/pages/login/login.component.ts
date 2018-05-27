@@ -9,11 +9,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  changeClass = false;
   public form: FormGroup;
   public email: AbstractControl;
   public password: AbstractControl;
+  myMessage = '';
+  successTrigger = false;
+  errorTrigger = false;
 
-  constructor(private fb:FormBuilder,private router:Router) { 
+  constructor(private fb: FormBuilder, private router: Router) {
 
     this.form = fb.group({
       'email': ['', Validators.compose([Validators.required, EmailValidator.validate, Validators.minLength(4)])],
@@ -26,8 +30,27 @@ export class LoginComponent implements OnInit {
   }
 
 
-  onSubmit(m){
-    this.router.navigate(['dashboard']);
+  onSubmit(m) {
+    this.changeClass = true;
+    console.log(m)
+    if (m.email != "admin@hm.com" || m.password != 'admin') {
+
+      this.myMessage = 'username OR password is invalid.';
+      this.errorTrigger = true;
+
+    }
+
+    else if (m.email == "admin@hm.com" && m.password == 'admin') {
+      let obj: any = {
+        Authorized: true,
+        email: m.email,
+
+      }
+      window.localStorage.setItem("Authorized", JSON.stringify(obj));
+      this.router.navigate(['dashboard']);
+
+    }
+
 
 
 

@@ -9,8 +9,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountsComponent } from './pages/accounts/accounts.component';
 import { AddAccountComponent } from './pages/accounts/add-account/add-account.component';
 import { LoginComponent } from './pages/login/login.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { CarPurchaseComponent } from './pages/car-purchase/car-purchase.component';
 
 export const appRoutes: Routes = [
     {
@@ -29,11 +30,11 @@ export const appRoutes: Routes = [
                 pathMatch: 'full'
             },
 
-            
+            { path: "purchase", component: CarPurchaseComponent },
             { path: "exchangeRecipt", component: ExchangeReciptComponent },
             { path: "carStock", component: StockCarComponent },
-            { path: "carSale", component: SaleComponent },
-            { path: "carSaleUnregisterUser", component: SaleToUnregisterUserComponent },
+           
+            { path: "carSale", component: SaleToUnregisterUserComponent },
             { path: "udhar", component: UdharComponent },
 
             { path: "accounts", component: AccountsComponent },
@@ -46,7 +47,7 @@ export const appRoutes: Routes = [
     },
 
 
-    { path: "**", component: PageNotFoundComponent }
+    // { path: "**", component: PageNotFoundComponent }
 ]
 
 export const Routers: ModuleWithProviders = RouterModule.forRoot(appRoutes);
