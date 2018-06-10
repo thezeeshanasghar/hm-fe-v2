@@ -25,46 +25,47 @@
 </style>
 <div class="row">
   <div class="col-md-12">
-     <!-- warning message -->
-     <div *ngIf="warningTrigger" class="alert alert-warning alert-dismissable">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close" >&times;</a>
-        <i class="fa fa-comment fa-fw"></i>
-          <strong>Please select any one of given filters below</strong>
-          <span class="pull-right"><strong>
-            برائے مہربانی سرچ کے لیا کوئی ایک  فلٹر کا انتخاب کریں       </strong>    </span>
+    <!-- warning message -->
+    <div *ngIf="warningTrigger" class="alert alert-warning alert-dismissable">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <i class="fa fa-comment fa-fw"></i>
+      <strong>Please select any one of given filters below</strong>
+      <span class="pull-right">
+        <strong>
+          برائے مہربانی سرچ کے لیا کوئی ایک فلٹر کا انتخاب کریں </strong>
+      </span>
     </div>
   </div>
 </div>
 <div class="row">
 
-     
+
   <form #searchForm="ngForm" (ngSubmit)="onSubmit(search)">
 
-
     <div class="col-md-2">
-      <label for="cnic">Serach by Cnic</label>
+
       <select name="cnic" id="cnic" class="form-control" [(ngModel)]="search.cnic">
-        <!-- <option value="">--Search by CNIC--</option> -->
+        <option value="0">--CNIC--</option>
         <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.CNIC}}</option>
       </select>
     </div>
     <div class="col-md-2">
-      <label for="mobile">Serach by mobile</label>
+
       <select name="mobile" id="mobile" class="form-control" [(ngModel)]="search.mobile">
-        <!-- <option value="">--Search by Phone #--</option> -->
+        <option value="0">--Phone--</option>
         <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.MobileNumber}}</option>
       </select>
     </div>
     <div class="col-md-2">
-      <label for="name">Serach by Name</label>
+
       <select name="name" id="name" class="form-control" [(ngModel)]="search.name">
-        <!-- <option value="">--Search by Name--</option> -->
+        <option value="">--Name--</option>
         <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}</option>
       </select>
     </div>
 
-    <div class="col-md-2" style="margin-top: 27px">
-      <button class="btn btn-sm" type="submit">
+    <div class="col-md-2">
+      <button class="btn btn-primary" type="submit">
         <i class="fa fa-search"></i>
       </button>
     </div>

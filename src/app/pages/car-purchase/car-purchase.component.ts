@@ -122,7 +122,7 @@ export class CarPurchaseComponent implements OnInit {
     this.sellerAddress = this.form.controls['sellerAddress'];
     this.description = this.form.controls["description"];
 
-
+    this.dealDate = this.form.controls['dealDate'];
     this.dueDate = this.form.controls['dueDate'];
     this.vehical = this.form.controls['vehical'];
     this.vehicalName = this.form.controls['vehicalName'];

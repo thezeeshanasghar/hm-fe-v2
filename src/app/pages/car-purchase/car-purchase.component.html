@@ -73,24 +73,11 @@
       <div class="tab-content">
         <div id="Parties" class="tab-pane fade in active">
 
-           <!-- dealDate -->
 
-           <div class="form-group row">
-              <label for="dealDate">Due Date For Remaing Payment</label>
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                <input required formControlName="dealDate" name="dealDate" type="date" class="form-control">
-              </div>
-            </div>
-            <!-- dealDate -->
+
+
 
           <div class="col-md-6" style="padding-right:30px" *ngIf="!showSeller">
-            <!-- <label for="isActive">I'm Register User &nbsp;&nbsp;</label>
-              <input type="checkbox" name="isActive" (change)="changeCheckboxSeller($event)"> -->
-
-
             <!--sellerName-->
             <div class="form-group row" [ngClass]="{'has-error': (!sellerName.valid && sellerName.touched), 'has-success': (sellerName.valid && sellerName.touched)}">
 
@@ -145,6 +132,19 @@
               <span *ngIf="!sellerAddress.valid && sellerAddress.touched " class="help-block sub-little-text">Enter a valid Vehical sellerAddress</span>
             </div>
             <!-- sellerAddress -->
+
+            <!-- dealDate -->
+
+            <div class="form-group row">
+              <label for="dealDate">Deal date</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                <input required formControlName="dealDate" name="dealDate" type="date" class="form-control">
+              </div>
+            </div>
+            <!-- dealDate -->
             <!--vehicalPrice-->
             <div class="form-group row" [ngClass]="{'has-error': (!vehicalPrice.valid && vehicalPrice.touched), 'has-success': (vehicalPrice.valid && vehicalPrice.touched)}">
 
