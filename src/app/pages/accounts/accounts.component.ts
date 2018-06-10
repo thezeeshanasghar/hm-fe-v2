@@ -90,19 +90,22 @@ export class AccountsComponent implements OnInit {
 
   searchUser(word) {
     console.log(word);
-    let user: any[] = [];
+    let accounts: any[] = [];
+    if(word.name){
+      this.allAccounts.forEach(element => {
+        element
+  
+        if(element.Name==word){
+          console.log("this is searched");
+        }
+  
+      });
+    }
+  }
 
-    // this.allAccounts.forEach(element => {
-    //   element
-
-    //   if(element.Name==word){
-    //     console.log("this is searched");
-    //   }
-
-    // });
-
-
-
+  makeImageUrl(url){
+    console.log(url)
+    return  "http://{{ip}}:{{port}}/"+url;
   }
   openModalExpense(template: TemplateRef<any>) {
     this.modalRefExpense = this.modalService.show(template);
@@ -117,7 +120,11 @@ export class AccountsComponent implements OnInit {
   getAllAccounts() {
     this.gu.getAllAccounts().subscribe(data => {
       this.allAccounts = data.ResponseData;
-    }, error => { });
+
+      console.log(this.allAccounts);
+    }, error => { 
+
+    });
   }
 
   getTransactionsByAccountId(id) {
