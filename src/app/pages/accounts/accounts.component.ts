@@ -30,7 +30,7 @@ export class AccountsComponent implements OnInit {
   }
 
 
-  showSearch = false;
+  showSearch = true;
   warningTrigger = false;
   allAccounts: AccountModel[] = [];
   selectedAccountTransactions: TransactionModel[] = [];

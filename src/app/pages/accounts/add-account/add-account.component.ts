@@ -60,7 +60,7 @@ export class AddAccountComponent {
     this.gu.postAccount(fromData).subscribe(
       data => {
         if (data.IsSuccess == true) {
-          this.router.navigate(["accounts"]);
+          this.router.navigate(["/dashboard/accounts"]);
         } else {
           this.message = data.Message;
           this.openModal(this.alertModal);
