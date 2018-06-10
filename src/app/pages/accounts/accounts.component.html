@@ -44,28 +44,29 @@
 
     <div class="col-md-2">
 
-      <select name="cnic" id="cnic" class="form-control" [(ngModel)]="search.cnic">
+      <select name="cnic" id="cnic" class="form-control" [(ngModel)]="search.cnic" required ngModel>
         <option value="0">--CNIC--</option>
         <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.CNIC}}</option>
       </select>
     </div>
     <div class="col-md-2">
 
-      <select name="mobile" id="mobile" class="form-control" [(ngModel)]="search.mobile">
+      <select name="mobile" id="mobile" class="form-control" [(ngModel)]="search.mobile" required>
         <option value="0">--Phone--</option>
         <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.MobileNumber}}</option>
       </select>
     </div>
     <div class="col-md-2">
 
-      <select name="name" id="name" class="form-control" [(ngModel)]="search.name">
+      <select name="name" id="name" class="form-control" [(ngModel)]="search.name" required>
         <option value="">--Name--</option>
         <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}</option>
       </select>
     </div>
 
     <div class="col-md-2">
-      <button class="btn btn-primary" type="submit">
+      <!-- *ngIf="search.name='' && search.mobile=0 && search.cnic=0" -->
+      <button [disabled]="searchForm.invalid" class="btn btn-primary" type="submit">
         <i class="fa fa-search"></i>
       </button>
     </div>
@@ -95,8 +96,7 @@
           <th>Name</th>
           <th>Contact</th>
           <th>Image</th>
-          <!-- <th>CNIC</th> -->
-          <!-- <th>Address</th> -->
+        
           <th>Balance</th>
           <th>
 
@@ -105,16 +105,18 @@
           <th></th>
         </tr>
       </thead>
-      <tbody *ngIf="showSearch">
+      <tbody>
         <tr *ngFor="let account of allAccounts ; let i=index">
           <td>{{i+1}}</td>
           <td>{{account.Number}}</td>
           <td>{{account.Name}}</td>
           <td>{{account.MobileNumber}}</td>
+
           <td>
             <img src="http://{{ip}}:{{port}}/{{account.Image}} " width="40" height="40" alt="" style="border-radius: 50%;"> </td>
           <!-- <td>{{account.CNIC}}</td> -->
           <!-- <td>{{account.Address}}</td> -->
+
           <td [ngClass]="account.Balance>=0 ? 'text-green': 'text-red'">{{account.Balance |number}}</td>
           <td>
             <button class="btn btn-warning btn-sm" data-target="#editAccount" data-toggle="modal">

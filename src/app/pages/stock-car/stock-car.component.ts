@@ -13,25 +13,26 @@ import { CarOwner } from '../../Models/carOwner.model';
 
 })
 export class StockCarComponent implements OnInit {
-  carOwnerList=[];
-  carsList=[];
+  carOwnerList = [];
+  carsList = [];
   changeClass = false;
   showAddCarForm = false;
   public carStockForm: FormGroup;
+  carOwnerDtos: any;
 
   allAccounts: AccountModel[] = [];
   makerList = ['Toyota', 'Honda', 'Hundai', 'Suzuki', 'Faw'];
 
   constructor(private cs: CarService, private fb: FormBuilder, private gu: GeneralHttpService) {
-    
+
   }
 
- 
+
 
   ngOnInit() {
     this.getAllAccount();
     this.createForm();
-     this.getCars();
+    this.getCars();
   }
 
   createForm() {
@@ -79,8 +80,16 @@ export class StockCarComponent implements OnInit {
     carmodel.PurchaseDate = post.purchaseDate;
     carmodel.PurchasePrice = post.purchasePrice;
 
-    let model = {
-      carOwnerDTOs: [
+
+
+    if (post.owner2 === "") {
+      this.carOwnerDtos = [{
+        AccountId: post.owner1
+      }]
+    }
+
+    else {
+      this.carOwnerDtos = [
         {
           AccountId: post.owner1
         },
@@ -88,7 +97,14 @@ export class StockCarComponent implements OnInit {
           AccountId: post.owner2
         }
       ]
-      ,
+
+    }
+
+
+
+    let model: any = {
+      carOwnerDtos: this.carOwnerDtos,
+
       carDTO: {
         Name: carmodel.Name,
         EngineNumber: carmodel.EngineNumber,
@@ -108,19 +124,21 @@ export class StockCarComponent implements OnInit {
     formData.append('model', JSON.stringify(model));
     formData.append('avatar', this.carStockForm.get('avatar').value);
 
+    console.log(formData.get('model'));
+
     this.cs.addCar(formData).subscribe(data => {
       console.log(data);
     }, error => { });
   }
 
-  getCars(){
+  getCars() {
 
-    this.cs.getCars().subscribe(data=>{
+    this.cs.getCars().subscribe(data => {
       console.log(data.ResponseData);
-      this.carsList=data.ResponseData
+      this.carsList = data.ResponseData
       // this.carOwnerList=data.carOwnerDTOs
     },
-    error=>{});
+      error => { });
   }
 
   sortAllAccounts(accouts) {
