@@ -19,6 +19,10 @@ export class StockCarComponent implements OnInit {
   showAddCarForm = false;
   public carStockForm: FormGroup;
   carOwnerDtos: any;
+  myMessage = "";
+
+  successTrigger = false;
+  errorTrigger = false;
 
   allAccounts: AccountModel[] = [];
   makerList = ['Toyota', 'Honda', 'Hundai', 'Suzuki', 'Faw'];
@@ -27,6 +31,10 @@ export class StockCarComponent implements OnInit {
 
   }
 
+  setAlertOff() {
+    this.errorTrigger = false;
+    this.successTrigger = false;
+  }
 
 
   ngOnInit() {
@@ -39,6 +47,7 @@ export class StockCarComponent implements OnInit {
     let date = new Date();
     this.carStockForm = this.fb.group({
       name: ['Toyata GLI', Validators.required],
+      reciptNumber: ['', Validators.required],
       modelNumber: ['M321', Validators.compose([Validators.required, Validators.minLength(2)])],
       color: ['Black', Validators.compose([Validators.required, Validators.minLength(2)])],
       maker: ['Honda', Validators.compose([Validators.required, Validators.minLength(2)])],
@@ -68,6 +77,7 @@ export class StockCarComponent implements OnInit {
 
     let carmodel = new Car();
     carmodel.Name = post.name;
+    carmodel.reciptNumber = post.reciptNumber;
     carmodel.EngineNumber = post.engineNumber;
     carmodel.ChasisNumber = post.chasisNumber;
     carmodel.RegistrationNumber = post.registrationNumber;
@@ -117,7 +127,8 @@ export class StockCarComponent implements OnInit {
         ComputerizedNoPlate: carmodel.ComputerizedNoPlate,
         NoOfPapers: carmodel.NoOfPapers,
         PurchasePrice: carmodel.PurchasePrice,
-        PurchaseDate: carmodel.PurchaseDate
+        PurchaseDate: carmodel.PurchaseDate,
+        ReciptNumber: carmodel.reciptNumber
       }
     }
 
@@ -127,8 +138,16 @@ export class StockCarComponent implements OnInit {
     console.log(formData.get('model'));
 
     this.cs.addCar(formData).subscribe(data => {
+      if(data.IsSuccess){
+        this.successTrigger=true;
+        this.myMessage="car added successfully. کار کا یندراج کامیاب رھا۔"
+      }
       console.log(data);
-    }, error => { });
+    }, error => {
+
+      this.errorTrigger=true;
+      this.myMessage="somthing went wrong Please try again"
+     });
   }
 
   getCars() {
