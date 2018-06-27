@@ -1,5 +1,22 @@
 <div class="container-fluid">
 
+  <!-- success message -->
+  <div *ngIf="successTrigger" class="alert alert-success alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="setAlertOff()">&times;</a>
+    <i class="fa fa-check"></i>
+    <strong>Success</strong>
+    <br>
+    <span class="alertMessage">{{myMessage}}</span>
+  </div>
+  <!-- error message -->
+  <div *ngIf="errorTrigger" class="alert alert-danger alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="setAlertOff()">&times;</a>
+    <i class="fa fa-warning fa-fw"></i>
+    <strong>Error!</strong>
+    <br>
+    <span class="alertMessage">{{myMessage}}</span>
+  </div>
+
   <div class="row">
     <h3>Car Inventory &nbsp; /&nbsp; کار اندراج</h3>
     <button *ngIf="!showAddCarForm" class="btn btn-primary pull-right" (click)="showAddCarFormToggle()" style="font-size:15px">Add Car</button>
@@ -12,7 +29,7 @@
     <table class="table table-striped" *ngIf="carsList.length>0;else noCar">
       <thead style="background: lightblue">
         <tr>
-          <th>Sr.#</th>
+          <th>#</th>
           <th>Car Name</th>
           <!-- <th>Car Owner</th> -->
           <th>Maker</th>
@@ -32,16 +49,18 @@
           <td>{{i+1}}</td>
           <td>{{car.CarDTO.Name}}</td>
           <td>{{car.CarDTO.Maker}}</td>
-          <td>{{car.CarDTO.RegistraionNumber}}</td>
+          <td>{{car.CarDTO.RegistrationNumber}}</td>
           <td>{{car.CarDTO.PurchasePrice}}</td>
-          <td>{{car.CarDTO.PurchaseDate}}</td>
+          <td>{{car.CarDTO.PurchaseDate | date}}</td>
           <td>{{car.CarDTO.NoOfPapers}}</td>
           <td>{{car.CarDTO.Token}}</td>
           <td>
             <button class="btn btn-warning" data-target="#editCarStock" data-toggle="modal">
-              <i class="fa fa-pencil"></i>Edit</button>
+              <i class="fa fa-pencil"></i>
+            </button>
             <button class="btn btn-danger">
-              <i class="fa fa-trash"></i>Delete</button>
+              <i class="fa fa-trash"></i>
+            </button>
           </td>
         </tr>
       </tbody>
@@ -107,6 +126,22 @@
           </div>
           <span *ngIf="!carStockForm.controls['name'].valid && 
           carStockForm.controls['name'].touched" class="help-block sub-little-text">vehicle name is required</span>
+        </div>
+        <!--vehicle  name -->
+
+        <!-- vehicle reciptNumber -->
+        <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['reciptNumber'].valid && 
+         carStockForm.controls['reciptNumber'].touched, 'has-success': carStockForm.controls['reciptNumber'].valid}">
+          <label for="reciptNumber">Recipt Number:</label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-car"></i>
+            </span>
+
+            <input type="text" formControlName="reciptNumber" class="form-control" placeholder=" Enter vehicle reciptNumber">
+          </div>
+          <span *ngIf="!carStockForm.controls['reciptNumber'].valid && 
+          carStockForm.controls['reciptNumber'].touched" class="help-block sub-little-text">vehicle reciptNumber is required</span>
         </div>
         <!--vehicle  name -->
         <!-- vehicle modelNumber -->

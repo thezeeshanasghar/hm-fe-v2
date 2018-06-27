@@ -13,8 +13,8 @@ export class CarPurchaseComponent implements OnInit {
   changeClass = false;
   showSales = false;
 
-  showBuyer = false;
-  showSeller = false;
+  showBuyer = true;
+  showSeller = true;
   vehicalList = ['LHR 1234', 'LHQ 3456', 'LHE 5463', 'LHR 4567', 'LHE 6789', 'LHQ 2345']
 
   public form: FormGroup;
@@ -89,7 +89,7 @@ export class CarPurchaseComponent implements OnInit {
       'description': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
 
       'dueDate': [''],
-      'dealDate':[''],
+      'dealDate': [''],
       'commissionFromSeller': ['', Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
       'commissionFromBuyer': ['', Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
       'vehicalPrice': ['', Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
@@ -183,10 +183,6 @@ export class CarPurchaseComponent implements OnInit {
           {
             Id: 0,
             AccountId: m.buyer1,
-            Address: m.buyerAddress,
-            CNIC: m.buyerCNIC,
-            Contact: m.buyerContact,
-            Name: m.buyerName,
             PaidAmount: m.buyerPaidAmount,
             commission: m.commissionFromBuyer
           },
@@ -201,10 +197,6 @@ export class CarPurchaseComponent implements OnInit {
         {
           Id: 0,
           AccountId: m.seller1,
-          Address: m.sellerAddress,
-          CNIC: m.sellerCNIC,
-          Contact: m.sellerContact,
-          Name: m.sellerName,
           VehicalPrice: m.vehicalPrice,
           commission: m.commissionFromSeller
         },
@@ -229,21 +221,23 @@ export class CarPurchaseComponent implements OnInit {
           Contact: m.witnessContact2
         }
       ],
+      carId:m.vehicalID,
+      dealDate:m.dealDate
+      // carDTO: {
+      //   carId: 0
 
-      carDTO: {
+      //   // Name: m.vehicalName,
+      //   // EngineNumber: m.engineNumber,
+      //   // ModelNumber: m.modelNumber,
+      //   // ChasisNumber: m.chassisNumber,
+      //   // RegistrationNumber: m.registrationNumber,
+      //   // Color: m.color,
+      //   // Maker: m.maker,
+      //   // Token: m.token,
+      //   // ComputerizedNoPlate: m.computerizedNoPlate,
+      //   // NoOfPapers: m.noOfPApsers,
 
-        Name: m.vehicalName,
-        EngineNumber: m.engineNumber,
-        ModelNumber: m.modelNumber,
-        ChasisNumber: m.chassisNumber,
-        RegistrationNumber: m.registrationNumber,
-        Color: m.color,
-        Maker: m.maker,
-        Token: m.token,
-        ComputerizedNoPlate: m.computerizedNoPlate,
-        NoOfPapers: m.noOfPApsers,
-
-      }
+      // }
 
 
     }

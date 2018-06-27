@@ -27,13 +27,10 @@
   <div class="col-md-12">
     <!-- warning message -->
     <div *ngIf="warningTrigger" class="alert alert-warning alert-dismissable">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <i class="fa fa-comment fa-fw"></i>
-      <strong>Please select any one of given filters below</strong>
-      <span class="pull-right">
-        <strong>
-          برائے مہربانی سرچ کے لیا کوئی ایک فلٹر کا انتخاب کریں </strong>
-      </span>
+      <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="setAlertOff()">&times;</a>
+      <i class="fa fa-warning fa-fw"></i>
+      <strong>{{message}}</strong>
+
     </div>
   </div>
 </div>
@@ -59,15 +56,18 @@
     <div class="col-md-2">
 
       <select name="name" id="name" class="form-control" [(ngModel)]="search.name" required>
-        <option value="">--Name--</option>
+        <option value="0">--Name--</option>
         <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}</option>
       </select>
     </div>
 
     <div class="col-md-2">
       <!-- *ngIf="search.name='' && search.mobile=0 && search.cnic=0" -->
-      <button [disabled]="searchForm.invalid" class="btn btn-primary" type="submit">
+      <button class="btn btn-primary" type="submit">
         <i class="fa fa-search"></i>
+      </button>
+      <button class="btn btn-success" *ngIf="showSearchResult" (click)="showSearchResultToggle()">
+        <i class="fa fa-refresh"></i>
       </button>
     </div>
 
@@ -96,7 +96,7 @@
           <th>Name</th>
           <th>Contact</th>
           <th>Image</th>
-        
+
           <th>Balance</th>
           <th>
 
@@ -145,7 +145,7 @@
         </tr>
       </tbody>
 
-      
+
     </table>
   </div>
 </div>

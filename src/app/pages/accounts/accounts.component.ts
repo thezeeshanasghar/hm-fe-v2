@@ -10,7 +10,7 @@ import { BsModalService } from 'ngx-bootstrap';
 import { Router } from '@angular/router';
 
 export class searchModel {
-  name: string;
+  name: number;
   cnic: number;
   mobile: number;
 }
@@ -24,7 +24,7 @@ export class AccountsComponent implements OnInit {
 
 
   public search: searchModel = {
-    name: '',
+    name: 0,
     cnic: 0,
     mobile: 0
   }
@@ -51,15 +51,11 @@ export class AccountsComponent implements OnInit {
   public userAccount: AbstractControl;
   public incomeAmount: AbstractControl;
   public description: AbstractControl;
+  message: string = "";
+  showSearchResult: boolean = false;
 
   constructor(private router: Router, public fb: FormBuilder, private gu: GeneralHttpService, private modalService: BsModalService, private http: Http) {
-    // let obj = JSON.parse(localStorage.getItem("Authorized"));
-    // console.log(obj.Authorized);
 
-    // if(obj==null || obj.Authorized ==false){
-    //   router.navigate(['login']);    
-
-    // }
 
     this.ip = this.gu.ip;
     this.port = this.gu.port;
@@ -70,6 +66,8 @@ export class AccountsComponent implements OnInit {
       'description': ['', Validators.compose([Validators.required, Validators.minLength(10)])]
 
     });
+
+
 
     this.userAccount = this.form.controls["userAccount"];
     this.incomeAmount = this.form.controls["incomeAmount"];
@@ -86,26 +84,46 @@ export class AccountsComponent implements OnInit {
   }
   modalRefExpense: BsModalRef;
   modalRefIncome: BsModalRef;
-
-
-  searchUser(word) {
-    console.log(word);
-    let accounts: any[] = [];
-    if(word.name){
-      this.allAccounts.forEach(element => {
-        element
-  
-        if(element.Name==word){
-          console.log("this is searched");
-        }
-  
-      });
-    }
+  setAlertOff() {
+    this.warningTrigger = false;
+    this.search.mobile = 0;
+    this.search.cnic = 0;
+    this.search.name = 0;
   }
 
-  makeImageUrl(url){
+
+  showSearchResultToggle() {
+    this.getAllAccounts();
+
+    this.showSearchResult = !this.showSearchResult;
+  }
+
+  searchUser(word) {
+    // console.log(word);
+
+
+    this.showSearchResult = true;
+    let accounts: any[] = [];
+
+    this.allAccounts.forEach(e => {
+      // console.log(e)
+
+      if (e.Id == word) {
+        // console.log("this is searched");
+        console.log(e);
+        accounts.push(e);
+      }
+
+    });
+
+
+    this.allAccounts = accounts;
+
+  }
+
+  makeImageUrl(url) {
     console.log(url)
-    return  "http://{{ip}}:{{port}}/"+url;
+    return "http://{{ip}}:{{port}}/" + url;
   }
   openModalExpense(template: TemplateRef<any>) {
     this.modalRefExpense = this.modalService.show(template);
@@ -122,7 +140,9 @@ export class AccountsComponent implements OnInit {
       this.allAccounts = data.ResponseData;
 
       console.log(this.allAccounts);
-    }, error => { 
+    }, error => {
+
+
 
     });
   }
@@ -153,14 +173,35 @@ export class AccountsComponent implements OnInit {
   onSubmit(form: searchModel) {
     console.log(form);
 
-    if (form.name == '' && form.cnic == 0 && form.mobile == 0) {
+    if (form.name == 0 && form.cnic == 0 && form.mobile == 0) {
       this.warningTrigger = true;
+      this.message = "Please select any one of given filters below." + "     " + "برائے مہربانی سرچ کے لیا کوئی ایک فلٹر کا انتخاب کریں"
       console.log("empty form")
+    }
 
-      setTimeout(()=>{
-        this.warningTrigger=false;
-      },5000)
+    else if ((form.name !== 0 && form.cnic !== 0) || (form.name !== 0 && form.mobile !== 0) || (form.mobile !== 0 && form.cnic !== 0)) {
+
+      this.message = "Please select any one of given filters below." + "     " + "برائے مہربانی سرچ کے لیا کوئی ایک فلٹر کا انتخاب کریں"
+      this.warningTrigger = true;
 
     }
+
+    if (form.name !== 0) {
+      this.searchUser(form.name)
+    }
+    else if (form.cnic !== 0) {
+      this.searchUser(form.cnic)
+    }
+    else if (form.mobile !== 0) {
+      this.searchUser(form.mobile)
+    }
+
+
+    setTimeout(() => {
+      this.search.mobile = 0;
+      this.search.cnic = 0;
+      this.search.name = 0;
+      this.warningTrigger = false;
+    }, 5000)
   }
 }
