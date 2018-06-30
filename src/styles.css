@@ -2,3 +2,8 @@
 .alertMessage{
     padding-left: 15px;
 }
+.carImage img{
+    width:540px;
+    max-width: 540px ;
+    height: 300px;
+}
