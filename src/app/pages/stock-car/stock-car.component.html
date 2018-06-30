@@ -30,14 +30,13 @@
       <thead style="background: lightblue">
         <tr>
           <th>#</th>
+          <th>Recipt Number</th>
           <th>Car Name</th>
-          <!-- <th>Car Owner</th> -->
+
           <th>Maker</th>
-          <th>Rigistration Number </th>
-          <th>Purcasing Date</th>
-          <th>
-            Purchase Price
-          </th>
+          <th>Rigistration #</th>
+          <th>Purchase Date</th>
+          <th>Purchase Price</th>
           <th>Number of Papers</th>
           <th>Token Status</th>
           <th></th>
@@ -45,9 +44,11 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let car of carsList; let i=index">
+        <tr *ngFor="let car of carsList | reverse; let i=index">
           <td>{{i+1}}</td>
+          <td>123213</td>
           <td>{{car.CarDTO.Name}}</td>
+
           <td>{{car.CarDTO.Maker}}</td>
           <td>{{car.CarDTO.RegistrationNumber}}</td>
           <td>{{car.CarDTO.PurchasePrice}}</td>
@@ -55,11 +56,14 @@
           <td>{{car.CarDTO.NoOfPapers}}</td>
           <td>{{car.CarDTO.Token}}</td>
           <td>
-            <button class="btn btn-warning" data-target="#editCarStock" data-toggle="modal">
+            <!-- <button class="btn btn-warning" data-target="#editCarStock" data-toggle="modal">
               <i class="fa fa-pencil"></i>
-            </button>
+            </button> -->
             <button class="btn btn-danger">
               <i class="fa fa-trash"></i>
+            </button>
+            <button class="btn btn-info" data-toggle="modal" data-target="#userInfo">
+              <i class="fa fa-user"></i>
             </button>
           </td>
         </tr>
@@ -633,3 +637,59 @@
   </div>
 </div>
 <!-- edit carstock end -->
+
+
+<!-- Modal -->
+<div id="userInfo" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Car Owner Details</h4>
+      </div>
+      <div class="modal-body">
+        <div class="carImage">
+          <img src="../../../assets/images/car1.png" alt="">
+          <hr>
+        </div>
+
+
+        <table class="table">
+          <tr>
+
+            <th>Owner Name:</th>
+            <td>Muhammad Hussain</td>
+          </tr>
+          <tr>
+            <th>Contact:</th>
+            <td>1324513134</td>
+          </tr>
+          <tr>
+            <th>CNIC:</th>
+            <td>35134-12343241-1</td>
+          </tr>
+          <hr>
+
+          <tr>
+
+            <th>Owner Name:</th>
+            <td>Saddique Hussain</td>
+          </tr>
+          <tr>
+            <th>Contact:</th>
+            <td>90798787687</td>
+          </tr>
+          <tr>
+            <th>CNIC:</th>
+            <td>340908-132413-23</td>
+
+          </tr>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+</div>

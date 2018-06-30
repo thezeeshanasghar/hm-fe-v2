@@ -25,6 +25,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { CarPurchaseComponent } from './pages/car-purchase/car-purchase.component';
+import { ReversePipe } from './pipes/reverse.pipe';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { CarPurchaseComponent } from './pages/car-purchase/car-purchase.componen
     DashboardComponent,
     SearchFilterPipe,
     CarPurchaseComponent,
+    ReversePipe,
 
   ],
   imports: [
