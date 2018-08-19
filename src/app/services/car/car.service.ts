@@ -1,4 +1,4 @@
-import { Http ,Response} from '@angular/http';
+import { Http, Response, RequestOptions, Headers} from '@angular/http';
 import { GeneralHttpService } from './../general-http.service';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map'
@@ -6,18 +6,19 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class CarService {
 
-  constructor(private gs:GeneralHttpService,private http:Http) { }
+  constructor(private gs: GeneralHttpService, private http: Http) { }
 
 
-  addCar(obj:FormData){
-   
-      // let headers = new Headers({ 'Content-Type': 'application/json' });
-      let url = "http://" + this.gs.ip + ":" + this.gs.port + "/api/car";
-      return this.http.post(url, obj).map((response: Response) => response.json());
-    
+  addCar(obj) {
+
+    let httpOption = new Headers({ 'Content-Type': 'application/json' });
+    const option = new RequestOptions( {headers: httpOption });
+    let url = "http://" + this.gs.ip + ":" + this.gs.port + "/api/car";
+    return this.http.post(url, obj,option).map((response: Response) => response.json());
+
   }
 
-  getCars(){
+  getCars() {
     // let headers = new Headers({ 'Content-Type': 'application/json' });
     let url = "http://" + this.gs.ip + ":" + this.gs.port + "/api/car";
     return this.http.get(url).map((response: Response) => response.json());

@@ -14,12 +14,13 @@ import { CarOwner } from '../../Models/carOwner.model';
 })
 export class StockCarComponent implements OnInit {
   carOwnerList = [];
-  carsList = [];
+  carsList: any = [];
   changeClass = false;
   showAddCarForm = false;
   public carStockForm: FormGroup;
   carOwnerDtos: any;
   myMessage = "";
+  selectedCarOwner: any = [];
 
   successTrigger = false;
   errorTrigger = false;
@@ -94,17 +95,17 @@ export class StockCarComponent implements OnInit {
 
     if (post.owner2 === "") {
       this.carOwnerDtos = [{
-        AccountId: post.owner1
+        Id: post.owner1
       }]
     }
 
     else {
       this.carOwnerDtos = [
         {
-          AccountId: post.owner1
+          Id: post.owner1
         },
         {
-          AccountId: post.owner2
+          Id: post.owner2
         }
       ]
 
@@ -113,51 +114,59 @@ export class StockCarComponent implements OnInit {
 
 
     let model: any = {
-      carOwnerDtos: this.carOwnerDtos,
+      Owners: this.carOwnerDtos,
+      Name: carmodel.Name,
+      EngineNumber: carmodel.EngineNumber,
+      ModelNumber: carmodel.ModelNumber,
+      ChasisNumber: carmodel.ChasisNumber,
+      RegistrationNumber: carmodel.RegistrationNumber,
+      Color: carmodel.Color,
+      Maker: carmodel.Maker,
+      Token: carmodel.Token,
+      ComputerizedNoPlate: carmodel.ComputerizedNoPlate,
+      NoOfPapers: carmodel.NoOfPapers,
+      PurchasePrice: carmodel.PurchasePrice,
+      PurchaseDate: carmodel.PurchaseDate,
+      ReciptNumber: carmodel.reciptNumber
 
-      carDTO: {
-        Name: carmodel.Name,
-        EngineNumber: carmodel.EngineNumber,
-        ModelNumber: carmodel.ModelNumber,
-        ChasisNumber: carmodel.ChasisNumber,
-        RegistrationNumber: carmodel.RegistrationNumber,
-        Color: carmodel.Color,
-        Maker: carmodel.Maker,
-        Token: carmodel.Token,
-        ComputerizedNoPlate: carmodel.ComputerizedNoPlate,
-        NoOfPapers: carmodel.NoOfPapers,
-        PurchasePrice: carmodel.PurchasePrice,
-        PurchaseDate: carmodel.PurchaseDate,
-        ReciptNumber: carmodel.reciptNumber
-      }
     }
 
-    formData.append('model', JSON.stringify(model));
-    formData.append('avatar', this.carStockForm.get('avatar').value);
+    // formData.append('model', JSON.stringify(model));
+    // formData.append('avatar', this.carStockForm.get('avatar').value);
 
-    console.log(formData.get('model'));
+    // console.log(formData.get('model'));
+    let jsonModel = JSON.stringify(model);
 
-    this.cs.addCar(formData).subscribe(data => {
-      if(data.IsSuccess){
-        this.successTrigger=true;
-        this.myMessage="car added successfully. کار کا یندراج کامیاب رھا۔"
-      }
+    console.log("jso modal", jsonModel)
+
+    this.cs.addCar(jsonModel).subscribe(data => {
+
+      this.successTrigger = true;
+      this.myMessage = "car added successfully. کار کا یندراج کامیاب رھا۔";
+      window.scrollTo(0, 0);
+
       console.log(data);
     }, error => {
+      console.log(error)
+      this.errorTrigger = true;
+      this.myMessage = "somthing went wrong Please try again" + error;
+      window.scrollTo(0, 0);
 
-      this.errorTrigger=true;
-      this.myMessage="somthing went wrong Please try again"
-     });
+    });
   }
 
   getCars() {
 
     this.cs.getCars().subscribe(data => {
-      console.log(data.ResponseData);
-      this.carsList = data.ResponseData
+      debugger;
+      console.log(data);
+      this.carsList = data
       // this.carOwnerList=data.carOwnerDTOs
     },
-      error => { });
+      error => {
+        console.log(error)
+
+      });
   }
 
   sortAllAccounts(accouts) {
@@ -165,6 +174,10 @@ export class StockCarComponent implements OnInit {
       if (obj1.Number == obj2.Number) return 0;
       return (obj1.Number > obj2.Number) ? 1 : -1;
     });
+  }
+
+  setUserInfo(accounts) {
+    this.selectedCarOwner = accounts
   }
 
   onFileChange(event) {
