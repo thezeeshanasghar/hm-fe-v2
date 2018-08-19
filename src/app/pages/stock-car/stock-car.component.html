@@ -19,14 +19,17 @@
 
   <div class="row">
     <h3>Car Inventory &nbsp; /&nbsp; کار اندراج</h3>
-    <button *ngIf="!showAddCarForm" class="btn btn-primary pull-right" (click)="showAddCarFormToggle()" style="font-size:15px">Add Car</button>
-    <button *ngIf="showAddCarForm" class="btn btn-primary pull-right" (click)="showAddCarFormToggle()" style="font-size:15px">Show All Cars</button>
+    <button *ngIf="!showAddCarForm" class="btn btn-primary pull-right" (click)="showAddCarFormToggle()" style="font-size:15px">Add
+      Car
+    </button>
+    <button *ngIf="showAddCarForm" class="btn btn-primary pull-right" (click)="showAddCarFormToggle()" style="font-size:15px">Show
+      All Cars</button>
 
 
   </div>
   <hr>
   <div class="row" *ngIf="!showAddCarForm">
-    <table class="table table-striped" *ngIf="carsList.length>0;else noCar">
+    <table class="table table-striped">
       <thead style="background: lightblue">
         <tr>
           <th>#</th>
@@ -47,14 +50,14 @@
         <tr *ngFor="let car of carsList | reverse; let i=index">
           <td>{{i+1}}</td>
           <td>123213</td>
-          <td>{{car.CarDTO.Name}}</td>
+          <td>{{car.Name}}</td>
 
-          <td>{{car.CarDTO.Maker}}</td>
-          <td>{{car.CarDTO.RegistrationNumber}}</td>
-          <td>{{car.CarDTO.PurchasePrice}}</td>
-          <td>{{car.CarDTO.PurchaseDate | date}}</td>
-          <td>{{car.CarDTO.NoOfPapers}}</td>
-          <td>{{car.CarDTO.Token}}</td>
+          <td>{{car.Maker}}</td>
+          <td>{{car.RegistrationNumber}}</td>
+          <td>{{car.PurchasePrice}}</td>
+          <td>{{car.PurchaseDate | date}}</td>
+          <td>{{car.NoOfPapers}}</td>
+          <td>{{car.Token}}</td>
           <td>
             <!-- <button class="btn btn-warning" data-target="#editCarStock" data-toggle="modal">
               <i class="fa fa-pencil"></i>
@@ -62,7 +65,7 @@
             <button class="btn btn-danger">
               <i class="fa fa-trash"></i>
             </button>
-            <button class="btn btn-info" data-toggle="modal" data-target="#userInfo">
+            <button (click)="setUserInfo(car.Accounts)" class="btn btn-info" data-toggle="modal" data-target="#userInfo">
               <i class="fa fa-user"></i>
             </button>
           </td>
@@ -94,7 +97,8 @@
               <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Number}} -- {{u.Name}}</option>
             </select>
           </div>
-          <span *ngIf="!carStockForm.controls['owner1'].valid && carStockForm.controls['owner1'].touched" class="help-block sub-little-text">Owner1 is required</span>
+          <span *ngIf="!carStockForm.controls['owner1'].valid && carStockForm.controls['owner1'].touched" class="help-block sub-little-text">Owner1
+            is required</span>
         </div>
         <!-- owner1 -->
         <!-- owner2 -->
@@ -145,7 +149,8 @@
             <input type="text" formControlName="reciptNumber" class="form-control" placeholder=" Enter vehicle reciptNumber">
           </div>
           <span *ngIf="!carStockForm.controls['reciptNumber'].valid && 
-          carStockForm.controls['reciptNumber'].touched" class="help-block sub-little-text">vehicle reciptNumber is required</span>
+          carStockForm.controls['reciptNumber'].touched" class="help-block sub-little-text">vehicle reciptNumber
+            is required</span>
         </div>
         <!--vehicle  name -->
         <!-- vehicle modelNumber -->
@@ -160,7 +165,8 @@
             <input type="text" formControlName="modelNumber" class="form-control" placeholder=" Enter vehicle modal">
           </div>
           <span *ngIf="!carStockForm.controls['modelNumber'].valid && 
-          carStockForm.controls['modelNumber'].touched" class="help-block sub-little-text">vehicle model number is required</span>
+          carStockForm.controls['modelNumber'].touched" class="help-block sub-little-text">vehicle model number
+            is required</span>
         </div>
         <!--vehicle  modelNumber -->
 
@@ -212,7 +218,8 @@
             <input type="text" formControlName="noOfPapers" class="form-control" placeholder=" Enter vehicle number of papers">
           </div>
           <span *ngIf="!carStockForm.controls['noOfPapers'].valid && 
-          carStockForm.controls['noOfPapers'].touched" class="help-block sub-little-text">Number of vehicle Papers.must be a number </span>
+          carStockForm.controls['noOfPapers'].touched" class="help-block sub-little-text">Number of vehicle Papers.must
+            be a number </span>
         </div>
         <!--No of Papers -->
 
@@ -228,7 +235,8 @@
             <input type="text" formControlName="registrationNumber" class="form-control" placeholder=" Enter vehicle registration number">
           </div>
           <span *ngIf="!carStockForm.controls['registrationNumber'].valid && 
-         carStockForm.controls['registrationNumber'].touched" class="help-block sub-little-text">vehicle registration number is required</span>
+         carStockForm.controls['registrationNumber'].touched" class="help-block sub-little-text">vehicle registration
+            number is required</span>
         </div>
         <!--vehicle  registrationNumber -->
 
@@ -254,7 +262,8 @@
             <input type="text" formControlName="engineNumber" class="form-control" placeholder=" Enter vehicle engine number">
           </div>
           <span *ngIf="!carStockForm.controls['engineNumber'].valid && 
-          carStockForm.controls['engineNumber'].touched" class="help-block sub-little-text">vehicle engine number is required</span>
+          carStockForm.controls['engineNumber'].touched" class="help-block sub-little-text">vehicle engine number
+            is required</span>
         </div>
 
         <!--vehical  engineNumber -->
@@ -300,7 +309,8 @@
             <input type="text" formControlName="chasisNumber" class="form-control" placeholder=" Enter vehicle chasis number">
           </div>
           <span *ngIf="!carStockForm.controls['chasisNumber'].valid && 
-           carStockForm.controls['chasisNumber'].touched" class="help-block sub-little-text">Vehicle chasis number is required</span>
+           carStockForm.controls['chasisNumber'].touched" class="help-block sub-little-text">Vehicle chasis number
+            is required</span>
         </div>
         <!--vehicle  chasisNumber -->
 
@@ -316,7 +326,8 @@
             <input type="date" formControlName="purchaseDate" class="form-control" placeholder=" Enter vehicle purchase date">
           </div>
           <span *ngIf="!carStockForm.controls['purchaseDate'].valid && 
-           carStockForm.controls['purchaseDate'].touched" class="help-block sub-little-text">Vehicle purchase date is required</span>
+           carStockForm.controls['purchaseDate'].touched" class="help-block sub-little-text">Vehicle purchase
+            date is required</span>
         </div>
         <!--vehicle  purchaseDate -->
 
@@ -332,14 +343,15 @@
             <input type="text" formControlName="purchasePrice" class="form-control" placeholder=" Enter vehicle purchase price">
           </div>
           <span *ngIf="!carStockForm.controls['purchasePrice'].valid && 
-          carStockForm.controls['purchasePrice'].touched" class="help-block sub-little-text">vehicle purchase price is required,must b a number</span>
+          carStockForm.controls['purchasePrice'].touched" class="help-block sub-little-text">vehicle purchase
+            price is required,must b a number</span>
         </div>
         <!--vehicle  purchasePrice -->
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="avatar">Car Image</label>
           <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
-        </div>
+        </div> -->
 
 
         <button type="submit" class="btn btn-primary pull-right">
@@ -392,7 +404,8 @@
                   <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Number}} -- {{u.Name}}</option>
                 </select>
               </div>
-              <span *ngIf="!carStockForm.controls['owner1'].valid && carStockForm.controls['owner1'].touched" class="help-block sub-little-text">Owner1 is required</span>
+              <span *ngIf="!carStockForm.controls['owner1'].valid && carStockForm.controls['owner1'].touched" class="help-block sub-little-text">Owner1
+                is required</span>
             </div>
             <!-- owner1 -->
             <!-- owner2 -->
@@ -442,7 +455,8 @@
                 <input type="text" formControlName="modelNumber" class="form-control" placeholder=" Enter vehical modal">
               </div>
               <span *ngIf="!carStockForm.controls['modelNumber'].valid && 
-          carStockForm.controls['modelNumber'].touched" class="help-block sub-little-text">Vehical model number is required</span>
+          carStockForm.controls['modelNumber'].touched" class="help-block sub-little-text">Vehical model number
+                is required</span>
             </div>
             <!--vehical  modelNumber -->
 
@@ -494,7 +508,8 @@
                 <input type="text" formControlName="noOfPapers" class="form-control" placeholder=" Enter vehical number of papers">
               </div>
               <span *ngIf="!carStockForm.controls['noOfPapers'].valid && 
-          carStockForm.controls['noOfPapers'].touched" class="help-block sub-little-text">Number of Vehical Papers.must be a number </span>
+          carStockForm.controls['noOfPapers'].touched" class="help-block sub-little-text">Number of Vehical
+                Papers.must be a number </span>
             </div>
             <!--No of Papers -->
 
@@ -510,7 +525,8 @@
                 <input type="text" formControlName="registrationNumber" class="form-control" placeholder=" Enter vehical registration number">
               </div>
               <span *ngIf="!carStockForm.controls['registrationNumber'].valid && 
-         carStockForm.controls['registrationNumber'].touched" class="help-block sub-little-text">Vehical registration number is required</span>
+         carStockForm.controls['registrationNumber'].touched" class="help-block sub-little-text">Vehical registration
+                number is required</span>
             </div>
             <!--vehical  registrationNumber -->
 
@@ -530,7 +546,8 @@
                 <input type="text" formControlName="engineNumber" class="form-control" placeholder=" Enter vehical engine number">
               </div>
               <span *ngIf="!carStockForm.controls['engineNumber'].valid && 
-          carStockForm.controls['engineNumber'].touched" class="help-block sub-little-text">Vehical engine number is required</span>
+          carStockForm.controls['engineNumber'].touched" class="help-block sub-little-text">Vehical engine
+                number is required</span>
             </div>
             <!--vehical  engineNumber -->
             <!-- vehical token -->
@@ -545,7 +562,8 @@
                 <input type="text" formControlName="token" class="form-control" placeholder=" Enter vehical token status">
               </div>
               <span *ngIf="!carStockForm.controls['token'].valid && 
-          carStockForm.controls['token'].touched" class="help-block sub-little-text">Vehical token status is required</span>
+          carStockForm.controls['token'].touched" class="help-block sub-little-text">Vehical token status
+                is required</span>
             </div>
             <!--vehical  token -->
 
@@ -574,7 +592,8 @@
                 <input type="text" formControlName="chasisNumber" class="form-control" placeholder=" Enter vehical chasis number">
               </div>
               <span *ngIf="!carStockForm.controls['chasisNumber'].valid && 
-           carStockForm.controls['chasisNumber'].touched" class="help-block sub-little-text">Vehical chasis number is required</span>
+           carStockForm.controls['chasisNumber'].touched" class="help-block sub-little-text">Vehical chasis
+                number is required</span>
             </div>
             <!--vehical  chasisNumber -->
 
@@ -592,7 +611,8 @@
                 <input type="date" formControlName="purchaseDate" class="form-control" placeholder=" Enter vehical purchase date">
               </div>
               <span *ngIf="!carStockForm.controls['purchaseDate'].valid && 
-           carStockForm.controls['purchaseDate'].touched" class="help-block sub-little-text">Vehical purchase date is required</span>
+           carStockForm.controls['purchaseDate'].touched" class="help-block sub-little-text">Vehical purchase
+                date is required</span>
             </div>
             <!--vehical  purchaseDate -->
 
@@ -608,15 +628,16 @@
                 <input type="text" formControlName="purchasePrice" class="form-control" placeholder=" Enter vehical purchase price">
               </div>
               <span *ngIf="!carStockForm.controls['purchasePrice'].valid && 
-          carStockForm.controls['purchasePrice'].touched" class="help-block sub-little-text">Vehical purchase price is required,must b a number</span>
+          carStockForm.controls['purchasePrice'].touched" class="help-block sub-little-text">Vehical purchase
+                price is required,must b a number</span>
             </div>
             <!--vehical  purchasePrice -->
-
+            <!-- 
 
             <div class="form-group">
               <label for="avatar">Car Image</label>
               <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
-            </div>
+            </div> -->
 
 
 
@@ -657,34 +678,36 @@
 
 
         <table class="table">
-          <tr>
+          <tr *ngIf="selectedCarOwner[0]">
 
-            <th>Owner Name:</th>
-            <td>Muhammad Hussain</td>
+            <th>Owner 1 Name:</th>
+            <td>{{selectedCarOwner[0].Name}}</td>
+            <td><img src="selectedCarOwner[0].Image" alt="" width="60" height="70"></td>
           </tr>
-          <tr>
+          <tr *ngIf="selectedCarOwner[0]">
             <th>Contact:</th>
-            <td>1324513134</td>
+            <td>{{selectedCarOwner[0].MobileNumber}}</td>
           </tr>
-          <tr>
+          <tr *ngIf="selectedCarOwner[0]">
             <th>CNIC:</th>
-            <td>35134-12343241-1</td>
+            <td>{{selectedCarOwner[0].CNIC}}</td>
           </tr>
           <hr>
 
-          <tr>
+          <tr *ngIf="selectedCarOwner[1]">
 
             <th>Owner Name:</th>
-            <td>Saddique Hussain</td>
-          </tr>
-          <tr>
-            <th>Contact:</th>
-            <td>90798787687</td>
-          </tr>
-          <tr>
-            <th>CNIC:</th>
-            <td>340908-132413-23</td>
+            <td>{{selectedCarOwner[1].Name}}</td>
+            <td><img src="{{selectedCarOwner[1].Image}}" alt="" width="60" height="70"></td>
 
+          </tr>
+          <tr *ngIf="selectedCarOwner[1]">
+            <th>Contact:</th>
+            <td>{{selectedCarOwner[1].MobileNumber}}</td>
+          </tr>
+          <tr *ngIf="selectedCarOwner[1]">
+            <th>CNIC:</th>
+            <td>{{selectedCarOwner[1].CNIC}}</td>
           </tr>
         </table>
       </div>
