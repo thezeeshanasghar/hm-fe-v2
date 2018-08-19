@@ -18,16 +18,30 @@
   </div>
 
   <div class="row">
+
+
+
     <h3>Car Inventory &nbsp; /&nbsp; کار اندراج</h3>
     <button *ngIf="!showAddCarForm" class="btn btn-primary pull-right" (click)="showAddCarFormToggle()" style="font-size:15px">Add
       Car
     </button>
     <button *ngIf="showAddCarForm" class="btn btn-primary pull-right" (click)="showAddCarFormToggle()" style="font-size:15px">Show
       All Cars</button>
-
-
+    <hr>
+    <div class="col-md-6">
+      <div class="form-group" *ngIf="!showAddCarForm">
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-search"></i>
+          </div>
+          <input class="form-control" type="text" name="search" [(ngModel)]="filter">
+        </div>
+      </div>
+    </div>
   </div>
-  <hr>
+
+
+
   <div class="row" *ngIf="!showAddCarForm">
     <table class="table table-striped">
       <thead style="background: lightblue">
@@ -47,7 +61,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let car of carsList | reverse; let i=index">
+        <tr *ngFor="let car of carsList | reverse | filter:filter; let i=index">
           <td>{{i+1}}</td>
           <td>123213</td>
           <td>{{car.Name}}</td>

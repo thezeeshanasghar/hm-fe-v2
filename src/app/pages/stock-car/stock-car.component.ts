@@ -21,6 +21,8 @@ export class StockCarComponent implements OnInit {
   carOwnerDtos: any;
   myMessage = "";
   selectedCarOwner: any = [];
+  filter = '';
+
 
   successTrigger = false;
   errorTrigger = false;

@@ -29,6 +29,8 @@ export class AccountsComponent implements OnInit {
     mobile: 0
   }
 
+  filter = '';
+
 
   showSearch = true;
   warningTrigger = false;

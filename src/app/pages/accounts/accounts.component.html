@@ -37,7 +37,7 @@
 <div class="row">
 
 
-  <form #searchForm="ngForm" (ngSubmit)="onSubmit(search)">
+  <!-- <form #searchForm="ngForm" (ngSubmit)="onSubmit(search)">
 
     <div class="col-md-2">
 
@@ -62,17 +62,30 @@
     </div>
 
     <div class="col-md-2">
-      <!-- *ngIf="search.name='' && search.mobile=0 && search.cnic=0" -->
-      <button class="btn btn-primary" type="submit">
+     *ngIf="search.name='' && search.mobile=0 && search.cnic=0"
+  <button class="btn btn-primary" type="submit">
         <i class="fa fa-search"></i>
       </button>
       <button class="btn btn-success" *ngIf="showSearchResult" (click)="showSearchResultToggle()">
         <i class="fa fa-refresh"></i>
-      </button>
-    </div>
+      </button> 
 
-  </form>
-  <div class="col-md-4">
+ 
+</div>
+
+</form> -->
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input class="form-control" type="text" name="search" [(ngModel)]="filter">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
     <div class="pull-right">
       <!-- <button *ngIf="allAccounts.length>0" class="btn btn-success" style="font-size:15px">Total Account Holders&nbsp; :&nbsp; {{allAccounts.length}}</button> -->
       <button type="button" class="btn btn-primary" (click)="openModalExpense(templateExpense)" style="font-size:15px">
@@ -106,14 +119,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let account of allAccounts ; let i=index">
+        <tr *ngFor="let account of allAccounts | filter:filter ; let i=index">
           <td>{{i+1}}</td>
           <td>{{account.Number}}</td>
           <td>{{account.Name}}</td>
           <td>{{account.MobileNumber}}</td>
 
           <td>
-            <img src="http://{{ip}}:{{port}}/{{account.Image}} " width="40" height="40" alt="" style="border-radius: 50%;"> </td>
+            <img src="http://{{ip}}:{{port}}/{{account.Image}} " width="40" height="40" alt="" style="border-radius: 50%;">            </td>
           <!-- <td>{{account.CNIC}}</td> -->
           <!-- <td>{{account.Address}}</td> -->
 

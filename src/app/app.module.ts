@@ -26,6 +26,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { CarPurchaseComponent } from './pages/car-purchase/car-purchase.component';
 import { ReversePipe } from './pipes/reverse.pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { ReversePipe } from './pipes/reverse.pipe';
     HttpModule,
     ModalModule.forRoot(),
     AlertModule.forRoot(),
-    MyDatePickerModule
+    MyDatePickerModule,
+    Ng2SearchPipeModule
     
   ],
   providers: [GeneralHttpService,CarService],
