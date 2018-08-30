@@ -21,7 +21,7 @@ export class searchModel {
   templateUrl: './accounts.component.html'
 })
 export class AccountsComponent implements OnInit {
-
+  loading = false;
 
   public search: searchModel = {
     name: 0,
@@ -58,7 +58,7 @@ export class AccountsComponent implements OnInit {
 
   constructor(private router: Router, public fb: FormBuilder, private gu: GeneralHttpService, private modalService: BsModalService, private http: Http) {
 
-
+    this.loading = true;
     this.ip = this.gu.ip;
     this.port = this.gu.port;
 
@@ -118,9 +118,7 @@ export class AccountsComponent implements OnInit {
 
     });
 
-
     this.allAccounts = accounts;
-
   }
 
   makeImageUrl(url) {
@@ -140,8 +138,8 @@ export class AccountsComponent implements OnInit {
   getAllAccounts() {
     this.gu.getAllAccounts().subscribe(data => {
       this.allAccounts = data.ResponseData;
-
-      console.log(this.allAccounts);
+      this.loading = false;
+      // console.log(this.allAccounts);
     }, error => {
 
 

@@ -22,6 +22,7 @@ export class StockCarComponent implements OnInit {
   myMessage = "";
   selectedCarOwner: any = [];
   filter = '';
+  loading = false;
 
 
   successTrigger = false;
@@ -31,7 +32,7 @@ export class StockCarComponent implements OnInit {
   makerList = ['Toyota', 'Honda', 'Hundai', 'Suzuki', 'Faw'];
 
   constructor(private cs: CarService, private fb: FormBuilder, private gu: GeneralHttpService) {
-
+    this.loading = true;
   }
 
   setAlertOff() {
@@ -160,8 +161,9 @@ export class StockCarComponent implements OnInit {
   getCars() {
 
     this.cs.getCars().subscribe(data => {
-      debugger;
-      console.log(data);
+      // debugger;
+      // console.log(data);
+      this.loading = false;
       this.carsList = data
       // this.carOwnerList=data.carOwnerDTOs
     },
