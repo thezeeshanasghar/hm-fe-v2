@@ -63,9 +63,8 @@
       <tbody>
         <tr *ngFor="let car of carsList | reverse | filter:filter; let i=index">
           <td>{{i+1}}</td>
-          <td>123213</td>
+          <td>{{car.receiptNumber}}</td>
           <td>{{car.Name}}</td>
-
           <td>{{car.Maker}}</td>
           <td>{{car.RegistrationNumber}}</td>
           <td>{{car.PurchasePrice}}</td>
@@ -152,18 +151,18 @@
         <!--vehicle  name -->
 
         <!-- vehicle reciptNumber -->
-        <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['reciptNumber'].valid && 
-         carStockForm.controls['reciptNumber'].touched, 'has-success': carStockForm.controls['reciptNumber'].valid}">
-          <label for="reciptNumber">Recipt Number:</label>
+        <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['receiptNumber'].valid && 
+         carStockForm.controls['receiptNumber'].touched, 'has-success': carStockForm.controls['receiptNumber'].valid}">
+          <label for="receiptNumber">Recipt Number:</label>
           <div class="input-group">
             <span class="input-group-addon">
               <i class="fa fa-car"></i>
             </span>
 
-            <input type="text" formControlName="reciptNumber" class="form-control" placeholder=" Enter vehicle reciptNumber">
+            <input type="text" formControlName="receiptNumber" class="form-control" placeholder=" Enter vehicle receiptNumber">
           </div>
-          <span *ngIf="!carStockForm.controls['reciptNumber'].valid && 
-          carStockForm.controls['reciptNumber'].touched" class="help-block sub-little-text">vehicle reciptNumber
+          <span *ngIf="!carStockForm.controls['receiptNumber'].valid && 
+          carStockForm.controls['receiptNumber'].touched" class="help-block sub-little-text">vehicle receiptNumber
             is required</span>
         </div>
         <!--vehicle  name -->

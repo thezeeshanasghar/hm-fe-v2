@@ -14,6 +14,6 @@ export class Car{
     NoOfPapers:number;
     PurchasePrice:number;
     PurchaseDate:Date;
-    reciptNumber:number;
+    receiptNumber:number;
     carOwner:CarOwner[];
 }
