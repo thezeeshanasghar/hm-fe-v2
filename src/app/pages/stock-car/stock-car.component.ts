@@ -51,7 +51,7 @@ export class StockCarComponent implements OnInit {
     let date = new Date();
     this.carStockForm = this.fb.group({
       name: ['Toyata GLI', Validators.required],
-      reciptNumber: ['', Validators.required],
+      receiptNumber: ['', Validators.required],
       modelNumber: ['M321', Validators.compose([Validators.required, Validators.minLength(2)])],
       color: ['Black', Validators.compose([Validators.required, Validators.minLength(2)])],
       maker: ['Honda', Validators.compose([Validators.required, Validators.minLength(2)])],
@@ -81,7 +81,7 @@ export class StockCarComponent implements OnInit {
 
     let carmodel = new Car();
     carmodel.Name = post.name;
-    carmodel.reciptNumber = post.reciptNumber;
+    carmodel.receiptNumber = post.receiptNumber;
     carmodel.EngineNumber = post.engineNumber;
     carmodel.ChasisNumber = post.chasisNumber;
     carmodel.RegistrationNumber = post.registrationNumber;
@@ -130,7 +130,7 @@ export class StockCarComponent implements OnInit {
       NoOfPapers: carmodel.NoOfPapers,
       PurchasePrice: carmodel.PurchasePrice,
       PurchaseDate: carmodel.PurchaseDate,
-      ReciptNumber: carmodel.reciptNumber
+      ReceiptNumber: carmodel.receiptNumber
 
     }
 
