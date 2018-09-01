@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
 .alertMessage{
     padding-left: 15px;
 }
@@ -6,4 +7,8 @@
     width:540px;
     max-width: 540px ;
     height: 300px;
+}
+
+.mt-15{
+    margin-top: 15px;
 }

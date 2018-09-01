@@ -1,7 +1,7 @@
-<div >
+<div>
 
-  <div class="row" >
-    <div class="col-md-6 col-md-offset-3">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
 
       <div class="login-panel panel panel-default">
 
@@ -23,17 +23,17 @@
           <div style="padding:15px"></div>
 
           <!-- success message -->
-      <div *ngIf="successTrigger" class="alert alert-success alert-dismissable">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <i class="fa fa-comment fa-fw"></i>
-        <strong>{{myMessage}}</strong>
-      </div>
-      <!-- error message -->
-      <div *ngIf="errorTrigger" class="alert alert-danger alert-dismissable">
-        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
-        <i class="fa fa-warning fa-fw"></i>
-        <strong>{{myMessage}}</strong>
-      </div>
+          <div *ngIf="successTrigger" class="alert alert-success alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <i class="fa fa-comment fa-fw"></i>
+            <strong>{{myMessage}}</strong>
+          </div>
+          <!-- error message -->
+          <div *ngIf="errorTrigger" class="alert alert-danger alert-dismissable">
+            <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+            <i class="fa fa-warning fa-fw"></i>
+            <strong>{{myMessage}}</strong>
+          </div>
 
           <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
             <!--email-->
@@ -59,7 +59,8 @@
                   </span>
                   <input [formControl]="password" type="password" class="form-control" placeholder="Enter Password">
                 </div>
-                <span *ngIf="!password.valid && password.touched " class="help-block sub-little-text">Password field can't empty.</span>
+                <span *ngIf="!password.valid && password.touched " class="help-block sub-little-text">Password field can't
+                  empty.</span>
 
               </div>
             </div>
