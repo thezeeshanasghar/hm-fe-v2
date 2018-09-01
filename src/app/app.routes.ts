@@ -1,3 +1,5 @@
+import { ListExchangeCarComponent } from './pages/exchange-recipt/list-exchange-car/list-exchange-car.component';
+import { AddExchangeCarComponent } from './pages/exchange-recipt/add-exchange-car/add-exchange-car.component';
 import { CarSaleComponent } from './pages/car-sale/car-sale.component';
 import { ExchangeReciptComponent } from './pages/exchange-recipt/exchange-recipt.component';
 import { UdharComponent } from './pages/udhar/udhar.component';
@@ -42,13 +44,25 @@ export const appRoutes: Routes = [
             },
 
             { path: "purchase", component: CarPurchaseComponent },
-            { path: "exchangeRecipt", component: ExchangeReciptComponent },
+            // { path: "exchangeRecipt", component: ExchangeReciptComponent },
 
             { path: "udhar", component: UdharComponent },
 
             { path: "accounts", component: AccountsComponent },
             { path: "addAccount", component: AddAccountComponent },
             { path: "roznamcha", component: RoznamchaComponent },
+
+            {
+                path: "carExchange",
+                component: ExchangeReciptComponent,
+                children: [
+                    { path: '', redirectTo: 'add', pathMatch: 'full' },
+                    { path: 'add', component: AddExchangeCarComponent },
+                    { path: 'list', component: ListExchangeCarComponent },
+
+                ]
+
+            },
 
 
             {
