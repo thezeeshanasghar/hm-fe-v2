@@ -15,6 +15,9 @@ import { CarPurchaseComponent } from './pages/car-purchase/car-purchase.componen
 import { AddCarComponent } from './pages/stock-car/add-car/add-car.component';
 import { ListCarsComponent } from './pages/stock-car/list-cars/list-cars.component';
 import { EditCarComponent } from './pages/stock-car/edit-car/edit-car.component';
+import { AddCarPurchaseComponent } from './pages/car-purchase/add-car-purchase/add-car-purchase.component';
+import { ListCarPurchaseComponent } from './pages/car-purchase/list-car-purchase/list-car-purchase.component';
+import { EditCarPurchaseComponent } from './pages/car-purchase/edit-car-purchase/edit-car-purchase.component';
 
 export const appRoutes: Routes = [
     {
@@ -56,6 +59,18 @@ export const appRoutes: Routes = [
 
                 ]
             },
+
+            {
+                path: "purchase",
+                component: CarPurchaseComponent,
+                children: [
+                    { path: '', redirectTo: 'list', pathMatch: 'full' },
+                    { path: 'list', component: ListCarPurchaseComponent },
+                    { path: 'add', component: AddCarPurchaseComponent },
+                    { path: 'edit', component: EditCarPurchaseComponent }
+
+                ]
+            }
 
 
         ]

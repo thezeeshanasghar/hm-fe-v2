@@ -30,6 +30,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AddCarComponent } from './pages/stock-car/add-car/add-car.component';
 import { ListCarsComponent } from './pages/stock-car/list-cars/list-cars.component';
 import { EditCarComponent } from './pages/stock-car/edit-car/edit-car.component';
+import { EditCarPurchaseComponent } from './pages/car-purchase/edit-car-purchase/edit-car-purchase.component';
+import { AddCarPurchaseComponent } from './pages/car-purchase/add-car-purchase/add-car-purchase.component';
+import { ListCarPurchaseComponent } from './pages/car-purchase/list-car-purchase/list-car-purchase.component';
+import { CarPurchaseService } from './services/car/car-purchase.service';
 
 
 @NgModule({
@@ -55,6 +59,9 @@ import { EditCarComponent } from './pages/stock-car/edit-car/edit-car.component'
     AddCarComponent,
     ListCarsComponent,
     EditCarComponent,
+    EditCarPurchaseComponent,
+    AddCarPurchaseComponent,
+    ListCarPurchaseComponent,
 
   ],
   imports: [
@@ -70,7 +77,7 @@ import { EditCarComponent } from './pages/stock-car/edit-car/edit-car.component'
     BsDatepickerModule.forRoot()
 
   ],
-  providers: [GeneralHttpService, CarService],
+  providers: [GeneralHttpService, CarService,CarPurchaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
