@@ -153,7 +153,7 @@
                 <i class="fa fa-user"></i>
               </span>
 
-              <select formControlName="seller1" class="form-control" id="sel1" (ngModelChange)="getOwnedCars(seller1)">
+              <select formControlName="seller1" class="form-control" #seller1 (ngModelChange)="getOwnedCars(seller1.value)">
                 <option value="">--Select Seller 1 Account--</option>
                 <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
               </select>
@@ -163,14 +163,15 @@
           </div>
           <!--userAccount -->
           <!--userAccount -->
-          <div class="form-group row">
+          <!-- {{seller1.value |json}} -->
+          <div *ngIf="seller1.value != ''" class="form-group row">
             <label for="seller2">Seller 2:</label>
             <div class="input-group">
               <span class="input-group-addon">
                 <i class="fa fa-user"></i>
               </span>
 
-              <select formControlName="seller2" class="form-control" id="sel1">
+              <select formControlName="seller2" class="form-control" #seller2 (ngModelChange)="getSharedCars(seller1.value,seller2.value)">
                 <option value="">--Select Seller 2 Account--</option>
                 <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
               </select>
@@ -186,9 +187,9 @@
                 <i class="fa fa-car"></i>
               </span>
 
-              <select formControlName="vehical" class="form-control" id="sel1">
+              <select formControlName="vehical" class="form-control" id="">
                 <option value="">--Select vehical--</option>
-                <option value="{{u}}" *ngFor="let u of vehicalList">{{u}}</option>
+                <option value="{{u.Id}}" *ngFor="let u of vehicalList">{{u.Name}}</option>
               </select>
             </div>
             <span *ngIf="!vehical.valid && vehical.touched && vehical.value.length < 4 " class="help-block sub-little-text">Vehical
@@ -237,7 +238,7 @@
                 <i class="fa fa-user"></i>
               </span>
 
-              <select formControlName="buyer1" class="form-control" id="sel1">
+              <select formControlName="buyer1" class="form-control" #buyer1 >
                 <option value="">--Select Buyer 1 Account--</option>
                 <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
               </select>
@@ -247,14 +248,14 @@
           </div>
           <!--userAccount -->
           <!--userAccount -->
-          <div class="form-group row">
+          <div *ngIf="buyer1.value != ''" class="form-group row">
             <label for="buyer2">buyer 2:</label>
             <div class="input-group">
               <span class="input-group-addon">
                 <i class="fa fa-user"></i>
               </span>
 
-              <select formControlName="buyer2" class="form-control" id="sel1">
+              <select formControlName="buyer2" class="form-control" id="">
                 <option value="">--Select Buyer 2 Account--</option>
                 <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
               </select>
@@ -517,7 +518,7 @@
                 <i class="fa fa-car"></i>
               </span>
 
-              <select [formControl]="maker" class="form-control" id="sel1">
+              <select [formControl]="maker" class="form-control" id="">
                 <option value="">--Select Maker--</option>
                 <option value="{{i+i}}" *ngFor="let u of makerList ;let i=index">{{u}}</option>
               </select>
