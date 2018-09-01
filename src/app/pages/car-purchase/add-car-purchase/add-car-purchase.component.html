@@ -7,653 +7,655 @@
 
 <div class="row">
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+  <div class="col-md-12">
+      <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
 
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <a data-toggle="pill" href="#Parties">Parties</a>
-      </li>
-      <!-- <li>
-            <a data-toggle="pill" href="#Buyer">Buyer</a>
-          </li> -->
-      <li *ngIf="!showSeller">
-        <a data-toggle="pill" href="#Vehical">Vehical</a>
-      </li>
-      <li>
-        <a data-toggle="pill" href="#Witness">Witness</a>
-      </li>
-    </ul>
-
-    <div class="tab-content">
-      <div id="Parties" class="tab-pane fade in active">
-
-
-
-
-
-        <div class="col-md-6" style="padding-right:30px" *ngIf="!showSeller">
-          <!--sellerName-->
-          <div class="form-group row" [ngClass]="{'has-error': (!sellerName.valid && sellerName.touched), 'has-success': (sellerName.valid && sellerName.touched)}">
-
-            <label for="sellerName">Seller Name:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-              <input required formControlName="sellerName" type="text" name="sellerName" class="form-control" placeholder=" Enter Vehical sellerName"
-                #sellerName (ngModelChange)=setOnwer1(sellerName)>
-            </div>
-            <span *ngIf="!sellerName.valid && sellerName.touched " class="help-block sub-little-text">Enter a valid name
-            </span>
-          </div>
-          <!-- sellerName -->
-          <!--sellerContact-->
-          <div class="form-group row" [ngClass]="{'has-error': (!sellerContact.valid && sellerContact.touched), 'has-success': (sellerContact.valid && sellerContact.touched)}">
-
-            <label for="sellerContact">Seller Contact:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-              <input required formControlName="sellerContact" type="text" class="form-control" placeholder=" Enter Vehical sellerContact">
-            </div>
-            <span *ngIf="!sellerContact.valid && sellerContact.touched " class="help-block sub-little-text">Enter a valid
-              contact
-            </span>
-          </div>
-          <!-- sellerContact -->
-
-          <!--sellerCNIC-->
-          <div class="form-group row" [ngClass]="{'has-error': (!sellerCNIC.valid && sellerCNIC.touched), 'has-success': (sellerCNIC.valid && sellerCNIC.touched)}">
-
-            <label for="sellerCNIC">Seller CNIC:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-              <input required formControlName="sellerCNIC" type="text" class="form-control" placeholder=" Enter Vehical sellerCNIC">
-            </div>
-            <span *ngIf="!sellerCNIC.valid && sellerCNIC.touched " class="help-block sub-little-text">Enter a valid CNIC
-            </span>
-          </div>
-          <!-- sellerCNIC -->
-
-          <!--sellerAddress-->
-          <div class="form-group row" [ngClass]="{'has-error': (!sellerAddress.valid && sellerAddress.touched), 'has-success': (sellerAddress.valid && sellerAddress.touched)}">
-
-            <label for="sellerAddress">Seller Address:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-              <input required formControlName="sellerAddress" type="text" class="form-control" placeholder=" Enter Vehical sellerAddress">
-            </div>
-            <span *ngIf="!sellerAddress.valid && sellerAddress.touched " class="help-block sub-little-text">Enter a valid
-              address
-            </span>
-          </div>
-          <!-- sellerAddress -->
-
-          <!-- dealDate -->
-
-          <div class="form-group row">
-            <label for="dealDate">Deal date</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              <input required formControlName="dealDate" name="dealDate" type="date" class="form-control">
-            </div>
-          </div>
-          <!-- dealDate -->
-          <!--vehicalPrice-->
-          <div class="form-group row" [ngClass]="{'has-error': (!vehicalPrice.valid && vehicalPrice.touched), 'has-success': (vehicalPrice.valid && vehicalPrice.touched)}">
-
-            <label for="vehicalPrice">Car Price:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-              <input required formControlName="vehicalPrice" type="text" class="form-control" placeholder=" Enter Vehical vehicalPrice">
-            </div>
-            <span *ngIf="!vehicalPrice.valid && vehicalPrice.touched " class="help-block sub-little-text">Enter a valid vehical
-              price
-            </span>
-          </div>
-          <!-- vehicalPrice -->
-          <!--commissionFromSeller-->
-          <div class="form-group row" [ngClass]="{'has-error': (!commissionFromSeller.valid && commissionFromSeller.touched), 'has-success': (commissionFromSeller.valid && commissionFromSeller.touched)}">
-            <label for="commissionFromSeller">Commission:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-paint-brush"></i>
-              </span>
-              <input required formControlName="commissionFromSeller" type="text" class="form-control" placeholder=" Enter commission">
-            </div>
-            <span *ngIf="!commissionFromSeller.valid && commissionFromSeller.touched " class="help-block sub-little-text">Enter
-              Amount
-            </span>
-          </div>
-          <!-- commissionFromSeller -->
-
-
-
-
-
-        </div>
-        <div class="col-md-6" *ngIf="showSeller" style="padding-right:30px">
-          <!-- <label for="isActive">I'm Not Register User &nbsp;&nbsp;</label>
-                <input type="checkbox" name="isActive" (change)="changeCheckboxSeller($event)"> -->
-
-          <!--userAccount -->
-          <div class="form-group row" [ngClass]="{'has-error': (!seller1.valid && seller1.touched), 'has-success': (seller1.valid && seller1.touched)}">
-            <label for="seller1">seller1 1:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-user"></i>
-              </span>
-
-              <select formControlName="seller1" class="form-control" #seller1 (ngModelChange)="getOwnedCars(seller1.value)">
-                <option value="">--Select Seller 1 Account--</option>
-                <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
-              </select>
-            </div>
-            <span *ngIf="!seller1.valid && seller1.touched && seller1.value.length < 4 " class="help-block sub-little-text">User
-              Account is required</span>
-          </div>
-          <!--userAccount -->
-          <!--userAccount -->
-          <!-- {{seller1.value |json}} -->
-          <div *ngIf="seller1.value != ''" class="form-group row">
-            <label for="seller2">Seller 2:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-user"></i>
-              </span>
-
-              <select formControlName="seller2" class="form-control" #seller2 (ngModelChange)="getSharedCars(seller1.value,seller2.value)">
-                <option value="">--Select Seller 2 Account--</option>
-                <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
-              </select>
-            </div>
-
-          </div>
-          <!--userAccount -->
-          <!--vehical -->
-          <div class="form-group row" [ngClass]="{'has-error': (!vehical.valid && vehical.touched), 'has-success': (vehical.valid && vehical.touched)}">
-            <label for="vehical">Vehical:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-
-              <select formControlName="vehical" class="form-control" id="">
-                <option value="">--Select vehical--</option>
-                <option value="{{u.Id}}" *ngFor="let u of vehicalList">{{u.Name}}</option>
-              </select>
-            </div>
-            <span *ngIf="!vehical.valid && vehical.touched && vehical.value.length < 4 " class="help-block sub-little-text">Vehical
-              is required</span>
-          </div>
-          <!--vehical -->
-
-          <!--vehicalPrice-->
-          <div class="form-group row" [ngClass]="{'has-error': (!vehicalPrice.valid && vehicalPrice.touched), 'has-success': (vehicalPrice.valid && vehicalPrice.touched)}">
-
-            <label for="vehicalPrice">Car Price:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-              <input required formControlName="vehicalPrice" type="text" class="form-control" placeholder=" Enter Vehical vehicalPrice">
-            </div>
-            <span *ngIf="!vehicalPrice.valid && vehicalPrice.touched " class="help-block sub-little-text">Enter a valid amount
-            </span>
-          </div>
-          <!-- vehicalPrice -->
-          <!--commissionFromSeller-->
-          <div class="form-group row" [ngClass]="{'has-error': (!commissionFromSeller.valid && commissionFromSeller.touched), 'has-success': (commissionFromSeller.valid && commissionFromSeller.touched)}">
-            <label for="commissionFromSeller">Commission:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-paint-brush"></i>
-              </span>
-              <input required formControlName="commissionFromSeller" type="text" class="form-control" placeholder=" Enter commission">
-            </div>
-            <span *ngIf="!commissionFromSeller.valid && commissionFromSeller.touched " class="help-block sub-little-text">Enter
-              a valid Amount</span>
-          </div>
-          <!-- commissionFromSeller -->
-
-        </div>
-
-        <div class="col-md-6" *ngIf="showBuyer">
-          <!-- <label for="isActive">I'm Not Register User &nbsp;&nbsp;</label>
-              <input type="checkbox" name="isActive" (change)="changeCheckbox($event)"> -->
-          <!--userAccount -->
-          <div class="form-group row" [ngClass]="{'has-error': (!buyer1.valid && buyer1.touched), 'has-success': (buyer1.valid && buyer1.touched)}">
-            <label for="buyer1">Buyer1 1:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-user"></i>
-              </span>
-
-              <select formControlName="buyer1" class="form-control" #buyer1 >
-                <option value="">--Select Buyer 1 Account--</option>
-                <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
-              </select>
-            </div>
-            <span *ngIf="!buyer1.valid && buyer1.touched && buyer1.value.length < 4 " class="help-block sub-little-text">User
-              Account is required</span>
-          </div>
-          <!--userAccount -->
-          <!--userAccount -->
-          <div *ngIf="buyer1.value != ''" class="form-group row">
-            <label for="buyer2">buyer 2:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-user"></i>
-              </span>
-
-              <select formControlName="buyer2" class="form-control" id="">
-                <option value="">--Select Buyer 2 Account--</option>
-                <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
-              </select>
-            </div>
-
-          </div>
-          <!--userAccount -->
-          <!-- DealDate -->
-          <div class="form-group row">
-            <label for="dealDate">Deal date</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              <input placeholder="Datepicker" formControlName="dealDate" name="dealDate" bsDatepicker class="form-control">
-            </div>
-          </div>
-          <!-- DealDate -->
-          <!--buyerPaidAmount-->
-          <!-- <div class="form-group row" [ngClass]="{'has-error': (!buyerPaidAmount.valid && buyerPaidAmount.touched), 'has-success': (buyerPaidAmount.valid && buyerPaidAmount.touched)}">
-                <label for="buyerPaidAmoount">Advance:</label>
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-paint-brush"></i>
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a data-toggle="pill" href="#Parties">Parties</a>
+            </li>
+            <!-- <li>
+                  <a data-toggle="pill" href="#Buyer">Buyer</a>
+                </li> -->
+            <li *ngIf="!showSeller">
+              <a data-toggle="pill" href="#Vehical">Vehical</a>
+            </li>
+            <li>
+              <a data-toggle="pill" href="#Witness">Witness</a>
+            </li>
+          </ul>
+      
+          <div class="tab-content">
+            <div id="Parties" class="tab-pane fade in active">
+      
+      
+      
+      
+      
+              <div class="col-md-6" style="padding-right:30px" *ngIf="!showSeller">
+                <!--sellerName-->
+                <div class="form-group row" [ngClass]="{'has-error': (!sellerName.valid && sellerName.touched), 'has-success': (sellerName.valid && sellerName.touched)}">
+      
+                  <label for="sellerName">Seller Name:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+                    <input required formControlName="sellerName" type="text" name="sellerName" class="form-control" placeholder=" Enter Vehical sellerName"
+                      #sellerName (ngModelChange)=setOnwer1(sellerName)>
+                  </div>
+                  <span *ngIf="!sellerName.valid && sellerName.touched " class="help-block sub-little-text">Enter a valid name
                   </span>
-                  <input required formControlName="buyerPaidAmount" type="text" class="form-control" placeholder=" Enter Vehical buyer Paid Amount">
                 </div>
-                <span *ngIf="!buyerPaidAmount.valid && buyerPaidAmount.touched " class="help-block sub-little-text">Enter a
-                  valid Vehical buyer Paid Amount</span>
-              </div> -->
-          <!-- buyerPaidAmount -->
-          <!--commissionFromBuyer-->
-          <div class="form-group row" [ngClass]="{'has-error': (!commissionFromBuyer.valid && commissionFromBuyer.touched), 'has-success': (commissionFromBuyer.valid && commissionFromBuyer.touched)}">
-            <label for="commissionFromBuyer">Commission:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-paint-brush"></i>
-              </span>
-              <input required formControlName="commissionFromBuyer" type="text" class="form-control" placeholder=" Enter commission">
-            </div>
-            <span *ngIf="!commissionFromBuyer.valid && commissionFromBuyer.touched " class="help-block sub-little-text">Enter
-              a valid Vehical buyer Paid Amount</span>
-          </div>
-          <!-- commissionFromBuyer -->
-          <!-- dueDate -->
-
-          <!-- <div class="form-group row">
-                <label for="dueDate">Due Date For Remaing Payment</label>
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-clock-o"></i>
+                <!-- sellerName -->
+                <!--sellerContact-->
+                <div class="form-group row" [ngClass]="{'has-error': (!sellerContact.valid && sellerContact.touched), 'has-success': (sellerContact.valid && sellerContact.touched)}">
+      
+                  <label for="sellerContact">Seller Contact:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+                    <input required formControlName="sellerContact" type="text" class="form-control" placeholder=" Enter Vehical sellerContact">
+                  </div>
+                  <span *ngIf="!sellerContact.valid && sellerContact.touched " class="help-block sub-little-text">Enter a valid
+                    contact
                   </span>
-                  <input required formControlName="dueDate" name="dueDate" type="date" class="form-control">
                 </div>
-              </div> -->
-          <!-- dueDate -->
-
-        </div>
-        <div class="col-md-6" *ngIf="!showBuyer">
-          <!-- <label for="isActive">I'm Register User &nbsp;&nbsp;</label>
-              <input type="checkbox" name="isActiveNot" (change)="changeCheckbox($event)"> -->
-
-
-          <!--buyerName-->
-          <div class="form-group row" [ngClass]="{'has-error': (!buyerName.valid && buyerName.touched), 'has-success': (buyerName.valid && buyerName.touched)}">
-
-            <label for="buyerName">Buyer Name:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-              <input required formControlName="buyerName" type="text" class="form-control" placeholder=" Enter Vehical buyerName">
-            </div>
-            <span *ngIf="!buyerName.valid && buyerName.touched " class="help-block sub-little-text">Enter a valid Name
-            </span>
-          </div>
-          <!-- buyerName -->
-          <!--buyerContact-->
-          <div class="form-group row" [ngClass]="{'has-error': (!buyerContact.valid && buyerContact.touched), 'has-success': (buyerContact.valid && buyerContact.touched)}">
-
-            <label for="buyerContact">Buyer Contact:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-              <input required formControlName="buyerContact" type="text" class="form-control" placeholder=" Enter Vehical buyerContact">
-            </div>
-            <span *ngIf="!buyerContact.valid && buyerContact.touched " class="help-block sub-little-text">Enter a valid contact
-            </span>
-          </div>
-          <!-- buyerContact -->
-
-          <!--buyerCNIC-->
-          <div class="form-group row" [ngClass]="{'has-error': (!buyerCNIC.valid && buyerCNIC.touched), 'has-success': (buyerCNIC.valid && buyerCNIC.touched)}">
-
-            <label for="buyerCNIC">Buyer CNIC:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-              <input required formControlName="buyerCNIC" type="text" class="form-control" placeholder=" Enter Vehical buyerCNIC">
-            </div>
-            <span *ngIf="!buyerCNIC.valid && buyerCNIC.touched " class="help-block sub-little-text">Enter a valid CNIC
-            </span>
-          </div>
-          <!-- buyerCNIC -->
-
-          <!--buyerAddress-->
-          <div class="form-group row" [ngClass]="{'has-error': (!buyerAddress.valid && buyerAddress.touched), 'has-success': (buyerAddress.valid && buyerAddress.touched)}">
-
-            <label for="buyerAddress">Buyer Address:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-              <input required formControlName="buyerAddress" type="text" class="form-control" placeholder=" Enter Vehical buyerAddress">
-            </div>
-            <span *ngIf="!buyerAddress.valid && buyerAddress.touched " class="help-block sub-little-text">Enter a valid address
-            </span>
-          </div>
-          <!-- buyerAddress -->
-          <!--buyerPaidAmount-->
-          <div class="form-group row" [ngClass]="{'has-error': (!buyerPaidAmount.valid && buyerPaidAmount.touched), 'has-success': (buyerPaidAmount.valid && buyerPaidAmount.touched)}">
-
-            <label for="buyerPaidAmount">Paid Amount:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-              <input required formControlName="buyerPaidAmount" type="text" class="form-control" placeholder=" Enter Vehical buyerPaidAmount">
-            </div>
-            <span *ngIf="!buyerPaidAmount.valid && buyerPaidAmount.touched " class="help-block sub-little-text">Enter a valid
-              amount
-            </span>
-          </div>
-          <!-- buyerPaidAmount -->
-          <!--commissionFromBuyer-->
-          <div class="form-group row" [ngClass]="{'has-error': (!commissionFromBuyer.valid && commissionFromBuyer.touched), 'has-success': (commissionFromBuyer.valid && commissionFromBuyer.touched)}">
-            <label for="commissionFromBuyer">Commission:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-paint-brush"></i>
-              </span>
-              <input required formControlName="commissionFromBuyer" type="text" class="form-control" placeholder=" Enter commission">
-            </div>
-            <span *ngIf="!commissionFromBuyer.valid && commissionFromBuyer.touched " class="help-block sub-little-text">Enter
-              a valid amount</span>
-          </div>
-          <!-- commissionFromBuyer -->
-
-          <!-- dueDate -->
-          <!-- 
-              <div class="form-group row">
-                <label for="dueDate">Due Date For Remaing Payment</label>
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-clock-o"></i>
+                <!-- sellerContact -->
+      
+                <!--sellerCNIC-->
+                <div class="form-group row" [ngClass]="{'has-error': (!sellerCNIC.valid && sellerCNIC.touched), 'has-success': (sellerCNIC.valid && sellerCNIC.touched)}">
+      
+                  <label for="sellerCNIC">Seller CNIC:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+                    <input required formControlName="sellerCNIC" type="text" class="form-control" placeholder=" Enter Vehical sellerCNIC">
+                  </div>
+                  <span *ngIf="!sellerCNIC.valid && sellerCNIC.touched " class="help-block sub-little-text">Enter a valid CNIC
                   </span>
-                  <input required formControlName="dueDate" name="dueDate" type="date" class="form-control">
                 </div>
-              </div> -->
-          <!-- dueDate -->
-
-        </div>
-
-
-      </div>
-
-      <div id="Vehical" class="tab-pane fade" *ngIf="!showSeller">
-        <div class="col-md-6" style="padding-right:30px">
-
-          <!--vehicalName-->
-          <div class="form-group row" [ngClass]="{'has-error': (!vehicalName.valid && vehicalName.touched), 'has-success': (vehicalName.valid && vehicalName.touched)}">
-
-            <label for="vehicalName">Vehical Name:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-              <input required formControlName="vehicalName" type="text" class="form-control" placeholder=" Enter Vehical vehicalName">
+                <!-- sellerCNIC -->
+      
+                <!--sellerAddress-->
+                <div class="form-group row" [ngClass]="{'has-error': (!sellerAddress.valid && sellerAddress.touched), 'has-success': (sellerAddress.valid && sellerAddress.touched)}">
+      
+                  <label for="sellerAddress">Seller Address:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+                    <input required formControlName="sellerAddress" type="text" class="form-control" placeholder=" Enter Vehical sellerAddress">
+                  </div>
+                  <span *ngIf="!sellerAddress.valid && sellerAddress.touched " class="help-block sub-little-text">Enter a valid
+                    address
+                  </span>
+                </div>
+                <!-- sellerAddress -->
+      
+                <!-- dealDate -->
+      
+                <div class="form-group row">
+                  <label for="dealDate">Deal date</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-clock-o"></i>
+                    </span>
+                    <input required formControlName="dealDate" name="dealDate" type="date" class="form-control">
+                  </div>
+                </div>
+                <!-- dealDate -->
+                <!--vehicalPrice-->
+                <div class="form-group row" [ngClass]="{'has-error': (!vehicalPrice.valid && vehicalPrice.touched), 'has-success': (vehicalPrice.valid && vehicalPrice.touched)}">
+      
+                  <label for="vehicalPrice">Car Price:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+                    <input required formControlName="vehicalPrice" type="text" class="form-control" placeholder=" Enter Vehical vehicalPrice">
+                  </div>
+                  <span *ngIf="!vehicalPrice.valid && vehicalPrice.touched " class="help-block sub-little-text">Enter a valid vehical
+                    price
+                  </span>
+                </div>
+                <!-- vehicalPrice -->
+                <!--commissionFromSeller-->
+                <div class="form-group row" [ngClass]="{'has-error': (!commissionFromSeller.valid && commissionFromSeller.touched), 'has-success': (commissionFromSeller.valid && commissionFromSeller.touched)}">
+                  <label for="commissionFromSeller">Commission:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-paint-brush"></i>
+                    </span>
+                    <input required formControlName="commissionFromSeller" type="text" class="form-control" placeholder=" Enter commission">
+                  </div>
+                  <span *ngIf="!commissionFromSeller.valid && commissionFromSeller.touched " class="help-block sub-little-text">Enter
+                    Amount
+                  </span>
+                </div>
+                <!-- commissionFromSeller -->
+      
+      
+      
+      
+      
+              </div>
+              <div class="col-md-6" *ngIf="showSeller" style="padding-right:30px">
+                <!-- <label for="isActive">I'm Not Register User &nbsp;&nbsp;</label>
+                      <input type="checkbox" name="isActive" (change)="changeCheckboxSeller($event)"> -->
+      
+                <!--userAccount -->
+                <div class="form-group row" [ngClass]="{'has-error': (!seller1.valid && seller1.touched), 'has-success': (seller1.valid && seller1.touched)}">
+                  <label for="seller1">seller1 1:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user"></i>
+                    </span>
+      
+                    <select formControlName="seller1" class="form-control" #seller1 (ngModelChange)="getOwnedCars(seller1.value)">
+                      <option value="">--Select Seller 1 Account--</option>
+                      <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
+                    </select>
+                  </div>
+                  <span *ngIf="!seller1.valid && seller1.touched && seller1.value.length < 4 " class="help-block sub-little-text">User
+                    Account is required</span>
+                </div>
+                <!--userAccount -->
+                <!--userAccount -->
+                <!-- {{seller1.value |json}} -->
+                <div *ngIf="seller1.value != ''" class="form-group row">
+                  <label for="seller2">Seller 2:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user"></i>
+                    </span>
+      
+                    <select formControlName="seller2" class="form-control" #seller2 (ngModelChange)="getSharedCars(seller1.value,seller2.value)">
+                      <option value="">--Select Seller 2 Account--</option>
+                      <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
+                    </select>
+                  </div>
+      
+                </div>
+                <!--userAccount -->
+                <!--vehical -->
+                <div class="form-group row" [ngClass]="{'has-error': (!vehical.valid && vehical.touched), 'has-success': (vehical.valid && vehical.touched)}">
+                  <label for="vehical">Vehical:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+      
+                    <select formControlName="vehical" class="form-control" id="">
+                      <option value="">--Select vehical--</option>
+                      <option value="{{u.Id}}" *ngFor="let u of vehicalList">{{u.Name}}</option>
+                    </select>
+                  </div>
+                  <span *ngIf="!vehical.valid && vehical.touched && vehical.value.length < 4 " class="help-block sub-little-text">Vehical
+                    is required</span>
+                </div>
+                <!--vehical -->
+      
+                <!--vehicalPrice-->
+                <div class="form-group row" [ngClass]="{'has-error': (!vehicalPrice.valid && vehicalPrice.touched), 'has-success': (vehicalPrice.valid && vehicalPrice.touched)}">
+      
+                  <label for="vehicalPrice">Car Price:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+                    <input required formControlName="vehicalPrice" type="text" class="form-control" placeholder=" Enter Vehical vehicalPrice">
+                  </div>
+                  <span *ngIf="!vehicalPrice.valid && vehicalPrice.touched " class="help-block sub-little-text">Enter a valid amount
+                  </span>
+                </div>
+                <!-- vehicalPrice -->
+                <!--commissionFromSeller-->
+                <div class="form-group row" [ngClass]="{'has-error': (!commissionFromSeller.valid && commissionFromSeller.touched), 'has-success': (commissionFromSeller.valid && commissionFromSeller.touched)}">
+                  <label for="commissionFromSeller">Commission:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-paint-brush"></i>
+                    </span>
+                    <input required formControlName="commissionFromSeller" type="text" class="form-control" placeholder=" Enter commission">
+                  </div>
+                  <span *ngIf="!commissionFromSeller.valid && commissionFromSeller.touched " class="help-block sub-little-text">Enter
+                    a valid Amount</span>
+                </div>
+                <!-- commissionFromSeller -->
+      
+              </div>
+      
+              <div class="col-md-6" *ngIf="showBuyer">
+                <!-- <label for="isActive">I'm Not Register User &nbsp;&nbsp;</label>
+                    <input type="checkbox" name="isActive" (change)="changeCheckbox($event)"> -->
+                <!--userAccount -->
+                <div class="form-group row" [ngClass]="{'has-error': (!buyer1.valid && buyer1.touched), 'has-success': (buyer1.valid && buyer1.touched)}">
+                  <label for="buyer1">Buyer1 1:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user"></i>
+                    </span>
+      
+                    <select formControlName="buyer1" class="form-control" #buyer1 >
+                      <option value="">--Select Buyer 1 Account--</option>
+                      <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
+                    </select>
+                  </div>
+                  <span *ngIf="!buyer1.valid && buyer1.touched && buyer1.value.length < 4 " class="help-block sub-little-text">User
+                    Account is required</span>
+                </div>
+                <!--userAccount -->
+                <!--userAccount -->
+                <div *ngIf="buyer1.value != ''" class="form-group row">
+                  <label for="buyer2">buyer 2:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user"></i>
+                    </span>
+      
+                    <select formControlName="buyer2" class="form-control" id="">
+                      <option value="">--Select Buyer 2 Account--</option>
+                      <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}--{{u.Number}}</option>
+                    </select>
+                  </div>
+      
+                </div>
+                <!--userAccount -->
+                <!-- DealDate -->
+                <div class="form-group row">
+                  <label for="dealDate">Deal date</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-clock-o"></i>
+                    </span>
+                    <input placeholder="Datepicker" formControlName="dealDate" name="dealDate" bsDatepicker class="form-control">
+                  </div>
+                </div>
+                <!-- DealDate -->
+                <!--buyerPaidAmount-->
+                <!-- <div class="form-group row" [ngClass]="{'has-error': (!buyerPaidAmount.valid && buyerPaidAmount.touched), 'has-success': (buyerPaidAmount.valid && buyerPaidAmount.touched)}">
+                      <label for="buyerPaidAmoount">Advance:</label>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="fa fa-paint-brush"></i>
+                        </span>
+                        <input required formControlName="buyerPaidAmount" type="text" class="form-control" placeholder=" Enter Vehical buyer Paid Amount">
+                      </div>
+                      <span *ngIf="!buyerPaidAmount.valid && buyerPaidAmount.touched " class="help-block sub-little-text">Enter a
+                        valid Vehical buyer Paid Amount</span>
+                    </div> -->
+                <!-- buyerPaidAmount -->
+                <!--commissionFromBuyer-->
+                <div class="form-group row" [ngClass]="{'has-error': (!commissionFromBuyer.valid && commissionFromBuyer.touched), 'has-success': (commissionFromBuyer.valid && commissionFromBuyer.touched)}">
+                  <label for="commissionFromBuyer">Commission:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-paint-brush"></i>
+                    </span>
+                    <input required formControlName="commissionFromBuyer" type="text" class="form-control" placeholder=" Enter commission">
+                  </div>
+                  <span *ngIf="!commissionFromBuyer.valid && commissionFromBuyer.touched " class="help-block sub-little-text">Enter
+                    a valid Vehical buyer Paid Amount</span>
+                </div>
+                <!-- commissionFromBuyer -->
+                <!-- dueDate -->
+      
+                <!-- <div class="form-group row">
+                      <label for="dueDate">Due Date For Remaing Payment</label>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+                        <input required formControlName="dueDate" name="dueDate" type="date" class="form-control">
+                      </div>
+                    </div> -->
+                <!-- dueDate -->
+      
+              </div>
+              <div class="col-md-6" *ngIf="!showBuyer">
+                <!-- <label for="isActive">I'm Register User &nbsp;&nbsp;</label>
+                    <input type="checkbox" name="isActiveNot" (change)="changeCheckbox($event)"> -->
+      
+      
+                <!--buyerName-->
+                <div class="form-group row" [ngClass]="{'has-error': (!buyerName.valid && buyerName.touched), 'has-success': (buyerName.valid && buyerName.touched)}">
+      
+                  <label for="buyerName">Buyer Name:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+                    <input required formControlName="buyerName" type="text" class="form-control" placeholder=" Enter Vehical buyerName">
+                  </div>
+                  <span *ngIf="!buyerName.valid && buyerName.touched " class="help-block sub-little-text">Enter a valid Name
+                  </span>
+                </div>
+                <!-- buyerName -->
+                <!--buyerContact-->
+                <div class="form-group row" [ngClass]="{'has-error': (!buyerContact.valid && buyerContact.touched), 'has-success': (buyerContact.valid && buyerContact.touched)}">
+      
+                  <label for="buyerContact">Buyer Contact:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+                    <input required formControlName="buyerContact" type="text" class="form-control" placeholder=" Enter Vehical buyerContact">
+                  </div>
+                  <span *ngIf="!buyerContact.valid && buyerContact.touched " class="help-block sub-little-text">Enter a valid contact
+                  </span>
+                </div>
+                <!-- buyerContact -->
+      
+                <!--buyerCNIC-->
+                <div class="form-group row" [ngClass]="{'has-error': (!buyerCNIC.valid && buyerCNIC.touched), 'has-success': (buyerCNIC.valid && buyerCNIC.touched)}">
+      
+                  <label for="buyerCNIC">Buyer CNIC:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+                    <input required formControlName="buyerCNIC" type="text" class="form-control" placeholder=" Enter Vehical buyerCNIC">
+                  </div>
+                  <span *ngIf="!buyerCNIC.valid && buyerCNIC.touched " class="help-block sub-little-text">Enter a valid CNIC
+                  </span>
+                </div>
+                <!-- buyerCNIC -->
+      
+                <!--buyerAddress-->
+                <div class="form-group row" [ngClass]="{'has-error': (!buyerAddress.valid && buyerAddress.touched), 'has-success': (buyerAddress.valid && buyerAddress.touched)}">
+      
+                  <label for="buyerAddress">Buyer Address:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+                    <input required formControlName="buyerAddress" type="text" class="form-control" placeholder=" Enter Vehical buyerAddress">
+                  </div>
+                  <span *ngIf="!buyerAddress.valid && buyerAddress.touched " class="help-block sub-little-text">Enter a valid address
+                  </span>
+                </div>
+                <!-- buyerAddress -->
+                <!--buyerPaidAmount-->
+                <div class="form-group row" [ngClass]="{'has-error': (!buyerPaidAmount.valid && buyerPaidAmount.touched), 'has-success': (buyerPaidAmount.valid && buyerPaidAmount.touched)}">
+      
+                  <label for="buyerPaidAmount">Paid Amount:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+                    <input required formControlName="buyerPaidAmount" type="text" class="form-control" placeholder=" Enter Vehical buyerPaidAmount">
+                  </div>
+                  <span *ngIf="!buyerPaidAmount.valid && buyerPaidAmount.touched " class="help-block sub-little-text">Enter a valid
+                    amount
+                  </span>
+                </div>
+                <!-- buyerPaidAmount -->
+                <!--commissionFromBuyer-->
+                <div class="form-group row" [ngClass]="{'has-error': (!commissionFromBuyer.valid && commissionFromBuyer.touched), 'has-success': (commissionFromBuyer.valid && commissionFromBuyer.touched)}">
+                  <label for="commissionFromBuyer">Commission:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-paint-brush"></i>
+                    </span>
+                    <input required formControlName="commissionFromBuyer" type="text" class="form-control" placeholder=" Enter commission">
+                  </div>
+                  <span *ngIf="!commissionFromBuyer.valid && commissionFromBuyer.touched " class="help-block sub-little-text">Enter
+                    a valid amount</span>
+                </div>
+                <!-- commissionFromBuyer -->
+      
+                <!-- dueDate -->
+                <!-- 
+                    <div class="form-group row">
+                      <label for="dueDate">Due Date For Remaing Payment</label>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+                        <input required formControlName="dueDate" name="dueDate" type="date" class="form-control">
+                      </div>
+                    </div> -->
+                <!-- dueDate -->
+      
+              </div>
+      
+      
             </div>
-            <span *ngIf="!vehicalName.valid && vehicalName.touched " class="help-block sub-little-text">Enter a valid vehical
-              Name
-            </span>
-          </div>
-          <!-- vehicalName -->
-          <!--modelNumber-->
-          <div class="form-group row" [ngClass]="{'has-error': (!modelNumber.valid && modelNumber.touched), 'has-success': (modelNumber.valid && modelNumber.touched)}">
-            <label for="modelNumber">Model Number:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-              <input required [formControl]="modelNumber" type="text" class="form-control" placeholder=" Enter Vehical model Number">
+      
+            <div id="Vehical" class="tab-pane fade" *ngIf="!showSeller">
+              <div class="col-md-6" style="padding-right:30px">
+      
+                <!--vehicalName-->
+                <div class="form-group row" [ngClass]="{'has-error': (!vehicalName.valid && vehicalName.touched), 'has-success': (vehicalName.valid && vehicalName.touched)}">
+      
+                  <label for="vehicalName">Vehical Name:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+                    <input required formControlName="vehicalName" type="text" class="form-control" placeholder=" Enter Vehical vehicalName">
+                  </div>
+                  <span *ngIf="!vehicalName.valid && vehicalName.touched " class="help-block sub-little-text">Enter a valid vehical
+                    Name
+                  </span>
+                </div>
+                <!-- vehicalName -->
+                <!--modelNumber-->
+                <div class="form-group row" [ngClass]="{'has-error': (!modelNumber.valid && modelNumber.touched), 'has-success': (modelNumber.valid && modelNumber.touched)}">
+                  <label for="modelNumber">Model Number:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+                    <input required [formControl]="modelNumber" type="text" class="form-control" placeholder=" Enter Vehical model Number">
+                  </div>
+                  <span *ngIf="!modelNumber.valid && modelNumber.touched " class="help-block sub-little-text">Enter a valid Vehical
+                    Model Number</span>
+                </div>
+                <!-- modelNumber -->
+      
+                <!--registrationNumber-->
+                <div class="form-group row" [ngClass]="{'has-error': (!registrationNumber.valid && registrationNumber.touched), 'has-success': (registrationNumber.valid && registrationNumber.touched)}">
+                  <label for="registrationNumber">Registration Number:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-book"></i>
+                    </span>
+                    <input required [formControl]="registrationNumber" type="text" class="form-control" placeholder=" Enter Vehical registration Number">
+                  </div>
+                  <span *ngIf="!registrationNumber.valid && registrationNumber.touched " class="help-block sub-little-text">Enter
+                    a valid Vehical Registration Number</span>
+                </div>
+                <!-- registrationNumber -->
+                <!--chassisNumber-->
+                <div class="form-group row" [ngClass]="{'has-error': (!chassisNumber.valid && chassisNumber.touched), 'has-success': (chassisNumber.valid && chassisNumber.touched)}">
+                  <label for="chassisNumber">Chassis Number:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-cogs"></i>
+                    </span>
+                    <input required [formControl]="chassisNumber" type="text" class="form-control" placeholder=" Enter Vehical Chassis Number">
+                  </div>
+                  <span *ngIf="!chassisNumber.valid && chassisNumber.touched " class="help-block sub-little-text">Enter a valid
+                    Vehical Number</span>
+                </div>
+                <!-- chassisNumber -->
+      
+              </div>
+              <div class="col-md-6">
+                <!--engineNumber-->
+                <div class="form-group row" [ngClass]="{'has-error': (!engineNumber.valid && engineNumber.touched), 'has-success': (engineNumber.valid && engineNumber.touched)}">
+                  <label for="engineNumber">Engine Number:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-cogs"></i>
+                    </span>
+                    <input required [formControl]="engineNumber" type="text" class="form-control" placeholder=" Enter Vehical Engine Number">
+                  </div>
+                  <span *ngIf="!engineNumber.valid && engineNumber.touched " class="help-block sub-little-text">Enter a valid Vehical
+                    Engine Number</span>
+                </div>
+                <!-- engineNumber -->
+                <!--color-->
+                <div class="form-group row" [ngClass]="{'has-error': (!color.valid && color.touched), 'has-success': (color.valid && color.touched)}">
+                  <label for="color">Color:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-paint-brush"></i>
+                    </span>
+                    <input required [formControl]="color" type="text" class="form-control" placeholder=" Enter Vehical Color">
+                  </div>
+                  <span *ngIf="!color.valid && color.touched " class="help-block sub-little-text">Enter a valid Vehical Color</span>
+                </div>
+                <!-- color -->
+                <!--maker -->
+                <div class="form-group row" [ngClass]="{'has-error': (!maker.valid && maker.touched), 'has-success': (maker.valid && maker.touched)}">
+                  <label for="maker">Maker:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-car"></i>
+                    </span>
+      
+                    <select [formControl]="maker" class="form-control" id="">
+                      <option value="">--Select Maker--</option>
+                      <option value="{{i+i}}" *ngFor="let u of makerList ;let i=index">{{u}}</option>
+                    </select>
+                  </div>
+                  <span *ngIf="!maker.valid && maker.touched && maker.value.length < 4 " class="help-block sub-little-text">Vehical
+                    maker is required</span>
+                </div>
+                <!--maker -->
+      
+              </div>
+      
+      
             </div>
-            <span *ngIf="!modelNumber.valid && modelNumber.touched " class="help-block sub-little-text">Enter a valid Vehical
-              Model Number</span>
-          </div>
-          <!-- modelNumber -->
-
-          <!--registrationNumber-->
-          <div class="form-group row" [ngClass]="{'has-error': (!registrationNumber.valid && registrationNumber.touched), 'has-success': (registrationNumber.valid && registrationNumber.touched)}">
-            <label for="registrationNumber">Registration Number:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-book"></i>
-              </span>
-              <input required [formControl]="registrationNumber" type="text" class="form-control" placeholder=" Enter Vehical registration Number">
+            <div id="Witness" class="tab-pane fade">
+              <div class="col-md-6" style="padding-right:30px">
+      
+                <!--witnessName1-->
+                <div class="form-group row" [ngClass]="{'has-error': (!witnessName1.valid && witnessName1.touched), 'has-success': (witnessName1.valid && witnessName1.touched)}">
+                  <label for="witnessName1">Witness 1 Name:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user"></i>
+                    </span>
+                    <input required [formControl]="witnessName1" type="text" class="form-control" placeholder=" Enter Witness Name">
+                  </div>
+                  <span *ngIf="!witnessName1.valid && witnessName1.touched " class="help-block sub-little-text">Enter a valid name
+                  </span>
+                </div>
+                <!-- witnessName1 -->
+                <!--witnessContact1-->
+                <div class="form-group row" [ngClass]="{'has-error': (!witnessContact1.valid && witnessContact1.touched), 'has-success': (witnessContact1.valid && witnessContact1.touched)}">
+                  <label for="witnessContact1">Witness 1 Contact:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-phone"></i>
+                    </span>
+                    <input required [formControl]="witnessContact1" type="text" class="form-control" placeholder=" Enter Witness Contact">
+                  </div>
+                  <span *ngIf="!witnessContact1.valid && witnessContact1.touched " class="help-block sub-little-text">Enter a valid
+                    phone number</span>
+                </div>
+                <!-- witnessContact1 -->
+      
+                <!--witnessCnic1-->
+                <div class="form-group row" [ngClass]="{'has-error': (!witnessCnic1.valid && witnessCnic1.touched), 'has-success': (witnessCnic1.valid && witnessCnic1.touched)}">
+                  <label for="witnessCnic1">Witness 1 CNIC:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-id-card"></i>
+                    </span>
+                    <input required [formControl]="witnessCnic1" type="text" class="form-control" placeholder=" Enter Witness CNIC">
+                  </div>
+                  <span *ngIf="!witnessCnic1.valid && witnessCnic1.touched " class="help-block sub-little-text">Enter a valid CNIC
+                  </span>
+                </div>
+                <!-- witnessCnic1 -->
+      
+              </div>
+              <div class="col-md-6">
+      
+      
+      
+                <!--witnessName2-->
+                <div class="form-group row" [ngClass]="{'has-error': (!witnessName2.valid && witnessName2.touched), 'has-success': (witnessName2.valid && witnessName2.touched)}">
+                  <label for="witnessName2">Witness 2 Name:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user"></i>
+                    </span>
+                    <input required [formControl]="witnessName2" type="text" class="form-control" placeholder=" Enter Witness Name">
+                  </div>
+                  <span *ngIf="!witnessName2.valid && witnessName2.touched " class="help-block sub-little-text">Enter a valid name
+                  </span>
+                </div>
+                <!-- witnessName2 -->
+                <!--witnessContact2-->
+                <div class="form-group row" [ngClass]="{'has-error': (!witnessContact2.valid && witnessContact2.touched), 'has-success': (witnessContact2.valid && witnessContact2.touched)}">
+                  <label for="witnessContact2">Witness 2 Contact:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-phone"></i>
+                    </span>
+                    <input required [formControl]="witnessContact2" type="text" class="form-control" placeholder=" Enter Witness Contact">
+                  </div>
+                  <span *ngIf="!witnessContact2.valid && witnessContact2.touched " class="help-block sub-little-text">Enter a valid
+                    phone number</span>
+                </div>
+                <!-- witnessContact2 -->
+      
+                <!--witnessCnic2-->
+                <div class="form-group row" [ngClass]="{'has-error': (!witnessCnic2.valid && witnessCnic2.touched), 'has-success': (witnessCnic2.valid && witnessCnic2.touched)}">
+                  <label for="witnessCnic2">Witness 2 CNIC:</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-id-card"></i>
+                    </span>
+                    <input [formControl]="witnessCnic2" type="text" class="form-control" placeholder=" Enter Witness CNIC">
+                  </div>
+                  <span *ngIf="!witnessCnic2.valid && witnessCnic2.touched " class="help-block sub-little-text">Enter a valid CNIC
+                  </span>
+                </div>
+                <!-- witnessCnic2 -->
+      
+      
+      
+      
+      
+              </div>
+      
+              <div class="col-md-12">
+                <!--description-->
+                <div class="form-group row" [ngClass]="{'has-error': (!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="glyphicon glyphicon-pencil"></i>
+                    </span>
+                    <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
+                  </div>
+                  <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must
+                    be at least 10 characters</span>
+                </div>
+                <!-- description -->
+              </div>
+      
+              <button type="submit" class="btn btn-primary pull-right">
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                <i [ngClass]="{'fa fa-spinner fa-spin': changeClass}"></i>
+                Add</button>
+      
+      
             </div>
-            <span *ngIf="!registrationNumber.valid && registrationNumber.touched " class="help-block sub-little-text">Enter
-              a valid Vehical Registration Number</span>
           </div>
-          <!-- registrationNumber -->
-          <!--chassisNumber-->
-          <div class="form-group row" [ngClass]="{'has-error': (!chassisNumber.valid && chassisNumber.touched), 'has-success': (chassisNumber.valid && chassisNumber.touched)}">
-            <label for="chassisNumber">Chassis Number:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-cogs"></i>
-              </span>
-              <input required [formControl]="chassisNumber" type="text" class="form-control" placeholder=" Enter Vehical Chassis Number">
-            </div>
-            <span *ngIf="!chassisNumber.valid && chassisNumber.touched " class="help-block sub-little-text">Enter a valid
-              Vehical Number</span>
-          </div>
-          <!-- chassisNumber -->
-
-        </div>
-        <div class="col-md-6">
-          <!--engineNumber-->
-          <div class="form-group row" [ngClass]="{'has-error': (!engineNumber.valid && engineNumber.touched), 'has-success': (engineNumber.valid && engineNumber.touched)}">
-            <label for="engineNumber">Engine Number:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-cogs"></i>
-              </span>
-              <input required [formControl]="engineNumber" type="text" class="form-control" placeholder=" Enter Vehical Engine Number">
-            </div>
-            <span *ngIf="!engineNumber.valid && engineNumber.touched " class="help-block sub-little-text">Enter a valid Vehical
-              Engine Number</span>
-          </div>
-          <!-- engineNumber -->
-          <!--color-->
-          <div class="form-group row" [ngClass]="{'has-error': (!color.valid && color.touched), 'has-success': (color.valid && color.touched)}">
-            <label for="color">Color:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-paint-brush"></i>
-              </span>
-              <input required [formControl]="color" type="text" class="form-control" placeholder=" Enter Vehical Color">
-            </div>
-            <span *ngIf="!color.valid && color.touched " class="help-block sub-little-text">Enter a valid Vehical Color</span>
-          </div>
-          <!-- color -->
-          <!--maker -->
-          <div class="form-group row" [ngClass]="{'has-error': (!maker.valid && maker.touched), 'has-success': (maker.valid && maker.touched)}">
-            <label for="maker">Maker:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-car"></i>
-              </span>
-
-              <select [formControl]="maker" class="form-control" id="">
-                <option value="">--Select Maker--</option>
-                <option value="{{i+i}}" *ngFor="let u of makerList ;let i=index">{{u}}</option>
-              </select>
-            </div>
-            <span *ngIf="!maker.valid && maker.touched && maker.value.length < 4 " class="help-block sub-little-text">Vehical
-              maker is required</span>
-          </div>
-          <!--maker -->
-
-        </div>
-
-
-      </div>
-      <div id="Witness" class="tab-pane fade">
-        <div class="col-md-6" style="padding-right:30px">
-
-          <!--witnessName1-->
-          <div class="form-group row" [ngClass]="{'has-error': (!witnessName1.valid && witnessName1.touched), 'has-success': (witnessName1.valid && witnessName1.touched)}">
-            <label for="witnessName1">Witness 1 Name:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-user"></i>
-              </span>
-              <input required [formControl]="witnessName1" type="text" class="form-control" placeholder=" Enter Witness Name">
-            </div>
-            <span *ngIf="!witnessName1.valid && witnessName1.touched " class="help-block sub-little-text">Enter a valid name
-            </span>
-          </div>
-          <!-- witnessName1 -->
-          <!--witnessContact1-->
-          <div class="form-group row" [ngClass]="{'has-error': (!witnessContact1.valid && witnessContact1.touched), 'has-success': (witnessContact1.valid && witnessContact1.touched)}">
-            <label for="witnessContact1">Witness 1 Contact:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-phone"></i>
-              </span>
-              <input required [formControl]="witnessContact1" type="text" class="form-control" placeholder=" Enter Witness Contact">
-            </div>
-            <span *ngIf="!witnessContact1.valid && witnessContact1.touched " class="help-block sub-little-text">Enter a valid
-              phone number</span>
-          </div>
-          <!-- witnessContact1 -->
-
-          <!--witnessCnic1-->
-          <div class="form-group row" [ngClass]="{'has-error': (!witnessCnic1.valid && witnessCnic1.touched), 'has-success': (witnessCnic1.valid && witnessCnic1.touched)}">
-            <label for="witnessCnic1">Witness 1 CNIC:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-id-card"></i>
-              </span>
-              <input required [formControl]="witnessCnic1" type="text" class="form-control" placeholder=" Enter Witness CNIC">
-            </div>
-            <span *ngIf="!witnessCnic1.valid && witnessCnic1.touched " class="help-block sub-little-text">Enter a valid CNIC
-            </span>
-          </div>
-          <!-- witnessCnic1 -->
-
-        </div>
-        <div class="col-md-6">
-
-
-
-          <!--witnessName2-->
-          <div class="form-group row" [ngClass]="{'has-error': (!witnessName2.valid && witnessName2.touched), 'has-success': (witnessName2.valid && witnessName2.touched)}">
-            <label for="witnessName2">Witness 2 Name:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-user"></i>
-              </span>
-              <input required [formControl]="witnessName2" type="text" class="form-control" placeholder=" Enter Witness Name">
-            </div>
-            <span *ngIf="!witnessName2.valid && witnessName2.touched " class="help-block sub-little-text">Enter a valid name
-            </span>
-          </div>
-          <!-- witnessName2 -->
-          <!--witnessContact2-->
-          <div class="form-group row" [ngClass]="{'has-error': (!witnessContact2.valid && witnessContact2.touched), 'has-success': (witnessContact2.valid && witnessContact2.touched)}">
-            <label for="witnessContact2">Witness 2 Contact:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-phone"></i>
-              </span>
-              <input required [formControl]="witnessContact2" type="text" class="form-control" placeholder=" Enter Witness Contact">
-            </div>
-            <span *ngIf="!witnessContact2.valid && witnessContact2.touched " class="help-block sub-little-text">Enter a valid
-              phone number</span>
-          </div>
-          <!-- witnessContact2 -->
-
-          <!--witnessCnic2-->
-          <div class="form-group row" [ngClass]="{'has-error': (!witnessCnic2.valid && witnessCnic2.touched), 'has-success': (witnessCnic2.valid && witnessCnic2.touched)}">
-            <label for="witnessCnic2">Witness 2 CNIC:</label>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-id-card"></i>
-              </span>
-              <input [formControl]="witnessCnic2" type="text" class="form-control" placeholder=" Enter Witness CNIC">
-            </div>
-            <span *ngIf="!witnessCnic2.valid && witnessCnic2.touched " class="help-block sub-little-text">Enter a valid CNIC
-            </span>
-          </div>
-          <!-- witnessCnic2 -->
-
-
-
-
-
-        </div>
-
-        <div class="col-md-12">
-          <!--description-->
-          <div class="form-group row" [ngClass]="{'has-error': (!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="glyphicon glyphicon-pencil"></i>
-              </span>
-              <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
-            </div>
-            <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must
-              be at least 10 characters</span>
-          </div>
-          <!-- description -->
-        </div>
-
-        <button type="submit" class="btn btn-primary pull-right">
-          <i class="fa fa-user-plus" aria-hidden="true"></i>
-          <i [ngClass]="{'fa fa-spinner fa-spin': changeClass}"></i>
-          Add</button>
-
-
-      </div>
-    </div>
-
-
-
-
-  </form>
+      
+      
+      
+      
+        </form>
+  </div>
 </div>
