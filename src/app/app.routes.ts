@@ -18,6 +18,7 @@ import { EditCarComponent } from './pages/stock-car/edit-car/edit-car.component'
 import { AddCarPurchaseComponent } from './pages/car-purchase/add-car-purchase/add-car-purchase.component';
 import { ListCarPurchaseComponent } from './pages/car-purchase/list-car-purchase/list-car-purchase.component';
 import { EditCarPurchaseComponent } from './pages/car-purchase/edit-car-purchase/edit-car-purchase.component';
+import { AuthGuard } from './router-guard/auth.guard';
 
 export const appRoutes: Routes = [
     {
@@ -29,6 +30,7 @@ export const appRoutes: Routes = [
     {
         path: "dashboard",
         component: DashboardComponent,
+        // canActivate: [AuthGuard],
         children: [
             {
                 path: '',

@@ -1,14 +1,18 @@
 <style>
-  table td{
+  table td {
     font-size: 11px;
     text-align: left;
   }
 </style>
-
 <div class="row">
+  <div class="col-md-4">
+    <h3>Daily Diary &nbsp; /&nbsp; روزنامچہ</h3>
+  </div>
+</div>
+
   <div class="row" style="padding-bottom:5px">
     <div class="col-md-3 col-lg-3">
-      <span class="pull-left" style="    padding-left: 15px;">
+      <span class="pull-left" >
         <form #myForm="ngForm" novalidate>
           <my-date-picker (ngModelChange)="getTransactionbyDate($event)" name="mydate" [options]="myDatePickerOptions" #mydate="ngModel"
             [(ngModel)]="model" required></my-date-picker>
@@ -27,6 +31,7 @@
 
     </div>
   </div>
+  <hr>
   <div class="row">
     <div class="col-md-12 col-sm-12">
 
@@ -134,13 +139,6 @@
   </div>
 
 
-
-
-
-
-
-  
-
   <ng-template #templateDelete>
     <div class="modal-header">
       <h4 class="modal-title pull-left">
@@ -185,7 +183,9 @@
                 </span>
                 <input required [formControl]="incomeAmount" type="text" class="form-control" id="inputPassword3" placeholder=" Enter Amount">
               </div>
-              <span *ngIf="!incomeAmount.valid && incomeAmount.touched " class="help-block sub-little-text">Enter a valid Amount</span>
+              <span *ngIf="!incomeAmount.valid && incomeAmount.touched " class="help-block sub-little-text">Enter a valid
+                Amount
+              </span>
             </div>
             <!-- Amount -->
             <!--description-->
@@ -196,7 +196,8 @@
                 </span>
                 <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
               </div>
-              <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must be at least 10 characters</span>
+              <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must
+                be at least 10 characters</span>
             </div>
 
             <a class="btn btn-default btn-sm pull-right" (click)="modalRefEdit.hide()">Cancle</a>
@@ -209,48 +210,51 @@
   </ng-template>
 
   <ng-template #templateEditExpense>
-      <div class="modal-header">
-        <h4 class="modal-title pull-left">
-          Edit Expense Transaction
-        </h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefEdit.hide()">
-          <span aria-hidden="true" style="display: inline-block; padding: 0 5px">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-  
-        <div class="row">
-          <div class="col-md-12">
-  
-            <form [formGroup]="form" (ngSubmit)="editTransaction(form.value)" class="form-horizontal">
-  
-              <!--amount-->
-              <div class="form-group row" [ngClass]="{'has-error': (!incomeAmount.valid && incomeAmount.touched), 'has-success': (incomeAmount.valid && incomeAmount.touched)}">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-usd"></i>
-                  </span>
-                  <input required [formControl]="incomeAmount" type="text" class="form-control" id="inputPassword3" placeholder=" Enter Amount">
-                </div>
-                <span *ngIf="!incomeAmount.valid && incomeAmount.touched " class="help-block sub-little-text">Enter a valid Amount</span>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">
+        Edit Expense Transaction
+      </h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefEdit.hide()">
+        <span aria-hidden="true" style="display: inline-block; padding: 0 5px">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <div class="row">
+        <div class="col-md-12">
+
+          <form [formGroup]="form" (ngSubmit)="editTransaction(form.value)" class="form-horizontal">
+
+            <!--amount-->
+            <div class="form-group row" [ngClass]="{'has-error': (!incomeAmount.valid && incomeAmount.touched), 'has-success': (incomeAmount.valid && incomeAmount.touched)}">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="glyphicon glyphicon-usd"></i>
+                </span>
+                <input required [formControl]="incomeAmount" type="text" class="form-control" id="inputPassword3" placeholder=" Enter Amount">
               </div>
-              <!-- Amount -->
-              <!--description-->
-              <div class="form-group row" [ngClass]="{'has-error': (!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-pencil"></i>
-                  </span>
-                  <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
-                </div>
-                <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must be at least 10 characters</span>
+              <span *ngIf="!incomeAmount.valid && incomeAmount.touched " class="help-block sub-little-text">Enter a valid
+                Amount
+              </span>
+            </div>
+            <!-- Amount -->
+            <!--description-->
+            <div class="form-group row" [ngClass]="{'has-error': (!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="glyphicon glyphicon-pencil"></i>
+                </span>
+                <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
               </div>
-  
-              <a class="btn btn-default btn-sm pull-right" (click)="modalRefEdit.hide()">Cancle</a>
-              <a class="btn btn-success btn-sm pull-right" (click)="modalRefEdit.hide();editTransactionExpense(form.value)">Update</a>
-            </form>
-          </div>
+              <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must
+                be at least 10 characters</span>
+            </div>
+
+            <a class="btn btn-default btn-sm pull-right" (click)="modalRefEdit.hide()">Cancle</a>
+            <a class="btn btn-success btn-sm pull-right" (click)="modalRefEdit.hide();editTransactionExpense(form.value)">Update</a>
+          </form>
         </div>
-  
       </div>
-    </ng-template>
+
+    </div>
+  </ng-template>

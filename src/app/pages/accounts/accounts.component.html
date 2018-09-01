@@ -34,6 +34,27 @@
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-4">
+    <h3>Accounts &nbsp; /&nbsp; کھاتہ</h3>
+  </div>
+
+  <div class="col-md-6 col-md-offset-2 mt-15">
+      <div class="pull-right">
+        <!-- <button *ngIf="allAccounts.length>0" class="btn btn-success" style="font-size:15px">Total Account Holders&nbsp; :&nbsp; {{allAccounts.length}}</button> -->
+        <button type="button" class="btn btn-primary" (click)="openModalExpense(templateExpense)" style="font-size:15px">
+          Expense &nbsp;/&nbsp;
+          <b>اندراج خرچ</b>
+        </button>
+        <button class="btn btn-primary" (click)="openModalIncome(templateIncome)" style="font-size:15px">
+          Income &nbsp;/&nbsp;
+          <b>اندراج آمدن</b>
+        </button>
+      </div>
+    </div>
+</div>
+<hr>
 <div class="row">
 
 
@@ -90,20 +111,9 @@
 
   </div>
 
-  <div class="col-md-6">
-    <div class="pull-right">
-      <!-- <button *ngIf="allAccounts.length>0" class="btn btn-success" style="font-size:15px">Total Account Holders&nbsp; :&nbsp; {{allAccounts.length}}</button> -->
-      <button type="button" class="btn btn-primary" (click)="openModalExpense(templateExpense)" style="font-size:15px">
-        Expense &nbsp;/&nbsp;
-        <b>اندراج خرچ</b>
-      </button>
-      <button class="btn btn-primary" (click)="openModalIncome(templateIncome)" style="font-size:15px">
-        Income &nbsp;/&nbsp;
-        <b>اندراج آمدن</b>
-      </button>
-    </div>
-  </div>
+  
 </div>
+
 <div class="row" style="margin-top:15px">
   <div class="col-md-12 col-sm-12">
     <table class="table table-striped table-sm ">
