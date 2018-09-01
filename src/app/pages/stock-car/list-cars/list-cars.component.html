@@ -1,63 +1,70 @@
 
-<div class="row pull-right">
+<div class="row">
 
-  <div class="col-md-3 col-offset-md-9" style="margin-bottom:10px">
+  <div class="col-md-3" style="margin-bottom:10px">
       <div class="input-group">
           <div class="input-group-addon">
             <i class="fa fa-search"></i>
           </div>
           <input class="form-control" type="text" name="search" [(ngModel)]="filter">
         </div>
+
+  </div>
+  <div class="col-md-1">
+      <i style="color:orange" [ngClass]="{'fa fa-refresh fa-spin fa-2x':loading}"></i>
   </div>
   
 </div>
 <div class="row">
-  <table class="table table-striped">
-    <thead style="background: lightblue">
-      <tr>
-        <th>#</th>
-        <th>Recipt Number</th>
-        <th>Car Name</th>
-
-        <th>Maker</th>
-        <th>Rigistration #</th>
-
-        <th>Purchase Price</th>
-        <th>Purchase Date</th>
-        <th>Number of Papers</th>
-        <th>Token Status</th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let car of carsList | reverse | filter:filter; let i=index">
-        <td>{{i+1}}</td>
-        <td>{{car.receiptNumber}}</td>
-        <td>{{car.Name}}</td>
-        <td>{{car.Maker}}</td>
-        <td>{{car.RegistrationNumber}}</td>
-        <td>{{car.PurchasePrice}}</td>
-        <td>{{car.PurchaseDate | date}}</td>
-        <td>{{car.NoOfPapers}}</td>
-        <td>{{car.Token}}</td>
-        <td>
-          <!-- <button class="btn btn-warning" data-target="#editCarStock" data-toggle="modal">
-              <i class="fa fa-pencil"></i>
-            </button> -->
-          <button class="btn btn-danger">
-            <i class="fa fa-trash"></i>
-          </button>
-          <button (click)="setUserInfo(car.Accounts)" class="btn btn-info" data-toggle="modal" data-target="#userInfo">
-            <i class="fa fa-user"></i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <ng-template #noCar>
-    <p style="color:red;text-align: center;font-size: 30px">No car available</p>
-  </ng-template>
+  <div class="col-md-12">
+      <table class="table table-striped">
+          <thead style="background: lightblue">
+            <tr>
+              <th>#</th>
+              <th>Recipt Number</th>
+              <th>Car Name</th>
+      
+              <th>Maker</th>
+              <th>Rigistration #</th>
+      
+              <th>Purchase Price</th>
+              <th>Purchase Date</th>
+              <th>Number of Papers</th>
+              <th>Token Status</th>
+              <th></th>
+            </tr>
+          </thead>
+      
+          <tbody>
+            <tr *ngFor="let car of carsList | reverse | filter:filter; let i=index">
+              <td>{{i+1}}</td>
+              <td>{{car.receiptNumber}}</td>
+              <td>{{car.Name}}</td>
+              <td>{{car.Maker}}</td>
+              <td>{{car.RegistrationNumber}}</td>
+              <td>{{car.PurchasePrice}}</td>
+              <td>{{car.PurchaseDate | date}}</td>
+              <td>{{car.NoOfPapers}}</td>
+              <td>{{car.Token}}</td>
+              <td>
+                <!-- <button class="btn btn-warning" data-target="#editCarStock" data-toggle="modal">
+                    <i class="fa fa-pencil"></i>
+                  </button> -->
+                <button class="btn btn-danger">
+                  <i class="fa fa-trash"></i>
+                </button>
+                <button (click)="setUserInfo(car.Accounts)" class="btn btn-info" data-toggle="modal" data-target="#userInfo">
+                  <i class="fa fa-user"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #noCar>
+          <p style="color:red;text-align: center;font-size: 30px">No car available</p>
+        </ng-template>
+  </div>
+ 
 </div>
 
 <!--edit carstock -->

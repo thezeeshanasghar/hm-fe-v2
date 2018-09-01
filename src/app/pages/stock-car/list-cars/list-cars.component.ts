@@ -15,7 +15,9 @@ export class ListCarsComponent implements OnInit {
   selectedCarOwner: any[] = [];
   carStockForm: any;
 
-  constructor(private cs: CarService, private fb: FormBuilder, ) { }
+  constructor(private cs: CarService, private fb: FormBuilder, ) {
+    this.loading = true
+  }
 
   ngOnInit() {
     this.getCars();
@@ -52,6 +54,8 @@ export class ListCarsComponent implements OnInit {
       // this.carOwnerList=data.carOwnerDTOs
     },
       error => {
+        this.loading = false;
+
         console.log(error)
 
       });

@@ -141,9 +141,7 @@ export class AccountsComponent implements OnInit {
       this.loading = false;
       // console.log(this.allAccounts);
     }, error => {
-
-
-
+      this.loading = false;
     });
   }
 
@@ -154,7 +152,9 @@ export class AccountsComponent implements OnInit {
       this.gu.getAccountById(id).subscribe(data => {
         console.log(data);
         this.singleUser = data.ResponseData;
-      }, error => { });
+      }, error => {
+
+      });
 
     }, error => { console.log(error); });
   }

@@ -34,6 +34,8 @@ import { EditCarPurchaseComponent } from './pages/car-purchase/edit-car-purchase
 import { AddCarPurchaseComponent } from './pages/car-purchase/add-car-purchase/add-car-purchase.component';
 import { ListCarPurchaseComponent } from './pages/car-purchase/list-car-purchase/list-car-purchase.component';
 import { CarPurchaseService } from './services/car/car-purchase.service';
+import { AuthGuard } from './router-guard/auth.guard';
+import { CarSaleComponent } from './pages/car-sale/car-sale.component';
 
 
 @NgModule({
@@ -62,6 +64,7 @@ import { CarPurchaseService } from './services/car/car-purchase.service';
     EditCarPurchaseComponent,
     AddCarPurchaseComponent,
     ListCarPurchaseComponent,
+    CarSaleComponent,
 
   ],
   imports: [
@@ -74,10 +77,11 @@ import { CarPurchaseService } from './services/car/car-purchase.service';
     AlertModule.forRoot(),
     MyDatePickerModule,
     Ng2SearchPipeModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    
 
   ],
-  providers: [GeneralHttpService, CarService,CarPurchaseService],
+  providers: [AuthGuard,GeneralHttpService, CarService, CarPurchaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
