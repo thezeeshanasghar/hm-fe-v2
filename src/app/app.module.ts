@@ -38,6 +38,8 @@ import { AuthGuard } from './router-guard/auth.guard';
 import { CarSaleComponent } from './pages/car-sale/car-sale.component';
 import { CarSaleListComponent } from './pages/car-sale/car-sale-list/car-sale-list.component';
 import { SaleComponent } from './pages/car-sale/sale/sale.component';
+import { AddExchangeCarComponent } from './pages/exchange-recipt/add-exchange-car/add-exchange-car.component';
+import { ListExchangeCarComponent } from './pages/exchange-recipt/list-exchange-car/list-exchange-car.component';
 
 
 @NgModule({
@@ -68,7 +70,9 @@ import { SaleComponent } from './pages/car-sale/sale/sale.component';
     ListCarPurchaseComponent,
     CarSaleComponent,
     CarSaleListComponent,
-    SaleComponent
+    SaleComponent,
+    AddExchangeCarComponent,
+    ListExchangeCarComponent
 
   ],
   imports: [

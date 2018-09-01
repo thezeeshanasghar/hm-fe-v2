@@ -1,83 +1,88 @@
 <div class="container-fluid">
-  
 
- 
-<div class="row">
-  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
 
- 
-        <div class="col-md-12">         
 
-              <!--vehical -->
-              <div class="form-group row" [ngClass]="{'has-error': (!vehical.valid && vehical.touched), 'has-success': (vehical.valid && vehical.touched)}">
-                  <label for="vehical">Recipt:</label>
-                  <div class="input-group">
-                      <span class="input-group-addon">
-                          <i class="fa fa-car"></i>
-                      </span>
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
 
-                      <select [formControl]="vehical" class="form-control" id="sel1">
-                          <option value="">--Select recipt--</option>
-                          <option value="{{u}}" *ngFor="let u of vehicalList">{{u}}</option>
-                      </select>
-                  </div>
-                  <span *ngIf="!vehical.valid && vehical.touched && vehical.value.length < 4 " class="help-block sub-little-text">Vehical vehical is required</span>
-              </div> 
-              <!--vehical-->
-                <!--amountPaid-->
-                <div class="form-group row" [ngClass]="{'has-error': (!amountPaid.valid && amountPaid.touched), 'has-success': (amountPaid.valid && amountPaid.touched)}">
-                  <label for="buyerPaidAmoount">Amount Paid:</label>
-                  <div class="input-group">
-                      <span class="input-group-addon">
-                          <i class="fa fa-money"></i>
-                      </span>
-                      <input required [formControl]="amountPaid" type="text" class="form-control" placeholder=" Enter Vehical buyer Paid Amount">
-                  </div>
-                  <span *ngIf="!amountPaid.valid && amountPaid.touched " class="help-block sub-little-text">Enter a valid Vehical buyer Paid Amount</span>
-              </div>
-              <!-- amountPaid -->
 
-                <!-- nextDueDate -->
+        <div class="col-md-12">
 
-        <div class="form-group row">
-          <label for="nextDueDate">Due Date For Remaing Payment</label>
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="fa fa-clock-o"></i>
-            </span>
-            <input required [formControl]="nextDueDate" name="nextDueDate" type="date" class="form-control">
+          <!--vehical -->
+          <div class="form-group row" [ngClass]="{'has-error': (!vehical.valid && vehical.touched), 'has-success': (vehical.valid && vehical.touched)}">
+            <label for="vehical">Recipt:</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-car"></i>
+              </span>
+
+              <select [formControl]="vehical" class="form-control" id="sel1">
+                <option value="">--Select recipt--</option>
+                <option value="{{u}}" *ngFor="let u of vehicalList">{{u}}</option>
+              </select>
+            </div>
+            <span *ngIf="!vehical.valid && vehical.touched && vehical.value.length < 4 " class="help-block sub-little-text">Vehical
+              vehical is required</span>
           </div>
-        </div>
-        <!-- nextDueDate -->
+          <!--vehical-->
+          <!--amountPaid-->
+          <div class="form-group row" [ngClass]="{'has-error': (!amountPaid.valid && amountPaid.touched), 'has-success': (amountPaid.valid && amountPaid.touched)}">
+            <label for="buyerPaidAmoount">Amount Paid:</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-money"></i>
+              </span>
+              <input required [formControl]="amountPaid" type="text" class="form-control" placeholder=" Enter Vehical buyer Paid Amount">
+            </div>
+            <span *ngIf="!amountPaid.valid && amountPaid.touched " class="help-block sub-little-text">Enter a valid Vehical
+              buyer Paid Amount</span>
+          </div>
+          <!-- amountPaid -->
 
-        <div class="row">
-          <div class="col-md-12">
+          <!-- nextDueDate -->
+
+          <div class="form-group row">
+            <label for="nextDueDate">Due Date For Remaing Payment</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <input required [formControl]="nextDueDate" name="nextDueDate" type="date" class="form-control">
+            </div>
+          </div>
+          <!-- nextDueDate -->
+
+          <div class="row">
+            <div class="col-md-12">
               <!--description-->
-        <div class="form-group row" [ngClass]="{'has-error': (!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="glyphicon glyphicon-pencil"></i>
-            </span>
-            <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
+              <div class="form-group row" [ngClass]="{'has-error': (!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                  </span>
+                  <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
+                </div>
+                <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must
+                  be at least 10 characters</span>
+              </div>
+              <!-- description -->
+            </div>
           </div>
-          <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must be at least 10 characters</span>
-      </div>
-      <!-- description -->
-          </div>
-        </div>
-          
-        
-       
 
-              <button [disabled]="!form.valid" type="submit" class="btn btn-primary pull-right">
-                <i class="fa fa-user-plus" aria-hidden="true"></i>
-                <i [ngClass]="{'fa fa-spinner fa-spin': changeClass}"></i>
-                Add</button>
 
-    
+
+
+          <button [disabled]="!form.valid" type="submit" class="btn btn-primary pull-right">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            <i [ngClass]="{'fa fa-spinner fa-spin': changeClass}"></i>
+            Add</button>
+
+
 
         </div>
-        
-  </form>
-</div>
+
+      </form>
+    </div>
+  </div>
 </div>
