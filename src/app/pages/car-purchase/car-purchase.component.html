@@ -1,10 +1,17 @@
 <div class="container-fluid">
   <div class="row">
-    <h3>Car Purchase &nbsp; /&nbsp; کار خرید</h3>
-    <button routerLink="add" *ngIf="router.url=='/dashboard/purchase' || router.url=='/dashboard/purchase/list'" class="btn btn-primary pull-right" style="font-size:15px">
-      <i class="fa fa-car"></i> Add new purchase</button>
-    <button routerLink="list" *ngIf="router.url=='/dashboard/purchase/add'" class="btn btn-primary pull-right" style="font-size:15px">
-      <i class="fa fa-car"></i>Show All purchase</button>
+    <div class="col-md-3">
+      <h3>Car Purchase &nbsp; /&nbsp; کار خرید</h3>
+
+    </div>
+    <div class="col-md-3 col-md-offset-6 mt-15">
+      <button routerLink="add" *ngIf="router.url=='/dashboard/purchase' || router.url=='/dashboard/purchase/list'" class="btn btn-primary pull-right"
+        style="font-size:15px">
+        <i class="fa fa-car"></i> Add new purchase</button>
+      <button routerLink="list" *ngIf="router.url=='/dashboard/purchase/add'" class="btn btn-primary pull-right" style="font-size:15px">
+        <i class="fa fa-car"></i>Show All purchase</button>
+    </div>
+
   </div>
   <hr>
 
