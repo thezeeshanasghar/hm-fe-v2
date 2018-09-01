@@ -1,8 +1,10 @@
+import { CarPurchaseService } from './../../../services/car/car-purchase.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { GeneralHttpService } from '../../../services/general-http.service';
 import { AmountValidator } from '../../../../assets/validators';
 import { CarPurchaseComponent } from '../car-purchase.component';
+// import rxjs from rxjs
 
 @Component({
   selector: 'app-add-car-purchase',
@@ -17,7 +19,7 @@ export class AddCarPurchaseComponent implements OnInit {
 
   showBuyer = true;
   showSeller = true;
-  vehicalList = ['LHR 1234', 'LHQ 3456', 'LHE 5463', 'LHR 4567', 'LHE 6789', 'LHQ 2345']
+  vehicalList: any = []//['LHR 1234', 'LHQ 3456', 'LHE 5463', 'LHR 4567', 'LHE 6789', 'LHQ 2345']
 
   public form: FormGroup;
   public buyer1: AbstractControl;
@@ -62,7 +64,7 @@ export class AddCarPurchaseComponent implements OnInit {
 
   makerList = ['Toyota', 'Honda', 'Hundai', 'Suzuki', 'Faw'];
   ids: any[] = [];
-  constructor(private fb: FormBuilder, private gu: GeneralHttpService,private purchaseService:CarPurchaseComponent) {
+  constructor(private fb: FormBuilder, private gu: GeneralHttpService, private purchaseService: CarPurchaseService) {
 
     this.form = this.fb.group({
       'buyer1': ['', Validators.compose([Validators.required])],
@@ -154,22 +156,35 @@ export class AddCarPurchaseComponent implements OnInit {
   }
 
   getOwnedCars(id) {
+    this.purchaseService.getOwnedCarsList(id).subscribe(data => {
+      console.log(data)
+      this.vehicalList = data;
+    }, error => {
+      console.log(error)
+    })
+  }
 
-    console.log("incomming id : " ,id)
-    this.ids.push(id);
-    console.log("ids array: " ,this.ids)
+  getSharedCars(id1, id2) {
+
+    debugger
+    console.log(id1, id2)
+    this.purchaseService.getSharedCarsList(id1, id2).subscribe(data => {
+      console.log(data)
+      this.vehicalList = data;
+    }, error => {
+      console.log(error)
+    })
   }
 
   showSalesFormToggle() {
     this.showSales = !this.showSales;
   }
-
   getAllAccount() {
 
-    debugger
+    // debugger
     this.gu.getAllAccounts().subscribe(data => {
       this.allAccounts = data.ResponseData;
-      console.log("all accounts",this.allAccounts)
+      console.log("all accounts", this.allAccounts)
     }, error => { });
   }
 
