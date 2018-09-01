@@ -15,7 +15,7 @@ import { AccountsComponent } from './pages/accounts/accounts.component';
 import { ModalModule, AlertModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { MyDatePickerModule } from 'mydatepicker';
 import { StockCarComponent } from './pages/stock-car/stock-car.component';
-import { SaleComponent } from './pages/sale/sale.component';
+
 import { SaleToUnregisterUserComponent } from './pages/sale-to-unregister-user/sale-to-unregister-user.component';
 import { UdharComponent } from './pages/udhar/udhar.component';
 import { ExchangeReciptComponent } from './pages/exchange-recipt/exchange-recipt.component';
@@ -36,6 +36,8 @@ import { ListCarPurchaseComponent } from './pages/car-purchase/list-car-purchase
 import { CarPurchaseService } from './services/car/car-purchase.service';
 import { AuthGuard } from './router-guard/auth.guard';
 import { CarSaleComponent } from './pages/car-sale/car-sale.component';
+import { CarSaleListComponent } from './pages/car-sale/car-sale-list/car-sale-list.component';
+import { SaleComponent } from './pages/car-sale/sale/sale.component';
 
 
 @NgModule({
@@ -48,7 +50,7 @@ import { CarSaleComponent } from './pages/car-sale/car-sale.component';
     IncomeComponent,
     AccountsComponent,
     StockCarComponent,
-    SaleComponent,
+
     SaleToUnregisterUserComponent,
     UdharComponent,
     ExchangeReciptComponent,
@@ -65,6 +67,8 @@ import { CarSaleComponent } from './pages/car-sale/car-sale.component';
     AddCarPurchaseComponent,
     ListCarPurchaseComponent,
     CarSaleComponent,
+    CarSaleListComponent,
+    SaleComponent
 
   ],
   imports: [
@@ -78,10 +82,10 @@ import { CarSaleComponent } from './pages/car-sale/car-sale.component';
     MyDatePickerModule,
     Ng2SearchPipeModule,
     BsDatepickerModule.forRoot(),
-    
+
 
   ],
-  providers: [AuthGuard,GeneralHttpService, CarService, CarPurchaseService],
+  providers: [AuthGuard, GeneralHttpService, CarService, CarPurchaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

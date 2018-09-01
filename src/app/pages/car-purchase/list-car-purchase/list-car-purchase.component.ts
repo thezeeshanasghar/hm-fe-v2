@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-car-purchase.component.css']
 })
 export class ListCarPurchaseComponent implements OnInit {
+  filter = '';
+  loading = false
 
   constructor() { }
 

@@ -1,3 +1,21 @@
-<p>
-  car-sale works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <h3>Car Sale &nbsp; /&nbsp; کار فروخت</h3>
+
+    </div>
+    <div class="col-md-3 col-md-offset-6 mt-15">
+      <button routerLink="add" *ngIf="router.url=='/dashboard/carSale' || router.url=='/dashboard/carSale/list'" class="btn btn-primary pull-right"
+        style="font-size:15px">
+        <i class="fa fa-car"></i> Add new sale</button>
+      <button routerLink="list" *ngIf="router.url=='/dashboard/carSale/add'" class="btn btn-primary pull-right" style="font-size:15px">
+        <i class="fa fa-car"></i>Show All sale</button>
+    </div>
+
+
+  </div>
+  <hr>
+
+  <router-outlet></router-outlet>
+
+</div>

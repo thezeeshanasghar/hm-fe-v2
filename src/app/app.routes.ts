@@ -1,7 +1,8 @@
+import { CarSaleComponent } from './pages/car-sale/car-sale.component';
 import { ExchangeReciptComponent } from './pages/exchange-recipt/exchange-recipt.component';
 import { UdharComponent } from './pages/udhar/udhar.component';
 import { SaleToUnregisterUserComponent } from './pages/sale-to-unregister-user/sale-to-unregister-user.component';
-import { SaleComponent } from './pages/sale/sale.component';
+
 import { StockCarComponent } from './pages/stock-car/stock-car.component';
 import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
 import { ModuleWithProviders, Component } from '@angular/core';
@@ -19,6 +20,8 @@ import { AddCarPurchaseComponent } from './pages/car-purchase/add-car-purchase/a
 import { ListCarPurchaseComponent } from './pages/car-purchase/list-car-purchase/list-car-purchase.component';
 import { EditCarPurchaseComponent } from './pages/car-purchase/edit-car-purchase/edit-car-purchase.component';
 import { AuthGuard } from './router-guard/auth.guard';
+import { SaleComponent } from './pages/car-sale/sale/sale.component';
+import { CarSaleListComponent } from './pages/car-sale/car-sale-list/car-sale-list.component';
 
 export const appRoutes: Routes = [
     {
@@ -41,8 +44,6 @@ export const appRoutes: Routes = [
             { path: "purchase", component: CarPurchaseComponent },
             { path: "exchangeRecipt", component: ExchangeReciptComponent },
 
-
-            { path: "carSale", component: SaleToUnregisterUserComponent },
             { path: "udhar", component: UdharComponent },
 
             { path: "accounts", component: AccountsComponent },
@@ -70,6 +71,18 @@ export const appRoutes: Routes = [
                     { path: 'list', component: ListCarPurchaseComponent },
                     { path: 'add', component: AddCarPurchaseComponent },
                     { path: 'edit', component: EditCarPurchaseComponent }
+
+                ]
+            },
+
+            {
+                path: "carSale",
+                component: CarSaleComponent,
+                children: [
+                    { path: '', redirectTo: 'add', pathMatch: 'full' },
+                    { path: 'list', component: SaleComponent },
+                    { path: 'add', component: CarSaleListComponent },
+
 
                 ]
             }

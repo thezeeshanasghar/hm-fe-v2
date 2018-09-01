@@ -1,20 +1,18 @@
-
 <div class="row">
-    <div class="col-md-3" style="margin-bottom:10px">
-        <div class="input-group">
-            <div class="input-group-addon">
-              <i class="fa fa-search"></i>
-            </div>
-            <input class="form-control" type="text" name="search" [(ngModel)]="filter">
-          </div>
-  
+  <div class="col-md-3" style="margin-bottom:10px">
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="fa fa-search"></i>
+      </div>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter">
     </div>
-    <div class="col-md-1">
-        <i style="color:orange" [ngClass]="{'fa fa-refresh fa-spin fa-2x':loading}"></i>
-    </div>
+
+  </div>
+  <div class="col-md-1">
+    <i style="color:orange" [ngClass]="{'fa fa-refresh fa-spin fa-2x':loading}"></i>
+  </div>
 </div>
 <div class="row">
-
   <table class="table table-striped table-sm">
     <thead style="background:lightblue">
       <tr>
@@ -39,11 +37,11 @@
         <td>68767899</td>
         <td>50000</td>
         <!-- <td>
-            <button class="btn btn-warning" data-target="#editCarStock" data-toggle="modal">
-              <i class="fa fa-pencil"></i>Edit</button>
-            <button class="btn btn-danger">
-              <i class="fa fa-trash"></i>Delete</button>
-          </td> -->
+              <button class="btn btn-warning" data-target="#editCarStock" data-toggle="modal">
+                <i class="fa fa-pencil"></i>Edit</button>
+              <button class="btn btn-danger">
+                <i class="fa fa-trash"></i>Delete</button>
+            </td> -->
 
       </tr>
     </tbody>
