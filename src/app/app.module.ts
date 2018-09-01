@@ -12,7 +12,7 @@ import { AddAccountComponent } from './pages/accounts/add-account/add-account.co
 import { ExpenseComponent } from './pages/accounts/expense/expense.component';
 import { IncomeComponent } from './pages/accounts/income/income.component';
 import { AccountsComponent } from './pages/accounts/accounts.component';
-import { ModalModule, AlertModule } from 'ngx-bootstrap';
+import { ModalModule, AlertModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { MyDatePickerModule } from 'mydatepicker';
 import { StockCarComponent } from './pages/stock-car/stock-car.component';
 import { SaleComponent } from './pages/sale/sale.component';
@@ -27,6 +27,9 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { CarPurchaseComponent } from './pages/car-purchase/car-purchase.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AddCarComponent } from './pages/stock-car/add-car/add-car.component';
+import { ListCarsComponent } from './pages/stock-car/list-cars/list-cars.component';
+import { EditCarComponent } from './pages/stock-car/edit-car/edit-car.component';
 
 
 @NgModule({
@@ -49,21 +52,25 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     SearchFilterPipe,
     CarPurchaseComponent,
     ReversePipe,
+    AddCarComponent,
+    ListCarsComponent,
+    EditCarComponent,
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule ,
+    ReactiveFormsModule,
     Routers,
     HttpModule,
     ModalModule.forRoot(),
     AlertModule.forRoot(),
     MyDatePickerModule,
-    Ng2SearchPipeModule
-    
+    Ng2SearchPipeModule,
+    BsDatepickerModule.forRoot()
+
   ],
-  providers: [GeneralHttpService,CarService],
+  providers: [GeneralHttpService, CarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,6 +12,9 @@ import { LoginComponent } from './pages/login/login.component';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CarPurchaseComponent } from './pages/car-purchase/car-purchase.component';
+import { AddCarComponent } from './pages/stock-car/add-car/add-car.component';
+import { ListCarsComponent } from './pages/stock-car/list-cars/list-cars.component';
+import { EditCarComponent } from './pages/stock-car/edit-car/edit-car.component';
 
 export const appRoutes: Routes = [
     {
@@ -32,14 +35,27 @@ export const appRoutes: Routes = [
 
             { path: "purchase", component: CarPurchaseComponent },
             { path: "exchangeRecipt", component: ExchangeReciptComponent },
-            { path: "carStock", component: StockCarComponent },
-           
+
+
             { path: "carSale", component: SaleToUnregisterUserComponent },
             { path: "udhar", component: UdharComponent },
 
             { path: "accounts", component: AccountsComponent },
             { path: "addAccount", component: AddAccountComponent },
             { path: "roznamcha", component: RoznamchaComponent },
+
+
+            {
+                path: "carStock",
+                component: StockCarComponent,
+                children: [
+                    { path: '', redirectTo: 'add', pathMatch: 'full' },
+                    { path: 'add', component: AddCarComponent },
+                    { path: 'list', component: ListCarsComponent },
+                    { path: 'edit', component: EditCarComponent }
+
+                ]
+            },
 
 
         ]
