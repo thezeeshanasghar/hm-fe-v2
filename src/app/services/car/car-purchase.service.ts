@@ -24,7 +24,7 @@ export class CarPurchaseService {
   addPurchasedCar(form) {
     let httpOption = new Headers({ 'Content-Type': 'application/json' });
     const option = new RequestOptions({ headers: httpOption });
-    let url = "http://" + this.gs.ip + ":" + this.gs.port + "/api/car";
+    let url = "http://" + this.gs.ip + ":" + this.gs.port + "/api/carpurchase";
     // let obj=JSON.stringify(form)
     return this.http.post(url, form, option).map((response: Response) => response.json());
 

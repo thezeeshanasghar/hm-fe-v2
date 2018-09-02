@@ -10,24 +10,25 @@ export class GeneralHttpService {
   public ip: string;
   public port: number;
   constructor(private http: Http) {
-   this.ip='hm-api.afz-sol.com';
+    //  this.ip='hm-api.afz-sol.com';
+    this.ip = 'hm-api.ez.panacea.com';
     this.port = 80;
 
     // this.ip = 'localhost';
     // this.port = 16443;
   }
 
- 
 
-  public getTransactions(date='') {
-    //let headers = new Headers({ 'Content-Type': 'application/json' });
+
+  public getTransactions(date = '') {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
     let str = "http://" + this.ip + ":" + this.port + "/api/transaction";
-    str+="?date="+date;
-    return this.http.get(str).map((response: Response) => response.json());
+    str += "?date=" + date;
+    return this.http.get(str,{headers:headers}).map((response: Response) => response.json());
   }
 
 
-  public deleteTransaction(id){
+  public deleteTransaction(id) {
     let str = "http://" + this.ip + ":" + this.port + "/api/transaction/" + id;
     return this.http.delete(str).map((response: Response) => response.json());
 
@@ -38,11 +39,11 @@ export class GeneralHttpService {
     return this.http.get(str).map((response: Response) => response.json());
 
   }
-  public EditTransaction(id,m) {
+  public EditTransaction(id, m) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let body = JSON.stringify(m);
     console.log(body);
-    let url = "http://" + this.ip + ":" + this.port + "/api/transaction/"+id;
+    let url = "http://" + this.ip + ":" + this.port + "/api/transaction/" + id;
     console.log(url);
     return this.http.put(url, body, { headers: headers }).map((response: Response) => response.json());
 

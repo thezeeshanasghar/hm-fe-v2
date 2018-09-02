@@ -17,6 +17,9 @@ export class AddCarPurchaseComponent implements OnInit {
   changeClass = false;
   showSales = false;
 
+  successMessage = '';
+  errorMessage = ''
+
   superAccountList: any[] = []
   seller1AccountList: any[] = []
   seller2AccountList: any[] = []
@@ -394,7 +397,14 @@ export class AddCarPurchaseComponent implements OnInit {
 
     this.purchaseService.addPurchasedCar(form).subscribe(data => {
 
+      console.log("car purchase data", data);
+      this.successMessage = data.Message
+
     }, error => {
+
+      console.log("car purchase error", error)
+      this.errorMessage = error.Message
+
 
     })
 

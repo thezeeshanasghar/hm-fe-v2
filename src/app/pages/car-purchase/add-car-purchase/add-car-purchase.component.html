@@ -7,6 +7,19 @@
 
 <div class="row">
 
+  <div *ngIf="successMessage.length > 0" class="alert alert-warning alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="setAlertOff()">&times;</a>
+    <i class="fa fa-tick fa-fw"></i>
+    <strong>{{successMessage}}</strong>
+
+  </div>
+  <div *ngIf="errorMessage.length > 0" class="alert alert-warning alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="setAlertOff()">&times;</a>
+    <i class="fa fa-tick fa-fw"></i>
+    <strong>{{errorMessage}}</strong>
+
+  </div>
+
   <div class="col-md-12">
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
 
@@ -47,10 +60,6 @@
           </div>
         </div>
         <div id="Parties" class="tab-pane fade in active">
-
-
-
-
 
           <div class="col-md-6" style="padding-right:30px" *ngIf="!showSeller">
             <!--sellerName-->
@@ -276,7 +285,7 @@
                 </span>
                 <!-- (ngModelChange)="removeAccountfromSuperListBuyer2(buyer2.value)" -->
 
-                <select formControlName="buyer2" class="form-control" #buyer2 >
+                <select formControlName="buyer2" class="form-control" #buyer2>
                   <option value=" ">--Select Buyer 2 Account--</option>
                   <option value="{{u.Id}} " *ngFor="let u of buyer2AccountList ">{{u.Name}}--{{u.Number}}</option>
                 </select>
@@ -291,7 +300,7 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-clock-o "></i>
                 </span>
-                <input formControlName="dealDate" bsDatepicker  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" name="dealDate" class="form-control ">
+                <input formControlName="dealDate" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" name="dealDate" class="form-control ">
               </div>
             </div>
             <!-- DealDate -->
@@ -318,7 +327,7 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-paint-brush "></i>
                 </span>
-                <input required formControlName="commissionFromBuyer " type="text " class="form-control " placeholder="
+                <input required formControlName="commissionFromBuyer" type="text " class="form-control " placeholder="
                   Enter commission ">
               </div>
               <span *ngIf="!commissionFromBuyer.valid && commissionFromBuyer.touched " class="help-block sub-little-text ">Enter
@@ -333,7 +342,7 @@
                         <span class="input-group-addon ">
                           <i class="fa fa-clock-o "></i>
                         </span>
-                        <input required formControlName="dueDate " name="dueDate " type="date " class="form-control ">
+                        <input required formControlName="dueDate" name="dueDate " type="date " class="form-control ">
                       </div>
                     </div> -->
             <!-- dueDate -->
@@ -353,7 +362,7 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-car "></i>
                 </span>
-                <input required formControlName="buyerName " type="text " class="form-control " placeholder=" Enter Vehical
+                <input required formControlName="buyerName" type="text " class="form-control " placeholder=" Enter Vehical
                   buyerName ">
               </div>
               <span *ngIf="!buyerName.valid && buyerName.touched " class="help-block sub-little-text ">Enter a valid Name
@@ -369,7 +378,7 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-car "></i>
                 </span>
-                <input required formControlName="buyerContact " type="text " class="form-control " placeholder=" Enter
+                <input required formControlName="buyerContact" type="text " class="form-control " placeholder=" Enter
                   Vehical buyerContact ">
               </div>
               <span *ngIf="!buyerContact.valid && buyerContact.touched " class="help-block sub-little-text ">Enter a valid
@@ -387,7 +396,7 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-car "></i>
                 </span>
-                <input required formControlName="buyerCNIC " type="text " class="form-control " placeholder=" Enter Vehical
+                <input required formControlName="buyerCNIC" type="text " class="form-control " placeholder=" Enter Vehical
                   buyerCNIC ">
               </div>
               <span *ngIf="!buyerCNIC.valid && buyerCNIC.touched " class="help-block sub-little-text ">Enter a valid CNIC
@@ -404,7 +413,7 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-car "></i>
                 </span>
-                <input required formControlName="buyerAddress " type="text " class="form-control " placeholder=" Enter
+                <input required formControlName="buyerAddress" type="text " class="form-control " placeholder=" Enter
                   Vehical buyerAddress ">
               </div>
               <span *ngIf="!buyerAddress.valid && buyerAddress.touched " class="help-block sub-little-text ">Enter a valid
@@ -421,11 +430,11 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-car "></i>
                 </span>
-                <input required formControlName="buyerPaidAmount " type="text " class="form-control " placeholder=" Enter
+                <input required formControlName="buyerPaidAmount" type="text " class="form-control " placeholder=" Enter
                   Vehical buyerPaidAmount ">
               </div>
-              <span *ngIf="!buyerPaidAmount.valid && buyerPaidAmount.touched " class="help-block sub-little-text ">Enter a
-                valid amount
+              <span *ngIf="!buyerPaidAmount.valid && buyerPaidAmount.touched " class="help-block sub-little-text ">Enter
+                a valid amount
               </span>
             </div>
             <!-- buyerPaidAmount -->
@@ -437,7 +446,7 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-paint-brush "></i>
                 </span>
-                <input required formControlName="commissionFromBuyer " type="text " class="form-control " placeholder="
+                <input required formControlName="commissionFromBuyer" type="text " class="form-control " placeholder="
                   Enter commission ">
               </div>
               <span *ngIf="!commissionFromBuyer.valid && commissionFromBuyer.touched " class="help-block sub-little-text ">Enter
@@ -453,7 +462,7 @@
                         <span class="input-group-addon ">
                           <i class="fa fa-clock-o "></i>
                         </span>
-                        <input required formControlName="dueDate " name="dueDate " type="date " class="form-control ">
+                        <input required formControlName="dueDate" name="dueDate " type="date " class="form-control ">
                       </div>
                     </div> -->
             <!-- dueDate -->
@@ -463,7 +472,7 @@
 
         </div>
 
-        <div id="Vehical " class="tab-pane fade " *ngIf="!showSeller ">
+        <div id="Vehical" class="tab-pane fade " *ngIf="!showSeller ">
           <div class="col-md-6 " style="padding-right:30px ">
 
             <!--vehicalName-->
@@ -475,11 +484,11 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-car "></i>
                 </span>
-                <input required formControlName="vehicalName " type="text " class="form-control " placeholder=" Enter Vehical
+                <input required formControlName="vehicalName" type="text " class="form-control " placeholder=" Enter Vehical
                   vehicalName ">
               </div>
-              <span *ngIf="!vehicalName.valid && vehicalName.touched " class="help-block sub-little-text ">Enter a valid vehical
-                Name
+              <span *ngIf="!vehicalName.valid && vehicalName.touched " class="help-block sub-little-text ">Enter a valid
+                vehical Name
               </span>
             </div>
             <!-- vehicalName -->
@@ -494,8 +503,8 @@
                 <input required [formControl]="modelNumber " type="text " class="form-control " placeholder=" Enter Vehical
                   model Number ">
               </div>
-              <span *ngIf="!modelNumber.valid && modelNumber.touched " class="help-block sub-little-text ">Enter a valid Vehical
-                Model Number</span>
+              <span *ngIf="!modelNumber.valid && modelNumber.touched " class="help-block sub-little-text ">Enter a valid
+                Vehical Model Number</span>
             </div>
             <!-- modelNumber -->
 
@@ -583,7 +592,7 @@
 
 
         </div>
-        <div id="Witness " class="tab-pane fade ">
+        <div id="Witness" class="tab-pane fade ">
           <div class="col-md-6 " style="padding-right:30px ">
 
             <!--witnessName1-->
@@ -594,8 +603,7 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-user "></i>
                 </span>
-                <input required [formControl]="witnessName1 " type="text " class="form-control " placeholder=" Enter Witness
-                  Name ">
+                <input required [formControl]="witnessName1" type="text " class="form-control " placeholder=" Enter Witness Name ">
               </div>
               <span *ngIf="!witnessName1.valid && witnessName1.touched " class="help-block sub-little-text ">Enter a valid
                 name
@@ -610,11 +618,10 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-phone "></i>
                 </span>
-                <input required [formControl]="witnessContact1 " type="text " class="form-control " placeholder=" Enter
-                  Witness Contact ">
+                <input required [formControl]="witnessContact1" type="text " class="form-control " placeholder=" Enter Witness Contact ">
               </div>
-              <span *ngIf="!witnessContact1.valid && witnessContact1.touched " class="help-block sub-little-text ">Enter a
-                valid phone number</span>
+              <span *ngIf="!witnessContact1.valid && witnessContact1.touched " class="help-block sub-little-text ">Enter
+                a valid phone number</span>
             </div>
             <!-- witnessContact1 -->
 
@@ -626,8 +633,7 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-id-card "></i>
                 </span>
-                <input required [formControl]="witnessCnic1 " type="text " class="form-control " placeholder=" Enter Witness
-                  CNIC ">
+                <input required [formControl]="witnessCnic1" type="text " class="form-control" placeholder=" Enter WitnessCNIC ">
               </div>
               <span *ngIf="!witnessCnic1.valid && witnessCnic1.touched " class="help-block sub-little-text ">Enter a valid
                 CNIC
@@ -648,8 +654,7 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-user "></i>
                 </span>
-                <input required [formControl]="witnessName2 " type="text " class="form-control " placeholder=" Enter Witness
-                  Name ">
+                <input required [formControl]="witnessName2" type="text " class="form-control " placeholder=" Enter Witness  Name ">
               </div>
               <span *ngIf="!witnessName2.valid && witnessName2.touched " class="help-block sub-little-text ">Enter a valid
                 name
@@ -664,11 +669,11 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-phone "></i>
                 </span>
-                <input required [formControl]="witnessContact2 " type="text " class="form-control " placeholder=" Enter
+                <input required [formControl]="witnessContact2" type="text " class="form-control " placeholder=" Enter
                   Witness Contact ">
               </div>
-              <span *ngIf="!witnessContact2.valid && witnessContact2.touched " class="help-block sub-little-text ">Enter a
-                valid phone number</span>
+              <span *ngIf="!witnessContact2.valid && witnessContact2.touched " class="help-block sub-little-text ">Enter
+                a valid phone number</span>
             </div>
             <!-- witnessContact2 -->
 
@@ -680,7 +685,7 @@
                 <span class="input-group-addon ">
                   <i class="fa fa-id-card "></i>
                 </span>
-                <input [formControl]="witnessCnic2 " type="text " class="form-control " placeholder=" Enter Witness CNIC ">
+                <input [formControl]="witnessCnic2" type="text " class="form-control " placeholder=" Enter Witness CNIC ">
               </div>
               <span *ngIf="!witnessCnic2.valid && witnessCnic2.touched " class="help-block sub-little-text ">Enter a valid
                 CNIC

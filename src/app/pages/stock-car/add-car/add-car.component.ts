@@ -140,7 +140,7 @@ export class AddCarComponent implements OnInit {
 
 
     let model: any = {
-      Owners: this.carOwnerDtos,
+      Accounts: this.carOwnerDtos,
       Name: carmodel.Name,
       EngineNumber: carmodel.EngineNumber,
       ModelNumber: carmodel.ModelNumber,
