@@ -246,7 +246,7 @@ export class AddCarPurchaseComponent implements OnInit {
           Contact: m.witnessContact2
         }
       ],
-      carId: m.vehicalID,
+      carId: m.vehical,
       dealDate: m.dealDate,
       CarPrice: m.buyerPaidAmount,
       buyerCommission: m.commissionFromBuyer,

@@ -26,8 +26,8 @@ export class StockCarComponent implements OnInit {
   // loading = false;
 
 
-  // successTrigger = false;
-  // errorTrigger = false;
+  successTrigger = false;
+  errorTrigger = false;
 
   // allAccounts: AccountModel[] = [];
   // makerList = ['Toyota', 'Honda', 'Hundai', 'Suzuki', 'Faw'];

@@ -1,7 +1,9 @@
+import { GeneralHttpService } from './../../../services/general-http.service';
 import { Component, OnInit } from '@angular/core';
 import { CarService } from '../../../services/car/car.service';
 import { Validators, FormBuilder } from '@angular/forms';
 import { AmountValidator } from '../../../../assets/validators';
+import { AccountModel } from '../../../Models/account.model';
 
 @Component({
   selector: 'app-list-cars',
@@ -12,16 +14,25 @@ export class ListCarsComponent implements OnInit {
   loading: boolean;
   carsList: any[] = [];
   filter = '';
+  changeClass = false;
   selectedCarOwner: any[] = [];
   carStockForm: any;
+  allAccounts: AccountModel[] = [];
+  makerList = ['Toyota', 'Honda', 'Hundai', 'Suzuki', 'Faw'];
 
-  constructor(private cs: CarService, private fb: FormBuilder, ) {
+  constructor(private cs: CarService, private fb: FormBuilder, public gu: GeneralHttpService) {
     this.loading = true
   }
 
   ngOnInit() {
     this.getCars();
     this.createForm();
+  }
+
+  getAllAccount() {
+    this.gu.getAllAccounts().subscribe(data => {
+      this.allAccounts = this.sortAllAccounts(data.ResponseData);
+    }, error => { console.log(error) });
   }
   createForm() {
     let date = new Date();
@@ -63,5 +74,14 @@ export class ListCarsComponent implements OnInit {
 
   setUserInfo(accounts) {
     this.selectedCarOwner = accounts
+  }
+  sortAllAccounts(accouts) {
+    return accouts.sort((obj1, obj2) => {
+      if (obj1.Number == obj2.Number) return 0;
+      return (obj1.Number > obj2.Number) ? 1 : -1;
+    });
+  }
+  onSubmit(m) {
+
   }
 }
