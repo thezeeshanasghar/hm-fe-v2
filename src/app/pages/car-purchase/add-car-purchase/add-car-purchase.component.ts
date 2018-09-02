@@ -319,7 +319,7 @@ export class AddCarPurchaseComponent implements OnInit {
     // console.log(m);
 
     let model = {
-      buyers: buyerList
+      Buyers: buyerList
       //  [
       //   {
       //     Id: m.buyer1,
@@ -335,7 +335,7 @@ export class AddCarPurchaseComponent implements OnInit {
 
       // ]
       ,
-      sellers: sellerList
+      Sellers: sellerList
       // [
       //   {
       //     Id: m.seller1,
@@ -351,7 +351,7 @@ export class AddCarPurchaseComponent implements OnInit {
       // ]
       ,
 
-      witnesses: [
+      Witnesses: [
         {
 
           Name: m.witnessName1,
@@ -365,11 +365,11 @@ export class AddCarPurchaseComponent implements OnInit {
           Contact: m.witnessContact2
         }
       ],
-      carId: m.vehical,
-      dealDate: m.dealDate,
-      CarPrice: m.vehicalPrice,
-      buyerCommission: m.commissionFromBuyer,
-      SellerCommission: m.commissionFromSeller
+      CarID: m.vehical,
+      DealDate: m.dealDate,
+      Price: m.vehicalPrice,
+      BuyerCom: m.commissionFromBuyer,
+      SellerCom: m.commissionFromSeller
       // carDTO: {
       //   carId: 0
 
