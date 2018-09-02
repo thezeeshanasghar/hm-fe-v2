@@ -11,9 +11,16 @@ import { AmountValidator } from '../../../../assets/validators';
 })
 export class SaleComponent implements OnInit {
 
+ 
   allAccounts: any[] = [];
   changeClass = false;
   showSales = false;
+
+  superAccountList: any[] = []
+  seller1AccountList: any[] = []
+  seller2AccountList: any[] = []
+  buyer1AccountList: any[] = []
+  buyer2AccountList: any[] = []
 
   showBuyer = true;
   showSeller = true;
@@ -65,20 +72,20 @@ export class SaleComponent implements OnInit {
   constructor(private fb: FormBuilder, private gu: GeneralHttpService, private purchaseService: CarPurchaseService) {
 
     this.form = this.fb.group({
-      'buyer1': ['', Validators.compose([Validators.required])],
-      'buyer2': ['', Validators.compose([Validators.required])],
-      'seller1': ['', Validators.compose([Validators.required])],
-      'seller2': ['', Validators.compose([Validators.required])],
+      'buyer1': [0, Validators.compose([Validators.required])],
+      'buyer2': [0, Validators.compose([Validators.required])],
+      'seller1': [0, Validators.compose([Validators.required])],
+      'seller2': [0, Validators.compose([Validators.required])],
       'buyerName': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'buyerContact': ['', Validators.compose([Validators.required, Validators.maxLength(11)])],
-      'buyerCNIC': ['', Validators.compose([Validators.required, Validators.maxLength(13)])],
+      'buyerContact': [0, Validators.compose([Validators.required, Validators.maxLength(11)])],
+      'buyerCNIC': [0, Validators.compose([Validators.required, Validators.maxLength(13)])],
       'buyerAddress': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
 
       'sellerName': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'sellerContact': ['', Validators.compose([Validators.required, Validators.maxLength(11)])],
-      'sellerCNIC': ['', Validators.compose([Validators.required, Validators.maxLength(13)])],
+      'sellerContact': [0, Validators.compose([Validators.required, Validators.maxLength(11)])],
+      'sellerCNIC': [0, Validators.compose([Validators.required, Validators.maxLength(13)])],
       'sellerAddress': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'vehical': ['', Validators.compose([Validators.required])],
+      'vehical': [0, Validators.compose([Validators.required])],
 
       'vehicalName': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'modelNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
@@ -89,12 +96,12 @@ export class SaleComponent implements OnInit {
       'chassisNumber': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'description': ['', Validators.compose([Validators.required, Validators.minLength(10)])],
 
-      'dueDate': [''],
-      'dealDate': [''],
-      'commissionFromSeller': ['', Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
-      'commissionFromBuyer': ['', Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
-      'vehicalPrice': ['', Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
-      'buyerPaidAmount': ['', Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
+      'dueDate': [new Date(), Validators.required],
+      'dealDate': [new Date(), Validators.required],
+      'commissionFromSeller': [0, Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
+      'commissionFromBuyer': [0, Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
+      'vehicalPrice': [0, Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
+      'buyerPaidAmount': [0, Validators.compose([Validators.required, Validators.minLength(2), AmountValidator.validate])],
 
       'witnessName1': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'witnessContact1': ['', Validators.compose([Validators.required, Validators.maxLength(11)])],
@@ -104,7 +111,7 @@ export class SaleComponent implements OnInit {
       'witnessCnic2': ['', Validators.compose([Validators.required, Validators.maxLength(13)])],
 
       'computerizedNoPlate': [false],
-      'noOfPapers': ['3', Validators.compose([AmountValidator.validate])],
+      'noOfPapers': [0, Validators.compose([AmountValidator.validate])],
       'token': ['Lifetime', Validators.required],
     });
 
@@ -151,6 +158,7 @@ export class SaleComponent implements OnInit {
 
   ngOnInit() {
     this.getAllAccount();
+
   }
 
   getOwnedCars(id) {
@@ -161,7 +169,82 @@ export class SaleComponent implements OnInit {
       console.log(error)
     })
   }
+  removeAccountfromSuperListSeller1(id) {
 
+    var newList: any[] = [];
+    var dummyList: any[] = this.allAccounts.slice(0);
+    for (let i = 0; i < dummyList.length; i++) {
+      const e = dummyList[i];
+      var index = dummyList.indexOf(e)
+
+      if (index > -1 && e.Id == id) {
+        dummyList.splice(index, 1);
+        break;
+        // this.seller2AccountList.splice(index, 1);
+        // this.buyer1AccountList.splice(index, 1);
+        // this.buyer2AccountList.splice(index, 1);
+
+      }
+
+    }
+
+    // this.seller2AccountList.splice(index, 1);
+    // this.buyer1AccountList.splice(index, 1);
+    // this.buyer2AccountList.splice(index, 1);
+
+    this.seller2AccountList = dummyList;
+    this.buyer1AccountList = dummyList;
+    this.buyer2AccountList = dummyList;
+
+
+
+  }
+  removeAccountfromSuperListSeller2(id) {
+
+    var newList: any[] = [];
+    var dummyList: any[] = this.seller2AccountList.slice(0);
+    for (let i = 0; i < dummyList.length; i++) {
+      const e = dummyList[i];
+      var index = dummyList.indexOf(e)
+
+      if (index > -1 && e.Id == id) {
+        dummyList.splice(index, 1);
+        break;
+        // this.seller2AccountList.splice(index, 1);
+        // this.buyer1AccountList.splice(index, 1);
+        // this.buyer2AccountList.splice(index, 1);
+
+      }
+
+    }
+
+    // this.seller2AccountList.splice(index, 1);
+    // this.buyer1AccountList.splice(index, 1);
+    // this.buyer2AccountList.splice(index, 1);
+
+    // this.seller1AccountList = dummyList;
+    this.buyer1AccountList = dummyList;
+    this.buyer2AccountList = dummyList;
+
+
+
+  }
+  removeAccountfromSuperListBuyer1(id) {
+
+    var newList: any[] = [];
+    var dummyList: any[] = this.buyer1AccountList.slice(0);
+    for (let i = 0; i < dummyList.length; i++) {
+      const e = dummyList[i];
+      var index = dummyList.indexOf(e)
+
+      if (index > -1 && e.Id == id) {
+        dummyList.splice(index, 1);
+        break;
+      }
+    }
+
+    this.buyer2AccountList = dummyList;
+  }
   getSharedCars(id1, id2) {
 
     debugger
@@ -182,6 +265,11 @@ export class SaleComponent implements OnInit {
     // debugger
     this.gu.getAllAccounts().subscribe(data => {
       this.allAccounts = data.ResponseData;
+      this.superAccountList = this.allAccounts.slice(0);
+      this.seller1AccountList = this.allAccounts.slice(0);
+      this.seller2AccountList = this.allAccounts.slice(0);
+      this.buyer1AccountList = this.allAccounts.slice(0);
+      this.buyer2AccountList = this.allAccounts.slice(0);
       console.log("all accounts", this.allAccounts)
     }, error => { });
   }
@@ -198,37 +286,69 @@ export class SaleComponent implements OnInit {
   }
 
   onSubmit(m: any) {
+
+    var buyerList: any = [];
+    var sellerList: any = [];
+    if (m.buyer2 != '') {
+      buyerList = [
+        { id: m.buyer1 },
+        { id: m.buyer2 },
+      ]
+    }
+    else {
+      buyerList = [
+        { id: m.buyer1 },
+      ]
+    }
+
+    if (m.seller2 != '') {
+      sellerList = [
+        { id: m.seller1 },
+        { id: m.seller2 },
+      ]
+    }
+    else {
+      sellerList = [
+        { id: m.seller1 },
+      ]
+    }
+
+
+
     // console.log(m);
 
     let model = {
-      buyers
-        : [
-          {
-            Id: m.buyer1,
-            // AccountId: m.buyer1,
-            // PaidAmount: m.buyerPaidAmount,
-            // commission: m.commissionFromBuyer
-          },
-          {
-            Id: m.buyer2,
-            // AccountId: m.buyer2,
+      buyers: buyerList
+      //  [
+      //   {
+      //     Id: m.buyer1,
+      //     // AccountId: m.buyer1,
+      //     // PaidAmount: m.buyerPaidAmount,
+      //     // commission: m.commissionFromBuyer
+      //   },
+      //   {
+      //     Id: m.buyer2,
+      //     // AccountId: m.buyer2,
 
-          }
+      //   }
 
-        ],
-      sellers: [
-        {
-          Id: m.seller1,
-          // AccountId: m.seller1,
-          // VehicalPrice: m.vehicalPrice,
-          // commission: m.commissionFromSeller
-        },
-        {
-          Id: m.seller2,
-          // AccountId: m.seller2,
+      // ]
+      ,
+      sellers: sellerList
+      // [
+      //   {
+      //     Id: m.seller1,
+      //     // AccountId: m.seller1,
+      //     // VehicalPrice: m.vehicalPrice,
+      //     // commission: m.commissionFromSeller
+      //   },
+      //   {
+      //     Id: m.seller2,
+      //     // AccountId: m.seller2,
 
-        }
-      ],
+      //   }
+      // ]
+      ,
 
       witnesses: [
         {
@@ -244,9 +364,9 @@ export class SaleComponent implements OnInit {
           Contact: m.witnessContact2
         }
       ],
-      carId: m.vehicalID,
+      carId: m.vehical,
       dealDate: m.dealDate,
-      CarPrice: m.buyerPaidAmount,
+      CarPrice: m.vehicalPrice,
       buyerCommission: m.commissionFromBuyer,
       SellerCommission: m.commissionFromSeller
       // carDTO: {
@@ -267,9 +387,18 @@ export class SaleComponent implements OnInit {
 
 
     }
-
-
     console.log(JSON.stringify(model));
+
+    let form = JSON.stringify(model);
+
+    this.purchaseService.addPurchasedCar(form).subscribe(data => {
+
+    }, error => {
+
+    })
+
+
+
   }
 
 
