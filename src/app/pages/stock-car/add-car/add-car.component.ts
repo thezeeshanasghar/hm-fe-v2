@@ -50,21 +50,21 @@ export class AddCarComponent implements OnInit {
   createForm() {
     let date = new Date();
     this.carStockForm = this.fb.group({
-      name: ['Toyata GLI', Validators.required],
+      name: ['', Validators.required],
       receiptNumber: ['', Validators.required],
-      modelNumber: ['M321', Validators.compose([Validators.required, Validators.minLength(2)])],
-      color: ['Black', Validators.compose([Validators.required, Validators.minLength(2)])],
-      maker: ['Honda', Validators.compose([Validators.required, Validators.minLength(2)])],
-      registrationNumber: ['R321', Validators.compose([Validators.required, Validators.minLength(2)])],
-      engineNumber: ['E321', Validators.compose([Validators.required, Validators.minLength(2)])],
-      chasisNumber: ['C321', Validators.compose([Validators.required, Validators.minLength(2)])],
+      modelNumber: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      color: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      maker: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      registrationNumber: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      engineNumber: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      chasisNumber: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       owner1: ['', Validators.required],
       owner2: [''],
       purchaseDate: [new Date(), Validators.required],
-      purchasePrice: ['200', Validators.compose([Validators.required, AmountValidator.validate])],
+      purchasePrice: ['', Validators.compose([Validators.required, AmountValidator.validate])],
       computerizedNoPlate: [false],
-      noOfPapers: ['3', Validators.compose([AmountValidator.validate])],
-      token: ['Lifetime', Validators.required],
+      noOfPapers: ['', Validators.compose([AmountValidator.validate])],
+      token: ['', Validators.required],
       avatar: null
     });
   }
@@ -140,7 +140,7 @@ export class AddCarComponent implements OnInit {
     // console.log(formData.get('model'));
     let jsonModel = JSON.stringify(model);
 
-    console.log("jso modal", jsonModel)
+    console.log("form data", formData.get('model'), formData.get('avatar'));
 
     this.cs.addCar(formData).subscribe(data => {
 
