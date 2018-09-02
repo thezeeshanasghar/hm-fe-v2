@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
       let obj: any = {
         Authorized: true,
         email: m.email,
-
       }
       window.localStorage.setItem("Authorized", JSON.stringify(obj));
       this.router.navigate(['dashboard']);

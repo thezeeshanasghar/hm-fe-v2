@@ -8,26 +8,31 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private router:Router) { 
+  constructor(private router: Router) {
     // this.validateLogin()  
     let obj = JSON.parse(localStorage.getItem("Authorized"))
-    
+
     console.log(obj.Authorized.Authorized);
 
 
   }
 
   validateLogin() {
-    
+
     let obj = JSON.parse(localStorage.getItem("Authorized"))
-   
-  
+
+
     if (!obj || obj.Authorized == null) {
       this.router.navigate(['login']);
     }
   }
 
   ngOnInit() {
+  }
+
+  logout() {
+    sessionStorage.setItem("Authorized", "");
+    this.router.navigate(['login']);
   }
 
 }

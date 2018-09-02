@@ -1,7 +1,10 @@
+import { ListExchangeCarComponent } from './pages/exchange-recipt/list-exchange-car/list-exchange-car.component';
+import { AddExchangeCarComponent } from './pages/exchange-recipt/add-exchange-car/add-exchange-car.component';
+import { CarSaleComponent } from './pages/car-sale/car-sale.component';
 import { ExchangeReciptComponent } from './pages/exchange-recipt/exchange-recipt.component';
 import { UdharComponent } from './pages/udhar/udhar.component';
 import { SaleToUnregisterUserComponent } from './pages/sale-to-unregister-user/sale-to-unregister-user.component';
-import { SaleComponent } from './pages/sale/sale.component';
+
 import { StockCarComponent } from './pages/stock-car/stock-car.component';
 import { RoznamchaComponent } from './pages/roznamcha/roznamcha.component';
 import { ModuleWithProviders, Component } from '@angular/core';
@@ -12,6 +15,15 @@ import { LoginComponent } from './pages/login/login.component';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CarPurchaseComponent } from './pages/car-purchase/car-purchase.component';
+import { AddCarComponent } from './pages/stock-car/add-car/add-car.component';
+import { ListCarsComponent } from './pages/stock-car/list-cars/list-cars.component';
+import { EditCarComponent } from './pages/stock-car/edit-car/edit-car.component';
+import { AddCarPurchaseComponent } from './pages/car-purchase/add-car-purchase/add-car-purchase.component';
+import { ListCarPurchaseComponent } from './pages/car-purchase/list-car-purchase/list-car-purchase.component';
+import { EditCarPurchaseComponent } from './pages/car-purchase/edit-car-purchase/edit-car-purchase.component';
+import { AuthGuard } from './router-guard/auth.guard';
+import { SaleComponent } from './pages/car-sale/sale/sale.component';
+import { CarSaleListComponent } from './pages/car-sale/car-sale-list/car-sale-list.component';
 
 export const appRoutes: Routes = [
     {
@@ -23,6 +35,7 @@ export const appRoutes: Routes = [
     {
         path: "dashboard",
         component: DashboardComponent,
+        // canActivate: [AuthGuard],
         children: [
             {
                 path: '',
@@ -31,15 +44,62 @@ export const appRoutes: Routes = [
             },
 
             { path: "purchase", component: CarPurchaseComponent },
-            { path: "exchangeRecipt", component: ExchangeReciptComponent },
-            { path: "carStock", component: StockCarComponent },
-           
-            { path: "carSale", component: SaleToUnregisterUserComponent },
+            // { path: "exchangeRecipt", component: ExchangeReciptComponent },
+
             { path: "udhar", component: UdharComponent },
 
             { path: "accounts", component: AccountsComponent },
             { path: "addAccount", component: AddAccountComponent },
             { path: "roznamcha", component: RoznamchaComponent },
+
+            {
+                path: "carExchange",
+                component: ExchangeReciptComponent,
+                children: [
+                    { path: '', redirectTo: 'add', pathMatch: 'full' },
+                    { path: 'add', component: AddExchangeCarComponent },
+                    { path: 'list', component: ListExchangeCarComponent },
+
+                ]
+
+            },
+
+
+            {
+                path: "carStock",
+                component: StockCarComponent,
+                children: [
+                    { path: '', redirectTo: 'add', pathMatch: 'full' },
+                    { path: 'add', component: AddCarComponent },
+                    { path: 'list', component: ListCarsComponent },
+                    { path: 'edit', component: EditCarComponent }
+
+                ]
+            },
+
+            {
+                path: "purchase",
+                component: CarPurchaseComponent,
+                children: [
+                    { path: '', redirectTo: 'add', pathMatch: 'full' },
+                    { path: 'list', component: ListCarPurchaseComponent },
+                    { path: 'add', component: AddCarPurchaseComponent },
+                    { path: 'edit', component: EditCarPurchaseComponent }
+
+                ]
+            },
+
+            {
+                path: "carSale",
+                component: CarSaleComponent,
+                children: [
+                    { path: '', redirectTo: 'add', pathMatch: 'full' },
+                    { path: 'list', component: SaleComponent },
+                    { path: 'add', component: CarSaleListComponent },
+
+
+                ]
+            }
 
 
         ]
