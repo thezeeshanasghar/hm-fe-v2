@@ -43,7 +43,7 @@ export const appRoutes: Routes = [
                 pathMatch: 'full'
             },
 
-            { path: "purchase", component: CarPurchaseComponent },
+            // { path: "purchase", component: CarPurchaseComponent },
             // { path: "exchangeRecipt", component: ExchangeReciptComponent },
 
             { path: "udhar", component: UdharComponent },
@@ -81,7 +81,7 @@ export const appRoutes: Routes = [
                 path: "purchase",
                 component: CarPurchaseComponent,
                 children: [
-                    { path: '', redirectTo: 'add', pathMatch: 'full' },
+                    { path:'', redirectTo: 'add', pathMatch: 'full' },
                     { path: 'list', component: ListCarPurchaseComponent },
                     { path: 'add', component: AddCarPurchaseComponent },
                     { path: 'edit', component: EditCarPurchaseComponent }
