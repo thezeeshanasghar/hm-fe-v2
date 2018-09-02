@@ -40,7 +40,7 @@ import { CarSaleListComponent } from './pages/car-sale/car-sale-list/car-sale-li
 import { SaleComponent } from './pages/car-sale/sale/sale.component';
 import { AddExchangeCarComponent } from './pages/exchange-recipt/add-exchange-car/add-exchange-car.component';
 import { ListExchangeCarComponent } from './pages/exchange-recipt/list-exchange-car/list-exchange-car.component';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -86,6 +86,7 @@ import { ListExchangeCarComponent } from './pages/exchange-recipt/list-exchange-
     MyDatePickerModule,
     Ng2SearchPipeModule,
     BsDatepickerModule.forRoot(),
+    NgxPaginationModule
 
 
   ],

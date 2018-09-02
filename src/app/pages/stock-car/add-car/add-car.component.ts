@@ -15,6 +15,8 @@ export class AddCarComponent implements OnInit {
 
   carOwnerList = [];
   carsList: any = [];
+  seller1AccountList: any[] = []
+  seller2AccountList: any[] = []
   changeClass = false;
   showAddCarForm = false;
   public carStockForm: FormGroup;
@@ -47,6 +49,23 @@ export class AddCarComponent implements OnInit {
     this.getCars();
   }
 
+
+  removeAccountfromSuperListOwner1(id) {
+
+    var dummyList: any[] = this.allAccounts.slice(0);
+    for (let i = 0; i < dummyList.length; i++) {
+      const e = dummyList[i];
+      var index = dummyList.indexOf(e)
+
+      if (index > -1 && e.Id == id) {
+        dummyList.splice(index, 1);
+        break;
+      }
+
+    }
+    this.seller2AccountList = dummyList;
+  }
+
   createForm() {
     let date = new Date();
     this.carStockForm = this.fb.group({
@@ -73,6 +92,9 @@ export class AddCarComponent implements OnInit {
   getAllAccount() {
     this.gu.getAllAccounts().subscribe(data => {
       this.allAccounts = this.sortAllAccounts(data.ResponseData);
+      this.seller1AccountList = this.allAccounts.slice(0);
+      this.seller2AccountList = this.allAccounts.slice(0);
+
     }, error => { console.log(error) });
   }
 
