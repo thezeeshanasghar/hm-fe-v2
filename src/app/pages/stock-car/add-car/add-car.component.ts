@@ -84,7 +84,8 @@ export class AddCarComponent implements OnInit {
       computerizedNoPlate: [false],
       noOfPapers: ['', Validators.compose([AmountValidator.validate])],
       token: ['', Validators.required],
-      avatar: null
+      avatar: null,
+      avatar2: null,
     });
   }
 
@@ -158,6 +159,7 @@ export class AddCarComponent implements OnInit {
 
     formData.append('model', JSON.stringify(model));
     formData.append('avatar', this.carStockForm.get('avatar').value);
+    formData.append('avatar2', this.carStockForm.get('avatar2').value);
 
     // console.log(formData.get('model'));
     let jsonModel = JSON.stringify(model);
@@ -208,6 +210,11 @@ export class AddCarComponent implements OnInit {
       this.carStockForm.get('avatar').setValue(file);
     }
   }
-
+  onFile2Change(event) {
+    if (event.target.files.length > 0) {
+      let file = event.target.files[0];
+      this.carStockForm.get('avatar2').setValue(file);
+    }
+  }
 
 }
