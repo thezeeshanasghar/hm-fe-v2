@@ -25,303 +25,304 @@
 </style>
 <div class="container-fluid">
   <div class="row">
-  <div class="col-md-12">
-    <!-- warning message -->
-    <div *ngIf="message.length > 0" class="alert alert-warning alert-dismissable">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="setAlertOff()">&times;</a>
-      <i class="fa fa-warning fa-fw"></i>
-      <strong>{{message}}</strong>
+    <div class="col-md-12">
+      <!-- warning message -->
+      <div *ngIf="message.length > 0" class="alert alert-warning alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="setAlertOff()">&times;</a>
+        <i class="fa fa-warning fa-fw"></i>
+        <strong>{{message}}</strong>
 
       </div>
     </div>
   </div>
-</div>
-<div class="row">
 
-  <div class="col-md-4">
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-addon">
-          <i class="fa fa-search"></i>
+  <div class="row">
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-search"></i>
+          </div>
+          <input class="form-control" type="text" name="search" [(ngModel)]="filter">
         </div>
-        <input class="form-control" type="text" name="search" [(ngModel)]="filter">
+      </div>
+
+    </div>
+
+    <div class="row" style="margin-top:15px">
+      <div class="col-md-12 col-sm-12">
+        <table class="table table-striped table-sm ">
+          <thead style="background: lightblue">
+            <tr>
+              <th>Sr.#</th>
+              <th>Acc. #</th>
+              <th>Name</th>
+              <th>Contact</th>
+              <th>Image</th>
+
+              <th>Balance</th>
+              <th>
+
+              </th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let account of allAccounts | filter:filter ; let i=index">
+              <td>{{i+1}}</td>
+              <td>{{account.Number}}</td>
+              <td>{{account.Name}}</td>
+              <td>{{account.MobileNumber}}</td>
+
+              <td>
+                <img src="http://{{ip}}:{{port}}/{{account.Image}} " width="40" height="40" alt="" style="border-radius: 50%;">                </td>
+              <!-- <td>{{account.CNIC}}</td> -->
+              <!-- <td>{{account.Address}}</td> -->
+
+              <td [ngClass]="account.Balance>=0 ? 'text-green': 'text-red'">{{account.Balance |number}}</td>
+              <td>
+                <button class="btn btn-warning btn-sm" data-target="#editAccount" data-toggle="modal">
+                  <i class="fa fa-pencil"></i>
+                </button>
+                <button class="btn btn-danger btn-sm">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+              <td>
+                <a href="#" class="pull-right" data-toggle="modal" (click)="getTransactionsByAccountId(account.Id)" data-target="#TransactionModal"
+                  style="font-size:15px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+                  History/
+                  <b>تفصیل</b>
+                </a>
+
+              </td>
+              <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm" style="margin-top:7px;font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+                Print</a>
+
+
+
+
+
+
+            </tr>
+          </tbody>
+
+
+        </table>
       </div>
     </div>
 
-  </div>
+    <ng-template #templateExpense>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          Expense&nbsp;/&nbsp;
+          <b>اندراج خرچ</b>
+        </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefExpense.hide()">
+          <span aria-hidden="true" style="display: inline-block; padding: 0 5px">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-expense></app-expense>
+      </div>
+    </ng-template>
 
-  <div class="row" style="margin-top:15px">
-    <div class="col-md-12 col-sm-12">
-      <table class="table table-striped table-sm ">
-        <thead style="background: lightblue">
-          <tr>
-            <th>Sr.#</th>
-            <th>Acc. #</th>
-            <th>Name</th>
-            <th>Contact</th>
-            <th>Image</th>
+    <ng-template #templateIncome>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left" style="font-size:25px">
+          Income&nbsp;/&nbsp;
+          <b>اندراج آمدن</b>
+        </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefIncome.hide()">
+          <span aria-hidden="true" style="display: inline-block; padding: 0 5px">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-income></app-income>
+      </div>
+    </ng-template>
 
-            <th>Balance</th>
-            <th>
+    <!--history Modal -->
+    <div class="modal fade" id="TransactionModal" role="dialog">
+      <div class="modal-dialog">
 
-            </th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let account of allAccounts | filter:filter ; let i=index">
-            <td>{{i+1}}</td>
-            <td>{{account.Number}}</td>
-            <td>{{account.Name}}</td>
-            <td>{{account.MobileNumber}}</td>
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" style="display: inline-block; padding: 0 5px">&times;</button>
+            <h4 class="modal-title">
+              History Log&nbsp;/&nbsp;
+              <b>تفصیل کھاتہ</b>
+            </h4>
+          </div>
+          <div class="modal-body">
+            <ng-template #no_data_templ>
+              No data found...
+            </ng-template>
+            <div *ngIf="singleUser" class="row">
 
-            <td>
-              <img src="http://{{ip}}:{{port}}/{{account.Image}} " width="40" height="40" alt="" style="border-radius: 50%;">              </td>
-            <!-- <td>{{account.CNIC}}</td> -->
-            <!-- <td>{{account.Address}}</td> -->
-
-            <td [ngClass]="account.Balance>=0 ? 'text-green': 'text-red'">{{account.Balance |number}}</td>
-            <td>
-              <button class="btn btn-warning btn-sm" data-target="#editAccount" data-toggle="modal">
-                <i class="fa fa-pencil"></i>
-              </button>
-              <button class="btn btn-danger btn-sm">
-                <i class="fa fa-trash"></i>
-              </button>
-            </td>
-            <td>
-              <a href="#" class="pull-right" data-toggle="modal" (click)="getTransactionsByAccountId(account.Id)" data-target="#TransactionModal"
-                style="font-size:15px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
-                History/
-                <b>تفصیل</b>
-              </a>
-
-            </td>
-            <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm" style="margin-top:7px;font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
-              Print</a>
-
-
-
-
-
-
-          </tr>
-        </tbody>
+              <div class="col-md-8">
+                <h5>Account number:&nbsp;&nbsp; {{singleUser.Number}}</h5>
+                <h5>Name:&nbsp;&nbsp; {{singleUser.Name}}</h5>
+                <h5>Contact:&nbsp;&nbsp; {{singleUser.MobileNumber}}</h5>
+                <h5>Address:&nbsp;&nbsp; {{singleUser.Address}}</h5>
+                <h5>Balance:&nbsp;&nbsp; {{singleUser.Balance |number}}</h5>
 
 
-      </table>
-    </div>
-  </div>
-
-  <ng-template #templateExpense>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">
-        Expense&nbsp;/&nbsp;
-        <b>اندراج خرچ</b>
-      </h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefExpense.hide()">
-        <span aria-hidden="true" style="display: inline-block; padding: 0 5px">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <app-expense></app-expense>
-    </div>
-  </ng-template>
-
-  <ng-template #templateIncome>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left" style="font-size:25px">
-        Income&nbsp;/&nbsp;
-        <b>اندراج آمدن</b>
-      </h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefIncome.hide()">
-        <span aria-hidden="true" style="display: inline-block; padding: 0 5px">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <app-income></app-income>
-    </div>
-  </ng-template>
-
-  <!--history Modal -->
-  <div class="modal fade" id="TransactionModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" style="display: inline-block; padding: 0 5px">&times;</button>
-          <h4 class="modal-title">
-            History Log&nbsp;/&nbsp;
-            <b>تفصیل کھاتہ</b>
-          </h4>
-        </div>
-        <div class="modal-body">
-          <ng-template #no_data_templ>
-            No data found...
-          </ng-template>
-          <div *ngIf="singleUser" class="row">
-
-            <div class="col-md-8">
-              <h5>Account number:&nbsp;&nbsp; {{singleUser.Number}}</h5>
-              <h5>Name:&nbsp;&nbsp; {{singleUser.Name}}</h5>
-              <h5>Contact:&nbsp;&nbsp; {{singleUser.MobileNumber}}</h5>
-              <h5>Address:&nbsp;&nbsp; {{singleUser.Address}}</h5>
-              <h5>Balance:&nbsp;&nbsp; {{singleUser.Balance |number}}</h5>
-
+              </div>
+              <div class="col-md-4">
+                <img src="http://{{ip}}:{{port}}/{{singleUser.image}} " width="150" height="150" alt="">
+              </div>
 
             </div>
-            <div class="col-md-4">
-              <img src="http://{{ip}}:{{port}}/{{singleUser.image}} " width="150" height="150" alt="">
-            </div>
+
+            <table class="table table-striped " *ngIf="selectedAccountTransactions?.length;else no_data_templ">
+
+
+              <thead>
+                <tr>
+                  <th>Sr#</th>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Income</th>
+                  <th>Expense</th>
+                  <th>Balance</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor="let u of selectedAccountTransactions;let i=index; let last=last">
+                  <td>{{i+1}}</td>
+                  <td>{{u.Date}}</td>
+                  <td>{{u.Description}}</td>
+                  <td *ngIf="u.Amount>0;else income" style="color:green">{{u.Amount |number}}</td>
+                  <ng-template #income>
+                    <td style="color:red;font-style:bold"></td>
+                  </ng-template>
+                  <td *ngIf="u.Amount<0;else expense" style="color:red">{{u.Amount |number}}</td>
+                  <ng-template #expense>
+                    <td style="color:green;font-style:bold"></td>
+                  </ng-template>
+                  <td [ngClass]="last ? 'text-bold': 'text-normal'">{{ getRowTotalUsingIndex(i) }}</td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
 
           </div>
 
-          <table class="table table-striped " *ngIf="selectedAccountTransactions?.length;else no_data_templ">
-
-
-            <thead>
-              <tr>
-                <th>Sr#</th>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Income</th>
-                <th>Expense</th>
-                <th>Balance</th>
-              </tr>
-            </thead>
-            <tbody>
-
-              <tr *ngFor="let u of selectedAccountTransactions;let i=index; let last=last">
-                <td>{{i+1}}</td>
-                <td>{{u.Date}}</td>
-                <td>{{u.Description}}</td>
-                <td *ngIf="u.Amount>0;else income" style="color:green">{{u.Amount |number}}</td>
-                <ng-template #income>
-                  <td style="color:red;font-style:bold"></td>
-                </ng-template>
-                <td *ngIf="u.Amount<0;else expense" style="color:red">{{u.Amount |number}}</td>
-                <ng-template #expense>
-                  <td style="color:green;font-style:bold"></td>
-                </ng-template>
-                <td [ngClass]="last ? 'text-bold': 'text-normal'">{{ getRowTotalUsingIndex(i) }}</td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
-
         </div>
 
       </div>
-
     </div>
-  </div>
-  <!-- history Modal end -->
-  <!--edit Account -->
-  <div class="modal fade" id="editAccount" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <!-- history Modal end -->
+    <!--edit Account -->
+    <div class="modal fade" id="editAccount" role="dialog">
+      <div class="modal-dialog modal-lg">
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" style="display: inline-block; padding: 0 5px">&times;</button>
-          <h4 class="modal-title">
-            Edit User Account
-            <!-- <b>تفصیل کھاتہ</b> -->
-          </h4>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="editUserForm" class="form-horizontal">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" style="display: inline-block; padding: 0 5px">&times;</button>
+            <h4 class="modal-title">
+              Edit User Account
+              <!-- <b>تفصیل کھاتہ</b> -->
+            </h4>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="editUserForm" class="form-horizontal">
 
-            <!-- number -->
-            <div class="form-group row" [ngClass]="{'has-error': (!number.valid && number.touched), 'has-success': (number.valid && number.touched)}">
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <i class="glyphicon glyphicon-user"></i>
-                </span>
-                <input [formControl]="number" type="text" class="form-control" placeholder="Enter account number">
+              <!-- number -->
+              <div class="form-group row" [ngClass]="{'has-error': (!number.valid && number.touched), 'has-success': (number.valid && number.touched)}">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-user"></i>
+                  </span>
+                  <input [formControl]="number" type="text" class="form-control" placeholder="Enter account number">
+                </div>
+                <div *ngIf="number.touched && number.hasError('required')" class="help-block sub-little-text">
+                  account number is required.
+                </div>
               </div>
-              <div *ngIf="number.touched && number.hasError('required')" class="help-block sub-little-text">
-                account number is required.
-              </div>
-            </div>
 
-            <!-- name -->
-            <div class="form-group row" [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <i class="glyphicon glyphicon-user"></i>
-                </span>
-                <input [formControl]="name" type="text" class="form-control" placeholder="Enter account holder name">
+              <!-- name -->
+              <div class="form-group row" [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-user"></i>
+                  </span>
+                  <input [formControl]="name" type="text" class="form-control" placeholder="Enter account holder name">
+                </div>
+                <div *ngIf="name.touched && name.hasError('required')" class="help-block sub-little-text">
+                  account holder name is required.
+                </div>
               </div>
-              <div *ngIf="name.touched && name.hasError('required')" class="help-block sub-little-text">
-                account holder name is required.
-              </div>
-            </div>
-
-
-            <!-- mobileNumber -->
-            <div class="form-group row" [ngClass]="{'has-error': (!mobileNumber.valid && mobileNumber.touched), 'has-success': (mobileNumber.valid && mobileNumber.touched)}">
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <i class="glyphicon glyphicon-phone"></i>
-                </span>
-                <input [formControl]="mobileNumber" type="text" class="form-control" placeholder="Enter mobile number">
-              </div>
-              <div *ngIf="mobileNumber.touched && mobileNumber.hasError('required')" class="help-block sub-little-text">
-                mobile number is required.
-              </div>
-            </div>
-
-            <!--cnic-->
-            <div class="form-group row" [ngClass]="{'has-error': (!cnic.valid && cnic.touched), 'has-success': (cnic.valid && cnic.touched)}">
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <i class="glyphicon glyphicon-credit-card"></i>
-                </span>
-                <input [formControl]="cnic" type="text" class="form-control" placeholder="Enter CNIC">
-              </div>
-              <div *ngIf="cnic.touched && cnic.hasError('required')" class="help-block sub-little-text">
-                CNIC is required.
-              </div>
-            </div>
 
 
-            <!--address-->
-            <div class="form-group row" [ngClass]="{'has-error': (!address.valid && address.touched), 'has-success': (address.valid && address.touched)}">
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <i class="glyphicon glyphicon-home"></i>
-                </span>
-                <textarea rows="5" cols="40" [formControl]="address" class="form-control" placeholder="Enter address....."></textarea>
+              <!-- mobileNumber -->
+              <div class="form-group row" [ngClass]="{'has-error': (!mobileNumber.valid && mobileNumber.touched), 'has-success': (mobileNumber.valid && mobileNumber.touched)}">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-phone"></i>
+                  </span>
+                  <input [formControl]="mobileNumber" type="text" class="form-control" placeholder="Enter mobile number">
+                </div>
+                <div *ngIf="mobileNumber.touched && mobileNumber.hasError('required')" class="help-block sub-little-text">
+                  mobile number is required.
+                </div>
               </div>
-              <div *ngIf="address.touched && address.hasError('required')" class="help-block sub-little-text">
-                address is required.
+
+              <!--cnic-->
+              <div class="form-group row" [ngClass]="{'has-error': (!cnic.valid && cnic.touched), 'has-success': (cnic.valid && cnic.touched)}">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-credit-card"></i>
+                  </span>
+                  <input [formControl]="cnic" type="text" class="form-control" placeholder="Enter CNIC">
+                </div>
+                <div *ngIf="cnic.touched && cnic.hasError('required')" class="help-block sub-little-text">
+                  CNIC is required.
+                </div>
               </div>
-            </div>
-            <!-- address -->
-            <!-- <div class="form-group">
+
+
+              <!--address-->
+              <div class="form-group row" [ngClass]="{'has-error': (!address.valid && address.touched), 'has-success': (address.valid && address.touched)}">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-home"></i>
+                  </span>
+                  <textarea rows="5" cols="40" [formControl]="address" class="form-control" placeholder="Enter address....."></textarea>
+                </div>
+                <div *ngIf="address.touched && address.hasError('required')" class="help-block sub-little-text">
+                  address is required.
+                </div>
+              </div>
+              <!-- address -->
+              <!-- <div class="form-group">
                   <label for="avatar">Image</label>
                   <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
                 </div> -->
-            <div class="row">
-              <button type="submit" class="btn btn-primary pull-right btn-sm" (click)="form.reset" [disabled]="!editUserForm.valid">&nbsp;Update&nbsp;</button>
-            </div>
+              <div class="row">
+                <button type="submit" class="btn btn-primary pull-right btn-sm" (click)="form.reset" [disabled]="!editUserForm.valid">&nbsp;Update&nbsp;</button>
+              </div>
 
 
 
-          </form>
-        </div>
-        <!-- <div class="modal-footer">
+            </form>
+          </div>
+          <!-- <div class="modal-footer">
       
             </div> -->
 
-      </div>
+        </div>
 
+      </div>
     </div>
+    <!-- edit Account end -->
   </div>
-  <!-- edit Account end -->
 </div>

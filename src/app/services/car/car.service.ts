@@ -8,10 +8,10 @@ export class CarService {
 
   constructor(private gs: GeneralHttpService, private http: Http) { }
   addCar(obj) {
-    let httpOption = new Headers({ 'Content-Type': 'application/json' });
-    const option = new RequestOptions( {headers: httpOption });
+    // let httpOption = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    // const option = new RequestOptions( {headers: httpOption });
     let url = "http://" + this.gs.ip + ":" + this.gs.port + "/api/car";
-    return this.http.post(url, obj,option).map((response: Response) => response.json());
+    return this.http.post(url, obj).map((response: Response) => response.json());
   }
   getCars() {
     // let headers = new Headers({ 'Content-Type': 'application/json' });
