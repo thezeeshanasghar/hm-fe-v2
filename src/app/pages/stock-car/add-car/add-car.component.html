@@ -39,9 +39,9 @@
               <i class="glyphicon glyphicon-user"></i>
             </span>
 
-            <select formControlName="owner1" class="form-control">
+            <select formControlName="owner1" class="form-control" #owner1 (ngModelChange)="removeAccountfromSuperListOwner1(owner1.value)">
               <option value="">-- Select first owner account --</option>
-              <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Number}} -- {{u.Name}}</option>
+              <option value="{{u.Id}}" *ngFor="let u of seller1AccountList">{{u.Number}} -- {{u.Name}}</option>
             </select>
           </div>
           <span *ngIf="!carStockForm.controls['owner1'].valid && carStockForm.controls['owner1'].touched" class="help-block sub-little-text">Owner1
@@ -49,22 +49,22 @@
         </div>
         <!-- owner1 -->
         <!-- owner2 -->
+        <!-- {{seller2AccountList |json}} -->
 
-        <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['owner2'].valid && 
-                carStockForm.controls['owner2'].touched, 'has-success': carStockForm.controls['owner2'].valid}">
-          <label for="owner">Owner 2:</label>
-
+        <div *ngIf="owner1.value !=''" class="form-group" [ngClass]="{'has-error': !carStockForm.controls['owner2'].valid &&          carStockForm.controls['owner2'].touched, 'has-success': carStockForm.controls['owner2'].valid}">
+          <label for="owner2">Owner 2:</label>
           <div class="input-group">
             <span class="input-group-addon">
               <i class="glyphicon glyphicon-user"></i>
             </span>
 
-            <select formControlName="owner2" class="form-control">
+            <select formControlName="owner2" class="form-control" #owner2>
               <option value="">-- Select second owner account --</option>
-              <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Number}} -- {{u.Name}}</option>
+              <option value="{{u.Id}}" *ngFor="let u of seller2AccountList">{{u.Number}} -- {{u.Name}}</option>
             </select>
           </div>
-
+          <span *ngIf="!carStockForm.controls['owner2'].valid && carStockForm.controls['owner2'].touched" class="help-block sub-little-text">owner2
+            is required</span>
         </div>
         <!-- owner2 -->
 
@@ -286,8 +286,7 @@
               <i class="fa fa-car"></i>
             </span>
 
-            <input class="form-control" placeholder="Datepicker" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DDThh:mm:sss' }"
-              formControlName="purchaseDate">
+            <input class="form-control" placeholder="Datepicker" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" formControlName="purchaseDate">
           </div>
           <span *ngIf="!carStockForm.controls['purchaseDate'].valid && 
                  carStockForm.controls['purchaseDate'].touched" class="help-block sub-little-text">Vehicle purchase
