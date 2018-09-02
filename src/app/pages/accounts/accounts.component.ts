@@ -6,6 +6,8 @@ import {
   Validators,
   FormControl,
   FormsModule
+
+
 } from "@angular/forms";
 import { Http } from "@angular/http";
 import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
@@ -28,7 +30,7 @@ export class searchModel {
 })
 export class AccountsComponent implements OnInit {
   loading = false;
-
+  page: number = 1
   public search: searchModel = {
     name: 0,
     cnic: 0,
@@ -172,7 +174,7 @@ export class AccountsComponent implements OnInit {
             console.log(data);
             this.singleUser = data.ResponseData;
           },
-          error => {}
+          error => { }
         );
       },
       error => {
