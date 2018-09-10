@@ -1,15 +1,18 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3">
-      <h3>Car Purchase &nbsp; /&nbsp; کار خرید</h3>
+      <h3>
+        Car Deal / <b> کار فروخت</b> - <b> کار خرید</b>
+        <!-- Car Purchase &nbsp; /&nbsp; کار خرید -->
+      </h3>
 
     </div>
     <div class="col-md-3 col-md-offset-6 mt-15">
       <button routerLink="add" *ngIf="router.url=='/dashboard/purchase' || router.url=='/dashboard/purchase/list'" class="btn btn-primary pull-right"
         style="font-size:15px">
-        <i class="fa fa-car"></i> Add new purchase</button>
+        <i class="fa fa-car"></i> New Deal</button>
       <button routerLink="list" *ngIf="router.url=='/dashboard/purchase/add'" class="btn btn-primary pull-right" style="font-size:15px">
-        <i class="fa fa-car"></i>Show All purchase</button>
+        <i class="fa fa-car"></i>Show All Deals</button>
     </div>
 
   </div>

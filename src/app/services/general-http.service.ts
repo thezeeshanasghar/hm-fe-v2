@@ -10,8 +10,8 @@ export class GeneralHttpService {
   public ip: string;
   public port: number;
   constructor(private http: Http) {
-    //  this.ip='hm-api.afz-sol.com';
-    this.ip = 'hm-api.ez.panacea.com';
+    this.ip = 'hm-api.afz-sol.com';
+    // this.ip = 'hm-api.ez.panacea.com';
     this.port = 80;
 
     // this.ip = 'localhost';
@@ -24,7 +24,7 @@ export class GeneralHttpService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let str = "http://" + this.ip + ":" + this.port + "/api/transaction";
     str += "?date=" + date;
-    return this.http.get(str,{headers:headers}).map((response: Response) => response.json());
+    return this.http.get(str, { headers: headers }).map((response: Response) => response.json());
   }
 
 

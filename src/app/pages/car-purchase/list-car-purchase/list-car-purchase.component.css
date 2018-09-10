@@ -1,0 +1,12 @@
+.info {
+    
+    padding: 2px;
+    text-align: center;
+    background: lightblue;
+    color: blue;
+    border-radius: 50%;
+    font-size: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
