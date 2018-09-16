@@ -103,7 +103,7 @@ export class RoznamchaComponent implements OnInit {
   getTransactionbyDate(d) {
     console.log(d);
 
-    let dateTime = d.date.month + "-" + d.date.day + "-" + d.date.year;
+    let dateTime = moment.utc(d.jsdate).format("MM/DD/YYYY");//d.date.month + "-" + d.date.day + "-" + d.date.year;
     this.getTransactions(dateTime);
     this.totalExpense = 0.0;
     this.totalExpense = 0.0;
@@ -121,11 +121,11 @@ export class RoznamchaComponent implements OnInit {
       }
 
       this.grandTotal = this.totalIncome + this.totalExpense;
-      //this.previousGrandTotal=this.previousTotalIncome+this.previousTotalExpense;
-      // this.gu.getAccountById(element.AccountID).subscribe(data => {
-      //   element.Account = data.ResponseData;
+      // this.previousGrandTotal=this.previousTotalIncome+this.previousTotalExpense;
+      this.gu.getAccountById(element.AccountID).subscribe(data => {
+        element.Account = data.ResponseData;
 
-      // }, error => { });
+      }, error => { });
     });
 
 
@@ -139,7 +139,7 @@ export class RoznamchaComponent implements OnInit {
     console.log(m);
     var uid = UUID.UUID();
     var date = new Date();
-    var dateTime = moment.utc(date).format("DD-MM-YYYY");
+    var dateTime = moment.utc(date).format("MM/DD/YYYY");
     var transaction = {
       Id: this.EditItemId,
       AccountID: this.accountId,
@@ -157,7 +157,7 @@ export class RoznamchaComponent implements OnInit {
     },
       error => { });
   }
-  
+
   editTransactionExpense(m) {
     console.log(this.EditItemId);
     console.log(m)
@@ -166,12 +166,12 @@ export class RoznamchaComponent implements OnInit {
     console.log(m);
     var uid = UUID.UUID();
     var date = new Date();
-    var dateTime = moment.utc(date).format("DD-MM-YYYY");
+    var dateTime = moment.utc(date).format("DD/MM/YYYY");
     var transaction = {
       Id: this.EditItemId,
       AccountID: this.accountId,
       Number: uid,
-      Amount:"-"+m.incomeAmount,
+      Amount: "-" + m.incomeAmount,
       Date: dateTime,
       Description: m.description
 
@@ -185,14 +185,16 @@ export class RoznamchaComponent implements OnInit {
     },
       error => { });
   }
-  
+
   getTransactions(date: any) {
+
+    console.log("date in get transaction: ", date)
 
 
     this.gu.getTransactions(date).subscribe(data => {
-      console.log(Number(data.ResponseData.PreviousBalance));
+      console.log("get transactin date", data);
       this.transaction = data.ResponseData.Transactions;
-      this.previousGrandTotal=Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
+      this.previousGrandTotal = Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
       //console.log(this.transaction);
 
       this.transaction.forEach(element => {

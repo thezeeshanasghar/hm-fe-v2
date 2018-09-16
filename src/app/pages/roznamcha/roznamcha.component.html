@@ -72,10 +72,10 @@
                         <td *ngIf="u.Account!=null  && u.Amount>0">{{u.Amount |number}}</td>
       
                         <td *ngIf="u.Amount>0">
-                          <a style="font-size:10px" class="btn btn-sm">
+                          <a disabled style="font-size:10px" class="btn btn-sm">
                             <span class="glyphicon glyphicon-pencil " aria-hidden="true" (click)="openModalEdit(templateEditIncome,u.Id,u.Account.Id)"></span>
                           </a>
-                          <a style="font-size:10px" class="btn btn-sm" (click)="openModalDelete(templateDelete,u.Id)">
+                          <a disabled style="font-size:10px" class="btn btn-sm" (click)="openModalDelete(templateDelete,u.Id)">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                           </a>
                         </td>
