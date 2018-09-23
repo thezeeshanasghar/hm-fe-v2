@@ -164,11 +164,18 @@ export class AddCarPurchaseComponent implements OnInit {
     this.getAllAccount();
 
   }
+  setAlertOff() {
+    this.successMessage = '';
+    this.errorMessage = '';
+  }
 
   getOwnedCars(id) {
     this.purchaseService.getOwnedCarsList(id).subscribe(data => {
       console.log(data)
       this.vehicalList = data;
+      if (this.vehicalList.length == 0) {
+        this.errorMessage = "No Car found on this owner name";
+      }
     }, error => {
       console.log(error)
     })
@@ -372,7 +379,8 @@ export class AddCarPurchaseComponent implements OnInit {
       DealDate: m.dealDate,
       Price: m.vehicalPrice,
       BuyerCom: m.commissionFromBuyer,
-      SellerCom: m.commissionFromSeller
+      SellerCom: m.commissionFromSeller,
+      Description: m.description
       // carDTO: {
       //   carId: 0
 

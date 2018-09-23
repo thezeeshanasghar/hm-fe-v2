@@ -78,7 +78,7 @@ export const appRoutes: Routes = [
             },
 
             {
-                path: "purchase",
+                path: "deal",
                 component: CarPurchaseComponent,
                 children: [
                     { path:'', redirectTo: 'add', pathMatch: 'full' },

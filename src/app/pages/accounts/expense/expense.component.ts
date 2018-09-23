@@ -64,7 +64,7 @@ export class ExpenseComponent {
       var trans={
       
       AccountID:m.userAccount,
-      Number:uid,
+      // Number:uid,
       Amount:"-"+m.loanAmount,
       Description: m.description,
       Date:dateTime

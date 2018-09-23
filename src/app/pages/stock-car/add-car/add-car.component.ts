@@ -171,6 +171,7 @@ export class AddCarComponent implements OnInit {
       this.successTrigger = true;
       this.myMessage = "car added successfully. کار کا یندراج کامیاب رھا۔";
       window.scrollTo(0, 0);
+      this.carStockForm.reset();
 
       console.log(data);
     }, error => {
@@ -189,6 +190,7 @@ export class AddCarComponent implements OnInit {
       // console.log(data);
       this.loading = false;
       this.carsList = data
+
       // this.carOwnerList=data.carOwnerDTOs
     },
       error => {

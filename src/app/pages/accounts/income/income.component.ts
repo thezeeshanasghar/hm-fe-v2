@@ -53,7 +53,7 @@ export class IncomeComponent implements OnInit {
     var dateTime = moment.utc(date).format("DD-MM-YYYY");
     var transaction = {
       AccountID: m.userAccount,
-      Number: uid,
+      // Number: uid,
       Amount: m.incomeAmount,
       Date: dateTime,
       Description: m.description

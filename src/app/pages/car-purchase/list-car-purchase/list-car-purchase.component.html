@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-3" style="margin-bottom:10px">
+  <!-- <div class="col-md-3" style="margin-bottom:10px">
     <div class="input-group">
       <div class="input-group-addon">
         <i class="fa fa-search"></i>
@@ -7,7 +7,7 @@
       <input class="form-control" type="text" name="search" [(ngModel)]="filter">
     </div>
 
-  </div>
+  </div> -->
   <div class="col-md-1">
     <i style="color:orange" [ngClass]="{'fa fa-refresh fa-spin fa-2x':loading}"></i>
   </div>
@@ -45,9 +45,11 @@
             <div class="dropdown dropdown-menu-left">
               <i (click)=setDeal(p) class="fa fa-info dropdown-toggle info" data-toggle="dropdown"></i>
               <ul class="dropdown-menu">
-                <li data-toggle="modal" data-target="#CarModal"><a>car</a></li>
-                <li data-toggle="modal" data-target="#SellersModal"><a>sellers</a></li>
-                <li data-toggle="modal" data-target="#BuyersModal"><a>buyers</a></li>
+                <li data-toggle="modal" data-target="#CarModal"><a>Car</a></li>
+                <li data-toggle="modal" data-target="#SellersModal"><a>Sellers</a></li>
+                <li data-toggle="modal" data-target="#BuyersModal"><a>Buyers</a></li>
+                <li data-toggle="modal" data-target="#WitnessModal"><a>Witness</a></li>
+
               </ul>
             </div>
           </td>
@@ -90,7 +92,7 @@
 <!-- edit carstock end -->
 
 
-<!-- Modal -->
+<!-- car Modal -->
 <div id="CarModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -101,7 +103,77 @@
         <h4 class="modal-title">Car Modal</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+
+        <div class="row">
+          <div class="col-md-12">
+              <img src="http://{{ip}}/{{car.Image1}}" width="500" height="250" alt="">
+
+          </div>
+        </div>
+
+        <div class="row" *ngIf="car !=[]">
+          <div class="col-md-12">
+            <table class="table">
+                <tr>
+                    <th>ReceiptNumber</th>
+                    <td>{{car.ReceiptNumber}}</td>
+                  </tr>
+                <tr>
+                    <th>PurchaseDate</th>
+                    <td>{{car.PurchaseDate}}</td>
+                  </tr>
+              <tr>
+                <th>Name</th>
+                <td>{{car.Name}}</td>
+              </tr>
+              <tr>
+                <th>Engine Number</th>
+                <td>{{car.EngineNumber}}</td>
+              </tr>
+              <tr>
+                <th>Model Number</th>
+                <td>{{car.ModelNumber}}</td>
+              </tr>
+              <tr>
+                <th>Chasis Number</th>
+                <td>{{car.ChasisNumber}}</td>
+              </tr>
+              <tr>
+                <th>Registration Number</th>
+                <td>{{car.RegistrationNumber}}</td>
+              </tr>
+              <tr>
+                <th>Color</th>
+                <td>{{car.Color}}</td>
+              </tr>
+              <tr>
+                <th>Maker</th>
+                <td>{{car.Maker}}</td>
+              </tr>
+              <tr>
+                <th>Token</th>
+                <td>{{car.Token}}</td>
+              </tr>
+              <tr>
+                <th>ComputerizedNoPlate</th>
+                <td *ngIf="ComputerizedNoPlate">Available</td>
+                <td *ngIf="!ComputerizedNoPlate">Not Available</td>
+              </tr>
+              <tr>
+                <th>No Of Papers</th>
+                <td>{{car.NoOfPapers}}</td>
+              </tr>
+              <tr>
+                <th>Price</th>
+                <td>{{car.PurchasePrice}}</td>
+              </tr>
+            
+              
+            </table>
+
+          </div>
+          
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -111,6 +183,74 @@
   </div>
 </div>
 <!-- Modal -->
+<div id="WitnessModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Witness</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-10">
+            <table class="table">
+              <tr *ngIf="witnessList.length>=1">
+                <th>Name</th>
+                <td>{{witnessList[0].Name}}</td>
+              </tr>
+              <tr *ngIf="witnessList.length>=1">
+                <th>Contact</th>
+                <td>{{witnessList[0].Contact}}</td>
+              </tr>
+              <tr *ngIf="witnessList.length>=1">
+                <th>CNIC</th>
+                <td>{{witnessList[0].CNIC}}</td>
+              </tr>
+            </table>
+
+          </div>
+          <div class="col-md-2" *ngIf="witnessList.length>=1">
+            <img src="http://{{ip}}/uploadFile/inf.png" width="70" height="100" alt="">
+
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-10">
+            <table class="table">
+              <tr *ngIf="witnessList.length>1">
+                <th>Name</th>
+                <td>{{witnessList[1].Name}}</td>
+              </tr>
+              <tr *ngIf="witnessList.length>1">
+                <th>Contact</th>
+                <td>{{witnessList[1].Contact}}</td>
+              </tr>
+              <tr *ngIf="witnessList.length>1">
+                <th>CNIC</th>
+                <td>{{witnessList[1].CNIC}}</td>
+              </tr>
+            </table>
+
+          </div>
+          <div class="col-md-2" *ngIf="witnessList.length>1">
+            <img src="http://{{ip}}/uploadFile/inf.png"" width=" 70" height="100" alt="">
+
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--sellers Modal -->
 <div id="SellersModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -118,10 +258,75 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Sellers Modal </h4>
+        <h4 class="modal-title">Sellers Details </h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <div class="row">
+          <div class="col-md-10">
+            <!-- {{sellersList.length}} -->
+
+            <table class="table">
+              <tr>
+                <th *ngIf="sellersList.length>=1">Sellers Details --</th>
+
+                <td *ngIf="sellersList.length>=1">{{sellersList[0].Number}}</td>
+              </tr>
+              <tr>
+                <th>Name</th>
+
+                <td *ngIf="sellersList.length>=1">{{sellersList[0].Name}}</td>
+
+              </tr>
+              <tr>
+                <th>Contact</th>
+
+                <td *ngIf="sellersList.length>=1">{{sellersList[0].MobileNumber}}</td>
+              </tr>
+              <tr>
+                <th>CNIC</th>
+
+                <td *ngIf="sellersList.length>=1">{{sellersList[0].CNIC}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-2" *ngIf="sellersList.length>=1">
+
+            <img src="http://{{ip}}/{{sellersList[0].Image}}" width="70" height="100" alt="">
+          </div>
+
+          <hr>
+
+
+        </div>
+        <div class="row">
+          <div class="col-md-10">
+
+            <tr *ngIf="sellersList.length>1">
+              <th>Sellers Details --</th>
+              <td>{{sellersList[1].Number}}</td>
+            </tr>
+            <tr *ngIf="sellersList.length>1">
+              <th>Name</th>
+              <td>{{sellersList[1].Name}}</td>
+
+            </tr>
+            <tr *ngIf="sellersList.length>1">
+              <th>Contact</th>
+              <td>{{sellersList[1].MobileNumber}}</td>
+            </tr>
+            <tr *ngIf="sellersList.length>1">
+              <th>CNIC</th>
+              <td>{{sellersList[1].CNIC}}</td>
+            </tr>
+          </div>
+          <div class="col-md-2" *ngIf="sellersList.length>1">
+            <img src="http://{{ip}}/{{sellersList[1].Image}}" width="70" height="100" alt="">
+          </div>
+
+          <hr>
+
+
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -138,10 +343,76 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Buyers Modal</h4>
+        <h4 class="modal-title">Buyers Details</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <div class="row">
+          <div class="col-md-10">
+            <!-- {{sellersList.length}} -->
+
+            <table class="table">
+              <tr>
+                <th *ngIf="buyersList.length>=1">Sellers Details &nbsp; -- &nbsp;</th>
+
+                <td *ngIf="buyersList.length>=1">{{buyersList[0].Number}}</td>
+              </tr>
+              <tr>
+                <th>Name</th>
+
+                <td *ngIf="buyersList.length>=1">{{buyersList[0].Name}}</td>
+
+              </tr>
+              <tr>
+                <th>Contact</th>
+
+                <td *ngIf="buyersList.length>=1">{{buyersList[0].MobileNumber}}</td>
+              </tr>
+              <tr>
+                <th>CNIC</th>
+
+                <td *ngIf="buyersList.length>=1">{{buyersList[0].CNIC}}</td>
+              </tr>
+
+            </table>
+          </div>
+          <div class="col-md-2" *ngIf="buyersList.length>=1">
+
+            <img src="http://{{ip}}/{{buyersList[0].Image}}" width="70" height="100" alt="">
+          </div>
+
+          <hr>
+
+
+        </div>
+        <div class="row">
+          <div class="col-md-10">
+
+            <tr *ngIf="buyersList.length>1">
+              <th>Buyers Details &nbsp; -- &nbsp;</th>
+              <td>{{buyersList[1].Number}}</td>
+            </tr>
+            <tr *ngIf="buyersList.length>1">
+              <th>Name</th>
+              <td>{{buyersList[1].Name}}</td>
+
+            </tr>
+            <tr *ngIf="buyersList.length>1">
+              <th>Contact</th>
+              <td>{{buyersList[1].MobileNumber}}</td>
+            </tr>
+            <tr *ngIf="buyersList.length>1">
+              <th>CNIC</th>
+              <td>{{buyersList[1].CNIC}}</td>
+            </tr>
+          </div>
+          <div class="col-md-2" *ngIf="buyersList.length>1">
+            <img src="http://{{ip}}/{{buyersList[1].Image}}" width="70" height="100" alt="">
+          </div>
+
+          <hr>
+
+
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -1,3 +1,4 @@
+import { GeneralHttpService } from './../../../services/general-http.service';
 import { CarPurchaseService } from './../../../services/car/car-purchase.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,8 +13,13 @@ export class ListCarPurchaseComponent implements OnInit {
   selectedDeal: any[] = [];
 
   purchasedCarList: any[] = [];
+  ip = this.gu.ip;
+  sellersList: any[] = [];
+  buyersList: any[] = [];
+  car: any = [];
+  witnessList: any[] = [];
 
-  constructor(public purchaseService: CarPurchaseService) { }
+  constructor(public purchaseService: CarPurchaseService, public gu: GeneralHttpService) { }
 
   ngOnInit() {
     this.getCarList();
@@ -29,8 +35,13 @@ export class ListCarPurchaseComponent implements OnInit {
   }
 
   setDeal(deal) {
-    console.log("deal : ", deal)
+    // console.log("deal : ", deal)
     this.selectedDeal = deal;
+    this.sellersList = deal.Sellers;
+    this.buyersList = deal.Buyers;
+    this.car = deal.Car
+    this.witnessList = deal.Witnesses
+
   }
 
 
