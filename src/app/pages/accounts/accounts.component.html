@@ -96,7 +96,8 @@
               <td>{{account.MobileNumber}}</td>
 
               <td>
-                <img src="http://{{ip}}:{{port}}/{{account.Image}} " width="40" height="40" alt="" style="border-radius: 50%;">                </td>
+                <img src="http://{{ip}}:{{port}}/{{account.Image}} " width="40" height="40" alt="" style="border-radius: 50%;">
+              </td>
               <!-- <td>{{account.CNIC}}</td> -->
               <!-- <td>{{account.Address}}</td> -->
 
@@ -110,20 +111,21 @@
                 </button>
               </td> -->
               <td>
-                <a href="#" class="pull-right" data-toggle="modal" (click)="getTransactionsByAccountId(account.Id)" data-target="#TransactionModal"
-                  style="font-size:15px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+                <a href="#" class="pull-right" data-toggle="modal" (click)="getTransactionsByAccountId(account.Id)"
+                  data-target="#TransactionModal" style="font-size:15px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
                   History/
                   <b>تفصیل</b>
                 </a>
 
               </td>
-              <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm" style="margin-top:7px;font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+              <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm"
+                style="margin-top:7px;font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
                 Print</a>
             </tr>
           </tbody>
 
           <tbody *ngIf="allAccounts.length == 0">
-            <p>No data  available</p>
+            <p style="color:red;text-align: center;font-size: 30px">No data available</p>
 
           </tbody>
 

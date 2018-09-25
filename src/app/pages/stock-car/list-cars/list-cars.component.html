@@ -1,4 +1,3 @@
-
 <div class="row">
 
   <div class="col-md-3" style="margin-bottom:10px">
@@ -35,7 +34,7 @@
         </tr>
       </thead>
 
-      <tbody>
+      <tbody *ngIf="carsList.length>0;else noCar">
         <tr *ngFor="let car of carsList | reverse | filter:filter; let i=index">
           <td>{{i+1}}</td>
           <td>{{car.ReceiptNumber}}</td>
@@ -60,10 +59,11 @@
         </tr>
       </tbody>
     </table>
-    <ng-template #noCar>
-      <p style="color:red;text-align: center;font-size: 30px">No car available</p>
-    </ng-template>
+
   </div>
+  <ng-template #noCar>
+    <p style="color:red;text-align: center;font-size: 30px">No car available</p>
+  </ng-template>
 
 </div>
 
@@ -138,7 +138,8 @@
                 <input type="text" formControlName="name" class="form-control" placeholder=" Enter vehical name">
               </div>
               <span *ngIf="!carStockForm.controls['name'].valid && 
-            carStockForm.controls['name'].touched" class="help-block sub-little-text">Vehical name is required</span>
+            carStockForm.controls['name'].touched"
+                class="help-block sub-little-text">Vehical name is required</span>
             </div>
             <!--vehical  name -->
             <!-- vehical modelNumber -->
@@ -153,7 +154,8 @@
                 <input type="text" formControlName="modelNumber" class="form-control" placeholder=" Enter vehical modal">
               </div>
               <span *ngIf="!carStockForm.controls['modelNumber'].valid && 
-            carStockForm.controls['modelNumber'].touched" class="help-block sub-little-text">Vehical model
+            carStockForm.controls['modelNumber'].touched"
+                class="help-block sub-little-text">Vehical model
                 number is required</span>
             </div>
             <!--vehical  modelNumber -->
@@ -170,7 +172,8 @@
                 <input type="text" formControlName="color" class="form-control" placeholder=" Enter vehical color">
               </div>
               <span *ngIf="!carStockForm.controls['color'].valid && 
-            carStockForm.controls['color'].touched" class="help-block sub-little-text">Vehical color is required</span>
+            carStockForm.controls['color'].touched"
+                class="help-block sub-little-text">Vehical color is required</span>
             </div>
             <!--vehical  color -->
 
@@ -190,7 +193,8 @@
                 </select>
               </div>
               <span *ngIf="!carStockForm.controls['maker'].valid && 
-            carStockForm.controls['maker'].touched" class="help-block sub-little-text">Vehical color is required</span>
+            carStockForm.controls['maker'].touched"
+                class="help-block sub-little-text">Vehical color is required</span>
             </div>
             <!--vehical  color -->
 
@@ -210,7 +214,8 @@
                 <input type="text" formControlName="noOfPapers" class="form-control" placeholder=" Enter vehical number of papers">
               </div>
               <span *ngIf="!carStockForm.controls['noOfPapers'].valid && 
-                    carStockForm.controls['noOfPapers'].touched" class="help-block sub-little-text">Number
+                    carStockForm.controls['noOfPapers'].touched"
+                class="help-block sub-little-text">Number
                 of Vehical Papers.must be a number </span>
             </div>
             <!--No of Papers -->
@@ -227,7 +232,8 @@
                 <input type="text" formControlName="registrationNumber" class="form-control" placeholder=" Enter vehical registration number">
               </div>
               <span *ngIf="!carStockForm.controls['registrationNumber'].valid && 
-                   carStockForm.controls['registrationNumber'].touched" class="help-block sub-little-text">Vehical
+                   carStockForm.controls['registrationNumber'].touched"
+                class="help-block sub-little-text">Vehical
                 registration number is required</span>
             </div>
             <!--vehical  registrationNumber -->
@@ -245,7 +251,8 @@
                 <input type="text" formControlName="engineNumber" class="form-control" placeholder=" Enter vehical engine number">
               </div>
               <span *ngIf="!carStockForm.controls['engineNumber'].valid && 
-            carStockForm.controls['engineNumber'].touched" class="help-block sub-little-text">Vehical engine
+            carStockForm.controls['engineNumber'].touched"
+                class="help-block sub-little-text">Vehical engine
                 number is required</span>
             </div>
             <!--vehical  engineNumber -->
@@ -261,7 +268,8 @@
                 <input type="text" formControlName="token" class="form-control" placeholder=" Enter vehical token status">
               </div>
               <span *ngIf="!carStockForm.controls['token'].valid && 
-            carStockForm.controls['token'].touched" class="help-block sub-little-text">Vehical token status
+            carStockForm.controls['token'].touched"
+                class="help-block sub-little-text">Vehical token status
                 is required</span>
             </div>
             <!--vehical  token -->
@@ -291,7 +299,8 @@
                 <input type="text" formControlName="chasisNumber" class="form-control" placeholder=" Enter vehical chasis number">
               </div>
               <span *ngIf="!carStockForm.controls['chasisNumber'].valid && 
-             carStockForm.controls['chasisNumber'].touched" class="help-block sub-little-text">Vehical chasis
+             carStockForm.controls['chasisNumber'].touched"
+                class="help-block sub-little-text">Vehical chasis
                 number is required</span>
             </div>
             <!--vehical  chasisNumber -->
@@ -309,7 +318,8 @@
                 <input type="text" formControlName="purchasePrice" class="form-control" placeholder=" Enter vehical purchase price">
               </div>
               <span *ngIf="!carStockForm.controls['purchasePrice'].valid && 
-            carStockForm.controls['purchasePrice'].touched" class="help-block sub-little-text">Vehical purchase
+            carStockForm.controls['purchasePrice'].touched"
+                class="help-block sub-little-text">Vehical purchase
                 price is required,must b a number</span>
             </div>
             <!--vehical  purchasePrice -->
@@ -360,14 +370,14 @@
             <td>{{selectedCarOwner[0].Name}}</td>
             <td><img src="selectedCarOwner[0].Image" alt="" width="60" height="70"></td>
           </tr>
-          <tr *ngIf="selectedCarOwner[0]">
+          <!-- <tr *ngIf="selectedCarOwner[0]">
             <th>Contact:</th>
             <td>{{selectedCarOwner[0].MobileNumber}}</td>
           </tr>
           <tr *ngIf="selectedCarOwner[0]">
             <th>CNIC:</th>
             <td>{{selectedCarOwner[0].CNIC}}</td>
-          </tr>
+          </tr> -->
           <hr>
 
           <tr *ngIf="selectedCarOwner[1]">
@@ -377,14 +387,14 @@
             <td><img src="{{selectedCarOwner[1].Image}}" alt="" width="60" height="70"></td>
 
           </tr>
-          <tr *ngIf="selectedCarOwner[1]">
+          <!-- <tr *ngIf="selectedCarOwner[1]">
             <th>Contact:</th>
             <td>{{selectedCarOwner[1].MobileNumber}}</td>
           </tr>
           <tr *ngIf="selectedCarOwner[1]">
             <th>CNIC:</th>
             <td>{{selectedCarOwner[1].CNIC}}</td>
-          </tr>
+          </tr> -->
         </table>
       </div>
 

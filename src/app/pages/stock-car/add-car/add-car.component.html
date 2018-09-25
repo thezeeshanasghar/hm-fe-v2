@@ -218,13 +218,13 @@
 
         <div class="form-group" [ngClass]="{'has-error': !carStockForm.controls['token'].valid && 
                carStockForm.controls['token'].touched, 'has-success': carStockForm.controls['token'].valid}">
-          <label for="token">Token Status:</label>'
+          <label for="token">Token Status:</label>
           <div class="input-group">
             <span class="input-group-addon">
               <i class="fa fa-car"></i>
             </span>
 
-            <input type="text" formControlName="token" class="form-control" placeholder=" Enter vehicle token status">
+            <input bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" formControlName="token" class="form-control" placeholder=" Enter vehicle token status">
           </div>
           <span *ngIf="!carStockForm.controls['token'].valid && 
                 carStockForm.controls['token'].touched" class="help-block sub-little-text">vehicle token status
