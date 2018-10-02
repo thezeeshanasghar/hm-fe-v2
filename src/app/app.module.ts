@@ -41,6 +41,7 @@ import { SaleComponent } from './pages/car-sale/sale/sale.component';
 import { AddExchangeCarComponent } from './pages/exchange-recipt/add-exchange-car/add-exchange-car.component';
 import { ListExchangeCarComponent } from './pages/exchange-recipt/list-exchange-car/list-exchange-car.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { PrintAccountDetilsComponent } from './pages/accounts/print-account-detils/print-account-detils.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     CarSaleListComponent,
     SaleComponent,
     AddExchangeCarComponent,
-    ListExchangeCarComponent
+    ListExchangeCarComponent,
+    PrintAccountDetilsComponent
 
   ],
   imports: [

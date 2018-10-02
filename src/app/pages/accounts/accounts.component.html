@@ -75,7 +75,7 @@
           <thead style="background: lightblue">
             <tr>
               <th>Sr.#</th>
-              <th>Acc. #</th>
+              <th>Ac. #</th>
               <th>Name</th>
               <th>Contact</th>
               <th>Image</th>
@@ -223,7 +223,7 @@
                 <tr *ngFor="let u of selectedAccountTransactions;let i=index; let last=last">
                   <td>{{i+1}}</td>
                   <td>{{u.Date}}</td>
-                  <td>{{u.Description}}</td>
+                  <td>{{u.Description  |slice :0:25}}</td>
                   <td *ngIf="u.Amount>0;else income" style="color:green">{{u.Amount |number}}</td>
                   <ng-template #income>
                     <td style="color:red;font-style:bold"></td>
