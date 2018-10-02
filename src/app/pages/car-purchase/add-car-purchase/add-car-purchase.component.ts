@@ -380,7 +380,8 @@ export class AddCarPurchaseComponent implements OnInit {
       Price: m.vehicalPrice,
       BuyerCom: m.commissionFromBuyer,
       SellerCom: m.commissionFromSeller,
-      Description: m.description
+      Description: m.description,
+      DealType:'purchase'
       // carDTO: {
       //   carId: 0
 

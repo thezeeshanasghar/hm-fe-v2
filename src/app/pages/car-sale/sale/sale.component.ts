@@ -11,10 +11,12 @@ import { AmountValidator } from '../../../../assets/validators';
 })
 export class SaleComponent implements OnInit {
 
- 
   allAccounts: any[] = [];
   changeClass = false;
   showSales = false;
+
+  successMessage = '';
+  errorMessage = ''
 
   superAccountList: any[] = []
   seller1AccountList: any[] = []
@@ -160,11 +162,18 @@ export class SaleComponent implements OnInit {
     this.getAllAccount();
 
   }
+  setAlertOff() {
+    this.successMessage = '';
+    this.errorMessage = '';
+  }
 
   getOwnedCars(id) {
     this.purchaseService.getOwnedCarsList(id).subscribe(data => {
       console.log(data)
       this.vehicalList = data;
+      if (this.vehicalList.length == 0) {
+        this.errorMessage = "No Car found on this owner name";
+      }
     }, error => {
       console.log(error)
     })
@@ -318,7 +327,7 @@ export class SaleComponent implements OnInit {
     // console.log(m);
 
     let model = {
-      buyers: buyerList
+      Buyers: buyerList
       //  [
       //   {
       //     Id: m.buyer1,
@@ -334,7 +343,7 @@ export class SaleComponent implements OnInit {
 
       // ]
       ,
-      sellers: sellerList
+      Sellers: sellerList
       // [
       //   {
       //     Id: m.seller1,
@@ -350,7 +359,7 @@ export class SaleComponent implements OnInit {
       // ]
       ,
 
-      witnesses: [
+      Witnesses: [
         {
 
           Name: m.witnessName1,
@@ -364,11 +373,13 @@ export class SaleComponent implements OnInit {
           Contact: m.witnessContact2
         }
       ],
-      carId: m.vehical,
-      dealDate: m.dealDate,
-      CarPrice: m.vehicalPrice,
-      buyerCommission: m.commissionFromBuyer,
-      SellerCommission: m.commissionFromSeller
+      CarID: m.vehical,
+      DealDate: m.dealDate,
+      Price: m.vehicalPrice,
+      BuyerCom: m.commissionFromBuyer,
+      SellerCom: m.commissionFromSeller,
+      Description: m.description,
+      DealType:'sale'
       // carDTO: {
       //   carId: 0
 
@@ -393,13 +404,19 @@ export class SaleComponent implements OnInit {
 
     this.purchaseService.addPurchasedCar(form).subscribe(data => {
 
+      console.log("car purchase data", data);
+      this.successMessage = data.Message
+
     }, error => {
+
+      console.log("car purchase error", error)
+      this.errorMessage = error.Message
+
 
     })
 
 
 
   }
-
 
 }
