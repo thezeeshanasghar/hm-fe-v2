@@ -84,8 +84,7 @@
               <th>
 
               </th>
-              <th></th>
-              <th></th>
+
             </tr>
           </thead>
           <tbody *ngIf="allAccounts.length >0">
@@ -118,9 +117,9 @@
                 </a>
 
               </td>
-              <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm"
+              <!-- <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm"
                 style="margin-top:7px;font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
-                Print</a>
+                Print</a> -->
             </tr>
           </tbody>
 
@@ -200,7 +199,9 @@
 
               </div>
               <div class="col-md-4">
-                <img src="http://{{ip}}:{{port}}/{{singleUser.image}} " width="150" height="150" alt="">
+                <img src="http://{{ip}}:{{port}}/{{singleUser.Image}}" width="150" height="150" alt="">
+
+                <button (click)="openInNewTab()" class="btn btn-primary" data-dismiss="modal" target="_blank">Print</button>
               </div>
 
             </div>
@@ -223,7 +224,7 @@
                 <tr *ngFor="let u of selectedAccountTransactions;let i=index; let last=last">
                   <td>{{i+1}}</td>
                   <td>{{u.Date}}</td>
-                  <td>{{u.Description  |slice :0:25}}</td>
+                  <td style="word-break: break-all">{{u.Description}}</td>
                   <td *ngIf="u.Amount>0;else income" style="color:green">{{u.Amount |number}}</td>
                   <ng-template #income>
                     <td style="color:red;font-style:bold"></td>

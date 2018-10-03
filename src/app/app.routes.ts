@@ -1,3 +1,4 @@
+import { PrintAccountDetilsComponent } from './pages/accounts/print-account-detils/print-account-detils.component';
 import { ListExchangeCarComponent } from './pages/exchange-recipt/list-exchange-car/list-exchange-car.component';
 import { AddExchangeCarComponent } from './pages/exchange-recipt/add-exchange-car/add-exchange-car.component';
 import { CarSaleComponent } from './pages/car-sale/car-sale.component';
@@ -32,6 +33,8 @@ export const appRoutes: Routes = [
         pathMatch: 'full'
     },
     { path: "login", component: LoginComponent },
+    { path: "printHistory", component: PrintAccountDetilsComponent },
+    
     {
         path: "dashboard",
         component: DashboardComponent,
@@ -43,7 +46,6 @@ export const appRoutes: Routes = [
                 pathMatch: 'full'
             },
 
-            // { path: "purchase", component: CarPurchaseComponent },
             // { path: "exchangeRecipt", component: ExchangeReciptComponent },
 
             { path: "udhar", component: UdharComponent },

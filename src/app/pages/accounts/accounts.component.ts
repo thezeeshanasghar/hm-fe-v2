@@ -30,6 +30,7 @@ export class searchModel {
 })
 export class AccountsComponent implements OnInit {
   loading = false;
+  historyLoading=false;
   page: number = 1
   public search: searchModel = {
     name: 0,
@@ -168,11 +169,17 @@ export class AccountsComponent implements OnInit {
     this.gu.getTransactionsIdBy(id).subscribe(
       data => {
         this.selectedAccountTransactions = data.ResponseData;
+        
+        sessionStorage.setItem("selectedAccountTransactions", JSON.stringify(data.ResponseData));
+
         console.log(this.selectedAccountTransactions);
         this.gu.getAccountById(id).subscribe(
           data => {
             console.log(data);
+            sessionStorage.setItem("singleUser", JSON.stringify(data.ResponseData));
+
             this.singleUser = data.ResponseData;
+
           },
           error => { }
         );
@@ -189,6 +196,12 @@ export class AccountsComponent implements OnInit {
       sum += this.selectedAccountTransactions[i].Amount;
     }
     return sum;
+  }
+
+  openInNewTab() {
+    var url="/printHistory"
+    var win = window.open(url, '_blank');
+    win.focus();
   }
 
   onSubmit(form: searchModel) {

@@ -17,15 +17,15 @@ import * as moment from 'moment';
   templateUrl: './expense.component.html'
 })
 export class ExpenseComponent {
-  allAccounts:any[]=[];
-  changeClass=false;
-  
+  allAccounts: any[] = [];
+  changeClass = false;
+
   public form: FormGroup;
   public userAccount: AbstractControl;
   public loanAmount: AbstractControl;
   public description: AbstractControl;
 
-  constructor(public fb: FormBuilder, public router: Router,private gu: GeneralHttpService,private modalService: BsModalService) {
+  constructor(public fb: FormBuilder, public router: Router, private gu: GeneralHttpService, private modalService: BsModalService) {
     this.form = fb.group({
       'userAccount': ['', Validators.compose([Validators.required])],
       'loanAmount': ['', Validators.compose([Validators.required, AmountValidator.validate, Validators.minLength(2)])],
@@ -38,51 +38,52 @@ export class ExpenseComponent {
     // var dateTime = moment.utc(date).format("YYYY-MM-DD HH:mm:ss");
     //  console.log(dateTime);
 
-   
+
 
     this.getAllAccount();
   }
 
   getAllAccount() {
-    this.gu.getAllAccounts().subscribe(data=> {
-      
-      this.allAccounts=data.ResponseData;
-    //  console.log(data.ResponseData)
-    }, error=> {})
+    this.gu.getAllAccounts().subscribe(data => {
+
+      this.allAccounts = data.ResponseData;
+      //  console.log(data.ResponseData)
+    }, error => { })
   }
   modalRef: BsModalRef;
-  closeModal(template:AccountsComponent) {
+  closeModal(template: AccountsComponent) {
     this.modalRef = this.modalService.show(template);
   }
 
-  onSubmitExpense(m)
-  {
+  onSubmitExpense(m) {
     //console.log(m);
-    var uid=UUID.UUID();
-    var date=new Date();
+    var uid = UUID.UUID();
+    var date = new Date();
     var dateTime = moment.utc(date).format("DD-MM-YYYY");
-      var trans={
-      
-      AccountID:m.userAccount,
+    var trans = {
+
+      AccountID: m.userAccount,
       // Number:uid,
-      Amount:"-"+m.loanAmount,
+      Amount: "-" + m.loanAmount,
       Description: m.description,
-      Date:dateTime
+      Date: dateTime
     }
     //console.log(transaction);
 
-    this.gu.PostTransaction(trans).subscribe(data=>{
+    this.gu.PostTransaction(trans).subscribe(data => {
       console.log(data);
       //this.closeModal();
       this.form.reset();
       //this.form.controls["loanAmount"].reset();;
-      this.router.navigate(["roznamcha"]);
+      // this.router.navigate(["roznamcha"]);
     },
-    error=>{});
+      error => {
+        console.log("expense error : ", error);
+      });
   }
 
-  
-    
 
-  
+
+
+
 }

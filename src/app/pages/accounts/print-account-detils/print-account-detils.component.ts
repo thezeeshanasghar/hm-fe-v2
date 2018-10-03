@@ -7,9 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrintAccountDetilsComponent implements OnInit {
 
-  constructor() { }
+  singleUser: any = '';
+  selectedAccountTransactions: any = '';
+  constructor() {
+
+    this.singleUser = JSON.parse(sessionStorage.getItem("singleUser"));
+    this.selectedAccountTransactions = JSON.parse(sessionStorage.getItem("selectedAccountTransactions"));
+
+  }
 
   ngOnInit() {
+    this.singleUser = JSON.parse(sessionStorage.getItem("singleUser"));
+    this.selectedAccountTransactions = JSON.parse(sessionStorage.getItem("selectedAccountTransactions"));
+
+  }
+
+  getRowTotalUsingIndex(index: number): number {
+    let sum = 0;
+    for (var i = 0; i <= index; i++) {
+      sum += this.selectedAccountTransactions[i].Amount;
+    }
+    return sum;
   }
 
 }
