@@ -31,7 +31,7 @@ export class CarPurchaseService {
   }
 
   getPurchaseCarList() {
-    let url = "http://" + this.gs.ip + "/api/carpurchase";
+    let url = "http://" + this.gs.ip + ":" + this.gs.port +  "/api/carpurchase";
     return this.http.get(url).map(res => res.json());
 
   }

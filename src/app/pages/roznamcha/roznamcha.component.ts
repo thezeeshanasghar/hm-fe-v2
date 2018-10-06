@@ -22,11 +22,10 @@ export class RoznamchaComponent implements OnInit {
   DeleteItemId;
   EditItemId;
   accountId
-  grandTotal: any = 0.0;
-  totalExpense: any = 0.0;
-  totalIncome: any = 0.0;
-  previousGrandTotal: Number = 0.0;
   loading = false;
+
+  PreviousBalance = 0;
+  RemainingBalance = 0;
 
   public transaction: TransactionModel[];
   date = new Date();
@@ -104,36 +103,18 @@ export class RoznamchaComponent implements OnInit {
 
   getTransactionbyDate(d) {
 
-    this.previousGrandTotal=0;
-    this.grandTotal=0;
-    this.totalExpense = 0.0;
-    this.totalExpense = 0.0;
     this.transaction=[];
     var dd=d.date.month + "-" + d.date.day + "-" + d.date.year;
     console.log("dd",dd);
 
     let dateTime = moment.utc(dd).format("MM/DD/YYYY");//
     this.getTransactions(dateTime);
- 
-    this.grandTotal = 0.0;
-
-    // transctionDTO -> Accont {}
-    console.log(this.transaction);
 
     this.transaction.forEach(element => {
-      if (element.Amount > 0 && element.Date.toString() == dateTime) {
-        this.totalIncome += element.Amount;
-      }
-      else if (element.Amount < 0 && element.Date.toString() == dateTime) {
-        this.totalExpense += element.Amount;
-      }
-
-      this.grandTotal = this.totalIncome + this.totalExpense;
+      
       // this.previousGrandTotal=this.previousTotalIncome+this.previousTotalExpense;
       this.gu.getAccountById(element.AccountID).subscribe(data => {
         element.Account = data.ResponseData;
-
-
       }, error => { });
     });
 
@@ -202,21 +183,11 @@ export class RoznamchaComponent implements OnInit {
       this.loading = false;
       console.log("get transactin date", data);
       this.transaction = data.ResponseData.Transactions;
-      this.previousGrandTotal = Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
+      this.PreviousBalance = Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
+      this.RemainingBalance = Number(data.ResponseData.RemainingBalance);// transctionDTO -> Accont {}
       //console.log(this.transaction);
 
       this.transaction.forEach(element => {
-
-        if (element.Amount > 0) {
-          this.totalIncome += element.Amount;
-        }
-        else if (element.Amount < 0) {
-          this.totalExpense += element.Amount;
-        }
-
-
-        this.grandTotal = this.totalIncome + this.totalExpense;
-        //this.previousGrandTotal=this.previousTotalIncome+this.previousTotalExpense;
         this.gu.getAccountById(element.AccountID).subscribe(data => {
           element.Account = data.ResponseData;
 
