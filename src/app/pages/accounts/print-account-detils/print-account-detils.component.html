@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-12">
+    
 
       <h4 class="modal-title">
         History Log&nbsp;/&nbsp;
@@ -11,10 +11,9 @@
           No data found...
         </ng-template>
 
-        {{singleUser |json }}
         <div *ngIf="singleUser" class="row">
 
-          <div class="col-md-8">
+          <div class="col-md-6 col-print-6">
             <h5>Account number:&nbsp;&nbsp; {{singleUser.Number}}</h5>
             <h5>Name:&nbsp;&nbsp; {{singleUser.Name}}</h5>
             <h5>Contact:&nbsp;&nbsp; {{singleUser.MobileNumber}}</h5>
@@ -23,7 +22,8 @@
 
 
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6 col-print-6">
+            
             <img src="http://{{ip}}:{{port}}/{{singleUser.Image}}" width="150" height="150" alt="">
           </div>
 
@@ -65,6 +65,6 @@
 
 
       </div>
-    </div>
+    
   </div>
 </div>

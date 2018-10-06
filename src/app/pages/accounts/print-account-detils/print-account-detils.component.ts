@@ -1,3 +1,4 @@
+import { GeneralHttpService } from './../../../services/general-http.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +10,9 @@ export class PrintAccountDetilsComponent implements OnInit {
 
   singleUser: any = '';
   selectedAccountTransactions: any = '';
-  constructor() {
+  ip: any;
+  port: any;
+  constructor(public gu:GeneralHttpService) {
 
     this.singleUser = JSON.parse(sessionStorage.getItem("singleUser"));
     this.selectedAccountTransactions = JSON.parse(sessionStorage.getItem("selectedAccountTransactions"));
@@ -17,6 +20,8 @@ export class PrintAccountDetilsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ip = this.gu.ip;
+    this.port = this.gu.port;
     this.singleUser = JSON.parse(sessionStorage.getItem("singleUser"));
     this.selectedAccountTransactions = JSON.parse(sessionStorage.getItem("selectedAccountTransactions"));
 

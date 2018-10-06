@@ -26,6 +26,7 @@ export class RoznamchaComponent implements OnInit {
   totalExpense: any = 0.0;
   totalIncome: any = 0.0;
   previousGrandTotal: Number = 0.0;
+  loading = false;
 
   public transaction: TransactionModel[];
   date = new Date();
@@ -80,6 +81,7 @@ export class RoznamchaComponent implements OnInit {
   public model = { date: { year: this.todaydate.getFullYear(), month: this.todaydate.getMonth() + 1, day: this.todaydate.getDate() }, filter: "all" };
 
   ngOnInit() {
+    this.loading = true;
     var date = new Date();
     var dateTime = moment.utc(date).format("MM/DD/YYYY");
     this.getTransactions(dateTime);
@@ -101,12 +103,18 @@ export class RoznamchaComponent implements OnInit {
   }
 
   getTransactionbyDate(d) {
-    console.log(d);
 
-    let dateTime = moment.utc(d.jsdate).format("MM/DD/YYYY");//d.date.month + "-" + d.date.day + "-" + d.date.year;
+    this.previousGrandTotal=0;
+    this.grandTotal=0;
+    this.totalExpense = 0.0;
+    this.totalExpense = 0.0;
+    this.transaction=[];
+    var dd=d.date.month + "-" + d.date.day + "-" + d.date.year;
+    console.log("dd",dd);
+
+    let dateTime = moment.utc(dd).format("MM/DD/YYYY");//
     this.getTransactions(dateTime);
-    this.totalExpense = 0.0;
-    this.totalExpense = 0.0;
+ 
     this.grandTotal = 0.0;
 
     // transctionDTO -> Accont {}
@@ -124,6 +132,7 @@ export class RoznamchaComponent implements OnInit {
       // this.previousGrandTotal=this.previousTotalIncome+this.previousTotalExpense;
       this.gu.getAccountById(element.AccountID).subscribe(data => {
         element.Account = data.ResponseData;
+
 
       }, error => { });
     });
@@ -187,11 +196,10 @@ export class RoznamchaComponent implements OnInit {
   }
 
   getTransactions(date: any) {
-
-    console.log("date in get transaction: ", date)
-
+    this.loading = true;
 
     this.gu.getTransactions(date).subscribe(data => {
+      this.loading = false;
       console.log("get transactin date", data);
       this.transaction = data.ResponseData.Transactions;
       this.previousGrandTotal = Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
