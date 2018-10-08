@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12">
       
-  <div *ngIf="successMessage.length > 0" class="alert alert-warning alert-dismissable">
+  <!-- <div *ngIf="successMessage.length > 0" class="alert alert-warning alert-dismissable">
       <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="setAlertOff()">&times;</a>
       <i class="fa fa-tick fa-fw"></i>
       <strong>{{successMessage}}</strong>
@@ -13,7 +13,7 @@
       <i class="fa fa-tick fa-fw"></i>
       <strong>{{errorMessage}}</strong>
   
-    </div>
+    </div> -->
      
           <form [formGroup]="form" (ngSubmit)="onSubmitExpense(form.value)" class="form-horizontal">
 
@@ -68,3 +68,4 @@
      
     </div>
   </div>
+<app-accounts #accounts  style="display:none"></app-accounts>

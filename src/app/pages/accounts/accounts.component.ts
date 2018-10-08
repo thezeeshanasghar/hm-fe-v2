@@ -30,7 +30,7 @@ export class searchModel {
 })
 export class AccountsComponent implements OnInit {
   loading = false;
-  historyLoading=false;
+  historyLoading = false;
   page: number = 1
   public search: searchModel = {
     name: 0,
@@ -63,11 +63,11 @@ export class AccountsComponent implements OnInit {
   showSearchResult: boolean = false;
 
   constructor(
-    private router: Router,
+
     public fb: FormBuilder,
-    private gu: GeneralHttpService,
-    private modalService: BsModalService,
-    private http: Http
+    public gu: GeneralHttpService,
+    public modalService: BsModalService,
+
   ) {
     this.loading = true;
     this.ip = this.gu.ip;
@@ -150,6 +150,9 @@ export class AccountsComponent implements OnInit {
   }
 
   getAllAccounts() {
+    this.allAccounts = [];
+
+    console.log("acounts called")
     this.gu.getAllAccounts().subscribe(
       data => {
         this.allAccounts = data.ResponseData;
@@ -169,7 +172,7 @@ export class AccountsComponent implements OnInit {
     this.gu.getTransactionsIdBy(id).subscribe(
       data => {
         this.selectedAccountTransactions = data.ResponseData;
-        
+
         sessionStorage.setItem("selectedAccountTransactions", JSON.stringify(data.ResponseData));
 
         console.log(this.selectedAccountTransactions);
@@ -199,7 +202,7 @@ export class AccountsComponent implements OnInit {
   }
 
   openInNewTab() {
-    var url="/printHistory"
+    var url = "/printHistory"
     var win = window.open(url, '_blank');
     win.focus();
   }

@@ -35,6 +35,8 @@ export class RoznamchaComponent implements OnInit {
   public userAccount: AbstractControl;
   public incomeAmount: AbstractControl;
   public description: AbstractControl;
+  totalIncome: number = 0;
+  totalExpense: number = 0;
 
   constructor(public fb: FormBuilder, private gu: GeneralHttpService, private modalService: BsModalService, private router: Router) {
     this.date = new Date();
@@ -103,15 +105,21 @@ export class RoznamchaComponent implements OnInit {
 
   getTransactionbyDate(d) {
 
-    this.transaction=[];
-    var dd=d.date.month + "-" + d.date.day + "-" + d.date.year;
-    console.log("dd",dd);
+    this.transaction = [];
+    var dd = d.date.month + "-" + d.date.day + "-" + d.date.year;
+    console.log("dd", dd);
 
     let dateTime = moment.utc(dd).format("MM/DD/YYYY");//
     this.getTransactions(dateTime);
 
     this.transaction.forEach(element => {
-      
+      if (element.Amount > 0) {
+        this.totalIncome += element.Amount;
+      }
+      else if (element.Amount < 0) {
+        this.totalExpense += element.Amount;
+      }
+
       // this.previousGrandTotal=this.previousTotalIncome+this.previousTotalExpense;
       this.gu.getAccountById(element.AccountID).subscribe(data => {
         element.Account = data.ResponseData;
@@ -183,11 +191,18 @@ export class RoznamchaComponent implements OnInit {
       this.loading = false;
       console.log("get transactin date", data);
       this.transaction = data.ResponseData.Transactions;
+      sessionStorage.setItem("roznamchaTRansactions", JSON.stringify(this.transaction));
       this.PreviousBalance = Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
       this.RemainingBalance = Number(data.ResponseData.RemainingBalance);// transctionDTO -> Accont {}
       //console.log(this.transaction);
 
       this.transaction.forEach(element => {
+        if (element.Amount > 0) {
+          this.totalIncome += element.Amount;
+        }
+        else if (element.Amount < 0) {
+          this.totalExpense += element.Amount;
+        }
         this.gu.getAccountById(element.AccountID).subscribe(data => {
           element.Account = data.ResponseData;
 

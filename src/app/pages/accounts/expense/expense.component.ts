@@ -1,8 +1,8 @@
 import { AccountsComponent } from './../accounts.component';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TransactionModel } from './../../../Models/Transaction.model';
-import { Response } from '@angular/http';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Response, Http } from '@angular/http';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap';
@@ -12,11 +12,16 @@ import { AmountValidator } from '../../../../assets/validators/index';
 import { GeneralHttpService } from '../../../services/general-http.service';
 import { UUID } from 'angular2-uuid';
 import * as moment from 'moment';
+
+
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html'
 })
 export class ExpenseComponent {
+
+  @ViewChild('accounts') accountsComponent: any;
+
   allAccounts: any[] = [];
   changeClass = false;
 
@@ -71,6 +76,12 @@ export class ExpenseComponent {
     //console.log(transaction);
 
     this.gu.PostTransaction(trans).subscribe(data => {
+
+      // var account = new AccountsComponent(this.fb, this.gu, this.modalService)
+      // account.getAllAccounts();
+
+      this.accountsComponent.getAllAccounts();
+      // this.router.navigate(['../accounts'])
       console.log(data);
       //this.closeModal();
       this.form.reset();
