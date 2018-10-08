@@ -217,7 +217,7 @@
 
                 <select formControlName="vehical" class="form-control" id="">
                   <option value="">--Select vehical--</option>
-                  <option value="{{u.Id}}" *ngFor="let u of vehicalList">{{u.Name}}</option>
+                  <option value="{{u.Id}}" *ngFor="let u of vehicalList">{{u.Name}}-{{u.RegistrationNumber}}</option>
                 </select>
               </div>
               <span *ngIf="!vehical.valid && vehical.touched && vehical.value.length < 4 " class="help-block sub-little-text">Vehical
