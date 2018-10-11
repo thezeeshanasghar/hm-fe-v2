@@ -43,11 +43,16 @@
 
 
     <div class="col-md-7 col-md-offset-2 mt-15 ">
+      <button class="btn btn-primary pull-right" style="font-size:15px;margin-left:5px">
+        <i class="fa fa-refresh" (click)="getAllAccounts()"></i>
+      </button>
       <button class="btn btn-primary pull-right" style="font-size:15px;margin-left:5px" (click)="openModalExpense(templateExpense)">Expense
         &nbsp;/&nbsp; اندراج اخراجات </button>
 
       <button class="btn btn-primary pull-right" style="font-size:15px" (click)="openModalIncome(templateIncome)">Income
         &nbsp;/&nbsp; اندراج آمدن</button>
+
+
     </div>
   </div>
 
@@ -71,70 +76,215 @@
 
     <div class="row" style="margin-top:15px">
       <div class="col-md-12 col-sm-12">
-        <table class="table table-striped table-sm ">
-          <thead style="background: lightblue">
-            <tr>
-              <th>Sr.#</th>
-              <th>Ac. #</th>
-              <th>Name</th>
-              <th>Contact</th>
-              <th>Image</th>
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#home">All Accounts</a></li>
+          <li style="color:green"><a data-toggle="tab" href="#menu1">({{totalIncome}}) Cradit Accounts / جمع کھاتہ</a></li>
+          <li style="color:red"><a data-toggle="tab" href="#menu2"> ({{totalExpense}}) Debit Accounts / بنام کھاتہ </a></li>
+        </ul>
 
-              <th>Balance</th>
-              <th>
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <table class="table table-striped table-sm ">
+              <thead style="background: lightblue">
+                <tr>
+                  <th>Sr.#</th>
+                  <th>Ac. #</th>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>Image</th>
 
-              </th>
+                  <th>Balance</th>
+                  <th>
 
-            </tr>
-          </thead>
-          <tbody *ngIf="allAccounts.length >0">
-            <tr *ngFor="let account of allAccounts  | reverse | filter:filter | paginate: { itemsPerPage: 10, currentPage: page } ; let i=index">
-              <td>{{i+1}}</td>
-              <td>{{account.Number}}</td>
-              <td>{{account.Name}}</td>
-              <td>{{account.MobileNumber}}</td>
+                  </th>
 
-              <td>
-                <img src="http://{{ip}}:{{port}}/{{account.Image}} " width="40" height="40" alt="" style="border-radius: 50%;">
-              </td>
-              <!-- <td>{{account.CNIC}}</td> -->
-              <!-- <td>{{account.Address}}</td> -->
+                </tr>
+              </thead>
+              <tbody *ngIf="allAccounts.length >0">
+                <tr *ngFor="let account of allAccounts  | reverse | filter:filter | paginate: { itemsPerPage: 10, currentPage: page } ; let i=index">
+                  <td>{{i+1}}</td>
+                  <td>{{account.Number}}</td>
+                  <td>{{account.Name}}</td>
+                  <td>{{account.MobileNumber}}</td>
 
-              <td [ngClass]="account.Balance>=0 ? 'text-green': 'text-red'">{{account.Balance |number}}</td>
-              <!-- <td>
-                <button class="btn btn-warning btn-sm" data-target="#editAccount" data-toggle="modal">
-                  <i class="fa fa-pencil"></i>
-                </button>
-                <button class="btn btn-danger btn-sm">
-                  <i class="fa fa-trash"></i>
-                </button>
-              </td> -->
-              <td>
-                <a href="#" class="pull-right" data-toggle="modal" (click)="getTransactionsByAccountId(account.Id)"
-                  data-target="#TransactionModal" style="font-size:15px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
-                  History/
-                  <b>تفصیل</b>
-                </a>
+                  <td>
+                    <img src="http://{{ip}}:{{port}}/{{account.Image}} " width="40" height="40" alt="" style="border-radius: 50%;">
+                  </td>
+                  <!-- <td>{{account.CNIC}}</td> -->
+                  <!-- <td>{{account.Address}}</td> -->
 
-              </td>
-              <!-- <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm"
-                style="margin-top:7px;font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
-                Print</a> -->
-            </tr>
-          </tbody>
+                  <td [ngClass]="account.Balance>=0 ? 'text-green': 'text-red'">{{account.Balance |number}}</td>
+                  <!-- <td>
+        <button class="btn btn-warning btn-sm" data-target="#editAccount" data-toggle="modal">
+          <i class="fa fa-pencil"></i>
+        </button>
+        <button class="btn btn-danger btn-sm">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td> -->
+                  <td>
+                    <a href="#" class="pull-right" data-toggle="modal" (click)="getTransactionsByAccountId(account.Id)"
+                      data-target="#TransactionModal" style="font-size:15px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+                      History/
+                      <b>تفصیل</b>
+                    </a>
 
-          <tbody *ngIf="allAccounts.length == 0">
-            <p style="color:red;text-align: center;font-size: 30px">No data available</p>
+                  </td>
+                  <!-- <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm"
+        style="margin-top:7px;font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+        Print</a> -->
+                </tr>
+              </tbody>
 
-          </tbody>
+              <tbody *ngIf="allAccounts.length == 0">
+                <p style="color:red;text-align: center;font-size: 30px">No data available</p>
+
+              </tbody>
 
 
-        </table>
+            </table>
 
-        <div class="row pull-right">
-          <div class="col-md-12">
-            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+            <div class="row pull-right">
+              <div class="col-md-12">
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
 
+              </div>
+            </div>
+          </div>
+          <div id="menu1" class="tab-pane fade">
+            <table class="table table-striped table-sm ">
+              <thead style="background: lightblue">
+                <tr>
+                  <th>Sr.#</th>
+                  <th>Ac. #</th>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>Image</th>
+
+                  <th>Balance</th>
+                  <th>
+
+                  </th>
+
+                </tr>
+              </thead>
+              <tbody *ngIf="craditAccouts.length >0">
+                <tr *ngFor="let account of craditAccouts  | reverse | filter:filter | paginate: { itemsPerPage: 10, currentPage: page } ; let i=index">
+                  <td>{{i+1}}</td>
+                  <td>{{account.Number}}</td>
+                  <td>{{account.Name}}</td>
+                  <td>{{account.MobileNumber}}</td>
+
+                  <td>
+                    <img src="http://{{ip}}:{{port}}/{{account.Image}} " width="40" height="40" alt="" style="border-radius: 50%;">
+                  </td>
+                  <!-- <td>{{account.CNIC}}</td> -->
+                  <!-- <td>{{account.Address}}</td> -->
+
+                  <td [ngClass]="account.Balance>=0 ? 'text-green': 'text-red'">{{account.Balance |number}}</td>
+                  <!-- <td>
+        <button class="btn btn-warning btn-sm" data-target="#editAccount" data-toggle="modal">
+          <i class="fa fa-pencil"></i>
+        </button>
+        <button class="btn btn-danger btn-sm">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td> -->
+                  <td>
+                    <a href="#" class="pull-right" data-toggle="modal" (click)="getTransactionsByAccountId(account.Id)"
+                      data-target="#TransactionModal" style="font-size:15px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+                      History/
+                      <b>تفصیل</b>
+                    </a>
+
+                  </td>
+                  <!-- <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm"
+        style="margin-top:7px;font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+        Print</a> -->
+                </tr>
+              </tbody>
+
+              <tbody *ngIf="allAccounts.length == 0">
+                <p style="color:red;text-align: center;font-size: 30px">No data available</p>
+
+              </tbody>
+
+
+            </table>
+
+            <div class="row pull-right">
+              <div class="col-md-12">
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+              </div>
+            </div>
+          </div>
+          <div id="menu2" class="tab-pane fade">
+            <table class="table table-striped table-sm ">
+              <thead style="background: lightblue">
+                <tr>
+                  <th>Sr.#</th>
+                  <th>Ac. #</th>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>Image</th>
+
+                  <th>Balance</th>
+                  <th>
+                  </th>
+
+                </tr>
+              </thead>
+              <tbody *ngIf="debitAccounts.length >0">
+                <tr *ngFor="let account of debitAccounts  | reverse | filter:filter | paginate: { itemsPerPage: 10, currentPage: page } ; let i=index">
+                  <td>{{i+1}}</td>
+                  <td>{{account.Number}}</td>
+                  <td>{{account.Name}}</td>
+                  <td>{{account.MobileNumber}}</td>
+
+                  <td>
+                    <img src="http://{{ip}}:{{port}}/{{account.Image}} " width="40" height="40" alt="" style="border-radius: 50%;">
+                  </td>
+                  <!-- <td>{{account.CNIC}}</td> -->
+                  <!-- <td>{{account.Address}}</td> -->
+
+                  <td [ngClass]="account.Balance>=0 ? 'text-green': 'text-red'">{{account.Balance |number}}</td>
+                  <!-- <td>
+                    <button class="btn btn-warning btn-sm" data-target="#editAccount" data-toggle="modal">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button class="btn btn-danger btn-sm">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </td> -->
+                  <td>
+                    <a href="#" class="pull-right" data-toggle="modal" (click)="getTransactionsByAccountId(account.Id)"
+                      data-target="#TransactionModal" style="font-size:15px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+                      History/
+                      <b>تفصیل</b>
+                    </a>
+
+                  </td>
+                  <!-- <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm"
+                    style="margin-top:7px;font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
+                    Print</a> -->
+                </tr>
+              </tbody>
+
+              <tbody *ngIf="allAccounts.length == 0">
+                <p style="color:red;text-align: center;font-size: 30px">No data available</p>
+
+              </tbody>
+
+
+            </table>
+
+            <div class="row pull-right">
+              <div class="col-md-12">
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+              </div>
+            </div>
           </div>
         </div>
       </div>

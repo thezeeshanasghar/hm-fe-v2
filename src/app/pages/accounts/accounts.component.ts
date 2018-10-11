@@ -61,6 +61,10 @@ export class AccountsComponent implements OnInit {
   public description: AbstractControl;
   message: string = "";
   showSearchResult: boolean = false;
+  totalIncome: number=0;
+  totalExpense: number=0;
+  craditAccouts: any[]=[];
+  debitAccounts: any[]=[];
 
   constructor(
 
@@ -157,7 +161,23 @@ export class AccountsComponent implements OnInit {
       data => {
         this.allAccounts = data.ResponseData;
         this.loading = false;
-        // console.log(this.allAccounts);
+        console.log(this.allAccounts);
+        this.allAccounts.forEach(element => {
+          if (element.Balance > 0) {
+            this.totalIncome += element.Balance;
+            this.craditAccouts.push(element)
+
+
+          }
+          else if (element.Balance < 0) {
+            this.totalExpense += element.Balance;
+            this.debitAccounts.push(element);
+          }
+        });
+
+        console.log("debit account",this.debitAccounts)
+        console.log("radit account",this.craditAccouts)
+
       },
       err => {
         if (err.status == 0) {
