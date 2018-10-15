@@ -101,7 +101,7 @@
                 </tr>
               </thead>
               <tbody *ngIf="allAccounts.length >0">
-                <tr *ngFor="let account of allAccounts  | reverse | filter:filter | paginate: { itemsPerPage: 10, currentPage: page } ; let i=index">
+                <tr *ngFor="let account of allAccounts | filter:filter | paginate: { itemsPerPage: 10, currentPage: page } ; let i=index">
                   <td>{{i+1}}</td>
                   <td>{{account.Number}}</td>
                   <td>{{account.Name}}</td>
@@ -346,6 +346,8 @@
                 <h5>Address:&nbsp;&nbsp; {{singleUser.Address}}</h5>
                 <h5>Balance:&nbsp;&nbsp; {{singleUser.Balance |number}}</h5>
 
+                <input type="text" name="search" [(ngModel)]="searchHistory" class="form-control" placeholder="search here">
+
 
               </div>
               <div class="col-md-4">
@@ -371,7 +373,7 @@
               </thead>
               <tbody>
 
-                <tr *ngFor="let u of selectedAccountTransactions;let i=index; let last=last">
+                <tr *ngFor="let u of selectedAccountTransactions |filter:searchHistory;let i=index; let last=last">
                   <td>{{i+1}}</td>
                   <td>{{u.Date}}</td>
                   <td style="word-break: break-all">{{u.Description}}</td>
