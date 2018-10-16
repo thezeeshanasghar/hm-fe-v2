@@ -7,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./print-account-detils.component.css']
 })
 export class PrintAccountDetilsComponent implements OnInit {
-
+  todayDate: Date;
   singleUser: any = '';
   selectedAccountTransactions: any = '';
   ip: any;
   port: any;
-  constructor(public gu:GeneralHttpService) {
-
+  constructor(public gu: GeneralHttpService) {
+    this.todayDate = new Date();
     this.singleUser = JSON.parse(sessionStorage.getItem("singleUser"));
     this.selectedAccountTransactions = JSON.parse(sessionStorage.getItem("selectedAccountTransactions"));
 

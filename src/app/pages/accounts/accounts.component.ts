@@ -61,11 +61,11 @@ export class AccountsComponent implements OnInit {
   public description: AbstractControl;
   message: string = "";
   showSearchResult: boolean = false;
-  totalIncome: number=0;
-  totalExpense: number=0;
-  craditAccouts: any[]=[];
-  debitAccounts: any[]=[];
-
+  totalIncome: number = 0;
+  totalExpense: number = 0;
+  craditAccouts: any[] = [];
+  debitAccounts: any[] = [];
+  
   constructor(
 
     public fb: FormBuilder,
@@ -73,6 +73,7 @@ export class AccountsComponent implements OnInit {
     public modalService: BsModalService,
 
   ) {
+    
     this.loading = true;
     this.ip = this.gu.ip;
     this.port = this.gu.port;
@@ -155,6 +156,12 @@ export class AccountsComponent implements OnInit {
 
   getAllAccounts() {
     this.allAccounts = [];
+    this.craditAccouts = [];
+    this.debitAccounts = [];
+    this.totalIncome = 0;
+    this.totalExpense = 0;
+    this.loading = true;
+
 
     console.log("acounts called")
     this.gu.getAllAccounts().subscribe(
@@ -175,8 +182,8 @@ export class AccountsComponent implements OnInit {
           }
         });
 
-        console.log("debit account",this.debitAccounts)
-        console.log("radit account",this.craditAccouts)
+        console.log("debit account", this.debitAccounts)
+        console.log("radit account", this.craditAccouts)
 
       },
       err => {

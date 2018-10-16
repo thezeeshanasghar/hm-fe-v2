@@ -1,70 +1,87 @@
 <div class="container-fluid">
   <div class="row">
-    
-
-      <h4 class="modal-title">
-        History Log&nbsp;/&nbsp;
-        <b>تفصیل کھاتہ</b>
-      </h4>
-      <div>
-        <ng-template #no_data_templ>
-          No data found...
-        </ng-template>
-
-        <div *ngIf="singleUser" class="row">
-
-          <div class="col-md-6 col-print-6">
-            <h5>Account number:&nbsp;&nbsp; {{singleUser.Number}}</h5>
-            <h5>Name:&nbsp;&nbsp; {{singleUser.Name}}</h5>
-            <h5>Contact:&nbsp;&nbsp; {{singleUser.MobileNumber}}</h5>
-            <h5>Address:&nbsp;&nbsp; {{singleUser.Address}}</h5>
-            <h5>Balance:&nbsp;&nbsp; {{singleUser.Balance |number}}</h5>
 
 
-          </div>
-          <!-- <div class="col-md-6 col-print-6">
+    <h4 class="modal-title">
+      Balance sheet -- ({{todayDate |date :'medium'}})
+
+    </h4>
+    <hr>
+    <div>
+      <ng-template #no_data_templ>
+        No data found...
+      </ng-template>
+
+      <div *ngIf="singleUser" class="row">
+
+        <div class="col-md-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Account number</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{singleUser.Number}}</td>
+                <td>{{singleUser.Name}}</td>
+                <td>{{singleUser.MobileNumber}}</td>
+                <td>{{singleUser.Address}}</td>
+                <td>{{singleUser.Balance |number}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+        </div>
+        <!-- <div class="col-md-6 col-print-6">
             
             <img src="http://{{ip}}:{{port}}/{{singleUser.Image}}" width="150" height="150" alt="">
           </div> -->
 
-        </div>
-
-        <table class="table table-striped " *ngIf="selectedAccountTransactions?.length;else no_data_templ">
-
-
-          <thead>
-            <tr>
-              <th>Sr#</th>
-              <th>Date</th>
-              <th>Description</th>
-              <th>Income</th>
-              <th>Expense</th>
-              <th>Balance</th>
-            </tr>
-          </thead>
-          <tbody>
-
-            <tr *ngFor="let u of selectedAccountTransactions;let i=index; let last=last">
-              <td>{{i+1}}</td>
-              <td>{{u.Date}}</td>
-              <td style="width:400px;word-break: break-all">{{u.Description}}</td>
-              <td *ngIf="u.Amount>0;else income" style="color:green">{{u.Amount |number}}</td>
-              <ng-template #income>
-                <td style="color:red;font-style:bold"></td>
-              </ng-template>
-              <td *ngIf="u.Amount<0;else expense" style="color:red">{{u.Amount |number}}</td>
-              <ng-template #expense>
-                <td style="color:green;font-style:bold"></td>
-              </ng-template>
-              <td [ngClass]="last ? 'text-bold': 'text-normal'">{{ getRowTotalUsingIndex(i) }}</td>
-            </tr>
-
-          </tbody>
-
-        </table>
-
-
       </div>
-    
+
+      <table class="table table-striped " *ngIf="selectedAccountTransactions?.length;else no_data_templ">
+
+
+        <thead>
+          <tr>
+            <th>Sr#</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Income</th>
+            <th>Expense</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let u of selectedAccountTransactions;let i=index; let last=last">
+            <td>{{i+1}}</td>
+            <td>{{u.Date}}</td>
+            <td style="width:400px;word-break: break-all">{{u.Description}}</td>
+            <td *ngIf="u.Amount>0;else income" style="color:green">{{u.Amount |number}}</td>
+            <ng-template #income>
+              <td style="color:red;font-style:bold"></td>
+            </ng-template>
+            <td *ngIf="u.Amount<0;else expense" style="color:red">{{u.Amount |number}}</td>
+            <ng-template #expense>
+              <td style="color:green;font-style:bold"></td>
+            </ng-template>
+            <td [ngClass]="last ? 'text-bold': 'text-normal'">{{ getRowTotalUsingIndex(i) }}</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+
+    </div>
+
   </div>
 </div>

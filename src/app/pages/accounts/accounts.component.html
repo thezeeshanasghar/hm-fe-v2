@@ -78,8 +78,10 @@
       <div class="col-md-12 col-sm-12">
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#home">All Accounts</a></li>
-          <li style="color:green"><a data-toggle="tab" href="#menu1">({{totalIncome}}) Cradit Accounts / جمع کھاتہ</a></li>
-          <li style="color:red"><a data-toggle="tab" href="#menu2"> ({{totalExpense}}) Debit Accounts / بنام کھاتہ </a></li>
+          <li style="color:green"><a data-toggle="tab" href="#menu1">({{totalIncome | number}}) Cradit Accounts / جمع
+              کھاتہ</a></li>
+          <li style="color:red"><a data-toggle="tab" href="#menu2"> ({{totalExpense |number}}) Debit Accounts / بنام
+              کھاتہ </a></li>
         </ul>
 
         <div class="tab-content">
