@@ -171,7 +171,7 @@
                 </tr>
               </thead>
               <tbody *ngIf="craditAccouts.length >0">
-                <tr *ngFor="let account of craditAccouts  | reverse | filter:filter | paginate: { itemsPerPage: 10, currentPage: page } ; let i=index">
+                <tr *ngFor="let account of craditAccouts  | reverse | filter:filter  ; let i=index">
                   <td>{{i+1}}</td>
                   <td>{{account.Number}}</td>
                   <td>{{account.Name}}</td>
@@ -214,12 +214,7 @@
 
             </table>
 
-            <div class="row pull-right">
-              <div class="col-md-12">
-                <pagination-controls (pageChange)="page = $event"></pagination-controls>
-
-              </div>
-            </div>
+            
           </div>
           <div id="menu2" class="tab-pane fade">
             <table class="table table-striped table-sm ">
@@ -238,7 +233,7 @@
                 </tr>
               </thead>
               <tbody *ngIf="debitAccounts.length >0">
-                <tr *ngFor="let account of debitAccounts  | reverse | filter:filter | paginate: { itemsPerPage: 10, currentPage: page } ; let i=index">
+                <tr *ngFor="let account of debitAccounts  | reverse | filter:filter  ; let i=index">
                   <td>{{i+1}}</td>
                   <td>{{account.Number}}</td>
                   <td>{{account.Name}}</td>
@@ -281,12 +276,7 @@
 
             </table>
 
-            <div class="row pull-right">
-              <div class="col-md-12">
-                <pagination-controls (pageChange)="page = $event"></pagination-controls>
-
-              </div>
-            </div>
+          
           </div>
         </div>
       </div>
