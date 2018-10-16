@@ -25,6 +25,7 @@ import { EditCarPurchaseComponent } from './pages/car-purchase/edit-car-purchase
 import { AuthGuard } from './router-guard/auth.guard';
 import { SaleComponent } from './pages/car-sale/sale/sale.component';
 import { CarSaleListComponent } from './pages/car-sale/car-sale-list/car-sale-list.component';
+import { PrintRoznamchaComponent } from './pages/roznamcha/print-roznamcha/print-roznamcha.component';
 
 export const appRoutes: Routes = [
     {
@@ -34,7 +35,10 @@ export const appRoutes: Routes = [
     },
     { path: "login", component: LoginComponent },
     { path: "printHistory", component: PrintAccountDetilsComponent },
-    
+
+    { path: "printRoznamcha", component: PrintRoznamchaComponent },
+
+
     {
         path: "dashboard",
         component: DashboardComponent,

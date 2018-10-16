@@ -11,7 +11,6 @@ import { BsModalService } from 'ngx-bootstrap';
 import { Router } from '@angular/router';
 import { UUID } from 'angular2-uuid';
 import * as moment from 'moment';
-import { Console } from '@angular/core/src/console';
 import { IMyDpOptions } from 'mydatepicker';
 
 @Component({
@@ -37,11 +36,14 @@ export class RoznamchaComponent implements OnInit {
   public description: AbstractControl;
   totalIncome: number = 0;
   totalExpense: number = 0;
-
   constructor(public fb: FormBuilder, private gu: GeneralHttpService, private modalService: BsModalService, private router: Router) {
     this.date = new Date();
   }
-
+  openInNewTab() {
+    var url = "/printRoznamcha"
+    var win = window.open(url, '_blank');
+    win.focus();
+  }
   modalRefDelete: BsModalRef;
   modalRefEdit: BsModalRef;
 
@@ -89,7 +91,7 @@ export class RoznamchaComponent implements OnInit {
   }
 
   deleteTransaction() {
-    console.log(this.DeleteItemId);
+
     //this.modalRefEdit = this.modalService.show(TemplateRef);
     this.gu.deleteTransaction(this.DeleteItemId).subscribe(data => {
 
@@ -103,13 +105,61 @@ export class RoznamchaComponent implements OnInit {
     });
   }
 
+  
+  editTransactionIncome(m) {
+
+
+    var uid = UUID.UUID();
+    var date = new Date();
+    var dateTime = moment.utc(date).format("MM/DD/YYYY");
+    var transaction = {
+      Id: this.EditItemId,
+      AccountID: this.accountId,
+      Number: uid,
+      Amount: m.incomeAmount,
+      Date: dateTime,
+      Description: m.description
+
+    }
+
+    this.gu.EditTransaction(this.EditItemId, transaction).subscribe(data => {
+
+      this.router.navigate(['accounts']);
+    },
+      error => { });
+  }
+
+  editTransactionExpense(m) {
+
+    var uid = UUID.UUID();
+    var date = new Date();
+    var dateTime = moment.utc(date).format("DD/MM/YYYY");
+    var transaction = {
+      Id: this.EditItemId,
+      AccountID: this.accountId,
+      Number: uid,
+      Amount: "-" + m.incomeAmount,
+      Date: dateTime,
+      Description: m.description
+
+    }
+
+
+    this.gu.EditTransaction(this.EditItemId, transaction).subscribe(data => {
+
+      this.form.reset();
+      this.router.navigate(['accounts']);
+    },
+      error => { });
+  }
   getTransactionbyDate(d) {
 
     this.transaction = [];
     var dd = d.date.month + "-" + d.date.day + "-" + d.date.year;
-    console.log("dd", dd);
+
 
     let dateTime = moment.utc(dd).format("MM/DD/YYYY");//
+
     this.getTransactions(dateTime);
 
     this.transaction.forEach(element => {
@@ -129,72 +179,20 @@ export class RoznamchaComponent implements OnInit {
 
   }
 
-  editTransactionIncome(m) {
-    console.log(this.EditItemId);
-    console.log(m)
-
-
-    console.log(m);
-    var uid = UUID.UUID();
-    var date = new Date();
-    var dateTime = moment.utc(date).format("MM/DD/YYYY");
-    var transaction = {
-      Id: this.EditItemId,
-      AccountID: this.accountId,
-      Number: uid,
-      Amount: m.incomeAmount,
-      Date: dateTime,
-      Description: m.description
-
-    }
-    console.log(transaction);
-
-    this.gu.EditTransaction(this.EditItemId, transaction).subscribe(data => {
-      //console.log(data)
-      this.router.navigate(['accounts']);
-    },
-      error => { });
-  }
-
-  editTransactionExpense(m) {
-    console.log(this.EditItemId);
-    console.log(m)
-
-
-    console.log(m);
-    var uid = UUID.UUID();
-    var date = new Date();
-    var dateTime = moment.utc(date).format("DD/MM/YYYY");
-    var transaction = {
-      Id: this.EditItemId,
-      AccountID: this.accountId,
-      Number: uid,
-      Amount: "-" + m.incomeAmount,
-      Date: dateTime,
-      Description: m.description
-
-    }
-    console.log(transaction);
-
-    this.gu.EditTransaction(this.EditItemId, transaction).subscribe(data => {
-      //console.log(data)
-      this.form.reset();
-      this.router.navigate(['accounts']);
-    },
-      error => { });
-  }
 
   getTransactions(date: any) {
     this.loading = true;
+    sessionStorage.setItem("roznamchaDate", date);
 
     this.gu.getTransactions(date).subscribe(data => {
       this.loading = false;
-      console.log("get transactin date", data);
+      sessionStorage.setItem("roznamchaData", '');
+      sessionStorage.setItem("roznamchaData", JSON.stringify(data));
+
       this.transaction = data.ResponseData.Transactions;
-      sessionStorage.setItem("roznamchaTRansactions", JSON.stringify(this.transaction));
+      // sessionStorage.setItem("roznamchaTRansactions", JSON.stringify(this.transaction));
       this.PreviousBalance = Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
       this.RemainingBalance = Number(data.ResponseData.RemainingBalance);// transctionDTO -> Accont {}
-      //console.log(this.transaction);
 
       this.transaction.forEach(element => {
         if (element.Amount > 0) {

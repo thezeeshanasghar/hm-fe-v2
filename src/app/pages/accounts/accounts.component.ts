@@ -30,6 +30,7 @@ export class searchModel {
 })
 export class AccountsComponent implements OnInit {
   loading = false;
+  searchHistory
   historyLoading = false;
   page: number = 1
   public search: searchModel = {
