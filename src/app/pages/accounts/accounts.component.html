@@ -166,7 +166,7 @@
                 </tr>
               </thead>
               <tbody *ngIf="craditAccouts.length >0">
-                <tr *ngFor="let account of craditAccouts  | reverse | filter:filter  ; let i=index">
+                <tr *ngFor="let account of craditAccouts  | filter:filter  ; let i=index">
                   <td>{{i+1}}</td>
                   <td>{{account.Number}}</td>
                   <td>{{account.Name}}</td>
@@ -228,7 +228,7 @@
                 </tr>
               </thead>
               <tbody *ngIf="debitAccounts.length >0">
-                <tr *ngFor="let account of debitAccounts  | reverse | filter:filter  ; let i=index">
+                <tr *ngFor="let account of debitAccounts   | filter:filter  ; let i=index">
                   <td>{{i+1}}</td>
                   <td>{{account.Number}}</td>
                   <td>{{account.Name}}</td>
