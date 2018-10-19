@@ -21,7 +21,7 @@ import * as moment from 'moment';
 export class ExpenseComponent {
 
   @ViewChild('accounts') accountsComponent: any;
-
+  expenseSearch=''
   allAccounts: any[] = [];
   changeClass = false;
 

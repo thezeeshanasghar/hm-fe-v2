@@ -1,55 +1,71 @@
+<div class="row">
+  <div class="col-md-12">
 
-  <div class="row">
-    <div class="col-md-12">
-     
-          <form [formGroup]="form" (ngSubmit)="onSubmitIncome(form.value)" class="form-horizontal">
-
-            <!--userAccount -->
-            <div class="form-group row" [ngClass]="{'has-error': (!userAccount.valid && userAccount.touched), 'has-success': (userAccount.valid && userAccount.touched)}">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-map-marker"></i>
-                  </span>
-
-                  <select [formControl]="userAccount" class="form-control" id="sel1">
-                    <option value="">--Select User Account--</option>
-                    <option value="{{u.Id}}" *ngFor="let u of allAccounts">{{u.Name}}-{{u.Number}}</option>
-                  </select>
-                </div>
-                <span *ngIf="!userAccount.valid && userAccount.touched && userAccount.value.length < 4 " class="help-block sub-little-text">userAccount is required"></span>
-            </div>
-            <!--userAccount -->
-
-            <!--amount-->
-            <div class="form-group row" [ngClass]="{'has-error': (!incomeAmount.valid && incomeAmount.touched), 'has-success': (incomeAmount.valid && incomeAmount.touched)}">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-usd"></i>
-                  </span>
-                  <input required [formControl]="incomeAmount" type="text" class="form-control" id="inputPassword3" placeholder=" Enter Amount">
-                </div>
-                <span *ngIf="!incomeAmount.valid && incomeAmount.touched " class="help-block sub-little-text">Enter a valid Amount</span>
-            </div>
-            <!-- Amount -->
-            <!--description-->
-            <div class="form-group row" [ngClass]="{'has-error': (!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-pencil"></i>
-                  </span>
-                  <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
-                </div>
-                <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must be at least 10 characters</span>
-            </div>
-            <!-- description -->
-
-            <div class=" row">
-              <button  (click)="form.reset" [disabled]="!form.valid" class="btn btn-primary pull-right"  type="submit" > Add</button>
-            </div>
-
-          </form>
-
-       
-      
+    <div class="form-group row">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="glyphicon glyphicon-search"></i>
+        </span>
+        <input type="text" class="form-control" placeholder="search here" name="incomsearch" [(ngModel)]="incomsearch">
+      </div>
     </div>
+
   </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmitIncome(form.value)" class="form-horizontal">
+
+      <!--userAccount -->
+      <div class="form-group row" [ngClass]="{'has-error': (!userAccount.valid && userAccount.touched), 'has-success': (userAccount.valid && userAccount.touched)}">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-map-marker"></i>
+          </span>
+          <!-- {{allAccounts[0] |json}} -->
+          <select [formControl]="userAccount" class="form-control" id="sel1">
+            <option value="">--Select User Account--</option>
+            <option value="{{u.Id}}" *ngFor="let u of allAccounts | filter:incomsearch">{{u.Name}}-{{u.Number}}-{{u.MobileNumber}}-{{u.CNIC}}</option>
+          </select>
+        </div>
+        <span *ngIf="!userAccount.valid && userAccount.touched && userAccount.value.length < 4 " class="help-block sub-little-text">userAccount
+          is required"></span>
+      </div>
+      <!--userAccount -->
+
+      <!--amount-->
+      <div class="form-group row" [ngClass]="{'has-error': (!incomeAmount.valid && incomeAmount.touched), 'has-success': (incomeAmount.valid && incomeAmount.touched)}">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-usd"></i>
+          </span>
+          <input required [formControl]="incomeAmount" type="text" class="form-control" id="inputPassword3" placeholder=" Enter Amount">
+        </div>
+        <span *ngIf="!incomeAmount.valid && incomeAmount.touched " class="help-block sub-little-text">Enter a valid
+          Amount</span>
+      </div>
+      <!-- Amount -->
+      <!--description-->
+      <div class="form-group row" [ngClass]="{'has-error': (!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>
+          <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
+        </div>
+        <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description must be
+          at least 10 characters</span>
+      </div>
+      <!-- description -->
+
+      <div class=" row">
+        <button (click)="form.reset" [disabled]="!form.valid" class="btn btn-primary pull-right" type="submit"> Add</button>
+      </div>
+
+    </form>
+
+
+
+  </div>
+</div>

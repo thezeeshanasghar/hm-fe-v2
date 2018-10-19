@@ -1,7 +1,11 @@
 <style>
+ 
   table td {
     font-size: 11px;
     text-align: left;
+    font-weight: 600;
+    background: #d9e6eb;
+
   }
 </style>
 <div class="container-fluid">
@@ -28,7 +32,7 @@
         <b>{{PreviousBalance |number}}</b>
       </span>
     </div>
-    <div class="col-md-6 col-lg-6" >
+    <div class="col-md-6 col-lg-6">
       <span (click)="openInNewTab()" class="btn btn-primary pull-right" routerLink="print-roznamcha">
         Print
       </span>
@@ -55,8 +59,8 @@
             </span>
           </div>
           <div class="panel-body">
-            <table class="table table-striped">
-              <thead>
+            <table class="table ">
+              <thead style="background: lightblue">
                 <tr>
                   <th>Sr#</th>
                   <th>Date</th>
@@ -106,8 +110,8 @@
             </span>
           </div>
           <div class="panel-body">
-            <table class="table table-striped">
-              <thead>
+            <table class="table ">
+              <thead style="background: lightblue">
                 <tr>
                   <th>Sr#</th>
                   <th>Date</th>
