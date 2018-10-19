@@ -105,7 +105,7 @@ export class RoznamchaComponent implements OnInit {
     });
   }
 
-  
+
   editTransactionIncome(m) {
 
 
@@ -121,10 +121,11 @@ export class RoznamchaComponent implements OnInit {
       Description: m.description
 
     }
-
     this.gu.EditTransaction(this.EditItemId, transaction).subscribe(data => {
+      this.form.reset();
 
-      this.router.navigate(['accounts']);
+      this.getTransactions(dateTime)
+      // this.router.navigate(['accounts']);
     },
       error => { });
   }
@@ -148,7 +149,8 @@ export class RoznamchaComponent implements OnInit {
     this.gu.EditTransaction(this.EditItemId, transaction).subscribe(data => {
 
       this.form.reset();
-      this.router.navigate(['accounts']);
+      this.getTransactions(dateTime)
+      // this.router.navigate(['accounts']);
     },
       error => { });
   }
