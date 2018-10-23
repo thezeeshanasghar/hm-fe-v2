@@ -11,11 +11,10 @@ export class GeneralHttpService {
   public port: number;
   constructor(private http: Http) {
     this.ip = 'hm-api.afz-sol.com';
-    // this.ip = 'hm-api.ez.panacea.com';
     this.port = 80;
 
     // this.ip = 'localhost';
-    // this.port = 37015;
+    // this.port = 81;
   }
 
 

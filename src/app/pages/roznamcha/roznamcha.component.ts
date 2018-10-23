@@ -157,6 +157,8 @@ export class RoznamchaComponent implements OnInit {
       error => { });
   }
   getTransactionbyDate(d) {
+    this.totalExpense=0;
+    this.totalIncome=0;
 
     this.transaction = [];
     var dd = d.date.month + "-" + d.date.day + "-" + d.date.year;
@@ -185,6 +187,8 @@ export class RoznamchaComponent implements OnInit {
 
 
   getTransactions(date: any) {
+    this.totalExpense=0;
+    this.totalIncome=0;
     this.loading = true;
     localStorage.setItem("roznamchaDate", date);
 
