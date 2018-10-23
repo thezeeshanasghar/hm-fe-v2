@@ -122,9 +122,10 @@ export class RoznamchaComponent implements OnInit {
 
     }
     this.gu.EditTransaction(this.EditItemId, transaction).subscribe(data => {
-      this.form.reset();
 
       this.getTransactions(dateTime)
+      this.form.reset();
+
       // this.router.navigate(['accounts']);
     },
       error => { });
@@ -134,7 +135,7 @@ export class RoznamchaComponent implements OnInit {
 
     var uid = UUID.UUID();
     var date = new Date();
-    var dateTime = moment.utc(date).format("DD/MM/YYYY");
+    var dateTime = moment.utc(date).format("MM/DD/YYYY");
     var transaction = {
       Id: this.EditItemId,
       AccountID: this.accountId,
@@ -148,8 +149,9 @@ export class RoznamchaComponent implements OnInit {
 
     this.gu.EditTransaction(this.EditItemId, transaction).subscribe(data => {
 
+      this.getTransactions(dateTime);
       this.form.reset();
-      this.getTransactions(dateTime)
+
       // this.router.navigate(['accounts']);
     },
       error => { });
