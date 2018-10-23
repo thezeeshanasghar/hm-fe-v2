@@ -19,6 +19,7 @@ export class ListCarsComponent implements OnInit {
   carStockForm: any;
   allAccounts: AccountModel[] = [];
   makerList = ['Toyota', 'Honda', 'Hundai', 'Suzuki', 'Faw'];
+  selectedCarAccounts: any[]=[];
 
   constructor(private cs: CarService, private fb: FormBuilder, public gu: GeneralHttpService) {
     this.loading = true
@@ -72,8 +73,11 @@ export class ListCarsComponent implements OnInit {
       });
   }
 
-  setUserInfo(accounts) {
-    this.selectedCarOwner = accounts
+  setUserInfo(car) {
+    this.selectedCarOwner = car;
+    this.selectedCarAccounts=car.Accounts
+
+    
   }
   sortAllAccounts(accouts) {
     return accouts.sort((obj1, obj2) => {
