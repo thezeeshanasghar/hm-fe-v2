@@ -6,7 +6,7 @@
       Balance sheet -- ({{todayDate |date :'medium'}})
 
     </h4>
-   
+
     <div>
       <ng-template #no_data_templ>
         No data found...
@@ -15,12 +15,13 @@
       <div *ngIf="singleUser" class="row">
 
         <div class="col-md-12">
-          <table class="table">
-            <thead>
+          <table class="table table-bordered table-sm">
+            <thead style="background:lightgray">
               <tr>
                 <th>Account number</th>
                 <th>Name</th>
                 <th>Contact</th>
+                <th>Cnic</th>
                 <th>Address</th>
                 <th>Balance</th>
               </tr>
@@ -30,6 +31,8 @@
                 <td>{{singleUser.Number}}</td>
                 <td>{{singleUser.Name}}</td>
                 <td>{{singleUser.MobileNumber}}</td>
+                <td>{{singleUser.CNIC}}</td>
+
                 <td>{{singleUser.Address}}</td>
                 <td>{{singleUser.Balance |number}}</td>
               </tr>
@@ -45,11 +48,11 @@
           </div> -->
 
       </div>
-<hr>
-      <table class="table table-striped " *ngIf="selectedAccountTransactions?.length;else no_data_templ">
+      <hr>
+      <table class="table table-bordered  table-sm" *ngIf="selectedAccountTransactions?.length;else no_data_templ">
 
 
-        <thead>
+        <thead style="background:lightgray">
           <tr>
             <th>Sr#</th>
             <th>Date</th>
