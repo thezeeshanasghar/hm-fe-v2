@@ -201,13 +201,13 @@ export class AccountsComponent implements OnInit {
       data => {
         this.selectedAccountTransactions = data.ResponseData;
 
-        sessionStorage.setItem("selectedAccountTransactions", JSON.stringify(data.ResponseData));
+        localStorage.setItem("selectedAccountTransactions", JSON.stringify(data.ResponseData));
 
         console.log(this.selectedAccountTransactions);
         this.gu.getAccountById(id).subscribe(
           data => {
             console.log(data);
-            sessionStorage.setItem("singleUser", JSON.stringify(data.ResponseData));
+            localStorage.setItem("singleUser", JSON.stringify(data.ResponseData));
 
             this.singleUser = data.ResponseData;
 

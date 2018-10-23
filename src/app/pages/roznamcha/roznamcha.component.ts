@@ -184,15 +184,15 @@ export class RoznamchaComponent implements OnInit {
 
   getTransactions(date: any) {
     this.loading = true;
-    sessionStorage.setItem("roznamchaDate", date);
+    localStorage.setItem("roznamchaDate", date);
 
     this.gu.getTransactions(date).subscribe(data => {
       this.loading = false;
-      sessionStorage.setItem("roznamchaData", '');
-      sessionStorage.setItem("roznamchaData", JSON.stringify(data));
+      localStorage.setItem("roznamchaData", '');
+      localStorage.setItem("roznamchaData", JSON.stringify(data));
 
       this.transaction = data.ResponseData.Transactions;
-      // sessionStorage.setItem("roznamchaTRansactions", JSON.stringify(this.transaction));
+      // localStorage.setItem("roznamchaTRansactions", JSON.stringify(this.transaction));
       this.PreviousBalance = Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
       this.RemainingBalance = Number(data.ResponseData.RemainingBalance);// transctionDTO -> Accont {}
 

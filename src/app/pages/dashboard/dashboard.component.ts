@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
   }
 
   logout() {
-    sessionStorage.setItem("Authorized", "");
+    localStorage.setItem("Authorized", "");
     this.router.navigate(['login']);
   }
 

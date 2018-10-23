@@ -22,8 +22,8 @@ export class PrintRoznamchaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getTransaction(sessionStorage.getItem("roznamchaData"));
-    this.currentdate=sessionStorage.getItem('roznamchaDate')
+    this.getTransaction(localStorage.getItem("roznamchaData"));
+    this.currentdate=localStorage.getItem('roznamchaDate')
   }
 
   getTransaction(data) {

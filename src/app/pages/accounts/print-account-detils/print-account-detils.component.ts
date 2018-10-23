@@ -14,16 +14,16 @@ export class PrintAccountDetilsComponent implements OnInit {
   port: any;
   constructor(public gu: GeneralHttpService) {
     this.todayDate = new Date();
-    this.singleUser = JSON.parse(sessionStorage.getItem("singleUser"));
-    this.selectedAccountTransactions = JSON.parse(sessionStorage.getItem("selectedAccountTransactions"));
+    this.singleUser = JSON.parse(localStorage.getItem("singleUser"));
+    this.selectedAccountTransactions = JSON.parse(localStorage.getItem("selectedAccountTransactions"));
 
   }
 
   ngOnInit() {
     this.ip = this.gu.ip;
     this.port = this.gu.port;
-    this.singleUser = JSON.parse(sessionStorage.getItem("singleUser"));
-    this.selectedAccountTransactions = JSON.parse(sessionStorage.getItem("selectedAccountTransactions"));
+    this.singleUser = JSON.parse(localStorage.getItem("singleUser"));
+    this.selectedAccountTransactions = JSON.parse(localStorage.getItem("selectedAccountTransactions"));
 
   }
 
