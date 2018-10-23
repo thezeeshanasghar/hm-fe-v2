@@ -15,11 +15,11 @@ export class ListCarsComponent implements OnInit {
   carsList: any[] = [];
   filter = '';
   changeClass = false;
-  selectedCarOwner: any[] = [];
+  selectedCarOwner: any = [];
   carStockForm: any;
   allAccounts: AccountModel[] = [];
   makerList = ['Toyota', 'Honda', 'Hundai', 'Suzuki', 'Faw'];
-  selectedCarAccounts: any[]=[];
+  selectedCarAccounts: any=[];
 
   constructor(private cs: CarService, private fb: FormBuilder, public gu: GeneralHttpService) {
     this.loading = true

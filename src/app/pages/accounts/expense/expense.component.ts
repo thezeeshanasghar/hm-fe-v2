@@ -71,7 +71,7 @@ export class ExpenseComponent {
       // Number:uid,
       Amount: "-" + m.loanAmount,
       Description: m.description,
-      Date: dateTime
+      Date: date
     }
     //console.log(transaction);
 

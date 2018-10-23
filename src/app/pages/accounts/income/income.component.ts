@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class IncomeComponent implements OnInit {
 
   allAccounts: any[] = [];
-  incomsearch='';
+  incomsearch = '';
   public form: FormGroup;
   public userAccount: AbstractControl;
   public incomeAmount: AbstractControl;
@@ -36,7 +36,7 @@ export class IncomeComponent implements OnInit {
 
   ngOnInit() {
     this.getAllAccount();
-    
+
   }
 
   getAllAccount() {
@@ -56,7 +56,7 @@ export class IncomeComponent implements OnInit {
       AccountID: m.userAccount,
       // Number: uid,
       Amount: m.incomeAmount,
-      Date: dateTime,
+      Date: date,
       Description: m.description
 
     }
@@ -70,7 +70,7 @@ export class IncomeComponent implements OnInit {
       error => {
         console.log("income error : ", error);
 
-       });
+      });
   }
 
 
