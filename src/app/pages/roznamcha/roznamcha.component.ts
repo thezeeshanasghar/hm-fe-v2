@@ -36,6 +36,8 @@ export class RoznamchaComponent implements OnInit {
   public description: AbstractControl;
   totalIncome: number = 0;
   totalExpense: number = 0;
+  incomeTransactions: any[] = [];
+  expenseTransactions: any[] = [];
   constructor(public fb: FormBuilder, private gu: GeneralHttpService, private modalService: BsModalService, private router: Router) {
     this.date = new Date();
   }
@@ -157,8 +159,10 @@ export class RoznamchaComponent implements OnInit {
       error => { });
   }
   getTransactionbyDate(d) {
-    this.totalExpense=0;
-    this.totalIncome=0;
+    this.totalExpense = 0;
+    this.totalIncome = 0;
+    this.incomeTransactions = [];
+    this.expenseTransactions = [];
 
     this.transaction = [];
     var dd = d.date.month + "-" + d.date.day + "-" + d.date.year;
@@ -171,9 +175,11 @@ export class RoznamchaComponent implements OnInit {
     this.transaction.forEach(element => {
       if (element.Amount > 0) {
         this.totalIncome += element.Amount;
+        this.incomeTransactions.push(element);
       }
       else if (element.Amount < 0) {
         this.totalExpense += element.Amount;
+        this.incomeTransactions.push(element);
       }
 
       // this.previousGrandTotal=this.previousTotalIncome+this.previousTotalExpense;
@@ -187,8 +193,11 @@ export class RoznamchaComponent implements OnInit {
 
 
   getTransactions(date: any) {
-    this.totalExpense=0;
-    this.totalIncome=0;
+    this.totalExpense = 0;
+    this.totalIncome = 0;
+
+    this.incomeTransactions = [];
+    this.expenseTransactions = [];
     this.loading = true;
     localStorage.setItem("roznamchaDate", date);
 
@@ -205,9 +214,11 @@ export class RoznamchaComponent implements OnInit {
       this.transaction.forEach(element => {
         if (element.Amount > 0) {
           this.totalIncome += element.Amount;
+          this.incomeTransactions.push(element);
         }
         else if (element.Amount < 0) {
           this.totalExpense += element.Amount;
+          this.expenseTransactions.push(element)
         }
         this.gu.getAccountById(element.AccountID).subscribe(data => {
           element.Account = data.ResponseData;

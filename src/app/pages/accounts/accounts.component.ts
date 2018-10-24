@@ -66,7 +66,7 @@ export class AccountsComponent implements OnInit {
   totalExpense: number = 0;
   craditAccouts: any[] = [];
   debitAccounts: any[] = [];
-  
+
   constructor(
 
     public fb: FormBuilder,
@@ -74,7 +74,7 @@ export class AccountsComponent implements OnInit {
     public modalService: BsModalService,
 
   ) {
-    
+
     this.loading = true;
     this.ip = this.gu.ip;
     this.port = this.gu.port;
@@ -152,6 +152,7 @@ export class AccountsComponent implements OnInit {
     this.modalRefIncome = this.modalService.show(templateIncome);
   }
   ngOnInit() {
+    this.loading = true;
     this.getAllAccounts();
   }
 

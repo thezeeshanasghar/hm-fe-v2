@@ -75,7 +75,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let u of transaction;let i=index">
+                <tr *ngFor="let u of incomeTransactions;let i=index">
 
                   <td *ngIf="u.Amount>0">{{i+1}}</td>
                   <td *ngIf="u.Amount>0">{{u.Date}}</td>
@@ -125,7 +125,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let u of transaction;let i=index">
+                <tr *ngFor="let u of expenseTransactions;let i=index">
 
                   <td *ngIf="u.Account!=null && u.Amount<0">{{i+1}}</td>
                   <td *ngIf="u.Account!=null && u.Amount<0">{{u.Date}}</td>
@@ -211,7 +211,7 @@
                 <span class="input-group-addon">
                   <i class="glyphicon glyphicon-pencil"></i>
                 </span>
-                <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
+                <textarea dir="rtl" rows="5" cols="40" [formControl]="description" class="form-control" placeholder="تفصیل یہاں لکھیں۔۔۔"></textarea>
               </div>
               <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description
                 must
@@ -264,7 +264,7 @@
                 <span class="input-group-addon">
                   <i class="glyphicon glyphicon-pencil"></i>
                 </span>
-                <textarea rows="5" cols="40" [formControl]="description" class="form-control" placeholder="description gose here....."></textarea>
+                <textarea dir="rtl" rows="5" cols="40" [formControl]="description" class="form-control" placeholder="تفصیل یہاں لکھیں۔۔۔"></textarea>
               </div>
               <span *ngIf="!description.valid && description.touched " class="help-block sub-little-text">Description
                 must
