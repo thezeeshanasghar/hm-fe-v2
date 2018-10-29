@@ -17,6 +17,7 @@ import { GeneralHttpService } from "../../services/general-http.service";
 import { AccountModel } from "../../Models/account.model";
 import { BsModalService } from "ngx-bootstrap";
 import { Router } from "@angular/router";
+import { IMyDrpOptions } from "mydaterangepicker";
 
 export class searchModel {
   name: number;
@@ -108,6 +109,14 @@ export class AccountsComponent implements OnInit {
       avatar: null
     });
   }
+
+  myDateRangePickerOptions: IMyDrpOptions = {
+    // other options...
+    dateFormat: 'dd.mm.yyyy',
+};
+
+public model: any = {beginDate: {year: 2018, month: 10, day: 9},
+                             endDate: {year: 2018, month: 10, day: 19}};
   modalRefExpense: BsModalRef;
   modalRefIncome: BsModalRef;
   setAlertOff() {

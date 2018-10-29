@@ -45,6 +45,9 @@ import { PrintAccountDetilsComponent } from './pages/accounts/print-account-deti
 import { PrintRoznamchaComponent } from './pages/roznamcha/print-roznamcha/print-roznamcha.component';
 import { PrintRoznamchaIncomeComponent } from './pages/roznamcha/print-roznamcha-income/print-roznamcha-income.component';
 
+import { MyDateRangePickerModule } from 'mydaterangepicker';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,7 +95,8 @@ import { PrintRoznamchaIncomeComponent } from './pages/roznamcha/print-roznamcha
     MyDatePickerModule,
     Ng2SearchPipeModule,
     BsDatepickerModule.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
+    MyDateRangePickerModule
 
 
   ],

@@ -36,13 +36,18 @@
     </div>
   </div>
   <div class="row">
+    <form #myForm="ngForm" novalidate>
+      <my-date-range-picker name="mydaterange" [options]="myDateRangePickerOptions" [(ngModel)]="model" required></my-date-range-picker>
+    </form>
+  </div>
+  <div class="row">
 
     <div class="col-md-3">
       <h3>Accounts &nbsp; /&nbsp; کھاتہ لسٹ</h3>
     </div>
     <div class="col-md-1">
-        <i style="color:orange" [ngClass]="{'fa fa-refresh fa-spin fa-2x':loading}"></i>
-      </div>
+      <i style="color:orange" [ngClass]="{'fa fa-refresh fa-spin fa-2x':loading}"></i>
+    </div>
 
     <div class="col-md-7 col-md-offset-1 mt-15 ">
       <button class="btn btn-primary pull-right" style="font-size:15px;margin-left:5px">
@@ -60,7 +65,7 @@
 
   <hr>
   <div class="row">
-    
+
 
     <div class="col-md-4 col-md-offset-8">
       <div class="form-group">
@@ -83,8 +88,8 @@
               کھاتہ</a></li>
           <li style="color:red"><a data-toggle="tab" href="#menu2"> ({{totalExpense |number}}) Debit Accounts / بنام
               کھاتہ </a></li>
-              <li style="color:red"><a data-toggle="tab"> ({{totalIncome+totalExpense |number}}) Remaining balance
-                  نقد کیش </a></li>
+          <li style="color:red"><a data-toggle="tab"> ({{totalIncome+totalExpense |number}}) Remaining balance
+              نقد کیش </a></li>
         </ul>
 
         <div class="tab-content">
