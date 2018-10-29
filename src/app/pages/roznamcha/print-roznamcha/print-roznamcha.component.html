@@ -29,89 +29,88 @@
   </div>
   <hr>
   <div class="row">
-    <div class="col-md-12 col-sm-12">
-
-      <div class="col-lg-6 col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">Income
-            <span class="pull-right">
-              Total Income: &nbsp;
-              <b>{{totalIncome | number}}</b>
-            </span>
-          </div>
-          <div class="panel-body">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Sr#</th>
-                  <th>Date</th>
-                  <th>Name</th>
-                  <th>Description</th>
-
-                  <th>Amount</th>
-
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let u of transaction;let i=index">
-
-                  <td *ngIf="u.Amount>0">{{i+1}}</td>
-                  <td *ngIf="u.Amount>0">{{u.Date}}</td>
-
-                  <td *ngIf="u.Account!=null && u.Amount>0">{{u.Account.Name}}</td>
-                  <td *ngIf="u.Account!=null && u.Amount>0" style="width:400px;word-break: break-all">{{u.Description}}</td>
-                  <td *ngIf="u.Account!=null  && u.Amount>0">{{u.Amount |number}}</td>
 
 
-
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
+    <div class="col-lg-12 col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">Income
+          <span class="pull-right">
+            Total Income: &nbsp;
+            <b>{{totalIncome
+              + PreviousBalance | number}}</b>
+          </span>
         </div>
-      </div>
-      <div class="col-lg-6 col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">Expense
-            <span class="pull-right">
-              Total Expense:&nbsp;
-              <b>{{totalExpense | number}}</b>
-            </span>
-          </div>
-          <div class="panel-body">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Sr#</th>
-                  <th>Date</th>
-                  <!-- <th>Ac#</th> -->
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Expense</th>
+        <div class="panel-body">
+          <table class="table table-bordered" >
+            <thead>
+              <tr>
+                <th>Sr#</th>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Description</th>
 
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let u of transaction;let i=index">
+                <th>Amount</th>
 
-                  <td *ngIf="u.Account!=null && u.Amount<0">{{i+1}}</td>
-                  <td *ngIf="u.Account!=null && u.Amount<0">{{u.Date}}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let u of incomeTransactions;let i=index">
 
-                  <td *ngIf="u.Account!=null && u.Amount<0">{{u.Account.Name}}</td>
-                  <td *ngIf="u.Account!=null && u.Amount<0" style="width:400px;word-break: break-all">{{u.Description}}</td>
-                  <td *ngIf="u.Account!=null && u.Amount<0">{{u.Amount |number}}</td>
+                <td *ngIf="u.Amount>0">{{i+1}}</td>
+                <td *ngIf="u.Amount>0">{{u.Date| date :'short'}}</td>
+
+                <td *ngIf="u.Account!=null && u.Amount>0">{{u.Account.Name}}</td>
+                <td *ngIf="u.Account!=null && u.Amount>0" style="width:400px;word-break: break-all">{{u.Description}}</td>
+                <td *ngIf="u.Account!=null  && u.Amount>0">{{u.Amount |number}}</td>
 
 
-                </tr>
 
-              </tbody>
-            </table>
-          </div>
+              </tr>
+
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
+    <div class="col-lg-12 col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">Expense
+          <span class="pull-right">
+            Total Expense:&nbsp;
+            <b>{{totalExpense | number}}</b>
+          </span>
+        </div>
+        <div class="panel-body">
+          <table class="table table-bordered" BORDERCOLOR="red">
+            <thead>
+              <tr>
+                <th>Sr#</th>
+                <th>Date</th>
+                <!-- <th>Ac#</th> -->
+                <th>Name</th>
+                <th>Description</th>
+                <th>Expense</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let u of expenseTransactions;let i=index">
+
+                <td *ngIf="u.Account!=null && u.Amount<0">{{i+1}}</td>
+                <td *ngIf="u.Account!=null && u.Amount<0">{{u.Date | date :'short'}}</td>
+
+                <td *ngIf="u.Account!=null && u.Amount<0">{{u.Account.Name}}</td>
+                <td *ngIf="u.Account!=null && u.Amount<0" style="width:400px;word-break: break-all">{{u.Description}}</td>
+                <td *ngIf="u.Account!=null && u.Amount<0">{{u.Amount |number}}</td>
+
+
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
   </div>
-
-
 </div>

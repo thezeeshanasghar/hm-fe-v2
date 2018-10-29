@@ -83,6 +83,8 @@
               کھاتہ</a></li>
           <li style="color:red"><a data-toggle="tab" href="#menu2"> ({{totalExpense |number}}) Debit Accounts / بنام
               کھاتہ </a></li>
+              <li style="color:red"><a data-toggle="tab"> ({{totalIncome+totalExpense |number}}) Remaining balance
+                  نقد کیش </a></li>
         </ul>
 
         <div class="tab-content">
@@ -366,7 +368,7 @@
 
                 <tr *ngFor="let u of selectedAccountTransactions |filter:searchHistory;let i=index; let last=last">
                   <td>{{i+1}}</td>
-                  <td>{{u.Date}}</td>
+                  <td>{{u.Date | date :'short'}}</td>
                   <td style="word-break: break-all">{{u.Description}}</td>
                   <td *ngIf="u.Amount>0;else income" style="color:green">{{u.Amount |number}}</td>
                   <ng-template #income>

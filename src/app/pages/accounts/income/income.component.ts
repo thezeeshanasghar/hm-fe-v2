@@ -51,6 +51,7 @@ export class IncomeComponent implements OnInit {
     //console.log(m);
     var uid = UUID.UUID();
     var date = new Date();
+
     var dateTime = moment.utc(date).format("DD-MM-YYYY");
     var transaction = {
       AccountID: m.userAccount,

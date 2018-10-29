@@ -17,8 +17,6 @@ export class GeneralHttpService {
     // this.port = 81;
   }
 
-
-
   public getTransactions(date = '') {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let str = "http://" + this.ip + ":" + this.port + "/api/transaction";

@@ -15,6 +15,8 @@ export class PrintRoznamchaComponent implements OnInit {
   RemainingBalance: number = 0;
   totalIncome: any = 0;
   totalExpense: any = 0;
+  incomeTransactions: any[] = [];
+  expenseTransactions: any[] = [];
 
   constructor(public gu: GeneralHttpService) {
 
@@ -23,26 +25,29 @@ export class PrintRoznamchaComponent implements OnInit {
 
   ngOnInit() {
     this.getTransaction(localStorage.getItem("roznamchaData"));
-    this.currentdate=localStorage.getItem('roznamchaDate')
+    this.currentdate = localStorage.getItem('roznamchaDate')
   }
 
   getTransaction(data) {
-
+    this.incomeTransactions = [];
+    this.expenseTransactions = [];
     let d = JSON.parse(data)
     console.log("current data", d.ResponseData.Transactions)
     this.loading = false;
 
     this.transaction = d.ResponseData.Transactions;
-    
+
     this.PreviousBalance = Number(d.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
     this.RemainingBalance = Number(d.ResponseData.RemainingBalance);// transctionDTO -> Accont {}
 
     this.transaction.forEach(element => {
       if (element.Amount > 0) {
         this.totalIncome += element.Amount;
+        this.incomeTransactions.push(element);
       }
       else if (element.Amount < 0) {
         this.totalExpense += element.Amount;
+        this.expenseTransactions.push(element)
       }
       this.gu.getAccountById(element.AccountID).subscribe(data => {
         element.Account = data.ResponseData;
