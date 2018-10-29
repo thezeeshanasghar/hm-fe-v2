@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
   <div class="row">
 
@@ -12,7 +13,7 @@
         No data found...
       </ng-template>
 
-      <div *ngIf="singleUser" class="row">
+      <div  class="row">
 
         <div class="col-md-12">
           <table class="table table-bordered table-sm">
@@ -36,6 +37,7 @@
                 <td>{{singleUser.Address}}</td>
                 <td>{{singleUser.Balance |number}}</td>
               </tr>
+              
             </tbody>
           </table>
 
@@ -78,6 +80,7 @@
             </ng-template>
             <td [ngClass]="last ? 'text-bold': 'text-normal'">{{ getRowTotalUsingIndex(i) }}</td>
           </tr>
+          
 
         </tbody>
 
