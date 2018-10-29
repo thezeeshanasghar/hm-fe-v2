@@ -43,6 +43,7 @@ import { ListExchangeCarComponent } from './pages/exchange-recipt/list-exchange-
 import {NgxPaginationModule} from 'ngx-pagination';
 import { PrintAccountDetilsComponent } from './pages/accounts/print-account-detils/print-account-detils.component';
 import { PrintRoznamchaComponent } from './pages/roznamcha/print-roznamcha/print-roznamcha.component';
+import { PrintRoznamchaIncomeComponent } from './pages/roznamcha/print-roznamcha-income/print-roznamcha-income.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { PrintRoznamchaComponent } from './pages/roznamcha/print-roznamcha/print
     AddExchangeCarComponent,
     ListExchangeCarComponent,
     PrintAccountDetilsComponent,
-    PrintRoznamchaComponent
+    PrintRoznamchaComponent,
+    PrintRoznamchaIncomeComponent
 
   ],
   imports: [

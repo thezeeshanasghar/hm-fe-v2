@@ -16,7 +16,7 @@
   </div>
 
   <div class="row" style="padding-bottom:5px">
-    <div class="col-md-3 col-lg-3">
+    <div class="col-md-2 col-lg-2">
       <span class="pull-left">
         <form #myForm="ngForm" novalidate>
           <my-date-picker (ngModelChange)="getTransactionbyDate($event)" name="mydate" [options]="myDatePickerOptions"
@@ -27,9 +27,12 @@
     <div class="col-md-1">
       <i style="color:orange" [ngClass]="{'fa fa-refresh fa-spin fa-2x':loading}"></i>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
       <span class="btn btn-info pull-right">Previous Balance: &nbsp;
         <b>{{PreviousBalance |number}}</b>
+      </span>
+      <span (click)="openInNewTabIncome()" class="btn btn-primary" routerLink="print-roznamcha">
+        Print
       </span>
     </div>
     <div class="col-md-6 col-lg-6">

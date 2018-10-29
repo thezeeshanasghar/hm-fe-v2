@@ -46,6 +46,12 @@ export class RoznamchaComponent implements OnInit {
     var win = window.open(url, '_blank');
     win.focus();
   }
+
+  openInNewTabIncome() {
+    var url = "/printRoznamchaIncome"
+    var win = window.open(url, '_blank');
+    win.focus();
+  }
   modalRefDelete: BsModalRef;
   modalRefEdit: BsModalRef;
 

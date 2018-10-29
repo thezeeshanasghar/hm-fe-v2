@@ -26,6 +26,7 @@ import { AuthGuard } from './router-guard/auth.guard';
 import { SaleComponent } from './pages/car-sale/sale/sale.component';
 import { CarSaleListComponent } from './pages/car-sale/car-sale-list/car-sale-list.component';
 import { PrintRoznamchaComponent } from './pages/roznamcha/print-roznamcha/print-roznamcha.component';
+import { PrintRoznamchaIncomeComponent } from './pages/roznamcha/print-roznamcha-income/print-roznamcha-income.component';
 
 export const appRoutes: Routes = [
     {
@@ -37,6 +38,7 @@ export const appRoutes: Routes = [
     { path: "printHistory", component: PrintAccountDetilsComponent },
 
     { path: "printRoznamcha", component: PrintRoznamchaComponent },
+    { path: "printRoznamchaIncome", component: PrintRoznamchaIncomeComponent },
 
 
     {
