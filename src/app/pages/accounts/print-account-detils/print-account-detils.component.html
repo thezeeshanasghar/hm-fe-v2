@@ -57,7 +57,7 @@
         <thead style="background:lightgray">
           <tr>
             <th>Sr#</th>
-            <th>Date</th>
+            <th>Date &nbsp;({{singleUser.Number}}, &nbsp;{{singleUser.Name}}, &nbsp;{{singleUser.MobileNumber}})</th>
             <th>Description</th>
             <th>Income آمدن</th>
             <th>Expense خرچ</th>
@@ -69,7 +69,7 @@
           <tr *ngFor="let u of selectedAccountTransactions;let i=index; let last=last">
             <td>{{i+1}}</td>
             <td>{{u.Date | date :'short'}}</td>
-            <td style="width:400px;word-break: break-all">{{u.Description}}</td>
+            <td style="width:400px;word-break: break-all;font-size: 16px">{{u.Description}}</td>
             <td *ngIf="u.Amount>0;else income" style="color:green">{{u.Amount |number}}</td>
             <ng-template #income>
               <td style="color:red;font-style:bold"></td>

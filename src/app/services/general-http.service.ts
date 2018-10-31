@@ -10,11 +10,11 @@ export class GeneralHttpService {
   public ip: string;
   public port: number;
   constructor(private http: Http) {
-    this.ip = 'hm-api.afz-sol.com';
-    this.port = 80;
+    // this.ip = 'hm-api.afz-sol.com';
+    // this.port = 80;
 
-    // this.ip = 'localhost';
-    // this.port = 81;
+    this.ip = 'localhost';
+    this.port = 81;
   }
 
   public getTransactions(date = '') {
@@ -47,11 +47,14 @@ export class GeneralHttpService {
   }
   public PostTransaction(m) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    let body = JSON.stringify(m);
-    console.log(body);
+    // let body = JSON.stringify(m);
+    debugger
+    // console.log(body);
+    var x = new Date();
+    x.setHours(x.getHours() - x.getTimezoneOffset() / 60);
     let url = "http://" + this.ip + ":" + this.port + "/api/transaction";
     console.log(url);
-    return this.http.post(url, body, { headers: headers }).map((response: Response) => response.json());
+    return this.http.post(url, m, { headers: headers }).map((response: Response) => response.json());
 
   }
 

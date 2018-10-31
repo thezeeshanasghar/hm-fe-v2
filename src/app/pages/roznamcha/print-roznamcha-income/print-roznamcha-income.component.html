@@ -61,7 +61,7 @@
                 <td *ngIf="u.Amount>0">{{u.Date| date :'short'}}</td>
 
                 <td *ngIf="u.Account!=null && u.Amount>0">{{u.Account.Name}}</td>
-                <td *ngIf="u.Account!=null && u.Amount>0" style="width:400px;word-break: break-all">{{u.Description}}</td>
+                <td *ngIf="u.Account!=null && u.Amount>0" style="width:400px;word-break: break-all;font-size: 16px">{{u.Description}}</td>
                 <td *ngIf="u.Account!=null  && u.Amount>0">{{u.Amount |number}}</td>
 
 
