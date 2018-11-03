@@ -7,6 +7,11 @@
       Balance sheet -- ({{todayDate |date :'medium'}})
 
     </h4>
+   
+      <form #myForm="ngForm" novalidate>
+        <my-date-range-picker name="mydaterange" [options]="myDateRangePickerOptions" [(ngModel)]="model" (ngModelChange)="getData(model)" required></my-date-range-picker>
+      </form>
+   
 
     <div>
       <ng-template #no_data_templ>
@@ -57,8 +62,8 @@
         <thead style="background:lightgray">
           <tr>
             <th>Sr#</th>
-            <th>Date &nbsp;({{singleUser.Number}}, &nbsp;{{singleUser.Name}}, &nbsp;{{singleUser.MobileNumber}})</th>
-            <th>Description</th>
+            <th>Date </th>
+            <th>Description &nbsp;({{singleUser.Number}}, &nbsp;{{singleUser.Name}}, &nbsp;{{singleUser.MobileNumber}})</th>
             <th>Income آمدن</th>
             <th>Expense خرچ</th>
             <th>Balance رقم</th>

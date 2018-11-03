@@ -173,7 +173,6 @@ public model: any = {beginDate: {year: 2018, month: 10, day: 9},
     this.totalExpense = 0;
     this.loading = true;
 
-
     console.log("acounts called")
     this.gu.getAllAccounts().subscribe(
       data => {
