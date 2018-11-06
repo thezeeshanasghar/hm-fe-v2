@@ -76,4 +76,11 @@ export class GeneralHttpService {
     return this.http.post(url, obj).map((response: Response) => response.json());
   }
 
+
+  public putAccount(obj:FormData,Id){
+    let url = "http://" + this.ip + ":" + this.port + "/api/account/"+Id;
+    return this.http.put(url, obj).map((response: Response) => response.json());
+
+  }
+
 }

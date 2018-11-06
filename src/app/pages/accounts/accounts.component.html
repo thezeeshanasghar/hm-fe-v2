@@ -88,7 +88,8 @@
               کھاتہ</a></li>
           <li style="color:red"><a data-toggle="tab" href="#menu2"> ({{totalExpense |number}}) Debit Accounts / بنام
               کھاتہ </a></li>
-          <li style="color:red"><a data-toggle="tab" href="#menu3"> ({{totalIncome+totalExpense |number}}) Remaining balance
+          <li style="color:red"><a data-toggle="tab" href="#menu3"> ({{totalIncome+totalExpense |number}}) Remaining
+              balance
               نقد کیش </a></li>
         </ul>
 
@@ -107,11 +108,9 @@
                   <th>Contact</th>
                   <th>Cnic</th>
                   <th>Image</th>
-
                   <th>Balance</th>
-                  <th>
-
-                  </th>
+                  <th></th>
+                  <th></th>
 
                 </tr>
               </thead>
@@ -130,11 +129,9 @@
                   <!-- <td>{{account.Address}}</td> -->
 
                   <td [ngClass]="account.Balance>=0 ? 'text-green': 'text-red'">{{account.Balance |number}}</td>
-                  <!-- <td>
-        <button class="btn btn-warning btn-sm" data-target="#editAccount" data-toggle="modal">
-          <i class="fa fa-pencil"></i>
-        </button>
-        <button class="btn btn-danger btn-sm">
+                 
+
+                    <!--  <td><button class="btn btn-danger btn-sm">
           <i class="fa fa-trash"></i>
         </button>
       </td> -->
@@ -144,7 +141,11 @@
                       History/
                       <b>تفصیل</b>
                     </a>
-
+                  </td>
+                  <td>
+                    <button class="btn btn-warning btn-sm" (click)="setEditUser(account)" data-target="#editAccount" data-toggle="modal">
+                      <i class="fa fa-pencil"></i>
+                    </button>
                   </td>
                   <!-- <a href="http://{{ip}}:{{port}}/api/account/DownloadLogPDF/{{account.Id}}" class="pull-right btn btn-info btn-sm"
         style="margin-top:7px;font-size:12px; font-weight:bolder; text-decoration: none;height:100%;width:100%">
@@ -323,7 +324,7 @@
 
     <!--history Modal -->
     <div class="modal fade" id="TransactionModal" role="dialog">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
 
         <!-- Modal content-->
         <div class="modal-content">
@@ -357,6 +358,8 @@
                 <!--  -->
                 <button routerLink="/printHistory" class="btn btn-primary" data-dismiss="modal" target="_blank">Print</button>
               </div>
+
+
 
             </div>
 
@@ -416,10 +419,10 @@
             </h4>
           </div>
           <div class="modal-body">
-            <form [formGroup]="editUserForm" class="form-horizontal">
+            <form [formGroup]="editUserForm" (ngSubmit)="submitEditform(editUserForm.value)" class="form-horizontal">
 
               <!-- number -->
-              <div class="form-group row" [ngClass]="{'has-error': (!number.valid && number.touched), 'has-success': (number.valid && number.touched)}">
+              <!-- <div class="form-group row" [ngClass]="{'has-error': (!number.valid && number.touched), 'has-success': (number.valid && number.touched)}">
                 <div class="input-group">
                   <span class="input-group-addon">
                     <i class="glyphicon glyphicon-user"></i>
@@ -429,7 +432,7 @@
                 <div *ngIf="number.touched && number.hasError('required')" class="help-block sub-little-text">
                   account number is required.
                 </div>
-              </div>
+              </div> -->
 
               <!-- name -->
               <div class="form-group row" [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
@@ -459,7 +462,7 @@
               </div>
 
               <!--cnic-->
-              <div class="form-group row" [ngClass]="{'has-error': (!cnic.valid && cnic.touched), 'has-success': (cnic.valid && cnic.touched)}">
+              <!-- <div class="form-group row" [ngClass]="{'has-error': (!cnic.valid && cnic.touched), 'has-success': (cnic.valid && cnic.touched)}">
                 <div class="input-group">
                   <span class="input-group-addon">
                     <i class="glyphicon glyphicon-credit-card"></i>
@@ -469,11 +472,11 @@
                 <div *ngIf="cnic.touched && cnic.hasError('required')" class="help-block sub-little-text">
                   CNIC is required.
                 </div>
-              </div>
+              </div> -->
 
 
               <!--address-->
-              <div class="form-group row" [ngClass]="{'has-error': (!address.valid && address.touched), 'has-success': (address.valid && address.touched)}">
+              <!-- <div class="form-group row" [ngClass]="{'has-error': (!address.valid && address.touched), 'has-success': (address.valid && address.touched)}">
                 <div class="input-group">
                   <span class="input-group-addon">
                     <i class="glyphicon glyphicon-home"></i>
@@ -483,7 +486,7 @@
                 <div *ngIf="address.touched && address.hasError('required')" class="help-block sub-little-text">
                   address is required.
                 </div>
-              </div>
+              </div> -->
               <!-- address -->
               <!-- <div class="form-group">
                   <label for="avatar">Image</label>

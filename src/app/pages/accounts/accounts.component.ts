@@ -1,14 +1,5 @@
 import { AmountValidator } from "./../../../assets/validators/amount.valdator";
-import {
-  FormGroup,
-  AbstractControl,
-  FormBuilder,
-  Validators,
-  FormControl,
-  FormsModule
-
-
-} from "@angular/forms";
+import {  FormGroup,  AbstractControl,  FormBuilder,  Validators,  FormControl,  FormsModule} from "@angular/forms";
 import { Http } from "@angular/http";
 import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
 import { TransactionModel } from "./../../Models/Transaction.model";
@@ -51,11 +42,11 @@ export class AccountsComponent implements OnInit {
 
   editUserForm: FormGroup;
 
-  number = new FormControl("", [Validators.required]);
-  name = new FormControl("", [Validators.required]);
-  mobileNumber = new FormControl("", [Validators.required]);
-  cnic = new FormControl("", [Validators.required]);
-  address = new FormControl("", [Validators.required]);
+  number = new FormControl("");
+  name = new FormControl("");
+  mobileNumber = new FormControl("");
+  cnic = new FormControl("");
+  address = new FormControl("");
 
   public form: FormGroup;
   public userAccount: AbstractControl;
@@ -67,6 +58,7 @@ export class AccountsComponent implements OnInit {
   totalExpense: number = 0;
   craditAccouts: any[] = [];
   debitAccounts: any[] = [];
+  selectedUser: any;
 
   constructor(
 
@@ -110,6 +102,23 @@ export class AccountsComponent implements OnInit {
     });
   }
 
+
+  setEditUser(user){
+    this.selectedUser=user;
+    // console.log(user)
+    // this.editUserForm = this.fb.group({
+    //   number: user.Number,
+    //   name: user.Name,
+    //   mobileNumber: user.MobileNumber,
+    //   cnic: user.CNIC,
+    //   address: user.Address,
+    //   // avatar: user.Image
+    // });
+
+    
+
+
+  }
   myDateRangePickerOptions: IMyDrpOptions = {
     // other options...
     dateFormat: 'dd.mm.yyyy',
@@ -277,5 +286,41 @@ public model: any = {beginDate: {year: 2018, month: 10, day: 9},
       this.search.cnic = 0;
       this.search.name = 0;
     }, 5000);
+  }
+
+  submitEditform(post){
+    let fromData = new FormData();
+
+
+    // console.log(post);
+    let model = new AccountModel();
+
+    model.Number = this.selectedUser.Number;
+    model.Name = post.name;
+    model.MobileNumber = post.mobileNumber;
+    model.CNIC = this.selectedUser.CNIC;
+    model.Address = this.selectedUser.Address;
+
+    console.log(model)
+    fromData.append('model',JSON.stringify(model)  );
+    fromData.append('avatar', this.selectedUser.Image);
+
+    this.gu.putAccount(fromData,this.selectedUser.Id).subscribe(
+      data => {
+
+        console.log('data',data)
+        if (data.IsSuccess == true) {
+          // this.router.navigate(["/dashboard/accounts"]);
+        } else {
+          this.message = data.Message;
+          
+        }
+      },
+      error => {
+        console.log('error',error)
+        this.message = error;
+       
+      });
+
   }
 }
