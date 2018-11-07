@@ -315,6 +315,9 @@ public model: any = {beginDate: {year: 2018, month: 10, day: 9},
 
         console.log('data',data)
         if (data.IsSuccess == true) {
+          this.message = "record is updated successfully";
+          this.getAllAccounts();
+
           // this.router.navigate(["/dashboard/accounts"]);
         } else {
           this.message = data.Message;
