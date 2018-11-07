@@ -58,7 +58,7 @@ export class AccountsComponent implements OnInit {
   totalExpense: number = 0;
   craditAccouts: any[] = [];
   debitAccounts: any[] = [];
-  selectedUser: any;
+  selectedUser: any={};
 
   constructor(
 
@@ -93,19 +93,19 @@ export class AccountsComponent implements OnInit {
     this.description = this.form.controls["description"];
 
     this.editUserForm = fb.group({
-      number: this.number,
+      // number: this.number,
       name: this.name,
       mobileNumber: this.mobileNumber,
-      cnic: this.cnic,
-      address: this.address,
-      avatar: null
+      // cnic: this.cnic,
+      // address: this.address,
+      // avatar: null
     });
   }
 
 
   setEditUser(user){
     this.selectedUser=user;
-    // console.log(user)
+    console.log(this.selectedUser)
     // this.editUserForm = this.fb.group({
     //   number: user.Number,
     //   name: user.Name,
@@ -293,17 +293,21 @@ public model: any = {beginDate: {year: 2018, month: 10, day: 9},
 
 
     // console.log(post);
-    let model:any //new AccountModel();
+    let model:any={} //new AccountModel();
 
-    model.Number = this.selectedUser.Number;
-    model.Name = post.name;
-    model.MobileNumber = post.mobileNumber;
+    if(this.selectedUser !={} && this.selectedUser != undefined){
+    model.Number =this.selectedUser.Number;
     model.CNIC = this.selectedUser.CNIC;
     model.Address = this.selectedUser.Address;
-    model.Avatar=this.selectedUser.Image;
+    // model.Avatar=this.selectedUser.Image;
+    model.Name = post.name;
+    model.MobileNumber = post.mobileNumber;
+    }
+
+   
 
     console.log(model)
-    fromData.append('model',JSON.stringify(model)  );
+    fromData.append('model',JSON.stringify(model));
     // fromData.append('avatar', this.selectedUser.Image);
 
     this.gu.putAccount(fromData,this.selectedUser.Id).subscribe(
