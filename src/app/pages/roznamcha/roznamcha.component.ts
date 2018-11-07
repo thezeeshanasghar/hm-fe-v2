@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { UUID } from 'angular2-uuid';
 import * as moment from 'moment';
 import { IMyDpOptions } from 'mydatepicker';
+import { IMyDrpOptions } from 'mydaterangepicker';
 
 @Component({
   selector: 'app-roznamcha',
@@ -40,7 +41,20 @@ export class RoznamchaComponent implements OnInit {
   expenseTransactions: any[] = [];
   constructor(public fb: FormBuilder, private gu: GeneralHttpService, private modalService: BsModalService, private router: Router) {
     this.date = new Date();
+    this.model.beginDate = { year: this.date.getFullYear(), month: this.date.getMonth() + 1, day: this.date.getDate() };
+    this.model.endDate = { year: this.date.getFullYear(), month: this.date.getMonth() + 1, day: this.date.getDate() }
+
   }
+
+  myDateRangePickerOptions: IMyDrpOptions = {
+    // other options...
+    dateFormat: 'mm/dd/yyyy',
+  };
+
+  public model: any = {
+    beginDate: { year: 2018, month: 10, day: 9 },
+    endDate: { year: 2018, month: 10, day: 19 }
+  };
   openInNewTab() {
     var url = "/printRoznamcha"
     var win = window.open(url, '_blank');
@@ -89,7 +103,7 @@ export class RoznamchaComponent implements OnInit {
   };
   todaydate = new Date()
   // Initialized to specific date (09.10.2018).
-  public model = { date: { year: this.todaydate.getFullYear(), month: this.todaydate.getMonth() + 1, day: this.todaydate.getDate() }, filter: "all" };
+  // public model = { date: { year: this.todaydate.getFullYear(), month: this.todaydate.getMonth() + 1, day: this.todaydate.getDate() }, filter: "all" };
 
   ngOnInit() {
     this.loading = true;
@@ -233,6 +247,47 @@ export class RoznamchaComponent implements OnInit {
       });
 
     }, error => { });
+
+  }
+
+
+  getData(model) {
+    var bd, ed;
+
+
+    if (model != null) {
+      console.log(model)
+      bd = moment(model.beginDate.year + "-" + model.beginDate.month + "-" + model.beginDate.day).format("MM/DD/YYYY");
+      ed = moment(model.endDate.year + "-" + model.endDate.month + "-" + model.endDate.day).format("MM/DD/YYYY");
+    }
+
+    console.log(bd, ed);
+
+    this.gu.getTransactionsByDateRange(bd, ed).subscribe(data => {
+      console.log(data);
+      this.transaction = data.ResponseData.Transactions;
+      // localStorage.setItem("roznamchaTRansactions", JSON.stringify(this.transaction));
+      this.PreviousBalance = Number(data.ResponseData.PreviousBalance);// transctionDTO -> Accont {}
+      this.RemainingBalance = Number(data.ResponseData.RemainingBalance);// transctionDTO -> Accont {}
+
+      this.transaction.forEach(element => {
+        if (element.Amount > 0) {
+          this.totalIncome += element.Amount;
+          this.incomeTransactions.push(element);
+        }
+        else if (element.Amount < 0) {
+          this.totalExpense += element.Amount;
+          this.expenseTransactions.push(element)
+        }
+        this.gu.getAccountById(element.AccountID).subscribe(data => {
+          element.Account = data.ResponseData;
+
+        }, error => { });
+      });
+    }, error => {
+
+    })
+
 
   }
 

@@ -16,6 +16,13 @@ export class GeneralHttpService {
     // this.ip = 'localhost';
     // this.port = 81;
   }
+  public getTransactionsByDateRange(startDate = '', endDate = '') {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let str = "http://" + this.ip + ":" + this.port + "/api/transaction";
+    str += "?startDate="+startDate+"&endDate="+endDate;
+    return this.http.get(str, { headers: headers }).map((response: Response) => response.json());
+  }
+
 
   public getTransactions(date = '') {
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -77,8 +84,8 @@ export class GeneralHttpService {
   }
 
 
-  public putAccount(obj:FormData,Id){
-    let url = "http://" + this.ip + ":" + this.port + "/api/account/"+Id;
+  public putAccount(obj: FormData, Id) {
+    let url = "http://" + this.ip + ":" + this.port + "/api/account/" + Id;
     return this.http.put(url, obj).map((response: Response) => response.json());
 
   }
