@@ -43,8 +43,8 @@ export class PrintAccountDetilsComponent implements OnInit {
     var bd, ed;
     if (model != null) {
       console.log(model)
-      bd = model.beginDate.year + "-" + model.beginDate.month + "-" + model.beginDate.day+"T00:00:00";
-      ed = model.endDate.year + "-" + model.endDate.month + "-" + model.endDate.day+"T00:00:00";
+      bd = moment(model.beginDate.year + "-" + model.beginDate.month + "-" + model.beginDate.day).format("YYYY-MM-DD");
+      ed = moment(model.endDate.year + "-" + model.endDate.month + "-" + model.endDate.day).format("YYYY-MM-DD");
 
       console.log(bd, ed)
       var filterArray: any = []
@@ -55,8 +55,6 @@ export class PrintAccountDetilsComponent implements OnInit {
         if (e.Date >= bd && e.Date <= ed) {
           filterArray.push(e);
         }
-
-
 
       });
 

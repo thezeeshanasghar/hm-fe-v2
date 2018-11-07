@@ -293,17 +293,18 @@ public model: any = {beginDate: {year: 2018, month: 10, day: 9},
 
 
     // console.log(post);
-    let model = new AccountModel();
+    let model:any //new AccountModel();
 
     model.Number = this.selectedUser.Number;
     model.Name = post.name;
     model.MobileNumber = post.mobileNumber;
     model.CNIC = this.selectedUser.CNIC;
     model.Address = this.selectedUser.Address;
+    model.Avatar=this.selectedUser.Image;
 
     console.log(model)
     fromData.append('model',JSON.stringify(model)  );
-    fromData.append('avatar', this.selectedUser.Image);
+    // fromData.append('avatar', this.selectedUser.Image);
 
     this.gu.putAccount(fromData,this.selectedUser.Id).subscribe(
       data => {
