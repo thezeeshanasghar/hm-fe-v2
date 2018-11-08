@@ -336,6 +336,8 @@
               History Log&nbsp;/&nbsp;
               <b>تفصیل کھاتہ</b>
             </h4>
+            <button routerLink="/printHistory" class="btn btn-primary" data-dismiss="modal" target="_blank">Print</button>
+
           </div>
           <div class="modal-body">
             <ng-template #no_data_templ>
@@ -358,7 +360,6 @@
                 <img src="http://{{ip}}:{{port}}/{{singleUser.Image}}" width="150" height="150" alt="">
                 <!-- (click)="openInNewTab()" -->
                 <!--  -->
-                <button routerLink="/printHistory" class="btn btn-primary" data-dismiss="modal" target="_blank">Print</button>
               </div>
 
 
