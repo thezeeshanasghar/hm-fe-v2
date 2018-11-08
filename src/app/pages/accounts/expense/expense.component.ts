@@ -29,6 +29,7 @@ export class ExpenseComponent {
   public userAccount: AbstractControl;
   public loanAmount: AbstractControl;
   public description: AbstractControl;
+  message: string='';
 
   constructor(public fb: FormBuilder, public router: Router, private gu: GeneralHttpService, private modalService: BsModalService) {
     this.form = fb.group({
@@ -63,7 +64,7 @@ export class ExpenseComponent {
   onSubmitExpense(m) {
     //console.log(m);
     var uid = UUID.UUID();
-    var date = new Date();
+    var date = moment().format("YYYY-MM-DD hh:mm:ss")//new Date();
     var dateTime = moment.utc(date).format("DD-MM-YYYY");
     var trans = {
 
@@ -85,6 +86,8 @@ export class ExpenseComponent {
       console.log(data);
       //this.closeModal();
       this.form.reset();
+      this.message="record added successfully"
+
       //this.form.controls["loanAmount"].reset();;
       // this.router.navigate(["roznamcha"]);
     },

@@ -15,10 +15,12 @@ export class IncomeComponent implements OnInit {
 
   allAccounts: any[] = [];
   incomsearch = '';
+  message=''
   public form: FormGroup;
   public userAccount: AbstractControl;
   public incomeAmount: AbstractControl;
   public description: AbstractControl;
+  successMessage: boolean;
 
 
   constructor(public fb: FormBuilder, public gu: GeneralHttpService, private router: Router) {
@@ -50,7 +52,7 @@ export class IncomeComponent implements OnInit {
   onSubmitIncome(m) {
     //console.log(m);
     var uid = UUID.UUID();
-    var date = new Date();
+    var date = moment().format("YYYY-MM-DD hh:mm:ss")//new Date();
 
     var dateTime = moment.utc(date).format("DD-MM-YYYY");
     var transaction = {
@@ -66,10 +68,12 @@ export class IncomeComponent implements OnInit {
     this.gu.PostTransaction(transaction).subscribe(data => {
       //console.log(data)
       this.form.reset();
+      this.message="record added successfully"
       // this.router.navigate(["roznamcha"]);
     },
       error => {
         console.log("income error : ", error);
+        
 
       });
   }

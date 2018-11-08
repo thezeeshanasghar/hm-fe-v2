@@ -12,20 +12,21 @@ export class PrintAccountDetilsComponent implements OnInit {
   todayDate: Date;
   singleUser: any = '';
   selectedAccountTransactions: any = [];
+  public previousSum = 0;
   ip: any;
   port: any;
   constructor(public gu: GeneralHttpService) {
     this.todayDate = new Date();
     this.singleUser = JSON.parse(localStorage.getItem("singleUser"));
     this.selectedAccountTransactions = JSON.parse(localStorage.getItem("selectedAccountTransactions"));
-
+    this.previousSum = 0;
   }
 
   ngOnInit() {
     this.ip = this.gu.ip;
     this.port = this.gu.port;
     this.singleUser = JSON.parse(localStorage.getItem("singleUser"));
-    debugger  
+    debugger
     this.selectedAccountTransactions = JSON.parse(localStorage.getItem("selectedAccountTransactions"));
 
   }
@@ -41,6 +42,7 @@ export class PrintAccountDetilsComponent implements OnInit {
   };
   getData(model) {
     var bd, ed;
+
     if (model != null) {
       console.log(model)
       bd = moment(model.beginDate.year + "-" + model.beginDate.month + "-" + model.beginDate.day).format("YYYY-MM-DD");
@@ -51,12 +53,18 @@ export class PrintAccountDetilsComponent implements OnInit {
       debugger
       this.selectedAccountTransactions.forEach(e => {
         debugger
+        if (e.Date < bd) {
+          this.previousSum += e.Amount
+        }
+
 
         if (e.Date >= bd && e.Date <= ed) {
           filterArray.push(e);
         }
 
       });
+
+
 
       this.selectedAccountTransactions = [];
       this.selectedAccountTransactions = filterArray;
@@ -65,7 +73,8 @@ export class PrintAccountDetilsComponent implements OnInit {
     }
   }
   getRowTotalUsingIndex(index: number): number {
-    let sum = 0;
+
+    let sum = this.previousSum;
     for (var i = 0; i <= index; i++) {
       sum += this.selectedAccountTransactions[i].Amount;
     }
