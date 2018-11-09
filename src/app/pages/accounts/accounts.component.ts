@@ -348,8 +348,12 @@ export class AccountsComponent implements OnInit {
     this.totalExpense = 0;
     this.totalIncome = 0;
 
-    var dd = d.date.month + "-" + d.date.day + "-" + d.date.year;
+    var dd = moment(d.date.month + "-" + d.date.day + "-" + d.date.year).format("MM/DD/YYYY");
     console.log(dd)
+
+    this.gu.getAccounts(dd).subscribe(data=>{
+      console.log(data)
+    },error=>{});
   }
 
 }

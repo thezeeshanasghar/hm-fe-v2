@@ -31,6 +31,13 @@ export class GeneralHttpService {
     return this.http.get(str, { headers: headers }).map((response: Response) => response.json());
   }
 
+  public getAccounts(date = '') {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let str = "http://" + this.ip + ":" + this.port + "/api/account";
+    str += "?date=" + date;
+    return this.http.get(str, { headers: headers }).map((response: Response) => response.json());
+  }
+
 
   public deleteTransaction(id) {
     let str = "http://" + this.ip + ":" + this.port + "/api/transaction/" + id;
