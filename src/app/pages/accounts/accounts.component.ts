@@ -9,6 +9,7 @@ import { AccountModel } from "../../Models/account.model";
 import { BsModalService } from "ngx-bootstrap";
 import { Router } from "@angular/router";
 import { IMyDrpOptions } from "mydaterangepicker";
+import * as moment from 'moment';
 
 export class searchModel {
   name: number;
@@ -59,6 +60,7 @@ export class AccountsComponent implements OnInit {
   craditAccouts: any[] = [];
   debitAccounts: any[] = [];
   selectedUser: any={};
+  date
 
   constructor(
 
@@ -67,7 +69,7 @@ export class AccountsComponent implements OnInit {
     public modalService: BsModalService,
 
   ) {
-
+this.date=new Date();
     this.loading = true;
     this.ip = this.gu.ip;
     this.port = this.gu.port;
@@ -100,8 +102,12 @@ export class AccountsComponent implements OnInit {
       // address: this.address,
       // avatar: null
     });
+
+     this.model.beginDate = { year: this.date.getFullYear(), month: this.date.getMonth() + 1, day: this.date.getDate() };
+    this.model.endDate = { year: this.date.getFullYear(), month: this.date.getMonth() + 1, day: this.date.getDate() }
   }
 
+  
 
   setEditUser(user){
     this.selectedUser=user;
@@ -330,5 +336,18 @@ public model: any = {beginDate: {year: 2018, month: 10, day: 9},
        
       });
 
+  }
+
+  getData(model) {
+    var bd, ed;
+
+
+    if (model != null) {
+      console.log(model)
+      bd = moment(model.beginDate.year + "-" + model.beginDate.month + "-" + model.beginDate.day).format("MM/DD/YYYY");
+      ed = moment(model.endDate.year + "-" + model.endDate.month + "-" + model.endDate.day).format("MM/DD/YYYY");
+    }
+
+    console.log(bd, ed);
   }
 }
