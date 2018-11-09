@@ -103,7 +103,7 @@ export class RoznamchaComponent implements OnInit {
   };
   todaydate = new Date()
   // Initialized to specific date (09.10.2018).
-  public model = { date: { year: this.todaydate.getFullYear(), month: this.todaydate.getMonth() + 1, day: this.todaydate.getDate() }, filter: "all" };
+  public model = {year: this.todaydate.getFullYear(), month: this.todaydate.getMonth() + 1, day: this.todaydate.getDate()  };
 
   ngOnInit() {
     this.loading = true;

@@ -1,5 +1,5 @@
 import { AmountValidator } from "./../../../assets/validators/amount.valdator";
-import {  FormGroup,  AbstractControl,  FormBuilder,  Validators,  FormControl,  FormsModule} from "@angular/forms";
+import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl, FormsModule } from "@angular/forms";
 import { Http } from "@angular/http";
 import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
 import { TransactionModel } from "./../../Models/Transaction.model";
@@ -10,6 +10,7 @@ import { BsModalService } from "ngx-bootstrap";
 import { Router } from "@angular/router";
 import { IMyDrpOptions } from "mydaterangepicker";
 import * as moment from 'moment';
+import { IMyDpOptions } from "mydatepicker";
 
 export class searchModel {
   name: number;
@@ -31,6 +32,7 @@ export class AccountsComponent implements OnInit {
     cnic: 0,
     mobile: 0
   };
+  public todaydate;
 
   filter = "";
 
@@ -59,7 +61,7 @@ export class AccountsComponent implements OnInit {
   totalExpense: number = 0;
   craditAccouts: any[] = [];
   debitAccounts: any[] = [];
-  selectedUser: any={};
+  selectedUser: any = {};
   date
 
   constructor(
@@ -69,7 +71,7 @@ export class AccountsComponent implements OnInit {
     public modalService: BsModalService,
 
   ) {
-this.date=new Date();
+    this.date = new Date();
     this.loading = true;
     this.ip = this.gu.ip;
     this.port = this.gu.port;
@@ -103,14 +105,24 @@ this.date=new Date();
       // avatar: null
     });
 
-     this.model.beginDate = { year: this.date.getFullYear(), month: this.date.getMonth() + 1, day: this.date.getDate() };
-    this.model.endDate = { year: this.date.getFullYear(), month: this.date.getMonth() + 1, day: this.date.getDate() }
   }
 
-  
 
-  setEditUser(user){
-    this.selectedUser=user;
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'dd.mm.yyyy',
+    showClearDateBtn: false,
+    editableDateField: false,
+    // disableSince: { year: this.date.getFullYear(), month: this.date.getMonth() + 1, day: this.date.getDate() + 1 }
+
+  };
+  // Initialized to specific date (09.10.2018).
+  public model = { year: 2018, month: 11, day: 10};
+
+
+
+  setEditUser(user) {
+    this.selectedUser = user;
     console.log(this.selectedUser)
     // this.editUserForm = this.fb.group({
     //   number: user.Number,
@@ -121,17 +133,11 @@ this.date=new Date();
     //   // avatar: user.Image
     // });
 
-    
+
 
 
   }
-  myDateRangePickerOptions: IMyDrpOptions = {
-    // other options...
-    dateFormat: 'dd.mm.yyyy',
-};
 
-public model: any = {beginDate: {year: 2018, month: 10, day: 9},
-                             endDate: {year: 2018, month: 10, day: 19}};
   modalRefExpense: BsModalRef;
   modalRefIncome: BsModalRef;
   setAlertOff() {
@@ -294,32 +300,32 @@ public model: any = {beginDate: {year: 2018, month: 10, day: 9},
     }, 5000);
   }
 
-  submitEditform(post){
+  submitEditform(post) {
     let fromData = new FormData();
 
 
     // console.log(post);
-    let model:any={} //new AccountModel();
+    let model: any = {} //new AccountModel();
 
-    if(this.selectedUser !={} && this.selectedUser != undefined){
-    model.Number =this.selectedUser.Number;
-    model.CNIC = this.selectedUser.CNIC;
-    model.Address = this.selectedUser.Address;
-    // model.Avatar=this.selectedUser.Image;
-    model.Name = post.name;
-    model.MobileNumber = post.mobileNumber;
+    if (this.selectedUser != {} && this.selectedUser != undefined) {
+      model.Number = this.selectedUser.Number;
+      model.CNIC = this.selectedUser.CNIC;
+      model.Address = this.selectedUser.Address;
+      // model.Avatar=this.selectedUser.Image;
+      model.Name = post.name;
+      model.MobileNumber = post.mobileNumber;
     }
 
-   
+
 
     console.log(model)
-    fromData.append('model',JSON.stringify(model));
+    fromData.append('model', JSON.stringify(model));
     // fromData.append('avatar', this.selectedUser.Image);
 
-    this.gu.putAccount(fromData,this.selectedUser.Id).subscribe(
+    this.gu.putAccount(fromData, this.selectedUser.Id).subscribe(
       data => {
 
-        console.log('data',data)
+        console.log('data', data)
         if (data.IsSuccess == true) {
           this.message = "record is updated successfully";
           this.getAllAccounts();
@@ -327,27 +333,23 @@ public model: any = {beginDate: {year: 2018, month: 10, day: 9},
           // this.router.navigate(["/dashboard/accounts"]);
         } else {
           this.message = data.Message;
-          
+
         }
       },
       error => {
-        console.log('error',error)
+        console.log('error', error)
         this.message = error;
-       
+
       });
 
   }
 
-  getData(model) {
-    var bd, ed;
+  getTransactionbyDate(d) {
+    this.totalExpense = 0;
+    this.totalIncome = 0;
 
-
-    if (model != null) {
-      console.log(model)
-      bd = moment(model.beginDate.year + "-" + model.beginDate.month + "-" + model.beginDate.day).format("MM/DD/YYYY");
-      ed = moment(model.endDate.year + "-" + model.endDate.month + "-" + model.endDate.day).format("MM/DD/YYYY");
-    }
-
-    console.log(bd, ed);
+    var dd = d.date.month + "-" + d.date.day + "-" + d.date.year;
+    console.log(dd)
   }
+
 }
