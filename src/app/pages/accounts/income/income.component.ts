@@ -52,7 +52,7 @@ export class IncomeComponent implements OnInit {
   onSubmitIncome(m) {
     //console.log(m);
     var uid = UUID.UUID();
-    var date = moment().format("YYYY-MM-DD hh:mm:ss")//new Date();
+    var date = moment().format("YYYY-MM-DD hh:mm:ss a")//new Date();
 
     var dateTime = moment.utc(date).format("DD-MM-YYYY");
     var transaction = {

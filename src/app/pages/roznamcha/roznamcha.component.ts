@@ -41,8 +41,8 @@ export class RoznamchaComponent implements OnInit {
   expenseTransactions: any[] = [];
   constructor(public fb: FormBuilder, private gu: GeneralHttpService, private modalService: BsModalService, private router: Router) {
     this.date = new Date();
-    this.model.beginDate = { year: this.date.getFullYear(), month: this.date.getMonth() + 1, day: this.date.getDate() };
-    this.model.endDate = { year: this.date.getFullYear(), month: this.date.getMonth() + 1, day: this.date.getDate() }
+    // this.model.beginDate = { year: this.date.getFullYear(), month: this.date.getMonth() + 1, day: this.date.getDate() };
+    // this.model.endDate = { year: this.date.getFullYear(), month: this.date.getMonth() + 1, day: this.date.getDate() }
 
   }
 
@@ -51,10 +51,10 @@ export class RoznamchaComponent implements OnInit {
     dateFormat: 'mm/dd/yyyy',
   };
 
-  public model: any = {
-    beginDate: { year: 2018, month: 10, day: 9 },
-    endDate: { year: 2018, month: 10, day: 19 }
-  };
+  // public model: any = {
+  //   beginDate: { year: 2018, month: 10, day: 9 },
+  //   endDate: { year: 2018, month: 10, day: 19 }
+  // };
   openInNewTab() {
     var url = "/printRoznamcha"
     var win = window.open(url, '_blank');
@@ -103,7 +103,7 @@ export class RoznamchaComponent implements OnInit {
   };
   todaydate = new Date()
   // Initialized to specific date (09.10.2018).
-  // public model = { date: { year: this.todaydate.getFullYear(), month: this.todaydate.getMonth() + 1, day: this.todaydate.getDate() }, filter: "all" };
+  public model = { date: { year: this.todaydate.getFullYear(), month: this.todaydate.getMonth() + 1, day: this.todaydate.getDate() }, filter: "all" };
 
   ngOnInit() {
     this.loading = true;

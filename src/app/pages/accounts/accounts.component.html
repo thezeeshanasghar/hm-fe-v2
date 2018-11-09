@@ -383,7 +383,7 @@
 
                 <tr *ngFor="let u of selectedAccountTransactions |filter:searchHistory;let i=index; let last=last">
                   <td>{{i+1}}</td>
-                  <td style="width:140px">{{u.Date | date :'short'}}</td>
+                  <td style="width:160px">{{u.Date | date :'short'}}</td>
                   <td style="word-break: break-all">{{u.Description}}</td>
                   <td *ngIf="u.Amount>0;else income" style="color:green">{{u.Amount |number}}</td>
                   <ng-template #income>
