@@ -98,7 +98,7 @@
               <tr *ngFor="let u of expenseTransactions;let i=index">
 
                 <td *ngIf="u.Account!=null && u.Amount<0">{{i+1}}</td>
-                <td *ngIf="u.Account!=null && u.Amount<0">{{u.Date | date :'short'}}</td>
+                <td *ngIf="u.Account!=null && u.Amount<0">{{u.Date | date :'dd-MMM-yyyy hh:mm a'}}</td>
 
                 <td *ngIf="u.Account!=null && u.Amount<0">{{u.Account.Name}}</td>
                 <td *ngIf="u.Account!=null && u.Amount<0" style="width:400px;word-break: break-all;font-size: 16px">{{u.Description}}</td>

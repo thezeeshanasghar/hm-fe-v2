@@ -389,7 +389,7 @@
 
                 <tr *ngFor="let u of selectedAccountTransactions |filter:searchHistory;let i=index; let last=last">
                   <td>{{i+1}}</td>
-                  <td style="width:160px">{{u.Date | date :'short'}}</td>
+                  <td style="width:160px">{{u.Date | date :'dd-MMM-yyyy hh:mm a'}}</td>
                   <td style="word-break: break-all">{{u.Description}}</td>
                   <td *ngIf="u.Amount>0;else income" style="color:green">{{u.Amount |number}}</td>
                   <ng-template #income>
@@ -463,7 +463,7 @@
                   <span class="input-group-addon">
                     <i class="glyphicon glyphicon-phone"></i>
                   </span>
-                  <input [formControl]="mobileNumber" type="text" class="form-control" placeholder="Enter mobile number">
+                  <input [formControl]="mobileNumber" type="text" class="form-control" maxlength="11"placeholder="Enter mobile number">
                 </div>
                 <div *ngIf="mobileNumber.touched && mobileNumber.hasError('required')" class="help-block sub-little-text">
                   mobile number is required.
@@ -502,7 +502,7 @@
                   <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
                 </div> -->
               <div class="row">
-                <button type="submit" data-dismiss="modal" class="btn btn-primary pull-right btn-sm" (click)="form.reset"
+                <button type="submit" class="btn btn-primary pull-right btn-sm" (click)="form.reset"
                   [disabled]="!editUserForm.valid">&nbsp;Update&nbsp;</button>
               </div>
 
