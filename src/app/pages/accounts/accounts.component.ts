@@ -345,14 +345,35 @@ export class AccountsComponent implements OnInit {
   }
 
   getTransactionbyDate(d) {
-    this.totalExpense = 0;
+    this.allAccounts = [];
+    this.craditAccouts = [];
+    this.debitAccounts = [];
     this.totalIncome = 0;
+    this.totalExpense = 0;
+    this.loading = true;
 
     var dd = moment(d.date.month + "-" + d.date.day + "-" + d.date.year).format("MM/DD/YYYY");
     console.log(dd)
 
+
+
     this.gu.getAccounts(dd).subscribe(data=>{
       console.log(data)
+      this.allAccounts = data.ResponseData;
+        this.loading = false;
+        console.log(this.allAccounts);
+        this.allAccounts.forEach(element => {
+          if (element.Balance > 0) {
+            this.totalIncome += element.Balance;
+            this.craditAccouts.push(element)
+
+
+          }
+          else if (element.Balance < 0) {
+            this.totalExpense += element.Balance;
+            this.debitAccounts.push(element);
+          }
+        });
     },error=>{});
   }
 
