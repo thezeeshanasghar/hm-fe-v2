@@ -102,7 +102,7 @@ export class AccountsComponent implements OnInit {
       mobileNumber: this.mobileNumber,
       // cnic: this.cnic,
       // address: this.address,
-      // avatar: null
+      avatar: null
     });
 
   }
@@ -320,7 +320,8 @@ export class AccountsComponent implements OnInit {
 
     console.log(model)
     fromData.append('model', JSON.stringify(model));
-    // fromData.append('avatar', this.selectedUser.Image);
+    fromData.append('avatar', this.editUserForm.get('avatar').value);
+   
 
     this.gu.putAccount(fromData, this.selectedUser.Id).subscribe(
       data => {
@@ -328,6 +329,7 @@ export class AccountsComponent implements OnInit {
         console.log('data', data)
         if (data.IsSuccess == true) {
           this.message = "record is updated successfully";
+          this.allAccounts=[];
           this.getAllAccounts();
 
           // this.router.navigate(["/dashboard/accounts"]);
@@ -375,6 +377,13 @@ export class AccountsComponent implements OnInit {
           }
         });
     },error=>{});
+  }
+
+  onFileChange(event) {
+    if(event.target.files.length > 0) {
+      let file = event.target.files[0];
+      this.editUserForm.get('avatar').setValue(file);
+    }
   }
 
 }
