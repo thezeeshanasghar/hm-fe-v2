@@ -331,6 +331,7 @@ export class AccountsComponent implements OnInit {
           this.message = "record is updated successfully";
           this.allAccounts=[];
           this.getAllAccounts();
+          this.editUserForm.reset();
 
           // this.router.navigate(["/dashboard/accounts"]);
         } else {
