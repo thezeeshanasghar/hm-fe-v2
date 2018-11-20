@@ -49,6 +49,10 @@ export class IncomeComponent implements OnInit {
     }, error => { });
   }
 
+  setAlertOff(){
+    this.message='';
+  }
+
   onSubmitIncome(m) {
     //console.log(m);
     var uid = UUID.UUID();

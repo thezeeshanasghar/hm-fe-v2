@@ -39,7 +39,7 @@
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-phone"></i>
                     </span>
-                    <input [formControl]="mobileNumber" type="text" class="form-control" placeholder="Enter mobile number" maxlength="11">
+                    <input [formControl]="mobileNumber" type="text" class="form-control" placeholder="Enter mobile number  like 923224352689" maxlength="12">
                 </div>
                 <div *ngIf="mobileNumber.touched && mobileNumber.hasError('required')" class="help-block sub-little-text">
                     mobile number is required.

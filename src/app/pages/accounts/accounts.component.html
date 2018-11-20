@@ -428,86 +428,34 @@
             </h4>
           </div>
           <div class="modal-body">
-            <form [formGroup]="editUserForm" (ngSubmit)="submitEditform(editUserForm.value)" class="form-horizontal">
+              <form name="form" (ngSubmit)="f.form.valid && submitEditform(f.form.value)" #f="ngForm" novalidate>
+                  <div class="form-group">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" name="name" [(ngModel)]="model2.name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required />
+                      <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
+                          <div *ngIf="name.errors.required">Name is required</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="mobileNumber">Mobile Number</label>
+                      <input type="text" class="form-control" name="mobileNumber" [(ngModel)]="model2.mobileNumber" #mobileNumber="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required />
+                      <div *ngIf="f.submitted && mobileNumber.invalid" class="invalid-feedback">
+                          <div *ngIf="mobileNumber.errors.required">Mobile Number is required</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="oldImage">Current Image</label>
+                    <img src="http://{{ip}}:{{port}}/{{model2.avatar}}" width="100" height="100" class="img-thumbnail" alt="">
+                  </div>
 
-              <!-- number -->
-              <!-- <div class="form-group row" [ngClass]="{'has-error': (!number.valid && number.touched), 'has-success': (number.valid && number.touched)}">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-user"></i>
-                  </span>
-                  <input [formControl]="number" type="text" class="form-control" placeholder="Enter account number">
-                </div>
-                <div *ngIf="number.touched && number.hasError('required')" class="help-block sub-little-text">
-                  account number is required.
-                </div>
-              </div> -->
+                  <div class="form-group">
+                      <input type="file" id="avatar"  (change)="onFileChange($event)" placeholder="Upload file">
+                  </div>
 
-              <!-- name -->
-              <div class="form-group row" [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-user"></i>
-                  </span>
-                  <input [formControl]="name" type="text" class="form-control" placeholder="Enter account holder name">
-                </div>
-                <div *ngIf="name.touched && name.hasError('required')" class="help-block sub-little-text">
-                  account holder name is required.
-                </div>
-              </div>
-
-
-              <!-- mobileNumber -->
-              <div class="form-group row" [ngClass]="{'has-error': (!mobileNumber.valid && mobileNumber.touched), 'has-success': (mobileNumber.valid && mobileNumber.touched)}">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-phone"></i>
-                  </span>
-                  <input [formControl]="mobileNumber" type="text" class="form-control" maxlength="11" placeholder="Enter mobile number">
-                </div>
-                <div *ngIf="mobileNumber.touched && mobileNumber.hasError('required')" class="help-block sub-little-text">
-                  mobile number is required.
-                </div>
-              </div>
-
-              <!--cnic-->
-              <!-- <div class="form-group row" [ngClass]="{'has-error': (!cnic.valid && cnic.touched), 'has-success': (cnic.valid && cnic.touched)}">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-credit-card"></i>
-                  </span>
-                  <input [formControl]="cnic" type="text" class="form-control" placeholder="Enter CNIC">
-                </div>
-                <div *ngIf="cnic.touched && cnic.hasError('required')" class="help-block sub-little-text">
-                  CNIC is required.
-                </div>
-              </div> -->
-
-
-              <!--address-->
-              <!-- <div class="form-group row" [ngClass]="{'has-error': (!address.valid && address.touched), 'has-success': (address.valid && address.touched)}">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-home"></i>
-                  </span>
-                  <textarea rows="5" cols="40" [formControl]="address" class="form-control" placeholder="Enter address....."></textarea>
-                </div>
-                <div *ngIf="address.touched && address.hasError('required')" class="help-block sub-little-text">
-                  address is required.
-                </div>
-              </div> -->
-              <!-- address -->
-              <div class="form-group">
-                <label for="avatar">Image</label>
-                <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
-              </div>
-              <div class="row">
-                <button type="submit" class="btn btn-primary pull-right btn-sm" (click)="form.reset" [disabled]="!editUserForm.valid">&nbsp;Update&nbsp;</button>
-              </div>
-
-
-
-            </form>
+                  <div class="row">
+                      <button type="submit" class="btn btn-primary pull-right btn-sm" (click)="form.reset" [disabled]="!f.valid">&nbsp;Update&nbsp;</button>
+                    </div>
+              </form>
           </div>
           <!-- <div class="modal-footer">
       

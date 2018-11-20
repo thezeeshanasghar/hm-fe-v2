@@ -3,7 +3,7 @@ import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl, Forms
 import { Http } from "@angular/http";
 import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
 import { TransactionModel } from "./../../Models/Transaction.model";
-import { Component, OnInit, TemplateRef } from "@angular/core";
+import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { GeneralHttpService } from "../../services/general-http.service";
 import { AccountModel } from "../../Models/account.model";
 import { BsModalService } from "ngx-bootstrap";
@@ -18,11 +18,23 @@ export class searchModel {
   mobile: number;
 }
 
+export class EDForm {
+  name: string; 
+  mobileNumber: number;
+  avatar:string;
+}
+
 @Component({
   selector: "app-accounts",
   templateUrl: "./accounts.component.html"
 })
 export class AccountsComponent implements OnInit {
+  public EDModel:EDForm;
+  model2: any = {};
+  fromData = new FormData();
+
+  @ViewChild('f') form2:any;
+
   loading = false;
   searchHistory
   historyLoading = false;
@@ -43,13 +55,13 @@ export class AccountsComponent implements OnInit {
   public ip;
   public port;
 
-  editUserForm: FormGroup;
+  public editUserForm: FormGroup;
 
-  number = new FormControl("");
-  name = new FormControl("");
-  mobileNumber = new FormControl("");
-  cnic = new FormControl("");
-  address = new FormControl("");
+  // number = new FormControl("");
+  name : AbstractControl;//new FormControl("");
+  mobileNumber : AbstractControl;//new FormControl("");
+  // cnic = new FormControl("");
+  // address = new FormControl("");
 
   public form: FormGroup;
   public userAccount: AbstractControl;
@@ -97,14 +109,13 @@ export class AccountsComponent implements OnInit {
     this.description = this.form.controls["description"];
 
     this.editUserForm = fb.group({
-      // number: this.number,
-      name: this.name,
-      mobileNumber: this.mobileNumber,
-      // cnic: this.cnic,
-      // address: this.address,
-      avatar: null
+      name: ['', Validators.compose([Validators.required])],
+      mobileNumber: ['', Validators.compose([Validators.required])],
+      // avatar: null
     });
 
+    this.name = this.form.controls["name"];
+    this.mobileNumber = this.form.controls["mobileNumber"];
   }
 
 
@@ -117,24 +128,33 @@ export class AccountsComponent implements OnInit {
 
   };
   // Initialized to specific date (09.10.2018).
-  public model = { year: 2018, month: 11, day: 10};
+  public model = { year: 2018, month: 11, day: 10 };
 
 
 
   setEditUser(user) {
+    this.fromData=new FormData();
     this.selectedUser = user;
-    console.log(this.selectedUser)
-    // this.editUserForm = this.fb.group({
-    //   number: user.Number,
-    //   name: user.Name,
-    //   mobileNumber: user.MobileNumber,
-    //   cnic: user.CNIC,
-    //   address: user.Address,
-    //   // avatar: user.Image
-    // });
+    // console.log(this.selectedUser)
+
+    this.gu.getAccountById(user.Id).subscribe(data => {
+      this.selectedUser = data.ResponseData;
+      console.log(this.selectedUser);
+      this.model2.name=this.selectedUser.Name
+      this.model2.mobileNumber=this.selectedUser.MobileNumber
+      this.model2.avatar=this.selectedUser.Image;
+
+      // this.editUserForm = this.fb.group({
+
+      //   name: new FormControl(this.selectedUser.Name),
+      //   mobileNumber: [this.selectedUser.MobileNumber],
+      //   avatar: [this.selectedUser.Image]
+      // });
 
 
+    }, error => {
 
+    });
 
   }
 
@@ -301,38 +321,39 @@ export class AccountsComponent implements OnInit {
   }
 
   submitEditform(post) {
-    let fromData = new FormData();
-
-
-    // console.log(post);
+    debugger
+    // var post=this.form2
+      // console.log(post);
     let model: any = {} //new AccountModel();
 
-    if (this.selectedUser != {} && this.selectedUser != undefined) {
-      model.Number = this.selectedUser.Number;
-      model.CNIC = this.selectedUser.CNIC;
-      model.Address = this.selectedUser.Address;
+ 
+      // model.Number = this.selectedUser.Number;
+      // model.CNIC = this.selectedUser.CNIC;
+      // model.Address = this.selectedUser.Address;
       // model.Avatar=this.selectedUser.Image;
       model.Name = post.name;
       model.MobileNumber = post.mobileNumber;
-    }
-
+    
 
 
     console.log(model)
-    fromData.append('model', JSON.stringify(model));
-    fromData.append('avatar', this.editUserForm.get('avatar').value);
-   
+    this.fromData.append('model', JSON.stringify(model));
+    // fromData.append('avatar', this.editUserForm.get('avatar').value);
 
-    this.gu.putAccount(fromData, this.selectedUser.Id).subscribe(
+
+    this.gu.putAccount(this.fromData, this.selectedUser.Id).subscribe(
       data => {
 
         console.log('data', data)
         if (data.IsSuccess == true) {
           this.message = "record is updated successfully";
-          this.allAccounts=[];
+          this.allAccounts = [];
           this.getAllAccounts();
-          this.editUserForm.reset();
-
+          // this.EDModel.name='';
+          // this.EDModel.mobileNumber=0;
+          // this.EDModel.avatar=''
+          this.form2.reset();
+          this.model2={}
           // this.router.navigate(["/dashboard/accounts"]);
         } else {
           this.message = data.Message;
@@ -360,30 +381,31 @@ export class AccountsComponent implements OnInit {
 
 
 
-    this.gu.getAccounts(dd).subscribe(data=>{
+    this.gu.getAccounts(dd).subscribe(data => {
       console.log(data)
       this.allAccounts = data.ResponseData;
-        this.loading = false;
-        console.log(this.allAccounts);
-        this.allAccounts.forEach(element => {
-          if (element.Balance > 0) {
-            this.totalIncome += element.Balance;
-            this.craditAccouts.push(element)
+      this.loading = false;
+      console.log(this.allAccounts);
+      this.allAccounts.forEach(element => {
+        if (element.Balance > 0) {
+          this.totalIncome += element.Balance;
+          this.craditAccouts.push(element)
 
 
-          }
-          else if (element.Balance < 0) {
-            this.totalExpense += element.Balance;
-            this.debitAccounts.push(element);
-          }
-        });
-    },error=>{});
+        }
+        else if (element.Balance < 0) {
+          this.totalExpense += element.Balance;
+          this.debitAccounts.push(element);
+        }
+      });
+    }, error => { });
   }
 
   onFileChange(event) {
-    if(event.target.files.length > 0) {
+    if (event.target.files.length > 0) {
       let file = event.target.files[0];
-      this.editUserForm.get('avatar').setValue(file);
+      // this.editUserForm.get('avatar').setValue(file);
+      this.fromData.append('avatar', file, file.name);
     }
   }
 

@@ -60,7 +60,9 @@ export class ExpenseComponent {
   closeModal(template: AccountsComponent) {
     this.modalRef = this.modalService.show(template);
   }
-
+  setAlertOff(){
+    this.message='';
+  }
   onSubmitExpense(m) {
     //console.log(m);
     var uid = UUID.UUID();
