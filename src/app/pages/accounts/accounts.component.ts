@@ -94,8 +94,7 @@ export class AccountsComponent implements OnInit {
         "",
         Validators.compose([
           Validators.required,
-          AmountValidator.validate,
-          Validators.minLength(3)
+          AmountValidator.validate
         ])
       ],
       description: [

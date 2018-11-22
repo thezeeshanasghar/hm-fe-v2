@@ -21,7 +21,7 @@ export class AddAccountComponent {
 
   number = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
-  mobileNumber = new FormControl('', [Validators.required]);
+  mobileNumber = new FormControl('');
   cnic = new FormControl('', [Validators.required]);
   address = new FormControl('', [Validators.required]);
     
