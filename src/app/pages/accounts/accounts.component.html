@@ -128,7 +128,7 @@
                   <td>{{account.Name}}</td>
                   <td>{{account.MobileNumber}}</td>
                   <td>{{account.CNIC}}
-                  <i style="margin-left:10px" class="fa fa-address-card" title="{{account.Address}}"></i>
+                  <i style="margin-left:10px;cursor: pointer;" class="fa fa-address-card" title="{{account.Address}}"></i>
 
                   </td>
 
@@ -392,7 +392,7 @@
 
                 <tr *ngFor="let u of selectedAccountTransactions |filter:searchHistory;let i=index; let last=last">
                   <td>{{i+1}}</td>
-                  <td style="width:160px">{{u.Date | date :'dd-MMM-yyyy hh:mm a'}}</td>
+                  <td style="width:160px">{{u.Date | date :'dd/MM/yyyy hh:mm a'}}</td>
                   <td style="word-break: break-all">{{u.Description}}</td>
                   <td *ngIf="u.Amount>0;else income" style="color:green">{{u.Amount |number}}</td>
                   <ng-template #income>

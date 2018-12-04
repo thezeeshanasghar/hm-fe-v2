@@ -19,9 +19,9 @@
       </ng-template>
 
       <div  class="row">
-
+       
         <div class="col-md-12">
-          <table class="table table-bordered table-sm">
+          <table class="table table-sm ">
             <thead style="background:lightgray">
               <tr>
                 <th>Account number</th>
@@ -30,6 +30,11 @@
                 <th>Cnic</th>
                 <th>Address</th>
                 <th>Balance</th>
+                <th>
+                  Image
+          <!-- <img src="http://{{ip}}:{{port}}/{{singleUser.Image}}" width="100" height="150" alt=""> -->
+
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -41,6 +46,10 @@
 
                 <td>{{singleUser.Address}}</td>
                 <td>{{singleUser.Balance |number}}</td>
+                <td>
+          <img src="http://{{ip}}:{{port}}/{{singleUser.Image}}" width="100" height="150" alt="">
+
+                </td>
               </tr>
               
             </tbody>
@@ -49,10 +58,10 @@
 
 
         </div>
-        <!-- <div class="col-md-6 col-print-6">
-            
-            <img src="http://{{ip}}:{{port}}/{{singleUser.Image}}" width="150" height="150" alt="">
-          </div> -->
+        <!-- <div class="col-md-2 image-container">            
+          <img src="http://{{ip}}:{{port}}/{{singleUser.Image}}" width="100" height="150" alt="">
+        </div> -->
+        
 
       </div>
       <hr>
@@ -73,7 +82,7 @@
 
           <tr *ngFor="let u of selectedAccountTransactions;let i=index; let last=last">
             <td>{{i+1}}</td>
-            <td style="width:160px;" >{{u.Date | date :'dd-MMM-yyyy hh:mm a'}}</td>
+            <td style="width:160px;" >{{u.Date | date :'dd/MM/yyyy hh:mm a'}}</td>
             <td style="width:400px;word-break: break-all;font-size: 16px">{{u.Description}}</td>
             <td *ngIf="u.Amount>0;else income" style="color:green">{{u.Amount |number}}</td>
             <ng-template #income>

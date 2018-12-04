@@ -80,7 +80,7 @@ export const appRoutes: Routes = [
                     { path: '', redirectTo: 'add', pathMatch: 'full' },
                     { path: 'add', component: AddCarComponent },
                     { path: 'list', component: ListCarsComponent },
-                    { path: 'edit', component: EditCarComponent }
+                    { path: 'edit/:id', component: EditCarComponent }
 
                 ]
             },
