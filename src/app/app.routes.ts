@@ -77,7 +77,7 @@ export const appRoutes: Routes = [
                 path: "carStock",
                 component: StockCarComponent,
                 children: [
-                    { path: '', redirectTo: 'add', pathMatch: 'full' },
+                    { path: '', redirectTo: 'list', pathMatch: 'full' },
                     { path: 'add', component: AddCarComponent },
                     { path: 'list', component: ListCarsComponent },
                     { path: 'edit/:id', component: EditCarComponent }

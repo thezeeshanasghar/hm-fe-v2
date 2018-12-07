@@ -7,10 +7,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  currentUser: any={};
 
   constructor(private router: Router) {
     // this.validateLogin()  
     let obj = JSON.parse(localStorage.getItem("Authorized"))
+    this.currentUser=JSON.parse(localStorage.getItem('Authorized'));
+
 
     console.log(obj.Authorized.Authorized);
 

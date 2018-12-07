@@ -33,23 +33,55 @@ export class LoginComponent implements OnInit {
   onSubmit(m) {
     this.changeClass = true;
     console.log(m)
-    if (m.email != "admin@hm.com" || m.password != 'admin') {
 
-      this.myMessage = 'username OR password is invalid.';
-      this.errorTrigger = true;
+    if (m.email == "admin@hm.com" && m.password == 'admin') {
 
-    }
+      localStorage.clear()
 
-    else if (m.email == "admin@hm.com" && m.password == 'admin') {
       let obj: any = {
         Authorized: true,
         email: m.email,
+
+        role: 'admin'
+      }
+      window.localStorage.setItem("Authorized", JSON.stringify(obj));
+      this.router.navigate(['dashboard']);
+
+    }
+    else if (m.email == "imranlava@hm.com" && m.password == 'imranlava') {
+
+      localStorage.clear()
+
+      let obj: any = {
+        Authorized: true,
+        email: m.email,
+
+        role: 'write'
+      }
+      window.localStorage.setItem("Authorized", JSON.stringify(obj));
+      this.router.navigate(['dashboard']);
+
+    }
+    else if (m.email == "munawarali@hm.com" && m.password == 'munawarali') {
+
+      localStorage.clear()
+
+      let obj: any = {
+        Authorized: true,
+        email: m.email,
+        role: 'read'
       }
       window.localStorage.setItem("Authorized", JSON.stringify(obj));
       this.router.navigate(['dashboard']);
 
     }
 
+    else if (m.email != "admin@hm.com" || m.password != 'admin') {
+      localStorage.clear()
+      this.myMessage = 'username OR password is invalid.';
+      this.errorTrigger = true;
+
+    }
 
 
 

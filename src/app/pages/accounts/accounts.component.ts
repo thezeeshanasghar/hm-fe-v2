@@ -75,6 +75,7 @@ export class AccountsComponent implements OnInit {
   debitAccounts: any[] = [];
   selectedUser: any = {};
   date
+  currentUser:any={};
 
   constructor(
 
@@ -83,6 +84,9 @@ export class AccountsComponent implements OnInit {
     public modalService: BsModalService,
 
   ) {
+
+
+    this.currentUser=JSON.parse(localStorage.getItem('Authorized'));
     this.date = new Date();
     this.loading = true;
     this.ip = this.gu.ip;

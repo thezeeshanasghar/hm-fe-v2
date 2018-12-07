@@ -28,6 +28,7 @@ export class StockCarComponent implements OnInit {
 
   successTrigger = false;
   errorTrigger = false;
+  currentUser: any={};
 
   // allAccounts: AccountModel[] = [];
   // makerList = ['Toyota', 'Honda', 'Hundai', 'Suzuki', 'Faw'];
@@ -38,6 +39,8 @@ export class StockCarComponent implements OnInit {
     //  private fb: FormBuilder, 
     //  private gu: GeneralHttpService
   ) {
+    this.currentUser=JSON.parse(localStorage.getItem('Authorized'));
+
     // this.loading = true;
   }
 

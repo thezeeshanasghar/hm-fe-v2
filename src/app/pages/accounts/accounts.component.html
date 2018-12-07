@@ -56,7 +56,7 @@
       <i style="color:orange" [ngClass]="{'fa fa-refresh fa-spin fa-2x':loading}"></i>
     </div>
 
-    <div class="col-md-7 col-md-offset-1 mt-15 ">
+    <div class="col-md-7 col-md-offset-1 mt-15 " *ngIf="currentUser.role=='admin' || currentUser.role=='write'">
       <button class="btn btn-primary pull-right" style="font-size:15px;margin-left:5px">
         <i class="fa fa-refresh" (click)="getAllAccounts()"></i>
       </button>
@@ -117,7 +117,7 @@
                   <th>Image</th>
                   <th>Balance</th>
                   <th></th>
-                  <th></th>
+                  <th *ngIf="currentUser.role=='admin || currentUser.role=='write"></th>
 
                 </tr>
               </thead>
@@ -152,7 +152,7 @@
                       <b>تفصیل</b>
                     </a>
                   </td>
-                  <td>
+                  <td *ngIf="currentUser.role=='admin || currentUser.role=='write">
                     <button class="btn btn-warning btn-sm" (click)="setEditUser(account)" data-target="#editAccount"
                       data-toggle="modal">
                       <i class="fa fa-pencil"></i>
