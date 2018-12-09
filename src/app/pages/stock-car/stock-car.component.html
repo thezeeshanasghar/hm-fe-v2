@@ -10,7 +10,7 @@
 
 
     <div class="col-md-2 col-md-offset-6 mt-15">
-      <button *ngIf="currentUser.role=='admin || currentUser.role=='write" routerLink="add" *ngIf="router.url=='/dashboard/carStock/list'" class="btn btn-primary pull-right" style="font-size:15px">Add
+      <button  routerLink="add" *ngIf="router.url=='/dashboard/carStock/list' && currentUser.role=='admin || currentUser.role=='write" class="btn btn-primary pull-right" style="font-size:15px">Add
         Car
       </button>
       <button routerLink="list" *ngIf="router.url=='/dashboard/carStock/add'" class="btn btn-primary pull-right" style="font-size:15px">Show

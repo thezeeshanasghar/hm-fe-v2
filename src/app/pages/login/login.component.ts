@@ -41,10 +41,9 @@ export class LoginComponent implements OnInit {
       let obj: any = {
         Authorized: true,
         email: m.email,
-
         role: 'admin'
       }
-      window.localStorage.setItem("Authorized", JSON.stringify(obj));
+      localStorage.setItem("Authorized", JSON.stringify(obj));
       this.router.navigate(['dashboard']);
 
     }

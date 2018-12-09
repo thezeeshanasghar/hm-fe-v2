@@ -117,7 +117,7 @@
                   <th>Image</th>
                   <th>Balance</th>
                   <th></th>
-                  <th *ngIf="currentUser.role=='admin || currentUser.role=='write"></th>
+                  <th *ngIf="currentUser.role=='admin' || currentUser.role=='write'"></th>
 
                 </tr>
               </thead>
@@ -152,7 +152,7 @@
                       <b>تفصیل</b>
                     </a>
                   </td>
-                  <td *ngIf="currentUser.role=='admin || currentUser.role=='write">
+                  <td *ngIf="currentUser.role=='admin' || currentUser.role=='write'">
                     <button class="btn btn-warning btn-sm" (click)="setEditUser(account)" data-target="#editAccount"
                       data-toggle="modal">
                       <i class="fa fa-pencil"></i>
