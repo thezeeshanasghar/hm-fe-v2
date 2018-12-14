@@ -10,15 +10,15 @@ export class GeneralHttpService {
   public ip: string;
   public port: number;
   constructor(private http: Http) {
-    this.ip = 'hm-api.afz-sol.com';
-    this.port = 80;
+    // this.ip = 'hm-api.afz-sol.com';
+    // this.port = 80;
 
     // myPcSettings
     //  this.ip = 'localhost';
     // this.port = 37015;
 
-    // this.ip = 'server';
-    // this.port = 7600;
+    this.ip = 'server';
+    this.port = 7600;
   }
   public getTransactionsByDateRange(startDate = '', endDate = '') {
     let headers = new Headers({ 'Content-Type': 'application/json' });
